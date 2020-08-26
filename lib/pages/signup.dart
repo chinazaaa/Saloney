@@ -8,50 +8,61 @@ class SignupPage extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       
+      
       body: SafeArea(
               child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+           
             height: MediaQuery.of(context).size.height - 50,
             width: double.infinity,
+            
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                            Container(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
-                    color: Colors.black,
+                 Container(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                           
+ 
+                Container(
+                   padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: <Widget>[
+                      FadeAnimation(1, Text("Sign up", style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                      ),)),
+                      SizedBox(height: 20,),
+                      FadeAnimation(1.2, Text("Just a little information and your account is ready", style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey[700]
+                      ),)),
+                    ],
                   ),
                 ),
-              ),
- 
-                Column(
-                  children: <Widget>[
-                    FadeAnimation(1, Text("Sign up", style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
-                    ),)),
-                    SizedBox(height: 20,),
-                    FadeAnimation(1.2, Text("Just a little information and your account is ready", style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey[700]
-                    ),)),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                     FadeAnimation(1.2, makeInput(label: "Username")),
-                
-                    FadeAnimation(1.4, makeInput(label: "Email")),
-                    FadeAnimation(1.5, makeInput(label: "Password", obscureText: true)),
-                    FadeAnimation(1.6, makeInput(label: "Confirm Password", obscureText: true)),
-                  ],
+                Padding(
+                 padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                     
+                    children: <Widget>[
+                       FadeAnimation(1.2, makeInput(label: "Username")),
+                  
+                      FadeAnimation(1.4, makeInput(label: "Email")),
+                      FadeAnimation(1.5, makeInput(label: "Password", obscureText: true)),
+                      FadeAnimation(1.6, makeInput(label: "Confirm Password", obscureText: true)),
+                    ],
+                  ),
                 ),
                 FadeAnimation(1.5, Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
