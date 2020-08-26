@@ -38,15 +38,17 @@ class SignupPage extends StatelessWidget {
  
                 Container(
                    padding: EdgeInsets.symmetric(horizontal: 50),
+                  
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                     children: <Widget>[
                       FadeAnimation(1, Text("Sign up", style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold
                       ),)),
                       SizedBox(height: 25,),
-                      // MainAxisAlignment.spaceEvenly,
-
+                      
                       FadeAnimation(1.2, Text("Welcome to Saloney", style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey[700]

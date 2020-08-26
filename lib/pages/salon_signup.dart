@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/animation/FadeAnimation.dart';
+
 class SalonSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,6 +8,7 @@ class SalonSignUp extends StatelessWidget {
           child: Scaffold(
         
                appBar:AppBar(bottom: TabBar(
+                 
                 
                               labelColor: Theme.of(context).primaryColor,
                               indicatorColor: Theme.of(context).primaryColor,
@@ -68,16 +69,16 @@ class SalonSignUp extends StatelessWidget {
                      padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1, Text("Sign up", style: TextStyle(
+                        Text("Sign up", style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold
-                        ),)),
+                        ),),
                         SizedBox(height: 20,),
 
-                        FadeAnimation(1.2, Text("Welcome to Saloney", style: TextStyle(
+                        Text("Welcome to Saloney", style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey[700]
-                        ),)),
+                        ),),
                       ],
                     ),
                   ),
@@ -88,15 +89,15 @@ class SalonSignUp extends StatelessWidget {
                     child: Column(
                        
                       children: <Widget>[
-                         FadeAnimation(1.2, makeInput(hint: "Username")),
+                        makeInput(hint: "Username"),
                     
-                        FadeAnimation(1.4, makeInput(hint: "Email")),
-                        FadeAnimation(1.5, makeInput(hint: "Password", obscureText: true)),
-                        FadeAnimation(1.6, makeInput(hint: "Confirm Password", obscureText: true)),
+                         makeInput(hint: "Email"),
+                       makeInput(hint: "Password", obscureText: true),
+                      makeInput(hint: "Confirm Password", obscureText: true),
                       ],
                     ),
                   ),
-                  FadeAnimation(1.5, Padding(
+                  Padding(
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: Container(
                           width: double.infinity,
@@ -113,8 +114,8 @@ class SalonSignUp extends StatelessWidget {
                                 fontWeight: FontWeight.w600, fontSize: 18),
                           ),
                     ),
-                  )),
-                  FadeAnimation(1.6, Row(
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Already have an account?"),
@@ -122,7 +123,7 @@ class SalonSignUp extends StatelessWidget {
                         fontWeight: FontWeight.w600, fontSize: 18
                       ),),
                     ],
-                  )),
+                  ),
                 ],
               ),
             ),
@@ -154,16 +155,16 @@ class SalonSignUp extends StatelessWidget {
                      padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1, Text("Sign up", style: TextStyle(
+                        Text("Sign up", style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold
-                        ),)),
+                        ),),
                         SizedBox(height: 20,),
 
-                        FadeAnimation(1.2, Text("Welcome to Saloney", style: TextStyle(
+                     Text("Welcome to Saloney", style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey[700]
-                        ),)),
+                        ),),
                       ],
                     ),
                   ),
@@ -174,15 +175,15 @@ class SalonSignUp extends StatelessWidget {
                     child: Column(
                        
                       children: <Widget>[
-                         FadeAnimation(1.2, makeInput(hint: "Username")),
+                         makeInput(hint: "Username"),
                     
-                        FadeAnimation(1.4, makeInput(hint: "Email")),
-                        FadeAnimation(1.5, makeInput(hint: "Password", obscureText: true)),
-                        FadeAnimation(1.6, makeInput(hint: "Confirm Password", obscureText: true)),
+                         makeInput(hint: "Email"),
+                         makeInput(hint: "Password", obscureText: true),
+                        makeInput(hint: "Confirm Password", obscureText: true),
                       ],
                     ),
                   ),
-                  FadeAnimation(1.5, Padding(
+                   Padding(
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: Container(
                           width: double.infinity,
@@ -199,8 +200,8 @@ class SalonSignUp extends StatelessWidget {
                                 fontWeight: FontWeight.w600, fontSize: 18),
                           ),
                     ),
-                  )),
-                  FadeAnimation(1.6, Row(
+                  ),
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Already have an account?"),
@@ -208,7 +209,7 @@ class SalonSignUp extends StatelessWidget {
                         fontWeight: FontWeight.w600, fontSize: 18
                       ),),
                     ],
-                  )),
+                  ),
                 ],
               ),
                             ),
