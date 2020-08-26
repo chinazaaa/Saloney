@@ -7,83 +7,81 @@ class SignupPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        brightness: Brightness.light,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  FadeAnimation(1, Text("Sign up", style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                  ),)),
-                  SizedBox(height: 20,),
-                  FadeAnimation(1.2, Text("Just a little information and your account is ready", style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey[700]
-                  ),)),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                   FadeAnimation(1.2, makeInput(label: "Username")),
-              
-                  FadeAnimation(1.4, makeInput(label: "Email")),
-                  FadeAnimation(1.5, makeInput(label: "Password", obscureText: true)),
-                  FadeAnimation(1.6, makeInput(label: "Confirm Password", obscureText: true)),
-                ],
-              ),
-              FadeAnimation(1.5, Container(
-                padding: EdgeInsets.only(top: 3, left: 3),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border(
-                    bottom: BorderSide(color: Colors.black),
-                    top: BorderSide(color: Colors.black),
-                    left: BorderSide(color: Colors.black),
-                    right: BorderSide(color: Colors.black),
-                  )
-                ),
-                child: MaterialButton(
-                  minWidth: double.infinity,
-                  height: 60,
-                  onPressed: () {},
-                  color:Color(0xfff3236e),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)
+      
+      body: SafeArea(
+              child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            height: MediaQuery.of(context).size.height - 50,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                            Container(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                    color: Colors.black,
                   ),
-                  child: Text("Sign up", style: TextStyle(
-                    fontWeight: FontWeight.w600, 
-                    fontSize: 18
-                  ),),
                 ),
-              )),
-              FadeAnimation(1.6, Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have an account?"),
-                  Text(" Login", style: TextStyle(
-                    fontWeight: FontWeight.w600, fontSize: 18
-                  ),),
-                ],
-              )),
-            ],
+              ),
+ 
+                Column(
+                  children: <Widget>[
+                    FadeAnimation(1, Text("Sign up", style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold
+                    ),)),
+                    SizedBox(height: 20,),
+                    FadeAnimation(1.2, Text("Just a little information and your account is ready", style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey[700]
+                    ),)),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                     FadeAnimation(1.2, makeInput(label: "Username")),
+                
+                    FadeAnimation(1.4, makeInput(label: "Email")),
+                    FadeAnimation(1.5, makeInput(label: "Password", obscureText: true)),
+                    FadeAnimation(1.6, makeInput(label: "Confirm Password", obscureText: true)),
+                  ],
+                ),
+                FadeAnimation(1.5, Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        height: 60,
+                        padding: EdgeInsets.only(top: 3, left: 3),
+                        decoration: BoxDecoration(
+                            color: Color(0xfff3236e),
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(color: Colors.black)),
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
+                        ),
+                  ),
+                )),
+                FadeAnimation(1.6, Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Already have an account?"),
+                    Text(" Login", style: TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 18
+                    ),),
+                  ],
+                )),
+              ],
+            ),
           ),
         ),
       ),

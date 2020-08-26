@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:starter_project/pages/forgot_password.dart';
-class LoginPage extends StatelessWidget {
+class ForgotPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,72 +32,40 @@ class LoginPage extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        FadeAnimation(
-                            1,
+                        
+                           
                             Text(
-                              "Login",
+                              "Forgot Password",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
-                            )),
+                            ),
                         SizedBox(
                           height: 20,
                         ),
-                        FadeAnimation(
-                            1.2,
+                      
                             Text(
-                              "Login to your account",
+                              "Please enter your email address \nto get a recovery otp",
                               style: TextStyle(
                                   fontSize: 15, color: Colors.grey[700]),
-                            )),
+                            ),
                       ],
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
-                          FadeAnimation(
-                              1.2, makeInput(label: "Username/Email Address")),
+                          makeInput(label: "Email Address"),
                           
-                          FadeAnimation(1.3,
-                              makeInput(label: "Password", obscureText: true)),
                           Container(
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                             FadeAnimation(
-                                1.4,
-                              Container(
-                                
-                                height: 7,
-                                child: Checkbox(
-
-                                  value: false,
-                                  onChanged: (value) {},
-                                )),
-                              ),
-                               FadeAnimation(
-                                1.5,
-                              Text("Remember me")),
-                              Spacer(),
-                               FadeAnimation(
-                                1.6,
-                                InkWell(
-                                    onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ForgotPage()));
-                                    },
-                                
-                              child: Text(
-                                "Forgot Password",
-                                style: TextStyle(
-                                  color: Color(0xfff3236e)),
-                                )),
-                              )
                               ],
                           ))
                         ],
                       ),
                     ),
-                         FadeAnimation(1.5, Padding(
+                         Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
                         width: double.infinity,
@@ -111,23 +77,13 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(color: Colors.black)),
                         child: Text(
-                          "Login",
+                          "Send",
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 18),
                         ),
                       ),
-                    )),
-                     FadeAnimation(1.5, Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Don't have an account?"),
-                        Text(
-                          "Sign up",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
-                        ),
-                      ],
-                    ))
+                    ),
+                  
                   ],
                 ),
               ),
