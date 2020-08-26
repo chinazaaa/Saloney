@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/login.dart';
+// import 'package:starter_project/pages/login.dart';
+import 'package:starter_project/pages/salon_signup.dart';
 import 'package:starter_project/pages/signup.dart';
 class HomeScreen extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SalonSignUp()));
                   setState(() {
                     colorText1 = Color(0xfff3236e);
                     colorText2 = Colors.black;

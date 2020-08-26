@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/forgot_password.dart';
+import 'package:starter_project/pages/signup.dart';
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -58,10 +59,10 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           FadeAnimation(
-                              1.2, makeInput(label: "Username/Email Address")),
+                              1.2, makeInput(hint: "Username/Email Address")),
                           
                           FadeAnimation(1.3,
-                              makeInput(label: "Password", obscureText: true)),
+                              makeInput(hint: "Password", obscureText: true)),
                           Container(
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,11 +122,15 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text("Don't have an account?"),
-                        Text(
+                         InkWell(
+                                    onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SignupPage()));
+                                    },
+                        child:Text(
                           "Sign up",
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 18),
-                        ),
+                         )),
                       ],
                     ))
                   ],
@@ -146,33 +151,27 @@ class LoginPage extends StatelessWidget {
       ));
     
   }
-
-  Widget makeInput({label, obscureText = false}) {
+Widget makeInput({obscureText = false, String hint}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          label,
-          style: TextStyle(
-              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
-        ),
-        SizedBox(
-          height: 5,
-        ),
+    
+        
         TextField(
           obscureText: obscureText,
           decoration: InputDecoration(
+            hintText: hint, 
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400])),
+              borderSide: BorderSide(color: Colors.grey[400])
+            ),
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400])),
+              borderSide: BorderSide(color: Colors.grey[400])
+            ),
           ),
         ),
-        SizedBox(
-          height: 7,
-        ),
+        SizedBox(height: 30,),
       ],
     );
-  }
+}
 }
