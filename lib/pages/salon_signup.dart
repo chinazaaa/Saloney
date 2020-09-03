@@ -28,7 +28,7 @@ class SalonSignUp extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  _signup(context: context),
+                  _yourDetails(context: context),
                   _login(context: context),
                 ],
               ),
@@ -58,6 +58,38 @@ class SalonSignUp extends StatelessWidget {
           height: 30,
         ),
       ],
+    );
+  }
+
+  Widget dropdownField({String hint}) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 30),
+      child: DropdownButtonFormField(
+        hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
+        icon: Icon(Icons.keyboard_arrow_down_outlined),
+        onChanged: (value) {},
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey[400])),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey[400])),
+        ),
+        items: [
+          DropdownMenuItem(
+            child: Text('Olodo Saloon'),
+            value: 'Olodo',
+          ),
+          DropdownMenuItem(
+            child: Text('Ode Saloon'),
+            value: 'Ode',
+          ),
+          DropdownMenuItem(
+            child: Text('hmmm Saloon'),
+            value: 'hmm',
+          )
+        ],
+      ),
     );
   }
 
@@ -131,7 +163,7 @@ class SalonSignUp extends StatelessWidget {
   }
 
   //Signup screen
-  _signup({BuildContext context}) {
+  _yourDetails({BuildContext context}) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -159,10 +191,9 @@ class SalonSignUp extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: <Widget>[
-                makeInput(hint: "Username"),
-                makeInput(hint: "Email"),
-                makeInput(hint: "Password", obscureText: true),
-                makeInput(hint: "Confirm Password", obscureText: true),
+                makeInput(hint: "Name of Saloon"),
+                dropdownField(hint: 'Type of Saloon'),
+                makeInput(hint: "Location"),
               ],
             ),
           ),
@@ -174,24 +205,17 @@ class SalonSignUp extends StatelessWidget {
               height: 60,
               padding: EdgeInsets.only(top: 3, left: 3),
               decoration: BoxDecoration(
-                  color: Color(0xfff3236e),
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Colors.black)),
+                color: Color(0xfff3236e),
+                borderRadius: BorderRadius.circular(5),
+              ),
               child: Text(
-                "Sign Up",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                "Done",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.white),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("Already have an account?"),
-              Text(
-                " Login",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-              ),
-            ],
           ),
         ],
       ),
