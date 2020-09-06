@@ -20,16 +20,16 @@ class SalonSignUp extends StatelessWidget {
               labelColor: Colors.pink,
               tabs: [
                 Text(
-                  'Details',
+                  'Your details',
                 ),
-                Text('More'),
+                Text('Salon details'),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
-                  _yourDetails(context: context),
                   _login(context: context),
+                  _yourDetails(context: context),
                 ],
               ),
             ),
@@ -66,7 +66,7 @@ class SalonSignUp extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 30),
       child: DropdownButtonFormField(
         hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
-        icon: Icon(Icons.keyboard_arrow_down_outlined),
+        icon: Icon(Icons.keyboard_arrow_down),
         onChanged: (value) {},
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -108,7 +108,7 @@ class SalonSignUp extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  "Login",
+                  "Sign Up",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -125,8 +125,11 @@ class SalonSignUp extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: <Widget>[
+                makeInput(hint: "Username"),
+                makeInput(hint: "Phone Number"),
                 makeInput(hint: "Email"),
                 makeInput(hint: "Password", obscureText: true),
+                 makeInput(hint: "Confirm Password", obscureText: true),
               ],
             ),
           ),
@@ -138,12 +141,15 @@ class SalonSignUp extends StatelessWidget {
               height: 60,
               padding: EdgeInsets.only(top: 3, left: 3),
               decoration: BoxDecoration(
-                  color: Color(0xfff3236e),
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Colors.black)),
+                color: Color(0xfff3236e),
+                borderRadius: BorderRadius.circular(5),
+              ),
               child: Text(
-                "Sign Up",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                "Next",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.white),
               ),
             ),
           ),

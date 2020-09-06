@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class ForgotPage extends StatelessWidget {
+class ResetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class ForgotPage extends StatelessWidget {
                         
                            
                             Text(
-                              "Forgot Password",
+                              "Reset Password",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
@@ -44,7 +44,7 @@ class ForgotPage extends StatelessWidget {
                         ),
                       
                             Text(
-                              "Please enter your email address \nto get a recovery otp",
+                              "Enter your new password",
                               style: TextStyle(
                                   fontSize: 15, color: Colors.grey[700]),
                             ),
@@ -54,7 +54,10 @@ class ForgotPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
-                          makeInput(hint: "Email Address"),
+                           makeInput(hint: "New Password", obscureText: true),
+                            makeInput(hint: "Confirm Password", obscureText: true),
+
+
                           
                           Container(
                               child: Row(
@@ -77,7 +80,7 @@ class ForgotPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
-                "Send",
+                "Reset Password",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,

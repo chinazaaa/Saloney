@@ -108,14 +108,16 @@ class LoginPage extends StatelessWidget {
                         height: 60,
                         padding: EdgeInsets.only(top: 3, left: 3),
                         decoration: BoxDecoration(
-                            color: Color(0xfff3236e),
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: Colors.black)),
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
-                        ),
+                color: Color(0xfff3236e),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text(
+                "Login",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.white),
+              ),
                       ),
                     )),
                      FadeAnimation(1.5, Row(
