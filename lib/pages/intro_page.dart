@@ -1,7 +1,7 @@
 import 'package:starter_project/models/step_models.dart';
 import 'package:flutter/material.dart';
 import 'package:starter_project/pages/home_screen.dart';
-
+import 'package:starter_project/pages/size_config.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize Size Config
     _controller.addListener(() {
       setState(() {
         initialPage = _controller.page.round();
@@ -39,45 +40,45 @@ class _IntroPageState extends State<IntroPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-         initialPage == 0 ? Container() : GestureDetector(
-            onTap: () {
-              if (initialPage > 0)
-                _controller.animateToPage(initialPage - 1,
-                    duration: Duration(microseconds: 500),
-                    curve: Curves.easeIn);
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              // decoration: BoxDecoration(
-              //   color: Colors.grey.withAlpha(50),
-              //   borderRadius: BorderRadius.all(
-              //     Radius.circular(15),
-              //   ),
-              // ),
-              // child: Icon(Icons.arrow_back_ios),
-            ),
-          ),
-          
-          initialPage == 2 ? Container() : FlatButton(
-            onPressed: () {
-              
-Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-            );
-
-
-            },
-            child: Text(
-              "Skip",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-          ),
+          initialPage == 0
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    if (initialPage > 0)
+                      _controller.animateToPage(initialPage - 1,
+                          duration: Duration(microseconds: 500),
+                          curve: Curves.easeIn);
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    // decoration: BoxDecoration(
+                    //   color: Colors.grey.withAlpha(50),
+                    //   borderRadius: BorderRadius.all(
+                    //     Radius.circular(15),
+                    //   ),
+                    // ),
+                    // child: Icon(Icons.arrow_back_ios),
+                  ),
+                ),
+          initialPage == 2
+              ? Container()
+              : FlatButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Skip",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
         ],
       ),
     );
@@ -97,13 +98,14 @@ Navigator.push(
               SizedBox(
                 height: 25,
               ),
-              Text(list[index].header,
-              style:TextStyle(
-                fontFamily:'SFProText',
-                fontWeight: FontWeight.bold,
-                fontSize: 35,
-                color: Colors.black
-              ),),
+              Text(
+                list[index].header,
+                style: TextStyle(
+                    fontFamily: 'SFProText',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    color: Colors.black),
+              ),
               index == 1
                   ? _displayImage(list[index].id)
                   : _displayText(list[index].text),
@@ -114,7 +116,7 @@ Navigator.push(
     );
   }
 
-   _indicator() {
+  _indicator() {
     return Container(
       width: 90,
       height: 90,
@@ -127,7 +129,7 @@ Navigator.push(
               width: 90,
               height: 90,
               child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(Color(0xfff3236e)),
+                valueColor: AlwaysStoppedAnimation(Color(0xfff3236e)),
                 value: (initialPage + 1) / (list.length + 1),
               ),
             ),
@@ -136,20 +138,19 @@ Navigator.push(
             alignment: Alignment.center,
             child: GestureDetector(
               onTap: () {
-
 //Some new stuffs
-if(_controller.page.round() >= 2){
-Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-            );
-}
+                if (_controller.page.round() >= 2) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                }
 //Stuff ends here
                 if (initialPage < list.length)
                   _controller.animateToPage(initialPage + 1,
                       duration: Duration(microseconds: 500),
                       curve: Curves.easeIn);
-   
+
 //I removed stuffs from here
 //Why? Just cos I feel like 😄
               },
@@ -157,7 +158,7 @@ Navigator.push(
                 width: 65,
                 height: 65,
                 decoration: BoxDecoration(
-                  color:Color(0xfff3236e),
+                  color: Color(0xfff3236e),
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),
                   ),
@@ -178,7 +179,7 @@ Navigator.push(
     return Text(
       text,
       style: TextStyle(
-        fontFamily:'SFProText',
+        fontFamily: 'SFProText',
         fontWeight: FontWeight.normal,
         fontSize: 20,
       ),

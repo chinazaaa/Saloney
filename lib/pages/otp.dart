@@ -2,36 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/pages/size_config.dart';
 
 class OtpScreen extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: SizeConfig.screenHeight * 0.05),
-              Text(
-                "OTP Verification",
-                style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+    SizeConfig().init(context);
+    return Scaffold(
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: SizeConfig.screenHeight * 0.05),
+                  Text(
+                    "OTP Verification",
+                    style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                  ),
+                  Text("We sent your code to +1 898 860 *"),
+                  buildTimer(),
+                  SizedBox(height: SizeConfig.screenHeight * 0.1),
+                  GestureDetector(
+                    onTap: () {
+                      // OTP code resend
+                    },
+                    child: Text(
+                      "Resend OTP Code",
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  )
+                ],
               ),
-              Text("We sent your code to +1 898 860 *"),
-              buildTimer(),
-              
-              SizedBox(height: SizeConfig.screenHeight * 0.1),
-              GestureDetector(
-                onTap: () {
-                  // OTP code resend
-                },
-                child: Text(
-                  "Resend OTP Code",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              )
-            ],
+            ),
           ),
         ),
       ),
@@ -49,8 +52,8 @@ class OtpScreen extends StatelessWidget {
           builder: (_, value, child) => Text(
             "00:${value.toInt()}",
             style: TextStyle(
-             color: Color(0xfff3236e),
-              ),
+              color: Color(0xfff3236e),
+            ),
           ),
         ),
       ],

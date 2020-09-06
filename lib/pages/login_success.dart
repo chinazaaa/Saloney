@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/pages/size_config.dart';
 
-
-
 class LoginSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Column(
       children: [
         SizedBox(height: SizeConfig.screenHeight * 0.04),
@@ -26,20 +25,16 @@ class LoginSuccessScreen extends StatelessWidget {
         SizedBox(
           width: SizeConfig.screenWidth * 0.6,
           child: Column(
-             children: <Widget>[
-               Text(
-                  "Back to home",
-                  style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                ),
-            
-             ],
-           
+            children: <Widget>[
+              Text(
+                "Back to home",
+                style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+              ),
+            ],
           ),
-             
         ),
         Spacer(),
       ],
     );
   }
 }
-  
