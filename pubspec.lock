@@ -88,6 +88,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  pin_entry_text_field:
+    dependency: "direct main"
+    description:
+      name: pin_entry_text_field
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   simple_animations:
     dependency: "direct main"
     description:

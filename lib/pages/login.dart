@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/pages/account_sucess.dart';
 import 'package:starter_project/pages/forgot_password.dart';
 import 'package:starter_project/pages/otp.dart';
 import 'package:starter_project/pages/signup.dart';
@@ -87,7 +88,7 @@ class LoginPage extends StatelessWidget {
                                 1.6,
                                 InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>OtpScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>AccountSuccess()));
                                     },
                                 
                               child: Text(

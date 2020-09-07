@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,22 +50,28 @@ class OtpScreen extends StatelessWidget {
                                   fontSize: 15, color: Colors.grey[700]),
                             ),
                       ],
-                    ),
+                    ), 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
-                      // child: Column(
-                      //   children: <Widget>[
-                      //     makeInput(hint: "Email Address"),
-                          
-                      //     Container(
-                      //         child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //       children: <Widget>[
-                      //         ],
-                      //     ))
-                      //   ],
-                      // ),
+ child:PinEntryTextField(
+  //  showFieldAsBox: true,
+            onSubmit: (String pin){
+              showDialog(
+                context: context,
+                //has to be removed when backend is in place
+                builder: (context){
+                  return AlertDialog(
+                    title: Text("Pin"),
+                    content: Text('Pin entered is $pin'),
+                  );
+                }
+              ); //end showDialog()
+
+            }, // end onSubmit
+          ),
+               
                     ),
+                    
                          Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
@@ -76,6 +83,7 @@ class OtpScreen extends StatelessWidget {
                 color: Color(0xfff3236e),
                 borderRadius: BorderRadius.circular(5),
               ),
+              
               child: Text(
                 "Continue",
                 style: TextStyle(
@@ -89,6 +97,15 @@ class OtpScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text("Didn't receive a code?"),
+                        InkWell(
+                                    onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>OtpScreen()));
+                                    },
+                        child:Text(
+                          "Resend",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 18),
+                         )),
                        
                       ],
                     )
