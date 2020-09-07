@@ -10,6 +10,9 @@ class SalonSignUp extends StatelessWidget {
         child: Scaffold(
             body: Column(
           children: <Widget>[
+            SizedBox(
+                    height: 20.0,
+                  ),
             _backButton(context: context),
             TabBar(
               labelPadding: EdgeInsets.symmetric(vertical: 10),
@@ -244,9 +247,7 @@ class SalonSignUp extends StatelessWidget {
 _backButton({BuildContext context}) {
   return Container(
     alignment: Alignment.topLeft,
-    
     child: IconButton(
-      
       onPressed: () {
         Navigator.pop(context);
       },
