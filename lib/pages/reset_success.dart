@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class OtpScreen extends StatelessWidget {
+class ResetSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class OtpScreen extends StatelessWidget {
                         
                            
                             Text(
-                              "Enter OTP",
+                              "Reset Complete",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
@@ -44,7 +44,7 @@ class OtpScreen extends StatelessWidget {
                         ),
                       
                             Text(
-                              "Please enter the code we just sent to your email.",
+                              "Your password has been changed",
                               style: TextStyle(
                                   fontSize: 15, color: Colors.grey[700]),
                             ),
@@ -85,13 +85,7 @@ class OtpScreen extends StatelessWidget {
               ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Didn't receive a code?"),
-                       
-                      ],
-                    )
+                  
                   
                   ],
                 ),

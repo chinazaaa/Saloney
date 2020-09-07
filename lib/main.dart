@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/pages/intro_page.dart';
-import 'package:starter_project/pages/size_config.dart';
 //  const MaterialColor primaryColor = MaterialColor(0xfff3236e,{});
 
 void main() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/forgot_password.dart';
+import 'package:starter_project/pages/otp.dart';
 import 'package:starter_project/pages/signup.dart';
 class LoginPage extends StatelessWidget {
   @override
@@ -86,7 +87,7 @@ class LoginPage extends StatelessWidget {
                                 1.6,
                                 InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ForgotPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>OtpScreen()));
                                     },
                                 
                               child: Text(
@@ -138,15 +139,7 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-              // FadeAnimation(1.2, Container(
-              //   height: MediaQuery.of(context).size.height / 3,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: AssetImage('assets/background.png'),
-              //       fit: BoxFit.cover
-              //     )
-              //   ),
-              // ))
+            
             ],
           ),
         ),

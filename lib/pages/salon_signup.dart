@@ -77,17 +77,14 @@ class SalonSignUp extends StatelessWidget {
         ),
         items: [
           DropdownMenuItem(
-            child: Text('Olodo Saloon'),
-            value: 'Olodo',
+            child: Text('Hair dressing salon'),
+            value: 'Hair dressing salon',
           ),
           DropdownMenuItem(
-            child: Text('Ode Saloon'),
-            value: 'Ode',
-          ),
-          DropdownMenuItem(
-            child: Text('hmmm Saloon'),
-            value: 'hmm',
+            child: Text('Barbing salon'),
+            value: 'Barbing salon',
           )
+         
         ],
       ),
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/login.dart';
-import 'package:starter_project/pages/otp.dart';
 
 class SignupPage extends StatelessWidget {
   @override
@@ -103,7 +102,7 @@ class SignupPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => OtpScreen()));
+                                    builder: (context) =>LoginPage()));
                           },
                           child: Text(" Login",
                               style: TextStyle(

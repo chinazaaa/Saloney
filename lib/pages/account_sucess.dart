@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class OtpScreen extends StatelessWidget {
+class AccountSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class OtpScreen extends StatelessWidget {
                         
                            
                             Text(
-                              "Enter OTP",
+                              "Account created successfully",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
@@ -44,7 +44,7 @@ class OtpScreen extends StatelessWidget {
                         ),
                       
                             Text(
-                              "Please enter the code we just sent to your email.",
+                              "We just sent you a verification email",
                               style: TextStyle(
                                   fontSize: 15, color: Colors.grey[700]),
                             ),
@@ -77,7 +77,7 @@ class OtpScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
-                "Continue",
+                "Get Started",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
@@ -85,13 +85,7 @@ class OtpScreen extends StatelessWidget {
               ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Didn't receive a code?"),
-                       
-                      ],
-                    )
+                  
                   
                   ],
                 ),
