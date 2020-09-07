@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class AccountSuccess extends StatelessWidget {
+class ResetSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,15 +32,21 @@ class AccountSuccess extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 50.0),
                     child: Image.asset(
-                       "assets/reset_success.png"),
+                      "assets/reset_success.png"),
                     height: 150,
                   ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
                   
+                  SizedBox(
+                    height: 80.0,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Container(
@@ -65,5 +71,5 @@ class AccountSuccess extends StatelessWidget {
           ),
         ));
   }
-
+  
 }

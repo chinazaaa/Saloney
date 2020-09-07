@@ -244,10 +244,13 @@ class SalonSignUp extends StatelessWidget {
 _backButton({BuildContext context}) {
   return Container(
     alignment: Alignment.topLeft,
+    
     child: IconButton(
+      
       onPressed: () {
         Navigator.pop(context);
       },
+      
       icon: Icon(
         Icons.arrow_back_ios,
         size: 20,

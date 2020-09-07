@@ -32,17 +32,23 @@ class AccountSuccess extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 50.0),
                     child: Image.asset(
-                       "assets/account_success.png"),
+                      "assets/account_success.png"),
                     height: 150,
+                  ),
+                  SizedBox(
+                    height: 50.0,
                   ),
                   Text(
                     "We just sent you a verification email",
                     style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                  ),
+                  SizedBox(
+                    height: 100.0,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
@@ -68,5 +74,5 @@ class AccountSuccess extends StatelessWidget {
           ),
         ));
   }
-
+  
 }
