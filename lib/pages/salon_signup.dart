@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/pages/login.dart';
 
 class SalonSignUp extends StatelessWidget {
   @override
@@ -77,8 +78,8 @@ class SalonSignUp extends StatelessWidget {
         ),
         items: [
           DropdownMenuItem(
-            child: Text('Hair dressing salon'),
-            value: 'Hair dressing salon',
+            child: Text('Beauty salon'),
+            value: 'Beauty salon',
           ),
           DropdownMenuItem(
             child: Text('Barbing salon'),
@@ -155,10 +156,17 @@ class SalonSignUp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Already have an account?"),
-                Text(
+                InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>LoginPage()));
+                          },
+                child:Text(
                   " Login",
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                ),
+                )),
               ],
             ),
           ],
@@ -190,6 +198,9 @@ class SalonSignUp extends StatelessWidget {
                     "Welcome to Saloney",
                     style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
@@ -197,8 +208,8 @@ class SalonSignUp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
-                  makeInput(hint: "Name of Saloon"),
-                  dropdownField(hint: 'Type of Saloon'),
+                  makeInput(hint: "Name of Salon"),
+                  dropdownField(hint: 'Type of Salon'),
                   makeInput(hint: "Location"),
                 ],
               ),
