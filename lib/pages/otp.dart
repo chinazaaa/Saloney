@@ -121,27 +121,4 @@ class OtpScreen extends StatelessWidget {
     
   }
 
-  Widget makeInput({obscureText = false, String hint}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-    
-        
-        TextField(
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hint, 
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400])
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400])
-            ),
-          ),
-        ),
-        SizedBox(height: 30,),
-      ],
-    );
-}
 }
