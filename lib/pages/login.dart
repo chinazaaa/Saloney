@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:starter_project/pages/forgot_password.dart';
+import 'package:starter_project/pages/screens/bottom_nav_screen.dart';
 
 import 'package:starter_project/pages/signup.dart';
 class LoginPage extends StatelessWidget {
@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                                 1.6,
                                 InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ForgotPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNavScreen()));
                                     },
                                 
                               child: Text(
