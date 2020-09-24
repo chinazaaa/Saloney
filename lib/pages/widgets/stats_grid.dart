@@ -10,7 +10,7 @@ class StatsGrid extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 _buildStatCard('Total Customers', '1.81 M', Colors.orange),
-                _buildStatCard('Toral Orders', '105 K', Colors.red),
+                _buildStatCard('Total Orders', '105 K', Colors.red),
               ],
             ),
           ),
