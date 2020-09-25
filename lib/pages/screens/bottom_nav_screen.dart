@@ -13,7 +13,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     Scaffold(),
     Scaffold(),
     Scaffold(),
-    Scaffold(),
+    ProfileScreen(),
   ];
   int _currentIndex = 0;
 
