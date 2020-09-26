@@ -17,8 +17,13 @@ final kTitleTextStyle = TextStyle(
 
 final kCaptionTextStyle = TextStyle(
   fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.3),
-  fontWeight: FontWeight.w100,
-  color: Colors.white,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+final kCaptionsTextStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.3),
+  fontWeight: FontWeight.w400,
+  color: Colors.black,
 );
 
 final kButtonTextStyle = TextStyle(

@@ -50,12 +50,12 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
             'Naza Sudu',
-            style: kTitleTextStyle,
+            style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
             'naza@gmail.com',
-            style: kCaptionTextStyle,
+            style: kCaptionsTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Container(

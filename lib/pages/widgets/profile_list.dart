@@ -36,6 +36,7 @@ class ProfileListItem extends StatelessWidget {
         children: <Widget>[
           Icon(
             this.icon,
+            color: Colors.white,
             size: kSpacingUnit.w * 2.5,
           ),
           SizedBox(width: kSpacingUnit.w * 1.5),
@@ -49,6 +50,7 @@ class ProfileListItem extends StatelessWidget {
           if (this.hasNavigation)
             Icon(
               LineAwesomeIcons.angle_right,
+              color: Colors.white,
               size: kSpacingUnit.w * 2.5,
             ),
         ],
