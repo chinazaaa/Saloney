@@ -1,5 +1,6 @@
 // import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:starter_project/pages/config/constants.dart';
@@ -91,6 +92,14 @@ class ProfileScreen extends StatelessWidget {
         SizedBox(width: kSpacingUnit.w * 3),
       ],
     );
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+       statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.transparent,
+    
+    ));
 return (
        Builder(
         builder: (context) {
