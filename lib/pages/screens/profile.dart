@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
                       widthFactor: kSpacingUnit.w * 1.5,
                       child: Icon(
                         LineAwesomeIcons.pen,
-                         color: Color(0xfff3236e),
+                        color: Colors.white,
                         size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
                       ),
                     ),
@@ -83,10 +83,10 @@ class ProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(width: kSpacingUnit.w * 3),
-        Icon(
-          LineAwesomeIcons.arrow_left,
-          size: ScreenUtil().setSp(kSpacingUnit.w * 3),
-        ),
+        // Icon(
+        //   LineAwesomeIcons.arrow_left,
+        //   size: ScreenUtil().setSp(kSpacingUnit.w * 3),
+        // ),
         profileInfo,
         SizedBox(width: kSpacingUnit.w * 3),
       ],
@@ -108,7 +108,7 @@ return (
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.history,
-                        text: 'Purchase History',
+                        text: 'Transaction History',
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.question_circle,

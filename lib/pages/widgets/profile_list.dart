@@ -29,7 +29,8 @@ class ProfileListItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-        color: Theme.of(context).backgroundColor,
+        color: Color(0xfff3236e),
+
       ),
       child: Row(
         children: <Widget>[
