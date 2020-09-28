@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) =>SignupPage()));
                   setState(() {
-                    colorText1 = Color(0xfff3236e);
+                    colorText1 = Color(0xff9477cb);
                     colorText2 = Colors.black;
                   });
                 },
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SalonSignUp()));
                   setState(() {
-                    colorText2 = Color(0xfff3236e);
+                    colorText2 = Color(0xff9477cb);
                     colorText1 = Colors.black;
                   });
                 },

@@ -80,7 +80,7 @@ class OtpScreen extends StatelessWidget {
                         height: 60,
                         padding: EdgeInsets.only(top: 3, left: 3),
                         decoration: BoxDecoration(
-                color: Color(0xfff3236e),
+                color: Color(0xff9477cb),
                 borderRadius: BorderRadius.circular(5),
               ),
               

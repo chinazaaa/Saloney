@@ -98,7 +98,7 @@ class SalonBarChart extends StatelessWidget {
                           barRods: [
                             BarChartRodData(
                               y: value,
-                              color: Color(0xfff3236e),
+                              color: Color(0xff9477cb),
                             ),
                           ],
                         )))

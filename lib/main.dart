@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/pages/intro_page.dart';
-//  const MaterialColor primaryColor = MaterialColor(0xfff3236e,{});
+//  const MaterialColor primaryColor = MaterialColor(0xff9477cb,{});
 
 void main() {
   runApp(MyApp());

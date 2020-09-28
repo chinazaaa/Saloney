@@ -128,7 +128,7 @@ class _IntroPageState extends State<IntroPage> {
               width: 90,
               height: 90,
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(Color(0xfff3236e)),
+                valueColor: AlwaysStoppedAnimation(Color(0xff9477cb)),
                 value: (initialPage + 1) / (list.length + 1),
               ),
             ),
@@ -157,7 +157,7 @@ class _IntroPageState extends State<IntroPage> {
                 width: 65,
                 height: 65,
                 decoration: BoxDecoration(
-                  color: Color(0xfff3236e),
+                  color: Color(0xff9477cb),
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),
                   ),

@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                     height: kSpacingUnit.w * 2.5,
                     width: kSpacingUnit.w * 2.5,
                     decoration: BoxDecoration(
-                      color: Color(0xfff3236e),
+                      color: Color(0xff9477cb),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
             width: kSpacingUnit.w * 20,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-              color: Color(0xfff3236e),
+              color: Color(0xff9477cb),
             ),
             child: Center(
               child: Text(
@@ -106,15 +106,15 @@ return (
           return Scaffold(
             body: Column(
               children: <Widget>[
-                SizedBox(height: kSpacingUnit.w * 5),
+                SizedBox(height: kSpacingUnit.w * 8),
                 header,
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.user_shield,
-                        text: 'Privacy',
-                      ),
+                      // ProfileListItem(
+                      //   icon: LineAwesomeIcons.user_shield,
+                      //   text: 'Privacy',
+                      // ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.history,
                         text: 'Transaction History',
@@ -147,3 +147,4 @@ return (
     
   }
 }
+ 
