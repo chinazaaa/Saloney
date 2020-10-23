@@ -1,44 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/pages/login.dart';
+import 'package:flutter/services.dart';
 
 class SalonSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: SafeArea(
-        child: Scaffold(
-            body: Column(
-          children: <Widget>[
-            SizedBox(
-                    height: 20.0,
-                  ),
-            _backButton(context: context),
-            TabBar(
-              labelPadding: EdgeInsets.symmetric(vertical: 10),
-              indicatorColor: Colors.transparent,
-              labelStyle: TextStyle(
-                fontSize: 14,
-              ),
-              unselectedLabelColor: Colors.grey[600],
-              labelColor: Color(0xff9477cb),
-              tabs: [
-                Text(
-                  'Your details',
+    //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: Colors.transparent,
+    //    statusBarBrightness: Brightness.light,
+    //   statusBarIconBrightness: Brightness.dark,
+    //   systemNavigationBarIconBrightness: Brightness.dark,
+    //   systemNavigationBarColor: Colors.transparent,
+    
+    // ));
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+          child: DefaultTabController(
+        length: 2,
+        child: SafeArea(
+          child: Scaffold(
+              body: Column(
+            children: <Widget>[
+              SizedBox(
+                      height: 20.0,
+                    ),
+              _backButton(context: context),
+              TabBar(
+                labelPadding: EdgeInsets.symmetric(vertical: 10),
+                indicatorColor: Colors.transparent,
+                labelStyle: TextStyle(
+                  fontSize: 14,
                 ),
-                Text('Salon details'),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  _login(context: context),
-                  _yourDetails(context: context),
+                unselectedLabelColor: Colors.grey[600],
+                labelColor: Color(0xff9477cb),
+                tabs: [
+                  Text(
+                    'Your details',
+                  ),
+                  Text('Salon details'),
                 ],
               ),
-            ),
-          ],
-        )),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    _login(context: context),
+                    _yourDetails(context: context),
+                  ],
+                ),
+              ),
+            ],
+          )),
+        ),
       ),
     );
   }
@@ -66,6 +78,7 @@ class SalonSignUp extends StatelessWidget {
   }
 
   Widget dropdownField({String hint}) {
+   
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: DropdownButtonFormField(

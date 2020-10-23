@@ -10,8 +10,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     
     StatsScreen(),
+    ChatsPage(),
     Scaffold(),
-    Scaffold(),
+    
     Scaffold(),
     ProfileScreen(),
   ];
