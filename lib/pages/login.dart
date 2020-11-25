@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           FadeAnimation(
-                              1.2, makeInput(hint: "Username/Email Address")),
+                              1.2, makeInput(hint: "Email Address")),
                           
                           FadeAnimation(1.3,
                               makeInput(hint: "Password", obscureText: true)),
