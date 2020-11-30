@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/pages/home_screen.dart';
 import 'package:starter_project/pages/screens/bottom_nav_screen.dart';
+import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
+import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
+import 'package:starter_project/pages/controllers.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
-import 'package:starter_project/pages/signup.dart';
 class LoginPage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldFormKey =
+      new GlobalKey<ScaffoldState>();
+  ProgressDialog pr;
+  Authentication auth = Authentication();
   @override
   Widget build(BuildContext context) {
+     pr = new ProgressDialog(context, showLogs: true);
+    pr.style(message: 'Please wait...');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -60,10 +70,10 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           FadeAnimation(
-                              1.2, makeInput(hint: "Email Address")),
+                              1.2, makeInput(hint: "Email Address", inputController: TextController.emailController)),
                           
                           FadeAnimation(1.3,
-                              makeInput(hint: "Password", obscureText: true)),
+                              makeInput(hint: "Password", inputController: TextController.passwordController, obscureText: true)),
                           Container(
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,6 +122,7 @@ class LoginPage extends StatelessWidget {
                 color: Color(0xff9477cb),
                 borderRadius: BorderRadius.circular(5),
               ),
+               //onTap: () => validateAndSubmit(),
               child: Text(
                 "Login",
                 style: TextStyle(
@@ -127,7 +138,7 @@ class LoginPage extends StatelessWidget {
                         Text("Don't have an account?"),
                          InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SignupPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
                                     },
                         child:Text(
                           "Sign up",
@@ -146,7 +157,7 @@ class LoginPage extends StatelessWidget {
       ));
     
   }
-Widget makeInput({obscureText = false, String hint}) {
+Widget makeInput({obscureText = false, String hint, TextEditingController inputController}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -154,6 +165,7 @@ Widget makeInput({obscureText = false, String hint}) {
         
         TextField(
           obscureText: obscureText,
+           controller: inputController,
           decoration: InputDecoration(
             hintText: hint, 
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -169,4 +181,18 @@ Widget makeInput({obscureText = false, String hint}) {
       ],
     );
 }
+
+  void validateAndSubmit() {
+    if (signInvalidateAndSave()) {
+      pr.show();
+      auth
+          .signInUser(
+              scaffoldKey: _scaffoldFormKey,
+              email: TextController.emailController.text,
+              password: TextController.passwordController.text)
+          .whenComplete(() {
+        pr.hide();
+      });
+    }
+  }
 }
