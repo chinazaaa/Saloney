@@ -3,10 +3,11 @@ import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/home_screen.dart';
 import 'package:starter_project/pages/screens/bottom_nav_screen.dart';
 import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
+// import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
 import 'package:starter_project/pages/controllers.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldFormKey =
       new GlobalKey<ScaffoldState>();
@@ -111,7 +112,9 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                         FadeAnimation(1.5, Padding(
+                         InkWell(
+                           onTap: () => validateAndSubmit(),
+                                                    child: FadeAnimation(1.5, Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
                         width: double.infinity,
@@ -122,7 +125,7 @@ class LoginPage extends StatelessWidget {
                 color: Color(0xff9477cb),
                 borderRadius: BorderRadius.circular(5),
               ),
-               //onTap: () => validateAndSubmit(),
+               
               child: Text(
                 "Login",
                 style: TextStyle(
@@ -132,6 +135,7 @@ class LoginPage extends StatelessWidget {
               ),
                       ),
                     )),
+                         ),
                      FadeAnimation(1.5, Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -163,7 +167,7 @@ Widget makeInput({obscureText = false, String hint, TextEditingController inputC
       children: <Widget>[
     
         
-        TextField(
+        TextFormField(
           obscureText: obscureText,
            controller: inputController,
           decoration: InputDecoration(

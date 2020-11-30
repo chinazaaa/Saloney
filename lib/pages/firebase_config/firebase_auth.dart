@@ -33,6 +33,7 @@ class Authentication<T> extends BaseConfig<T> {
   }
 
   @override
+  // ignore: missing_return
   Future<String> signInUser(
       {String email,
       String password,
@@ -62,6 +63,7 @@ class Authentication<T> extends BaseConfig<T> {
   }
 
   @override
+  // ignore: missing_return
   Future<String> signUpUser(
       {email,
       password,

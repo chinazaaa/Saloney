@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
+// import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
 import 'package:starter_project/pages/controllers.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
+// ignore: must_be_immutable
 class SalonSignUp extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   ProgressDialog pr;
@@ -68,7 +69,7 @@ class SalonSignUp extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        TextField(
+        TextFormField(
           obscureText: obscureText,
           controller: inputController,
           decoration: InputDecoration(
@@ -79,13 +80,13 @@ class SalonSignUp extends StatelessWidget {
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey[400])),
           ),
-    //           validator: (value) {
-    //   if (value.isEmpty) {
-    //     return "Field Can't be empty";
-    //   } else {
-    //     return null;
-    //   }
-    // },
+              validator: (value) {
+      if (value.isEmpty) {
+        return "Field Can't be empty";
+      } else {
+        return null;
+      }
+    },
      keyboardType: inputType,
         ),
         SizedBox(
@@ -103,7 +104,7 @@ class SalonSignUp extends StatelessWidget {
       child: DropdownButtonFormField(
         hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
         icon: Icon(Icons.keyboard_arrow_down),
-        onChanged: (value) {},
+        onChanged: (value) {print(value);},
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           enabledBorder: OutlineInputBorder(
@@ -222,7 +223,7 @@ class SalonSignUp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
-                   //onTap: () => validateAndSubmit(),
+                  
                   Text(
                     "Sign up",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -250,23 +251,26 @@ class SalonSignUp extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                height: 60,
-                padding: EdgeInsets.only(top: 3, left: 3),
-                decoration: BoxDecoration(
-                  color: Color(0xff9477cb),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  "Done",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.white),
+            InkWell(
+                 onTap: () => validateAndSubmit(),
+                          child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  height: 60,
+                  padding: EdgeInsets.only(top: 3, left: 3),
+                  decoration: BoxDecoration(
+                    color: Color(0xff9477cb),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text(
+                    "Done",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),

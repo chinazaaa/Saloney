@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
+// import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
 import 'package:starter_project/pages/controllers.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
+// ignore: must_be_immutable
 class SignupPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   ProgressDialog pr;
@@ -78,31 +79,34 @@ class SignupPage extends StatelessWidget {
                     ],
                   ),
                 ),
-               FadeAnimation(
-                        1.5,
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
-                          child: Container(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            height: 60,
-                            padding: EdgeInsets.only(top: 3, left: 3),
-                            decoration: BoxDecoration(
-                              color: Color(0xff9477cb),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            
-                             //onTap: () => validateAndSubmit(),
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
-                                  color: Colors.white),
+               InkWell(
+                 onTap: () => validateAndSubmit(),
+                                child: FadeAnimation(
+                          1.5,
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              height: 60,
+                              padding: EdgeInsets.only(top: 3, left: 3),
+                              decoration: BoxDecoration(
+                                color: Color(0xff9477cb),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              
+    
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              ),
                             ),
                           ),
-                        ),
-                ),
+                  ),
+               ),
                 
                 FadeAnimation(
                     1.6,
@@ -135,7 +139,7 @@ class SignupPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        TextField(
+        TextFormField(
           obscureText: obscureText,
           controller: inputController,
           decoration: InputDecoration(
@@ -146,13 +150,13 @@ class SignupPage extends StatelessWidget {
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey[400])),
           ),
-    //       validator: (value) {
-    //   if (value.isEmpty) {
-    //     return "Field Can't be empty";
-    //   } else {
-    //     return null;
-    //   }
-    // },
+          validator: (value) {
+      if (value.isEmpty) {
+        return "Field Can't be empty";
+      } else {
+        return null;
+      }
+    },
     keyboardType: inputType,
         ),
         SizedBox(
