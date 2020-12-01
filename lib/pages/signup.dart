@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
+//import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
 import 'package:starter_project/pages/controllers.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
