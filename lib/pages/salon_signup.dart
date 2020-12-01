@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:flutter/services.dart';
-import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-// import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
-import 'package:starter_project/pages/controllers.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+
 
 // ignore: must_be_immutable
 class SalonSignUp extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  ProgressDialog pr;
-  final Authentication auth = Authentication();
   @override
   Widget build(BuildContext context) {
-     pr = new ProgressDialog(context, showLogs: true);
-    pr.style(message: 'Please wait...');
+
     //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     //   statusBarColor: Colors.transparent,
     //    statusBarBrightness: Brightness.light,
@@ -160,11 +153,11 @@ class SalonSignUp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
-                  makeInput(hint: "Username", inputController: TextController.userNameController),
-                  makeInput(hint: "Phone Number", inputController: TextController.phoneNumberController),
-                  makeInput(hint: "Email", inputController: TextController.emailController),
-                  makeInput(hint: "Password", inputController: TextController.passwordController, obscureText: true),
-                  makeInput(hint: "Confirm Password", inputController: TextController.confirmPasswordController, obscureText: true),
+                  makeInput(hint: "Username"),
+                  makeInput(hint: "Phone Number"),
+                  makeInput(hint: "Email"),
+                  makeInput(hint: "Password"),
+                  makeInput(hint: "Confirm Password"),
                 ],
               ),
             ),
@@ -245,14 +238,14 @@ class SalonSignUp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
-                  makeInput(hint: "Name of Salon", inputController: TextController.nameController),
+                  makeInput(hint: "Name of Salon"),
                   dropdownField(hint: "Type of Salon"),
-                  makeInput(hint: "Location", inputController: TextController.locationController),
+                  makeInput(hint: "Location"),
                 ],
               ),
             ),
             InkWell(
-                 onTap: () => validateAndSubmit(),
+                
                           child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
@@ -279,23 +272,7 @@ class SalonSignUp extends StatelessWidget {
       ),
     );
   }
-      void validateAndSubmit() {
-    if (validateAndSave()) {
-      pr.show();
-      auth.signUpUser(
-          scaffoldKey: _scaffoldKey,
-          email: TextController.emailController.text,
-          password: TextController.passwordController.text,
-          info: {
-            'userName': TextController.userNameController.text,
-            'phoneNumber': TextController.phoneNumberController.text,
-            'nameOfSalon': TextController.nameController.text,
-            'location': TextController.locationController.text
-          }).whenComplete(() {
-        pr.hide();
-      });
-    }
-  }
+     
 }
 
 _backButton({BuildContext context}) {

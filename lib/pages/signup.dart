@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/pages/login.dart';
-import 'package:starter_project/pages/firebase_config/firebase_auth.dart';
-//import 'package:starter_project/pages/firebase_config/firebase_cloud.dart';
-import 'package:starter_project/pages/controllers.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 // ignore: must_be_immutable
 class SignupPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  ProgressDialog pr;
-  final Authentication auth = Authentication();
   @override
   Widget build(BuildContext context) {
-    pr = new ProgressDialog(context, showLogs: true);
-    pr.style(message: 'Please wait...');
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
@@ -67,20 +58,20 @@ class SignupPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      FadeAnimation(1.2, makeInput(hint: "Username", inputController: TextController.userNameController)),
-                      FadeAnimation(1.3, makeInput(hint: "Phone Number", inputController: TextController.phoneNumberController)),
-                      FadeAnimation(1.4, makeInput(hint: "Email", inputController: TextController.emailController)),
+                      FadeAnimation(1.2, makeInput(hint: "Username")),
+                      FadeAnimation(1.3, makeInput(hint: "Phone Number")),
+                      FadeAnimation(1.4, makeInput(hint: "Email")),
                       FadeAnimation(
-                          1.5, makeInput(hint: "Password",inputController: TextController.passwordController, obscureText: true)),
+                          1.5, makeInput(hint: "Password", obscureText: true)),
                       FadeAnimation(
                           1.6,
                           makeInput(
-                              hint: "Confirm Password",inputController: TextController.confirmPasswordController, obscureText: true)),
+                              hint: "Confirm Password", obscureText: true)),
                     ],
                   ),
                 ),
                InkWell(
-                 onTap: () => validateAndSubmit(),
+                 
                                 child: FadeAnimation(
                           1.5,
                           Padding(
@@ -135,13 +126,12 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget makeInput({obscureText = false, String hint, TextEditingController inputController,TextInputType inputType}) {
+  Widget makeInput({obscureText = false, String hint}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
           obscureText: obscureText,
-          controller: inputController,
           decoration: InputDecoration(
             hintText: hint,
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -157,7 +147,6 @@ class SignupPage extends StatelessWidget {
         return null;
       }
     },
-    keyboardType: inputType,
         ),
         SizedBox(
           height: 30,
@@ -165,19 +154,5 @@ class SignupPage extends StatelessWidget {
       ],
     );
   }
-    void validateAndSubmit() {
-    if (validateAndSave()) {
-      pr.show();
-      auth.signUpUser(
-          scaffoldKey: _scaffoldKey,
-          email: TextController.emailController.text,
-          password: TextController.passwordController.text,
-          info: {
-            'userName': TextController.userNameController.text,
-            'phoneNumber': TextController.phoneNumberController.text
-          }).whenComplete(() {
-        pr.hide();
-      });
-    }
-  }
+   
 }
