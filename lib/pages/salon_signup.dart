@@ -105,17 +105,17 @@ class SalonSignUp extends StatelessWidget {
           border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[400])),
         ),
-        items: [
-          DropdownMenuItem(
-            child: Text('Beauty salon'),
-            value: 'Beauty salon',
-          ),
-          DropdownMenuItem(
-            child: Text('Barbing salon'),
-            value: 'Barbing salon',
-          )
+        // items: [
+        //   DropdownMenuItem(
+        //     child: Text('Beauty salon'),
+        //     value: 'Beauty salon',
+        //   ),
+        //   DropdownMenuItem(
+        //     child: Text('Barbing salon'),
+        //     value: 'Barbing salon',
+        //   )
          
-        ],
+        // ],
       ),
     );
   }
