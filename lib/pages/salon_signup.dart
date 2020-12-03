@@ -90,35 +90,35 @@ class SalonSignUp extends StatelessWidget {
     
   }
 
-  Widget dropdownField({String hint}) {
+  // Widget dropdownField({String hint}) {
    
-    return Padding(
-      padding: EdgeInsets.only(bottom: 30),
-      child: DropdownButtonFormField(
-        hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
-        icon: Icon(Icons.keyboard_arrow_down),
-        onChanged: (value) {print(value);},
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400])),
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400])),
-        ),
-        // items: [
-        //   DropdownMenuItem(
-        //     child: Text('Beauty salon'),
-        //     value: 'Beauty salon',
-        //   ),
-        //   DropdownMenuItem(
-        //     child: Text('Barbing salon'),
-        //     value: 'Barbing salon',
-        //   )
+  //   return Padding(
+  //     padding: EdgeInsets.only(bottom: 30),
+  //     chilDropdownButtonFormField(
+  //       hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
+  //       icon: Icon(Icons.keyboard_arrow_down),
+  //       onChanged: (value) {print(value);},
+  //       decoration: InputDecoration(
+  //         contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+  //         enabledBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(color: Colors.grey[400])),
+  //         border: OutlineInputBorder(
+  //             borderSide: BorderSide(color: Colors.grey[400])),
+  //       ),
+  //       // items: [
+  //       //   DropdownMenuItem(
+  //       //     child: Text('Beauty salon'),
+  //       //     value: 'Beauty salon',
+  //       //   ),
+  //       //   DropdownMenuItem(
+  //       //     child: Text('Barbing salon'),
+  //       //     value: 'Barbing salon',
+  //       //   )
          
-        // ],
-      ),
-    );
-  }
+  //       // ],
+  //     ),
+  //   );
+  // }
 
   //Login Screen
   _login({BuildContext context}) {
@@ -239,7 +239,6 @@ class SalonSignUp extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   makeInput(hint: "Name of Salon"),
-                  dropdownField(hint: "Type of Salon"),
                   makeInput(hint: "Location"),
                 ],
               ),
