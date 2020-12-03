@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:flutter/services.dart';
@@ -91,7 +92,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
       Fluttertoast.showToast(
         msg: httpresponse.message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.TOP,
+        gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
