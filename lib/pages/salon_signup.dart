@@ -1,34 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/pages/login.dart';
 import 'package:flutter/services.dart';
-
+import 'package:starter_project/services/http_service.dart';
 
 // ignore: must_be_immutable
-class SalonSignUp extends StatelessWidget {
+class SalonSignUp extends StatefulWidget {
+  @override
+  _SalonSignUpState createState() => _SalonSignUpState();
+}
+
+class _SalonSignUpState extends State<SalonSignUp> {
+  int _index = 0;
+  bool _loading = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-
     //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     //   statusBarColor: Colors.transparent,
     //    statusBarBrightness: Brightness.light,
     //   statusBarIconBrightness: Brightness.dark,
     //   systemNavigationBarIconBrightness: Brightness.dark,
     //   systemNavigationBarColor: Colors.transparent,
-    
+
     // ));
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
-          child: DefaultTabController(
+      child: DefaultTabController(
         length: 2,
         child: SafeArea(
           child: Scaffold(
+            key: _scaffoldKey,
               body: Column(
             children: <Widget>[
               SizedBox(
-                      height: 20.0,
-                    ),
+                height: 20.0,
+              ),
               _backButton(context: context),
               TabBar(
+                onTap: (int index){
+                  setState(() {
+                    _index = index;
+                  });
+                },
                 labelPadding: EdgeInsets.symmetric(vertical: 10),
                 indicatorColor: Colors.transparent,
                 labelStyle: TextStyle(
@@ -44,12 +59,19 @@ class SalonSignUp extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child: TabBarView(
+                child:  IndexedStack(
+                  index: _index,
                   children: [
                     _login(context: context),
                     _yourDetails(context: context),
                   ],
-                ),
+                )
+                // TabBarView(
+                //   children: [
+                //     _login(context: context),
+                //     _yourDetails(context: context),
+                //   ],
+                // ),
               ),
             ],
           )),
@@ -58,7 +80,43 @@ class SalonSignUp extends StatelessWidget {
     );
   }
 
-  Widget makeInput({obscureText = false, String hint, TextEditingController inputController,TextInputType inputType}) {
+  Future<HttpResponse> _signUp() async {
+    setState((){
+      _loading = !_loading;
+    });
+    try{
+      HttpResponse httpresponse = await HttpService.salonSignup();
+        setState((){
+        _loading = !_loading;
+      });
+      Fluttertoast.showToast(
+        msg: httpresponse.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+      // _scaffoldKey.currentState.showSnackBar(SnackBar(
+        
+      //   content: Padding( 
+      //     padding: const EdgeInsets.all(8.0),
+      //     child:  Text(httpresponse.message)),
+      //   behavior:  SnackBarBehavior.floating 
+      //   ) );
+    }catch(e){
+           setState((){
+          _loading = !_loading;
+        });
+    }
+  }
+
+  Widget makeInput(
+      {obscureText = false,
+      String hint,
+      TextEditingController inputController,
+      TextInputType inputType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -73,54 +131,22 @@ class SalonSignUp extends StatelessWidget {
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey[400])),
           ),
-              validator: (value) {
-      if (value.isEmpty) {
-        return "Field Can't be empty";
-      } else {
-        return null;
-      }
-    },
-     keyboardType: inputType,
+          validator: (value) {
+            if (value.isEmpty) {
+              return "Field Can't be empty";
+            } else {
+              return null;
+            }
+          },
+          keyboardType: inputType,
         ),
         SizedBox(
           height: 30,
         ),
       ],
     );
-    
   }
 
-  // Widget dropdownField({String hint}) {
-   
-  //   return Padding(
-  //     padding: EdgeInsets.only(bottom: 30),
-  //     chilDropdownButtonFormField(
-  //       hint: Text('$hint', style: TextStyle(color: Colors.grey[600])),
-  //       icon: Icon(Icons.keyboard_arrow_down),
-  //       onChanged: (value) {print(value);},
-  //       decoration: InputDecoration(
-  //         contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-  //         enabledBorder: OutlineInputBorder(
-  //             borderSide: BorderSide(color: Colors.grey[400])),
-  //         border: OutlineInputBorder(
-  //             borderSide: BorderSide(color: Colors.grey[400])),
-  //       ),
-  //       // items: [
-  //       //   DropdownMenuItem(
-  //       //     child: Text('Beauty salon'),
-  //       //     value: 'Beauty salon',
-  //       //   ),
-  //       //   DropdownMenuItem(
-  //       //     child: Text('Barbing salon'),
-  //       //     value: 'Barbing salon',
-  //       //   )
-         
-  //       // ],
-  //     ),
-  //   );
-  // }
-
-  //Login Screen
   _login({BuildContext context}) {
     return SingleChildScrollView(
       child: Container(
@@ -161,23 +187,30 @@ class SalonSignUp extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                height: 60,
-                padding: EdgeInsets.only(top: 3, left: 3),
-                decoration: BoxDecoration(
-                  color: Color(0xff9477cb),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.white),
+            InkWell(
+              onTap:(){
+                 setState((){
+                    _index = 1;
+                  });
+              },
+                          child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  height: 60,
+                  padding: EdgeInsets.only(top: 3, left: 3),
+                  decoration: BoxDecoration(
+                    color: Color(0xff9477cb),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -186,16 +219,15 @@ class SalonSignUp extends StatelessWidget {
               children: <Widget>[
                 Text("Already have an account?"),
                 InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>LoginPage()));
-                          },
-                child:Text(
-                  " Login",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                )),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    child: Text(
+                      " Login",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                    )),
               ],
             ),
           ],
@@ -204,7 +236,6 @@ class SalonSignUp extends StatelessWidget {
     );
   }
 
-  //Signup screen
   _yourDetails({BuildContext context}) {
     return SingleChildScrollView(
       child: Container(
@@ -216,7 +247,6 @@ class SalonSignUp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
-                  
                   Text(
                     "Sign up",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -244,8 +274,9 @@ class SalonSignUp extends StatelessWidget {
               ),
             ),
             InkWell(
-                
-                          child: Padding(
+              onTap:_signUp
+              ,
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
                   width: double.infinity,
@@ -256,8 +287,10 @@ class SalonSignUp extends StatelessWidget {
                     color: Color(0xff9477cb),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text(
-                    "Done",
+                  child: _loading ? CircularProgressIndicator(
+                    // valueColor: AlwaysStoppedAnimation(color: Colors.white)
+                  ) : Text(
+                    "Sign up",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
@@ -271,7 +304,6 @@ class SalonSignUp extends StatelessWidget {
       ),
     );
   }
-     
 }
 
 _backButton({BuildContext context}) {
@@ -281,12 +313,11 @@ _backButton({BuildContext context}) {
       onPressed: () {
         Navigator.pop(context);
       },
-      
       icon: Icon(
         Icons.arrow_back_ios,
         size: 20,
         color: Colors.black,
       ),
     ),
-  ); 
+  );
 }

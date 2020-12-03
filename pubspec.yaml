@@ -37,6 +37,8 @@ dependencies:
   flutter_cmoon_icons: ^0.1.0
   international_phone_field: ^0.1.1
   progress_dialog: ^1.2.4
+  http: ^0.12.2
+  fluttertoast: ^7.1.5
 
 
 
