@@ -1,4 +1,3 @@
-
 import 'package:starter_project/Salon/pages/screens/utils/utils.dart';
 class AppNotification {
   String image, notification, time = '2 hours ago';
