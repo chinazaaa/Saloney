@@ -7,7 +7,7 @@ class Loading extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
             brightness: Brightness.light,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             elevation: 0,
       ),
       body: Center(
