@@ -30,12 +30,13 @@ dependencies:
   flutter_screenutil: ^2.3.1
   line_awesome_flutter: ^1.0.1
   flutter_markdown: ^0.5.0
+  cloud_firestore: ^0.14.3
+  firebase_analytics: ^6.0.2
+  firebase_auth: ^0.18.1+2
+  firebase_core: ^0.5.2+1
   flutter_cmoon_icons: ^0.1.0
   international_phone_field: ^0.1.1
-  http: ^0.12.2
-  fluttertoast: ^7.1.5
-  shimmer: ^1.1.2
-  flutter_slidable: ^0.5.7
+  progress_dialog: ^1.2.4
 
 
 
@@ -68,7 +69,6 @@ flutter:
     - assets/salon.png
     - assets/account_success.png
     - assets/reset_success.png
-    - assets/hamburger.png
 
     
 
