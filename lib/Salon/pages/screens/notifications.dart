@@ -1,37 +1,44 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:starter_project/Salon/pages/widgets/search_bar.dart';
+import 'package:starter_project/Salon/pages/widgets/second_section.dart';
+import 'package:starter_project/Salon/pages/widgets/tab_section.dart';
+import 'package:starter_project/Salon/pages/widgets/custom_appbar.dart';
+import 'package:starter_project/Salon/pages/widgets/header.dart';
 
-// class NotificationsPage extends StatefulWidget {
-//   @override
-//   _NotificationsPageState createState() => _NotificationsPageState();
-// }
+class NotificationsPage extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
 
-// class _NotificationsPageState extends State<NotificationsPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: ListView.separated(
-//           itemBuilder: (context, index) {
-//             return Container(
-//               child: Column(
-//                 children: [
-//                   Row(
-//                     children: [
-//                       Container(),
-//                       Text("A reservation has been placed by DREW BRIGHT"),
-//                       Container(),
-//                     ],
-//                   ),
-//                   Row(children: [
-//                     FlatButton(onPressed:() {} , child: Text("Cancel")),
-//                      FlatButton(onPressed:() {} , child: Text("Accept"))
-//                   ],)
-//                 ],
-//               ),
-//             );
-//           },
-//           separatorBuilder: (context, ),
-//           itemCount: null),
-//     );
-//   }
-// }
+    final _headerText = Header(isHome: false);
+
+    final _searchBar = SearchBar();
+
+    final _tabSection = TabSection();
+
+    final _firstSection = Container(
+      height: screenHeight * 0.35,
+      padding: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[_headerText, _searchBar, _tabSection],
+      ),
+    );
+
+
+    final _secondSection = SecondSection();
+
+    return Scaffold(
+      appBar: CustomAppBar(isHome: false),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[_firstSection, _secondSection],
+          ),
+        ),
+      ),
+    );
+  }
+}

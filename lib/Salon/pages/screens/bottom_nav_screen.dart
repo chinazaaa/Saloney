@@ -12,8 +12,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     StatsScreen(),
     ChatsPage(),
     Scaffold(),
-    
-    Scaffold(),
+    NotificationsPage(),
     ProfileScreen(),
   ];
   int _currentIndex = 0;
