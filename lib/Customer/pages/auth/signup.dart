@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
-
+import 'package:starter_project/services/http_service_customer.dart';
 // ignore: must_be_immutable
 class SignupPage extends StatelessWidget {
+   bool _loading = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       key: _scaffoldKey,
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -71,7 +76,8 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
                InkWell(
-                 
+                 onTap:_signUp
+              ,
                                 child: FadeAnimation(
                           1.5,
                           Padding(
@@ -125,7 +131,32 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
+// ignore: missing_return
+Future<HttpResponse> _signUp() async {
+      _loading = !_loading;
+  
+    try{
+      HttpResponse httpresponse = await HttpService.customerSignup();
+        _loading = !_loading;
 
+      Fluttertoast.showToast(
+        msg: httpresponse.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    
+          _loading = !_loading;
+    
+    }
+    catch(e){
+          _loading = !_loading;
+      
+    }
+  }
   Widget makeInput({obscureText = false, String hint}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

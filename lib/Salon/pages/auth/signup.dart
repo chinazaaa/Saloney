@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Salon/pages/auth/login.dart';
 import 'package:flutter/services.dart';
-import 'package:starter_project/services/http_service.dart';
+import 'package:starter_project/services/http_service_salon.dart';
 
 // ignore: must_be_immutable
 class SalonSignUp extends StatefulWidget {
