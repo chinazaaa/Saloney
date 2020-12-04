@@ -10,7 +10,7 @@ class TabSection extends StatefulWidget {
 class _TabSectionState extends State<TabSection>
     with SingleTickerProviderStateMixin {
   TabController tabController;
-  final List<String> _tabs = ["TODAY", "LAST WEEK"];
+  final List<String> _tabs = ["TODAY", "PREVIOUS WEEKS"];
 
   @override
   void initState() {

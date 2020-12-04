@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
  Size get preferredSize => Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
+    
     final _userImage = GestureDetector(
       // onTap: () => 
       child: Container(
@@ -28,6 +29,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
 
     return AppBar(
+      elevation: 0,
+        brightness: Brightness.light,
+        backgroundColor: Colors.transparent,
       leading: Padding(
         padding: EdgeInsets.only(left: 10.0),
         child: GestureDetector(
