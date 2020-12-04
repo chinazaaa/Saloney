@@ -46,7 +46,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
           body: Container(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red,
+               color: Color(0xff9477cb),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.0),
                   topRight: Radius.circular(15.0),
