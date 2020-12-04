@@ -33,9 +33,9 @@ class _ChatListPageViewState extends State<ChatListPageView> {
             brightness: Brightness.light,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.red,
-            ),
+            // iconTheme: IconThemeData(
+            //   color: Colors.red,
+            // ),
             centerTitle: true,
             title: Text(
               'Chats',
