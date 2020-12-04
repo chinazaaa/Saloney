@@ -39,7 +39,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
             centerTitle: true,
             title: Text(
               'Chats',
-              style: TextStyle(color: Colors.red, fontSize: 18),
+              style: TextStyle(color: Color(0xff9477cb), fontSize: 18),
             ),
           
           ),
