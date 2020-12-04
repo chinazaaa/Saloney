@@ -8,8 +8,8 @@ class AppNotification {
 }
 
 List<AppNotification> notifications = [
-  AppNotification(AvailableImages.luffy, 'Naza commented on your post: "Bankai! 🔪" ', false),
-  AppNotification(AvailableImages.naruto, 'Uzumaki Naruto commented on your post: "Nakama 👊"', true),
-  AppNotification(AvailableImages.natsu, 'Natsu Dragonnel commented on your post: "Zeref 👿"', false),
-  AppNotification(AvailableImages.luffy, 'Monkey D. Luffy commented on your post: "Gear 5th 😁"', true),
+  AppNotification(AvailableImages.luffy, 'Naza commented on your post: "Hello! 🔪" ', false),
+  AppNotification(AvailableImages.naruto, 'Mummy commented on your post: "Hi 👊"', true),
+  AppNotification(AvailableImages.natsu, 'Daddy  commented on your post: "Lol 👿"', false),
+  AppNotification(AvailableImages.luffy, 'Children  commented on your post: "Sorry lol 😁"', true),
 ];
