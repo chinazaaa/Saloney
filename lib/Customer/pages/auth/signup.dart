@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:starter_project/pages/login.dart';
+import 'package:starter_project/Customer/pages/auth/login.dart';
 
 // ignore: must_be_immutable
 class SignupPage extends StatelessWidget {

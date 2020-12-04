@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:starter_project/pages/login.dart';
-import 'package:starter_project/pages/salon_signup.dart';
-import 'package:starter_project/pages/signup.dart';
+import 'package:starter_project/Salon/pages/auth/signup.dart';
+import 'package:starter_project/Customer/pages/auth/signup.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();

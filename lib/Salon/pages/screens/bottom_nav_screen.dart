@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/screens/screens.dart';
+import 'package:starter_project/Salon/pages/screens/screens.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override

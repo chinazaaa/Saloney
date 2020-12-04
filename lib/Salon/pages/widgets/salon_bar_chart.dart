@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/config/styles.dart';
+import 'package:starter_project/Salon/pages/config/styles.dart';
 
 class SalonBarChart extends StatelessWidget {
   final List<double> orders;

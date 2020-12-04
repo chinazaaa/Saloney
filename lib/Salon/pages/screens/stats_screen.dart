@@ -1,10 +1,10 @@
 //import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/config/styles.dart';
-import 'package:starter_project/pages/config/palette.dart';
-import 'package:starter_project/pages/data/data.dart';
-import 'package:starter_project/pages/screens/custom_app_bar.dart';
-import 'package:starter_project/pages/widgets/widgets.dart';
+import 'package:starter_project/Salon/pages/config/styles.dart';
+import 'package:starter_project/Salon/pages/config/palette.dart';
+import 'package:starter_project/Salon/pages/data/data.dart';
+import 'package:starter_project/Salon/pages/screens/custom_app_bar.dart';
+import 'package:starter_project/Salon/pages/widgets/widgets.dart';
 
 
 class StatsScreen extends StatefulWidget {

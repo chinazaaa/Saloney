@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/config/palette.dart';
+import 'package:starter_project/Salon//pages/config/palette.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override

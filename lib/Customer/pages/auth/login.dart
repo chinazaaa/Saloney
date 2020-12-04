@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/password/forgot_password.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:starter_project/pages/home_screen.dart';
-import 'package:starter_project/pages/screens/bottom_nav_screen.dart';
+import 'package:starter_project/home_screen.dart';
 
 
 // ignore: must_be_immutable
-class CustomerLoginPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class CustomerLoginPage extends StatelessWidget {
                                 1.6,
                                 InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNavScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ForgotPage()));
                                     },
                                 
                               child: Text(

@@ -36,7 +36,7 @@ class OtpScreen extends StatelessWidget {
                         
                            
                             Text(
-                              "Enter OTP",
+                              "Enter OTP to reset your password",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),

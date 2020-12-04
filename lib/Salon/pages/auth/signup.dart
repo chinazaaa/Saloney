@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starter_project/models/http_response.dart';
-import 'package:starter_project/pages/login.dart';
+import 'package:starter_project/Salon/pages/auth/login.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/services/http_service.dart';
 
@@ -80,6 +80,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
     );
   }
 
+  // ignore: missing_return
   Future<HttpResponse> _signUp() async {
     setState((){
       _loading = !_loading;

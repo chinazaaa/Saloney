@@ -7,6 +7,7 @@ class HttpService {
   // Promise
   static const String BASE_URL = "https://saloney.herokuapp.com";
 
+  // ignore: missing_return
   static Future customerSignup() {}
   /*
 

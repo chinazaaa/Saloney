@@ -1,6 +1,6 @@
 import 'package:starter_project/models/step_models.dart';
 import 'package:flutter/material.dart';
-import 'package:starter_project/pages/home_screen.dart';
+import 'package:starter_project/home_screen.dart';
 
 class IntroPage extends StatefulWidget {
   @override

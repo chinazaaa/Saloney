@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:starter_project/pages/config/constants.dart';
-import 'package:starter_project/pages/widgets/profile_list.dart';
+import 'package:starter_project/Salon/pages/config/constants.dart';
+import 'package:starter_project/Salon/pages/widgets/profile_list.dart';
 
 
 class ProfileScreen extends StatelessWidget {
