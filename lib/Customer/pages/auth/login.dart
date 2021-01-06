@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/password/forgot_password.dart';
+//import 'package:starter_project/Customer/pages/password/forgot_password.dart';
+import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/home_screen.dart';
 
@@ -90,7 +91,7 @@ class LoginPage extends StatelessWidget {
                                 1.6,
                                 InkWell(
                                     onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>ForgotPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>Home()));
                                     },
                                 
                               child: Text(
