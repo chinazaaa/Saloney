@@ -48,7 +48,7 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
         ),
         body: TabBarView(
           children: <Widget>[
-            Icon(Icons.person),
+            //Icon(Icons.person),
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -81,11 +81,11 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
                                   fit: BoxFit.fitHeight,
                                 )),
                           ),
-                          BoldText("sheraton", 20.0, kblack),
+                          BoldText("Naza", 20.0, kblack),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              NormalText("Oran", kgreyDark, 12.0),
+                              NormalText("Lekki", kgreyDark, 12.0),
                               Icon(
                                 Icons.location_on,
                                 color: kgreyDark,
@@ -111,9 +111,9 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
-                          RecommendationImage("assets/1.png", "Sheraton", "Oran"),
-                          RecommendationImage("assets/2.png", "Meridien", "Oran"),
-                          RecommendationImage("assets/3.png", "Ibis", "Oran"),
+                          RecommendationImage("assets/1.png", "Naza", "Nigeria"),
+                          RecommendationImage("assets/2.png", "Sudu", "Nigeria"),
+                          RecommendationImage("assets/3.png", "KC", "Nigeria"),
                         ],
                       ),
                     ),
@@ -122,6 +122,7 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
+            Icon(Icons.person),
             Icon(Icons.restaurant),
           ],
           controller: tabController,
