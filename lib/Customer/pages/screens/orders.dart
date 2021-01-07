@@ -25,8 +25,10 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kwhite,
       appBar: AppBar(
         backgroundColor: kwhite,
+        brightness: Brightness.light,
         title: BoldText("My Orders", 25, kblack),
         centerTitle: true,
         elevation: 0.0,

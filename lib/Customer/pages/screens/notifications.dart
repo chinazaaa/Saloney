@@ -14,7 +14,14 @@ class _NotificationsState extends State<Notifications> {
     return Scaffold(
       backgroundColor: kwhite,
         appBar: AppBar(
-        backgroundColor: kwhite,
+        // backgroundColor: kwhite,
+         backgroundColor: Colors.red,
+         leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_backspace,
+          ),
+          onPressed: ()=>Navigator.pop(context),
+        ),
         title: BoldText("My Notifications", 25, kblack),
     centerTitle: true,
     elevation: 0.0,
