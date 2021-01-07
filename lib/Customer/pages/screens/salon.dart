@@ -26,7 +26,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
         ),
         centerTitle: true,
         title: Text(
-          "Salons",
+          "Salon Services",
         ),
         elevation: 0.0,
         actions: <Widget>[
