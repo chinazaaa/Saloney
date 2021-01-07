@@ -133,7 +133,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    "20 Pieces",
+                    "Cheap and affordable",
                     style: TextStyle(
                       fontSize: 11.0,
                       fontWeight: FontWeight.w300,
