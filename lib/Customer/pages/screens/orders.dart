@@ -41,8 +41,8 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
           indicatorColor: kdarkBlue,
           tabs: <Widget>[
             Tab(text: "Today"),
-            Tab(text: "Weekly"),
-            Tab(text: "Monthly"),
+            Tab(text: "Uncompleted"),
+            Tab(text: "Completed"),
           
           ],
         ),
