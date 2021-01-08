@@ -8,17 +8,20 @@ class CustomerRegistrationResponse extends ApiResponse{
   final bool success;
   final String message;
   final CustomerProfile data;
+  final String status;
   CustomerRegistrationResponse({
     this.success,
     this.message,
     this.data,
-  }) : super(success: success, message: message, data: data, status: null);
+    this.status,
+  }) : super(success: success, message: message, data: data, status: status);
 
   Map<String, dynamic> toMap() {
     return {
       'success': success,
       'message': message,
       'data': data?.toMap(),
+      'status': status
     };
   }
 
@@ -28,6 +31,7 @@ class CustomerRegistrationResponse extends ApiResponse{
     return CustomerRegistrationResponse(
       success: map['success'],
       message: map['message'],
+      status: map['status'],
       data: map['data'] != null ? CustomerProfile.fromMap(map['data']) : null,
     );
   }
@@ -37,6 +41,6 @@ class CustomerRegistrationResponse extends ApiResponse{
   factory CustomerRegistrationResponse.fromJson(String source) => CustomerRegistrationResponse.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CustomerRegistrationResponse(success: $success, message: $message, data: $data)';
+  String toString() => 'CustomerRegistrationResponse(success: $success, status: $status, message: $message, data: $data)';
 }
 
