@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:starter_project/models/api_response.dart';
 
-import '../user.dart';
+import '../saloonInfo.dart';
+
 
 class RegistrationResponse extends ApiResponse{
   final bool success;
   final String message;
-  final User data;
+  final SaloonInfo data;
   RegistrationResponse({
     this.success,
     this.message,
@@ -28,7 +29,7 @@ class RegistrationResponse extends ApiResponse{
     return RegistrationResponse(
       success: map['success'],
       message: map['message'],
-      data: map['data'] != null ? User.fromMap(map['data']) : null,
+      data: map['data'] != null ? SaloonInfo.fromMap(map['data']) : null,
     );
   }
 

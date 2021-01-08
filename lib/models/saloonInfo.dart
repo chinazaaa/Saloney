@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class User {
+class SaloonInfo {
   final Local local;
   final Image image;
   final String id;
@@ -8,7 +8,7 @@ class User {
   final String createdAt;
   final String updatedAt;
   final int v;
-  User({
+  SaloonInfo({
     this.local,
     this.image,
     this.id,
@@ -30,10 +30,10 @@ class User {
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
+  factory SaloonInfo.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return User(
+    return SaloonInfo(
       local: Local.fromMap(map['local']),
       image: Image.fromMap(map['image']),
       id: map['_id'],
@@ -46,7 +46,7 @@ class User {
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  factory SaloonInfo.fromJson(String source) => SaloonInfo.fromMap(json.decode(source));
 
   @override
   String toString() {
