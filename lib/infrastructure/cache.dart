@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Cache {
+class FCMCache {
   ///FCM Cache
   static const String location = "FCM";
   static setFcmToken(String fcmToken) async {

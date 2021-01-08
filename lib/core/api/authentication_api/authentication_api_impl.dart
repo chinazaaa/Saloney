@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:starter_project/models/api_response.dart';
+import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
 
 import '../api_utils/api_helper.dart';
@@ -34,7 +36,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
     try {
       var responsebody =
           await server.post(ApiRoutes.loginSalon, header, jsonEncode(val));
-      ApiResponse response = ApiResponse.fromJson(responsebody);
+      CustomerLoginResponse response = CustomerLoginResponse.fromJson(responsebody);
 
       return response;
     } on SocketException {
@@ -52,7 +54,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
     try {
       var responsebody =
           await server.post(ApiRoutes.loginSalon, header, jsonEncode(val));
-      ApiResponse response = ApiResponse.fromJson(responsebody);
+      SalonLoginResponse response = SalonLoginResponse.fromJson(responsebody);
 
       return response;
     } on SocketException {
