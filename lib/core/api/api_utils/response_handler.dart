@@ -18,6 +18,8 @@ dynamic responseHandler(http.Response response) async {
     case 401:
     case 403:
       throw UnauthorisedException(response.body.toString());
+    case 409:
+      throw AlreadyRegisteredException(response.body.toString());
     case 422:
       throw AlreadyRegisteredException(response.body.toString());
     case 500:
