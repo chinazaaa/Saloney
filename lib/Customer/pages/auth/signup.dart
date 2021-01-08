@@ -131,8 +131,8 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
-// ignore: missing_return
-Future<HttpResponse> _signUp() async {
+
+  Future<HttpResponse> _signUp() async {
       _loading = !_loading;
   
     try{
