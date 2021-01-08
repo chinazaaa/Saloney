@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/intro_page.dart';
 
+import 'core/provider/providers.dart';
 import 'core/routes/route_names.dart';
 import 'ui_helpers/themes/app_theme_light.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -28,12 +30,15 @@ class MyApp extends StatelessWidget {
       systemNavigationBarColor: Colors.transparent,
     
     ));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Saloney',
-      theme: appThemeLight,
-      routes: RouteNames.routes,
-      initialRoute: RouteNames.introPage,
+    return MultiProvider(
+      providers: SaloneyProviders.providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Saloney',
+        theme: appThemeLight,
+        routes: RouteNames.routes,
+        initialRoute: RouteNames.introPage,
+      ),
     );
   }
 }
