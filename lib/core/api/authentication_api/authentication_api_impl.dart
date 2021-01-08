@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:starter_project/models/api_response.dart';
+import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
+import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
 
 import '../api_utils/api_helper.dart';
 import '../api_utils/api_routes.dart';
@@ -60,7 +62,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<ApiResponse> registerCustomer({String userName, String email, String phone, String password}) async{
+  Future<CustomerRegistrationResponse> registerCustomer({String userName, String email, String phone, String password}) async{
     Map val =   {
       'userName': userName,
       'email': email,
@@ -71,7 +73,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
     try {
       var responsebody =
           await server.post(ApiRoutes.registerCustomer, header, jsonEncode(val));
-      ApiResponse response = ApiResponse.fromJson(responsebody);
+      CustomerRegistrationResponse response = CustomerRegistrationResponse.fromJson(responsebody);
 
       return response;
     } on SocketException {
@@ -82,7 +84,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<ApiResponse> registerSaloon({String userName, String email, String phone, String password, String nameOfSalon, String typeOfSalon, String location}) async{
+  Future<SalonRegistrationResponse> registerSaloon({String userName, String email, String phone, String password, String nameOfSalon, String typeOfSalon, String location}) async{
     Map val =   {
       'userName': userName,
       'email': email,
@@ -98,7 +100,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
     try {
       var responsebody =
           await server.post(ApiRoutes.registerSalon, header, jsonEncode(val));
-      ApiResponse response = ApiResponse.fromJson(responsebody);
+      SalonRegistrationResponse response = SalonRegistrationResponse.fromJson(responsebody);
 
       return response;
     } on SocketException {

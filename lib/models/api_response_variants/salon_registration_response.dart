@@ -5,11 +5,11 @@ import 'package:starter_project/models/api_response.dart';
 import '../saloonInfo.dart';
 
 
-class RegistrationResponse extends ApiResponse{
+class SalonRegistrationResponse extends ApiResponse{
   final bool success;
   final String message;
   final SaloonInfo data;
-  RegistrationResponse({
+  SalonRegistrationResponse({
     this.success,
     this.message,
     this.data,
@@ -23,10 +23,10 @@ class RegistrationResponse extends ApiResponse{
     };
   }
 
-  factory RegistrationResponse.fromMap(Map<String, dynamic> map) {
+  factory SalonRegistrationResponse.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return RegistrationResponse(
+    return SalonRegistrationResponse(
       success: map['success'],
       message: map['message'],
       data: map['data'] != null ? SaloonInfo.fromMap(map['data']) : null,
@@ -35,7 +35,7 @@ class RegistrationResponse extends ApiResponse{
 
   String toJson() => json.encode(toMap());
 
-  factory RegistrationResponse.fromJson(String source) => RegistrationResponse.fromMap(json.decode(source));
+  factory SalonRegistrationResponse.fromJson(String source) => SalonRegistrationResponse.fromMap(json.decode(source));
 
   @override
   String toString() => 'RegistrationResponse(success: $success, message: $message, data: $data)';

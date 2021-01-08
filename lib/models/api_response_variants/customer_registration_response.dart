@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:starter_project/models/api_response.dart';
+
 import '../customer_profile.dart';
 
-class CustomerRegistrationResponse {
+class CustomerRegistrationResponse extends ApiResponse{
   final bool success;
   final String message;
   final CustomerProfile data;
@@ -10,7 +12,7 @@ class CustomerRegistrationResponse {
     this.success,
     this.message,
     this.data,
-  });
+  }) : super(success: success, message: message, data: data, status: null);
 
   Map<String, dynamic> toMap() {
     return {
