@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/intro_page.dart';
+
+import 'core/routes/route_names.dart';
+import 'ui_helpers/themes/app_theme_light.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //  const MaterialColor primaryColor = MaterialColor(0xff9477cb,{});
 
@@ -27,12 +30,10 @@ class MyApp extends StatelessWidget {
     ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: IntroPage(),
+      title: 'Saloney',
+      theme: appThemeLight,
+      routes: RouteNames.routes,
+      initialRoute: RouteNames.introPage,
     );
   }
 }
