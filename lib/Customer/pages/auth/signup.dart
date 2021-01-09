@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
 import 'package:starter_project/services/http_service_customer.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
+
+import 'otp.dart';
+
 // ignore: must_be_immutable
-class SignupPage extends StatelessWidget {
-   bool _loading = false;
+class CustomerSignupPage extends StatelessWidget {
+  bool _loading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //Controllers
+  TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
+
+  GlobalKey<FormState> mykey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<AuthRepository>(context);
     return Scaffold(
-       key: _scaffoldKey,
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -59,52 +77,84 @@ class SignupPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    children: <Widget>[
-                      FadeAnimation(1.2, makeInput(hint: "Username")),
-                      FadeAnimation(1.3, makeInput(hint: "Phone Number")),
-                      FadeAnimation(1.4, makeInput(hint: "Email")),
-                      FadeAnimation(
-                          1.5, makeInput(hint: "Password", obscureText: true)),
-                      FadeAnimation(
-                          1.6,
-                          makeInput(
-                              hint: "Confirm Password", obscureText: true)),
-                    ],
+                Form(
+                  key: mykey,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      children: <Widget>[
+                        FadeAnimation(
+                            1.2,
+                            makeInput(
+                                hint: "Username",
+                                controller: name,
+                                validator: (value) =>
+                                    model.validateName(value))),
+                        FadeAnimation(
+                            1.3,
+                            makeInput(
+                                hint: "Phone Number",
+                                controller: phone,
+                                validator: (value) =>
+                                    model.validatePhoneNumber(value))),
+                        FadeAnimation(
+                            1.4,
+                            makeInput(
+                                hint: "Email",
+                                controller: email,
+                                validator: (value) =>
+                                    model.validateEmail(value))),
+                        FadeAnimation(
+                            1.5,
+                            makeInput(
+                                hint: "Password",
+                                obscureText: true,
+                                controller: password,
+                                validator: (value) =>
+                                    model.validatePassword(value))),
+                        FadeAnimation(
+                            1.6,
+                            makeInput(
+                                hint: "Confirm Password",
+                                obscureText: true,
+                                controller: confirmpassword,
+                                validator: (value) => value == password.text
+                                    ? null
+                                    : "Passwords do not match")),
+                      ],
+                    ),
                   ),
                 ),
-               InkWell(
-                 onTap:_signUp
-              ,
-                                child: FadeAnimation(
-                          1.5,
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 40),
-                            child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              height: 60,
-                              padding: EdgeInsets.only(top: 3, left: 3),
-                              decoration: BoxDecoration(
-                                color: Color(0xff9477cb),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              
-    
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              ),
-                            ),
+                ResponsiveState(
+                  state: model.state,
+                  busyWidget: CircularProgressIndicator(),
+                  idleWidget: InkWell(
+                    onTap: ()=> signUpCustomer(context),
+                    child: FadeAnimation(
+                      1.5,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: 60,
+                          padding: EdgeInsets.only(top: 3, left: 3),
+                          decoration: BoxDecoration(
+                            color: Color(0xff9477cb),
+                            borderRadius: BorderRadius.circular(5),
                           ),
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-               ),
-                
+                ),
                 FadeAnimation(
                     1.6,
                     Row(
@@ -116,7 +166,7 @@ class SignupPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>LoginPage()));
+                                    builder: (context) => CustomerLoginPage()));
                           },
                           child: Text(" Login",
                               style: TextStyle(
@@ -131,37 +181,58 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
-// ignore: missing_return
-Future<HttpResponse> _signUp() async {
-      _loading = !_loading;
-  
-    try{
-      HttpResponse httpresponse = await HttpService.customerSignup();
-        _loading = !_loading;
 
-      Fluttertoast.showToast(
-        msg: httpresponse.message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-    
-          _loading = !_loading;
-    
-    }
-    catch(e){
-          _loading = !_loading;
-      
+  signUpCustomer(BuildContext context) async {
+    final model = Provider.of<AuthRepository>(context);
+    if (!mykey.currentState.validate()) return;
+
+    bool success = await model.register(
+        isCustomer: true,
+        userName: name.text,
+        phone: phone.text,
+        email: email.text,
+        password: password.text);
+
+    if (success) {
+      //go to otp page
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerOtpScreen()));
+    } else {
+      //Do nothing
     }
   }
-  Widget makeInput({obscureText = false, String hint}) {
+
+  Future<HttpResponse> _signUp() async {
+    _loading = !_loading;
+
+    try {
+      HttpResponse httpresponse = await HttpService.customerSignup();
+      _loading = !_loading;
+
+      Fluttertoast.showToast(
+          msg: httpresponse.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+      _loading = !_loading;
+    } catch (e) {
+      _loading = !_loading;
+    }
+  }
+
+  Widget makeInput(
+      {obscureText = false,
+      String hint,
+      TextEditingController controller,
+      Function validator}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
+          controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hint,
@@ -171,13 +242,7 @@ Future<HttpResponse> _signUp() async {
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey[400])),
           ),
-          validator: (value) {
-      if (value.isEmpty) {
-        return "Field Can't be empty";
-      } else {
-        return null;
-      }
-    },
+          validator: validator,
         ),
         SizedBox(
           height: 30,
@@ -185,5 +250,4 @@ Future<HttpResponse> _signUp() async {
       ],
     );
   }
-   
 }

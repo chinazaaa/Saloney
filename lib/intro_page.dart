@@ -1,6 +1,11 @@
+import 'package:starter_project/locator.dart';
 import 'package:starter_project/models/step_models.dart';
 import 'package:flutter/material.dart';
 import 'package:starter_project/home_screen.dart';
+
+import 'Customer/pages/auth/otp.dart';
+import 'Salon/pages/auth/otp.dart';
+import 'infrastructure/user_info_cache.dart';
 
 class IntroPage extends StatefulWidget {
   @override
@@ -8,9 +13,50 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
+
   List<StepModel> list = StepModel.list;
   var _controller = PageController();
   var initialPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      initialize();
+    });
+
+  }
+
+
+  initialize() async {
+    //Initiating the UserInfoCache Data to be used in app
+    var user = locator<UserInfoCache>();
+    await user.getUserDataFromStorage();
+
+    //if user is logged in
+    if(user.isLoggedIn){
+      if(user.cache.isCustomer){
+        //perform customer checks
+        if(user.cache.customer.data == null){
+          //Go to customer OTP page
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerOtpScreen()));
+        } else {
+          //Got to home screen
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+        }
+      } else {
+        //perform salon checks
+        if(user.cache.salon.data == null){
+          //Go to customer OTP page
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>SalonOtpScreen()));
+        } else {
+          //Got to home screen
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+        }
+      }
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
