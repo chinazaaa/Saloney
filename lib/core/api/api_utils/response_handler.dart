@@ -14,14 +14,24 @@ dynamic responseHandler(http.Response response) async {
       return response.body;
       break;
     case 400:
-      throw BadRequestException(response.body);
+      return response.body;
+      // break;
+      // throw BadRequestException(response.body);
     case 401:
+      return response.body;
+      break;
     case 403:
-      throw UnauthorisedException(response.body.toString());
+      return response.body;
+      // break;
+      // throw UnauthorisedException(response.body.toString());
     case 409:
-      throw AlreadyRegisteredException(response.body.toString());
+      return response.body;
+      // break;
+      // throw AlreadyRegisteredException(response.body.toString());
     case 422:
-      throw AlreadyRegisteredException(response.body.toString());
+      return response.body;
+      // break;
+      // throw AlreadyRegisteredException(response.body.toString());
     case 500:
     default:
       throw FetchDataException(
