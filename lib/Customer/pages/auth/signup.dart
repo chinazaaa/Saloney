@@ -7,6 +7,8 @@ import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
 import 'package:starter_project/services/http_service_customer.dart';
 
+import 'otp.dart';
+
 // ignore: must_be_immutable
 class SignupPage extends StatelessWidget {
   bool _loading = false;
@@ -187,6 +189,7 @@ class SignupPage extends StatelessWidget {
 
     if (success) {
       //go to otp page
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerOtpScreen()));
     } else {
       //Do nothing
     }
