@@ -33,6 +33,8 @@ class Cache{
   factory Cache.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
+    print(map['salon']);
+
     return Cache(
       customer: CustomerLoginResponse.fromMap(map['customer']),
       salon: SalonLoginResponse.fromMap(map['salon']),
@@ -96,16 +98,13 @@ class UserInfoCache {
   }
 
   getUserDataFromStorage() async {
-    try {
+    // try {
       //Instance of SharedPreferences
       SharedPreferences storage = await SharedPreferences.getInstance();
-      var data = await storage.getString('user_data');
+      String data = await storage.getString('user_data');
 
-      var buffer = jsonDecode(data);
-
-      // print(buffer);
       //Set object fields
-      Cache res = Cache.fromJson(buffer);
+      Cache res = Cache.fromJson(data);
 
       if (res.isCustomer) {
         print('${res.customer.data.email}\'s data fetched from Storage successfully');
@@ -113,9 +112,11 @@ class UserInfoCache {
         print('${res.salon.data.local.email}\'s data fetched from Storage successfully');
       }
 
-    } catch (e) {
-      print('There is no data in location: \'user_data\'');
-    }
+    // }
+
+    // catch (e) {
+    //   print('There is no data in location: \'user_data\'');
+    // }
   }
 
   ///Please use only one response at a time
@@ -133,6 +134,8 @@ class UserInfoCache {
       }  else {
         data = Cache(customer: customer);
       }
+
+      // print(data.toMap());
       bool val = await storage.setString('user_data', data.toJson());
 
       //set new values in class field

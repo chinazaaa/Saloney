@@ -45,7 +45,7 @@ class AuthRepository extends BaseNotifier with Validators{
       }
       //is salon
       else {
-        salon = await authApi.loginCustomer(userName: userName, password: password);
+        salon = await authApi.loginSaloon(userName: userName, password: password);
         setState(ViewState.Idle);
 
         if(salon.success){
@@ -53,7 +53,8 @@ class AuthRepository extends BaseNotifier with Validators{
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(salon: salon);
           return true;
-        } else {
+        }
+        else {
           Get.snackbar(
             'Error',
             '${salon.message}',
@@ -75,14 +76,15 @@ class AuthRepository extends BaseNotifier with Validators{
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } catch (e) {
-      Get.snackbar(
-        'An Error Occured!',
-        'Please try again',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black45,
-      );
     }
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error Occured!',
+    //     'Please try again',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black45,
+    //   );
+    // }
 
     setState(ViewState.Idle);
     return false;

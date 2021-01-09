@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/intro_page.dart';
 
+import 'Salon/pages/auth/login.dart';
 import 'core/provider/providers.dart';
 import 'core/routes/route_names.dart';
 import 'locator.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         title: 'Saloney',
         theme: appThemeLight,
         routes: RouteNames.routes,
+        // home: SalonLoginPage(),
         initialRoute: RouteNames.introPage,
         navigatorKey: Get.key,
       ),

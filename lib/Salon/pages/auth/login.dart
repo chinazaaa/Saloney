@@ -228,7 +228,7 @@ class SalonLoginPage extends StatelessWidget {
     if (success) {
       //go to otp page
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
     } else {
       //Do nothing
     }
