@@ -135,7 +135,7 @@ class CustomerLoginPage extends StatelessWidget {
                         state: model.state,
                         busyWidget: LoadingButton(),
                         idleWidget: InkWell(
-                          onTap: loginCustomer(context),
+                          onTap: () => loginCustomer(context),
                           child: FadeAnimation(
                             1.5,
                             Padding(

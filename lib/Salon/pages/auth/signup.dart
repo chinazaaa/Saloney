@@ -30,7 +30,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   TextEditingController nameOfSalon = TextEditingController();
   TextEditingController typeOfSalon = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
-  GlobalKey<FormState> mykey = GlobalKey<FormState>();
+  final mykey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -358,7 +358,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
               state: model.state,
               busyWidget: LoadingButton(),
               idleWidget: InkWell(
-                onTap: signUpSalon(),
+                onTap: signUpSalon,
                 child: FadeAnimation(
                   1.5,
                   Padding(

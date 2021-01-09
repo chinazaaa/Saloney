@@ -95,7 +95,7 @@ class SalonLoginPage extends StatelessWidget {
                                 state: model.state,
                                 busyWidget: LoadingButton(),
                                 idleWidget: InkWell(
-                                  onTap: loginSalon(context),
+                                  onTap: () => loginSalon(context),
                                   child: FadeAnimation(
                                     1.5,
                                     Padding(
