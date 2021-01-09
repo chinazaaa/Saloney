@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/authentication_api/authentication_api.dart';
+import 'package:starter_project/core/mixin/validators.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
@@ -12,7 +13,7 @@ import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
 
 import '../../locator.dart';
 
-class AuthRepository extends BaseNotifier {
+class AuthRepository extends BaseNotifier with Validators{
 
   //API
   var authApi = locator<AuthenticationApi>();
