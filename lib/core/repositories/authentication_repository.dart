@@ -18,7 +18,7 @@ class AuthRepository extends BaseNotifier with Validators{
   //API
   var authApi = locator<AuthenticationApi>();
 
-  Future<Cache> login(String userName, String password, bool isCustomer) async {
+  Future<bool> login(String userName, String password, bool isCustomer) async {
     setState(ViewState.Busy);
     CustomerLoginResponse customer;
     SalonLoginResponse salon;
@@ -27,21 +27,45 @@ class AuthRepository extends BaseNotifier with Validators{
         customer = await authApi.loginCustomer(userName: userName, password: password);
         setState(ViewState.Idle);
 
-        // Cache Login information
-        var userInfoCache = locator<UserInfoCache>();
-        await userInfoCache.cacheLoginResponse(customer: customer);
+        if(customer.success){
+          // Cache Login information
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.cacheLoginResponse(customer: customer);
+          return true;
+        } else {
+          Get.snackbar(
+            'Error',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
       }
       //is salon
       else {
         salon = await authApi.loginCustomer(userName: userName, password: password);
         setState(ViewState.Idle);
 
-        // Cache Login information
-        var userInfoCache = locator<UserInfoCache>();
-        await userInfoCache.cacheLoginResponse(salon: salon);
-      }
+        if(salon.success){
+          // Cache Login information
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.cacheLoginResponse(salon: salon);
+          return true;
+        } else {
+          Get.snackbar(
+            'Error',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
 
-      return Cache(customer: customer, salon: salon);
+      }
+      return false;
     } on NetworkException {
       Get.snackbar(
         'No Internet!',
@@ -61,7 +85,7 @@ class AuthRepository extends BaseNotifier with Validators{
     }
 
     setState(ViewState.Idle);
-    return null;
+    return false;
   }
 
   Future<bool> register({bool isCustomer = true, String userName, String password, String email, String location, String nameOfSalon, String phone, String typeOfSalon}) async{
@@ -99,9 +123,67 @@ class AuthRepository extends BaseNotifier with Validators{
     return false;
   }
 
-  Future<bool> confirmOTP({bool isCustomer = true, String Otp}){
+  Future<bool> confirmOTP({bool isCustomer = true, String Otp}) async{
     SalonRegistrationResponse salon;
     CustomerRegistrationResponse customer;
+
+    try {
+      if (isCustomer) {
+        CustomerRegistrationResponse customer = await authApi.confirmCustomerOTP(Otp: Otp);
+
+        if(customer.success){
+          setState(ViewState.Idle);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }  else {
+        SalonRegistrationResponse salon = await authApi.confirmSaloonOTP(Otp: Otp);
+        if(salon.success){
+          setState(ViewState.Idle);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }
+
+      setState(ViewState.Idle);
+      return false;
+
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
+
+    setState(ViewState.Idle);
+    return false;
 
 
   }
