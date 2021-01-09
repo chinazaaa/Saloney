@@ -23,7 +23,7 @@ class CustomerSignupPage extends StatelessWidget {
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
 
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  GlobalKey<FormState> mykey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class CustomerSignupPage extends StatelessWidget {
                   ),
                 ),
                 Form(
-                  key: key,
+                  key: mykey,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
@@ -184,7 +184,7 @@ class CustomerSignupPage extends StatelessWidget {
 
   signUpCustomer(BuildContext context) async {
     final model = Provider.of<AuthRepository>(context);
-    if (!key.currentState.validate()) return;
+    if (!mykey.currentState.validate()) return;
 
     bool success = await model.register(
         isCustomer: true,

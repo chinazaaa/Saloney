@@ -18,7 +18,7 @@ class AuthRepository extends BaseNotifier with Validators{
   //API
   var authApi = locator<AuthenticationApi>();
 
-  Future<bool> login(String userName, String password, bool isCustomer) async {
+  Future<bool> login({String userName, String password, bool isCustomer}) async {
     setState(ViewState.Busy);
     CustomerLoginResponse customer;
     SalonLoginResponse salon;

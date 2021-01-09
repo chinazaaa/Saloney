@@ -30,7 +30,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   TextEditingController nameOfSalon = TextEditingController();
   TextEditingController typeOfSalon = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  GlobalKey<FormState> mykey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
 
   signUpSalon() async{
     final model = Provider.of<AuthRepository>(context);
-    if (!key.currentState.validate()) return;
+    if (!mykey.currentState.validate()) return;
 
     bool success = await model.register(
         isCustomer: false,
@@ -204,7 +204,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
               ),
             ),
             Form(
-              key: key,
+              key: mykey,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
