@@ -130,9 +130,8 @@ class AuthRepository extends BaseNotifier with Validators{
     try {
       if (isCustomer) {
         CustomerRegistrationResponse customer = await authApi.confirmCustomerOTP(Otp: Otp);
-
+        setState(ViewState.Idle);
         if(customer.success){
-          setState(ViewState.Idle);
           return true;
         } else {
           Get.snackbar(
@@ -146,8 +145,8 @@ class AuthRepository extends BaseNotifier with Validators{
         }
       }  else {
         SalonRegistrationResponse salon = await authApi.confirmSaloonOTP(Otp: Otp);
+        setState(ViewState.Idle);
         if(salon.success){
-          setState(ViewState.Idle);
           return true;
         } else {
           Get.snackbar(
@@ -181,11 +180,8 @@ class AuthRepository extends BaseNotifier with Validators{
         backgroundColor: Colors.black45,
       );
     }
-
     setState(ViewState.Idle);
     return false;
-
-
   }
 
 }
