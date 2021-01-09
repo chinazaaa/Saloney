@@ -31,6 +31,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   TextEditingController typeOfSalon = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
   final mykey = GlobalKey<FormState>();
+  final mySecondKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
                   _backButton(context: context),
                   TabBar(
                     onTap: (int index) {
+                      // if (!mykey.currentState.validate()) return;
                       setState(() {
                         _index = index;
                       });
@@ -91,7 +93,15 @@ class _SalonSignUpState extends State<SalonSignUp> {
 
   signUpSalon() async{
     final model = Provider.of<AuthRepository>(context);
-    if (!mykey.currentState.validate()) return;
+
+    if (!mykey.currentState.validate()){
+      setState(() {
+        _index = 0;
+      });
+      return;
+    }
+
+    if (!mySecondKey.currentState.validate()) return;
 
     bool success = await model.register(
         isCustomer: false,
@@ -254,6 +264,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
             ),
             InkWell(
               onTap: () {
+                if (!mykey.currentState.validate()) return;
                 setState(() {
                   _index = 1;
                 });
@@ -330,28 +341,31 @@ class _SalonSignUpState extends State<SalonSignUp> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Column(
-                children: <Widget>[
-                  FadeAnimation(
-                      1.4,
-                      makeInput(
-                          hint: "Name of Salon",
-                          controller: nameOfSalon,
-                          validator: (value) =>
-                              model.validateName(value))),
-                  FadeAnimation(
-                      1.5,
-                      makeInput(
-                          hint: "Location",
-                          obscureText: true,
-                          controller: location,
-                          validator: (value) =>
-                              model.validateName(value))),
-                  makeInput(hint: "Name of Salon"),
-                  makeInput(hint: "Location"),
-                ],
+            Form(
+              key: mySecondKey,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: <Widget>[
+                    FadeAnimation(
+                        1.4,
+                        makeInput(
+                            hint: "Name of Salon",
+                            controller: nameOfSalon,
+                            validator: (value) =>
+                                model.validateName(value))),
+                    FadeAnimation(
+                        1.5,
+                        makeInput(
+                            hint: "Location",
+                            obscureText: false,
+                            controller: location,
+                            validator: (value) =>
+                                model.validateName(value))),
+                    // makeInput(hint: "Name of Salon"),
+                    // makeInput(hint: "Location"),
+                  ],
+                ),
               ),
             ),
             ResponsiveState(

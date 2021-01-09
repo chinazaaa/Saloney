@@ -33,6 +33,8 @@ class AuthenticationApiImpl implements AuthenticationApi {
       'password': password,
     };
 
+    print(val);
+
     try {
       var responsebody =
           await server.post(ApiRoutes.loginSalon, header, jsonEncode(val));

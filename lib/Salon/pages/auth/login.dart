@@ -124,6 +124,7 @@ class SalonLoginPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 20),
                               Container(
                                   child: Row(
                                 mainAxisAlignment:
@@ -162,30 +163,30 @@ class SalonLoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        child: FadeAnimation(
-                            1.5,
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                height: 60,
-                                padding: EdgeInsets.only(top: 3, left: 3),
-                                decoration: BoxDecoration(
-                                  color: Color(0xff9477cb),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            )),
-                      ),
+                      // InkWell(
+                      //   child: FadeAnimation(
+                      //       1.5,
+                      //       Padding(
+                      //         padding: EdgeInsets.symmetric(horizontal: 40),
+                      //         child: Container(
+                      //           width: double.infinity,
+                      //           alignment: Alignment.center,
+                      //           height: 60,
+                      //           padding: EdgeInsets.only(top: 3, left: 3),
+                      //           decoration: BoxDecoration(
+                      //             color: Color(0xff9477cb),
+                      //             borderRadius: BorderRadius.circular(5),
+                      //           ),
+                      //           child: Text(
+                      //             "Login",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.w600,
+                      //                 fontSize: 18,
+                      //                 color: Colors.white),
+                      //           ),
+                      //         ),
+                      //       )),
+                      // ),
                       FadeAnimation(
                           1.5,
                           Row(
