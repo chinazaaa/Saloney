@@ -98,4 +98,12 @@ class AuthRepository extends BaseNotifier with Validators{
     setState(ViewState.Idle);
     return false;
   }
+
+  Future<bool> confirmOTP({bool isCustomer = true, String Otp}){
+    SalonRegistrationResponse salon;
+    CustomerRegistrationResponse customer;
+
+
+  }
+
 }

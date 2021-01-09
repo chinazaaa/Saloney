@@ -112,4 +112,42 @@ class AuthenticationApiImpl implements AuthenticationApi {
     return null;
   }
 
+  @override
+  Future<ApiResponse> confirmCustomerOTP({String Otp}) async{
+    Map val =   {
+      'otp' : Otp
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.confirmCustomerOTP, header, jsonEncode(val));
+      CustomerRegistrationResponse response = CustomerRegistrationResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<SalonRegistrationResponse> confirmSaloonOTP({String Otp}) async {
+    Map val =   {
+      'otp' : Otp
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.confirmSalonOTP, header, jsonEncode(val));
+      SalonRegistrationResponse response = SalonRegistrationResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
 }

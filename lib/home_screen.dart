@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SignupPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerSignupPage()));
                   setState(() {
                     colorText1 = Color(0xff9477cb);
                     colorText2 = Colors.black;
