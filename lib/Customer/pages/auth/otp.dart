@@ -57,7 +57,7 @@ class CustomerOtpScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Please enter the code we just sent to ${user.customer.data.email}",
+                            "Please enter the code we just sent to ${user.customerReg.data.email}",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           ),
@@ -69,7 +69,20 @@ class CustomerOtpScreen extends StatelessWidget {
                           //  showFieldAsBox: true,
                           onSubmit: (String pin) async {
 
-                            //Perform Operation here.
+                            //compare OTP
+                            if(pin != user.customerReg.data.otp.toString()){
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Incorrect OTP"),
+                                      content: Text('Please confirm your Otp and try again.'),
+                                    );
+                                  }); //end showDialog()
+                              return;
+                            }
+
+                            //if pin is correct, verify user
                             bool success = await model.confirmOTP(isCustomer: true, Otp: pin);
 
                             if(success){

@@ -56,7 +56,7 @@ class SalonOtpScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Please enter the code we just sent to  ${user.salon.data.local.email}",
+                            "Please enter the code we just sent to  ${user.salonReg.data.local.email}",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           ),
@@ -67,7 +67,20 @@ class SalonOtpScreen extends StatelessWidget {
                         child: PinEntryTextField(
                           //  showFieldAsBox: true,
                           onSubmit: (String pin) async{
-                            //Perform Operation here.
+                            //compare OTP
+                            if(pin != user.salonReg.data.local.otp.toString()){
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Incorrect OTP"),
+                                      content: Text('Please confirm your Otp and try again.'),
+                                    );
+                                  }); //end showDialog()
+                              return;
+                            }
+
+                            //if pin is correct, verify user
                             bool success = await model.confirmOTP(isCustomer: false, Otp: pin);
 
                             if(success){
