@@ -93,7 +93,7 @@ class SalonLoginPage extends StatelessWidget {
                                           model.validatePassword(value))),
                               ResponsiveState(
                                 state: model.state,
-                                busyWidget: LoadingButton(),
+                                busyWidget: CircularProgressIndicator(),
                                 idleWidget: InkWell(
                                   onTap: () => loginSalon(context),
                                   child: FadeAnimation(

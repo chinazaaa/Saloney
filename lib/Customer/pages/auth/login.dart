@@ -133,7 +133,7 @@ class CustomerLoginPage extends StatelessWidget {
                       ),
                       ResponsiveState(
                         state: model.state,
-                        busyWidget: LoadingButton(),
+                        busyWidget: CircularProgressIndicator(),
                         idleWidget: InkWell(
                           onTap: () => loginCustomer(context),
                           child: FadeAnimation(

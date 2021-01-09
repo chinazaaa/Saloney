@@ -127,7 +127,7 @@ class CustomerSignupPage extends StatelessWidget {
                 ),
                 ResponsiveState(
                   state: model.state,
-                  busyWidget: LoadingButton(),
+                  busyWidget: CircularProgressIndicator(),
                   idleWidget: InkWell(
                     onTap: ()=> signUpCustomer(context),
                     child: FadeAnimation(

@@ -356,7 +356,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
             ),
             ResponsiveState(
               state: model.state,
-              busyWidget: LoadingButton(),
+              busyWidget: CircularProgressIndicator(),
               idleWidget: InkWell(
                 onTap: signUpSalon,
                 child: FadeAnimation(
