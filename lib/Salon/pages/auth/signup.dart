@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/auth/otp.dart';
+import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Salon/pages/auth/login.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/services/http_service_salon.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
-// ignore: must_be_immutable
 class SalonSignUp extends StatefulWidget {
   @override
   _SalonSignUpState createState() => _SalonSignUpState();
@@ -15,115 +20,142 @@ class _SalonSignUpState extends State<SalonSignUp> {
   int _index = 0;
   bool _loading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //Controllers
+  TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController location = TextEditingController();
+  TextEditingController nameOfSalon = TextEditingController();
+  TextEditingController typeOfSalon = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
+  GlobalKey<FormState> key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.transparent,
-    //    statusBarBrightness: Brightness.light,
-    //   statusBarIconBrightness: Brightness.dark,
-    //   systemNavigationBarIconBrightness: Brightness.dark,
-    //   systemNavigationBarColor: Colors.transparent,
-
-    // ));
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: DefaultTabController(
         length: 2,
         child: SafeArea(
           child: Scaffold(
-            key: _scaffoldKey,
+              key: _scaffoldKey,
               body: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 20.0,
-              ),
-              _backButton(context: context),
-              TabBar(
-                onTap: (int index){
-                  setState(() {
-                    _index = index;
-                  });
-                },
-                labelPadding: EdgeInsets.symmetric(vertical: 10),
-                indicatorColor: Colors.transparent,
-                labelStyle: TextStyle(
-                  fontSize: 14,
-                ),
-                unselectedLabelColor: Colors.grey[600],
-                labelColor: Color(0xff9477cb),
-                tabs: [
-                  Text(
-                    'Your details',
+                children: <Widget>[
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  Text('Salon details'),
+                  _backButton(context: context),
+                  TabBar(
+                    onTap: (int index) {
+                      setState(() {
+                        _index = index;
+                      });
+                    },
+                    labelPadding: EdgeInsets.symmetric(vertical: 10),
+                    indicatorColor: Colors.transparent,
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                    ),
+                    unselectedLabelColor: Colors.grey[600],
+                    labelColor: Color(0xff9477cb),
+                    tabs: [
+                      Text(
+                        'Your details',
+                      ),
+                      Text('Salon details'),
+                    ],
+                  ),
+                  Expanded(
+                      child: IndexedStack(
+                    index: _index,
+                    children: [
+                      _login(context: context),
+                      _yourDetails(context: context),
+                    ],
+                  )
+                      // TabBarView(
+                      //   children: [
+                      //     _login(context: context),
+                      //     _yourDetails(context: context),
+                      //   ],
+                      // ),
+                      ),
                 ],
-              ),
-              Expanded(
-                child:  IndexedStack(
-                  index: _index,
-                  children: [
-                    _login(context: context),
-                    _yourDetails(context: context),
-                  ],
-                )
-                // TabBarView(
-                //   children: [
-                //     _login(context: context),
-                //     _yourDetails(context: context),
-                //   ],
-                // ),
-              ),
-            ],
-          )),
+              )),
         ),
       ),
     );
   }
 
+  signUpSalon() async{
+    final model = Provider.of<AuthRepository>(context);
+    if (!key.currentState.validate()) return;
+
+    bool success = await model.register(
+        isCustomer: false,
+        userName: name.text,
+        phone: phone.text,
+        email: email.text,
+        password: password.text,
+        nameOfSalon: nameOfSalon.text,
+        location: location.text,
+    );
+
+    if (success) {
+      //go to otp page
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>SalonOtpScreen()));
+    } else {
+      //Do nothing
+    }
+
+  }
+
   // ignore: missing_return
   Future<HttpResponse> _signUp() async {
-    setState((){
+    setState(() {
       _loading = !_loading;
     });
-    try{
+    try {
       HttpResponse httpresponse = await HttpService.salonSignup();
-        setState((){
+      setState(() {
         _loading = !_loading;
       });
       Fluttertoast.showToast(
-        msg: httpresponse.message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+          msg: httpresponse.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
       // _scaffoldKey.currentState.showSnackBar(SnackBar(
-        
-      //   content: Padding( 
+
+      //   content: Padding(
       //     padding: const EdgeInsets.all(8.0),
       //     child:  Text(httpresponse.message)),
-      //   behavior:  SnackBarBehavior.floating 
+      //   behavior:  SnackBarBehavior.floating
       //   ) );
-    }catch(e){
-           setState((){
-          _loading = !_loading;
-        });
+    } catch (e) {
+      setState(() {
+        _loading = !_loading;
+      });
     }
   }
 
   Widget makeInput(
       {obscureText = false,
       String hint,
-      TextEditingController inputController,
+      TextEditingController controller,
+        Function validator,
       TextInputType inputType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
           obscureText: obscureText,
-          controller: inputController,
+          controller: controller,
           decoration: InputDecoration(
             hintText: hint,
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -132,13 +164,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey[400])),
           ),
-          validator: (value) {
-            if (value.isEmpty) {
-              return "Field Can't be empty";
-            } else {
-              return null;
-            }
-          },
+          validator: validator,
           keyboardType: inputType,
         ),
         SizedBox(
@@ -149,6 +175,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   _login({BuildContext context}) {
+    final model = Provider.of<AuthRepository>(context);
     return SingleChildScrollView(
       child: Container(
         // color: Colors.blue,
@@ -176,25 +203,62 @@ class _SalonSignUpState extends State<SalonSignUp> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Column(
-                children: <Widget>[
-                  makeInput(hint: "Username"),
-                  makeInput(hint: "Phone Number"),
-                  makeInput(hint: "Email"),
-                  makeInput(hint: "Password"),
-                  makeInput(hint: "Confirm Password"),
-                ],
+            Form(
+              key: key,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: <Widget>[
+                    FadeAnimation(
+                        1.2,
+                        makeInput(
+                            hint: "Username",
+                            controller: name,
+                            validator: (value) =>
+                                model.validateName(value))),
+                    FadeAnimation(
+                        1.3,
+                        makeInput(
+                            hint: "Phone Number",
+                            controller: phone,
+                            validator: (value) =>
+                                model.validatePhoneNumber(value))),
+                    FadeAnimation(
+                        1.4,
+                        makeInput(
+                            hint: "Email",
+                            controller: email,
+                            validator: (value) =>
+                                model.validateEmail(value))),
+                    FadeAnimation(
+                        1.5,
+                        makeInput(
+                            hint: "Password",
+                            obscureText: true,
+                            controller: password,
+                            validator: (value) =>
+                                model.validatePassword(value))),
+                    FadeAnimation(
+                        1.6,
+                        makeInput(
+                            hint: "Confirm Password",
+                            obscureText: true,
+                            controller: confirmpassword,
+                            validator: (value) => value == password.text
+                                ? null
+                                : "Passwords do not match")),
+
+                  ],
+                ),
               ),
             ),
             InkWell(
-              onTap:(){
-                 setState((){
-                    _index = 1;
-                  });
+              onTap: () {
+                setState(() {
+                  _index = 1;
+                });
               },
-                          child: Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
                   width: double.infinity,
@@ -238,6 +302,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   _yourDetails({BuildContext context}) {
+    final model = Provider.of<AuthRepository>(context);
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
@@ -269,33 +334,52 @@ class _SalonSignUpState extends State<SalonSignUp> {
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
+                  FadeAnimation(
+                      1.4,
+                      makeInput(
+                          hint: "Name of Salon",
+                          controller: nameOfSalon,
+                          validator: (value) =>
+                              model.validateName(value))),
+                  FadeAnimation(
+                      1.5,
+                      makeInput(
+                          hint: "Location",
+                          obscureText: true,
+                          controller: location,
+                          validator: (value) =>
+                              model.validateName(value))),
                   makeInput(hint: "Name of Salon"),
                   makeInput(hint: "Location"),
                 ],
               ),
             ),
-            InkWell(
-              onTap:_signUp
-              ,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  height: 60,
-                  padding: EdgeInsets.only(top: 3, left: 3),
-                  decoration: BoxDecoration(
-                    color: Color(0xff9477cb),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: _loading ? CircularProgressIndicator(
-                    // valueColor: AlwaysStoppedAnimation(color: Colors.white)
-                  ) : Text(
-                    "Sign up",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: Colors.white),
+            ResponsiveState(
+              state: model.state,
+              busyWidget: LoadingButton(),
+              idleWidget: InkWell(
+                onTap: signUpSalon(),
+                child: FadeAnimation(
+                  1.5,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: Container(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      height: 60,
+                      padding: EdgeInsets.only(top: 3, left: 3),
+                      decoration: BoxDecoration(
+                        color: Color(0xff9477cb),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -306,6 +390,9 @@ class _SalonSignUpState extends State<SalonSignUp> {
     );
   }
 }
+
+
+
 
 _backButton({BuildContext context}) {
   return Container(

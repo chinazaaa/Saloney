@@ -6,11 +6,13 @@ import 'package:starter_project/core/repositories/authentication_repository.dart
 import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
 import 'package:starter_project/services/http_service_customer.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 import 'otp.dart';
 
 // ignore: must_be_immutable
-class SignupPage extends StatelessWidget {
+class CustomerSignupPage extends StatelessWidget {
   bool _loading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -123,27 +125,31 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: signUpCustomer(context),
-                  child: FadeAnimation(
-                    1.5,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        height: 60,
-                        padding: EdgeInsets.only(top: 3, left: 3),
-                        decoration: BoxDecoration(
-                          color: Color(0xff9477cb),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              color: Colors.white),
+                ResponsiveState(
+                  state: model.state,
+                  busyWidget: LoadingButton(),
+                  idleWidget: InkWell(
+                    onTap: signUpCustomer(context),
+                    child: FadeAnimation(
+                      1.5,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: 60,
+                          padding: EdgeInsets.only(top: 3, left: 3),
+                          decoration: BoxDecoration(
+                            color: Color(0xff9477cb),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
