@@ -94,13 +94,45 @@ class AuthRepository extends BaseNotifier with Validators{
     try {
       if (isCustomer) {
         CustomerRegistrationResponse res = await authApi.registerCustomer(userName: userName, password: password, email: email, phone: phone,);
+        setState(ViewState.Idle);
+        if(res.success){
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.updateRegistrationInfo(customerReg: res);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${res.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+          return false;
+        }
       }  else {
         SalonRegistrationResponse res = await authApi.registerSaloon(userName: userName, password: password, email: email, location: location, nameOfSalon: nameOfSalon, phone: phone, typeOfSalon: typeOfSalon);
+        setState(ViewState.Idle);
+        if(res.success){
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.updateRegistrationInfo(salonReg: res);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${res.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+          return false;
+        }
       }
 
-      setState(ViewState.Idle);
 
-      return true;
+
+      return false;
     } on NetworkException {
       Get.snackbar(
         'No Internet!',

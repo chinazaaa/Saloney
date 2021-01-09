@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
+import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
+import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
 
 //-- How to use --
 /* var userInfoCache = locator<UserInfoCache>();
@@ -65,6 +67,11 @@ class UserInfoCache {
   bool get isLoggedIn => this.cache != null;
   // int get id => this._user.id;
 
+  //Temporary details from Registration
+  CustomerRegistrationResponse customerReg;
+  SalonRegistrationResponse salonReg;
+  bool isCustomerReg = true;
+
   UserInfoCache() {
     try {
       //On initiate, attempt to populate fields from Local Storage
@@ -73,6 +80,19 @@ class UserInfoCache {
       print(
           'Could not find any data in shared Preference Location: \'user_data\'');
     }
+  }
+
+  ///Use only one param at a time
+  updateRegistrationInfo({CustomerRegistrationResponse customerReg, SalonRegistrationResponse salonReg}){
+    this.customerReg = customerReg;
+    this.salonReg = salonReg;
+    if (salonReg != null) {
+      //is salon
+      isCustomerReg = false;
+    }  else {
+      isCustomerReg = true;
+    }
+
   }
 
   getUserDataFromStorage() async {
