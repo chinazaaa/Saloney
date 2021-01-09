@@ -5,7 +5,7 @@ import 'package:starter_project/Salon/pages/screens/bottom_nav_screen.dart';
 
 
 // ignore: must_be_immutable
-class LoginPage extends StatelessWidget {
+class SalonLoginPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {

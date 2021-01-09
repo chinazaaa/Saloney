@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_entry_text_field/pin_entry_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:starter_project/Customer/pages/auth/login.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
+import 'package:starter_project/infrastructure/user_info_cache.dart';
+
+import '../../../locator.dart';
 
 class CustomerOtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final user = locator<UserInfoCache>();
+    final model = Provider.of<AuthRepository>(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -47,7 +57,7 @@ class CustomerOtpScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Please enter the code we just sent to your email.",
+                            "Please enter the code we just sent to ${user.customer.data.email}",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           ),
@@ -57,16 +67,33 @@ class CustomerOtpScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: PinEntryTextField(
                           //  showFieldAsBox: true,
-                          onSubmit: (String pin) {
-                            showDialog(
-                                context: context,
-                                //has to be removed when backend is in place
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text("Pin"),
-                                    content: Text('Pin entered is $pin'),
-                                  );
-                                }); //end showDialog()
+                          onSubmit: (String pin) async {
+
+                            //Perform Operation here.
+                            bool success = await model.confirmOTP(isCustomer: true, Otp: pin);
+
+                            if(success){
+                              //go to login screen
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerLoginPage()));
+                              Get.snackbar(
+                                'Success',
+                                'Account has been verified',
+                                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                                snackStyle: SnackStyle.FLOATING,
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.black26,
+                              );
+                            }
+
+                            // showDialog(
+                            //     context: context,
+                            //     //has to be removed when backend is in place
+                            //     builder: (context) {
+                            //       return AlertDialog(
+                            //         title: Text("Pin"),
+                            //         content: Text('Pin entered is $pin'),
+                            //       );
+                            //     }); //end showDialog()
                           }, // end onSubmit
                         ),
                       ),

@@ -7,7 +7,7 @@ import 'package:starter_project/home_screen.dart';
 
 
 // ignore: must_be_immutable
-class LoginPage extends StatelessWidget {
+class CustomerLoginPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {

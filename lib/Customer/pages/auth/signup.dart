@@ -166,7 +166,7 @@ class CustomerSignupPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => CustomerLoginPage()));
                           },
                           child: Text(" Login",
                               style: TextStyle(

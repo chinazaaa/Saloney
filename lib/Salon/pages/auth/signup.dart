@@ -286,7 +286,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                          MaterialPageRoute(builder: (context) => SalonLoginPage()));
                     },
                     child: Text(
                       " Login",
