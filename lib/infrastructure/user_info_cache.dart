@@ -79,8 +79,6 @@ class UserInfoCache {
     try {
       //On initiate, attempt to populate fields from Local Storage
       getUserDataFromStorage();
-
-      print("Retreived cache $cache");
     } catch (e) {
       print(
           'Could not find any data in shared Preference Location: \'user_data\'');
@@ -108,7 +106,6 @@ class UserInfoCache {
 
       //Set object fields
       Cache res = Cache.fromJson(data);
-      print(res.customer);
       cache = res;
 
 
