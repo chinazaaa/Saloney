@@ -1,14 +1,13 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/DashBoard.dart';
+import 'package:starter_project/Customer/pages/screens/profile.dart';
 //import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 
-import 'Notifications.dart';
 import 'Orders.dart';
-import 'Profile.dart';
 import 'chatListPageView.dart';
-// import 'SignInPage.dart';
+import 'notifications.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -110,7 +109,6 @@ class _HomeState extends State<Home> {
             CustomerChatListPageView(),
             CustomerNotifications(),
             CustomerProfile(),
-      
           ],
         ),
       ),
