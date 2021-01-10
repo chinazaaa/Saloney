@@ -108,7 +108,6 @@ class UserInfoCache {
       Cache res = Cache.fromJson(data);
       cache = res;
 
-
       if (res.isCustomer) {
         print('${res.customer.data.local.email}\'s data fetched from Storage successfully');
       }  else {
