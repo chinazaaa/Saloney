@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 
-class Notifications extends StatefulWidget {
+class CustomerNotifications extends StatefulWidget {
   @override
-  _NotificationsState createState() => _NotificationsState();
+  _CustomerNotificationsState createState() => _CustomerNotificationsState();
 }
 
-class _NotificationsState extends State<Notifications> {
+class _CustomerNotificationsState extends State<CustomerNotifications> {
 
   @override
   Widget build(BuildContext context) {

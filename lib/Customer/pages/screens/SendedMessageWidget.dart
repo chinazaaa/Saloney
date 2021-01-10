@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SendedMessageWidget extends StatelessWidget {
+class CustomerSendedMessageWidget extends StatelessWidget {
   final String content;
   final String imageAddress;
   final String time;
   final bool isImage;
-  const SendedMessageWidget({
+  const CustomerSendedMessageWidget({
     Key key,
     this.content,
     this.time,

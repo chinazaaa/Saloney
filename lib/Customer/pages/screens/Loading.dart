@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Loading extends StatelessWidget {
+class CustomerLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

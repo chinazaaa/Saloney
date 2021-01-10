@@ -9,6 +9,28 @@ class RouteNames {
   /// static const String splashScreen = '/splashScreen';
 
   static const String introPage = 'introPage';
+  static const String CustomerLoginPage = 'CustomerLoginPage';
+  static const String CustomerOtpScreen = 'CustomerOtpScreen';
+  static const String CustomerSignupPage = 'CustomerSignupPage';
+  static const String CustomerForgotPage = 'CustomerForgotPage';
+  static const String CustomerOtpPassword = 'CustomerOtpPassword';
+  static const String CustomerResetPage = 'CustomerResetPage';
+  static const String CustomerResetSuccess = 'CustomerResetSuccess';
+  static const String CustomerChatListPageView = 'CustomerChatListPageView';
+  static const String CustomerChatListViewItem = 'CustomerChatListViewItem';
+  static const String CustomerChatPageView = 'CustomerChatPageView';
+  static const String Dashboard = 'Dashboard';
+  static const String Home = 'Home';
+  static const String CustomerLoading = 'CustomerLoading';
+  static const String CustomerNotifications = 'CustomerNotifications';
+  static const String Orders = 'Orders';
+  static const String OverViewPageme = 'OverViewPage';
+  static const String CustomerProfile = 'CustomerProfile';
+  static const String CustomerReceivedMessageWidget = 'CustomerReceivedMessageWidget';
+  static const String ServiceDetails = 'ServiceDetails';
+  static const String SalonsScreen = 'SalonsScreen';
+  static const String CustomerSendedMessageWidget = 'CustomerSendedMessageWidget';
+
 
 
 
@@ -16,6 +38,7 @@ class RouteNames {
     ///Named routes to be added here in this format
     ///RouteNames.splashScreen: (context) => SplashScreen(),
     introPage: (context) => IntroPage(),
+   
 
   };
 
@@ -24,6 +47,7 @@ class RouteNames {
       // Add your screen here as well as the transition you want
       case introPage:
         return MaterialPageRoute(builder: (context) => IntroPage());
+      
 
 
       //Default Route is error route

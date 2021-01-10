@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:starter_project/Customer/pages/screens/chatPageView.dart';
-class ChatListViewItem extends StatelessWidget {
+class CustomerChatListViewItem extends StatelessWidget {
   final AssetImage image;
   final String name;
   final String lastMessage;
   final String time;
   final bool hasUnreadMessage;
   final int newMesssageCount;
-  const ChatListViewItem({
+  const CustomerChatListViewItem({
     Key key,
     this.image,
     this.name,
@@ -74,7 +74,7 @@ class ChatListViewItem extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChatPageView(),
+                        builder: (context) => CustomerChatPageView(),
                       ),
                     );
                   },

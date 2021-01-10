@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 
-class Profile extends StatefulWidget {
+class CustomerProfile extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _CustomerProfileState createState() => _CustomerProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _CustomerProfileState extends State<CustomerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

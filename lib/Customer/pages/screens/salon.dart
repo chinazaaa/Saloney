@@ -39,7 +39,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context){
-                    return Notifications();
+                    return CustomerNotifications();
                   },
                 ),
               );

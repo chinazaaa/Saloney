@@ -107,9 +107,9 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Dashboard(),
             Orders(),
-            ChatListPageView(),
-            Notifications(),
-            Profile(),
+            CustomerChatListPageView(),
+            CustomerNotifications(),
+            CustomerProfile(),
       
           ],
         ),

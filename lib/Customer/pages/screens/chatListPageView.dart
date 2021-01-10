@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/ChatListViewItem.dart';
 import 'package:starter_project/Customer/pages/screens/Loading.dart';
 
-class ChatListPageView extends StatefulWidget {
+class CustomerChatListPageView extends StatefulWidget {
   @override
-  _ChatListPageViewState createState() => _ChatListPageViewState();
+  _CustomerChatListPageViewState createState() => _CustomerChatListPageViewState();
 }
 
-class _ChatListPageViewState extends State<ChatListPageView> {
+class _CustomerChatListPageViewState extends State<CustomerChatListPageView> {
   bool isLoading = true;
 
   @override
@@ -24,7 +24,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
   @override
   Widget build(BuildContext context) {
     if (isLoading == true) {
-      return Loading();
+      return CustomerLoading();
     } else {
       return Container(
         child: Scaffold(
@@ -54,7 +54,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
               ),
               child: ListView(
                 children: <Widget>[
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: true,
                     image: AssetImage('assets/1.png'),
                     lastMessage:
@@ -63,7 +63,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 8,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: true,
                     image: AssetImage('assets/2.png'),
                     lastMessage:
@@ -72,7 +72,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 5,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: false,
                     image: AssetImage('assets/3.png'),
                     lastMessage:
@@ -81,7 +81,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 0,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: false,
                     image: AssetImage('assets/account_success.png'),
                     lastMessage:
@@ -90,7 +90,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 0,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: false,
                     image: AssetImage('assets/customer.png'),
                     lastMessage:
@@ -99,7 +99,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 0,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: false,
                     image: AssetImage('assets/salon.png'),
                     lastMessage:
@@ -108,7 +108,7 @@ class _ChatListPageViewState extends State<ChatListPageView> {
                     newMesssageCount: 0,
                     time: "19:27 PM",
                   ),
-                  ChatListViewItem(
+                  CustomerChatListViewItem(
                     hasUnreadMessage: false,
                     image: AssetImage('assets/customer.png'),
                     lastMessage:

@@ -3,19 +3,19 @@ import 'package:starter_project/Customer/pages/screens/ReceivedMessageWidget.dar
 import 'package:starter_project/Customer/pages/screens/SendedMessageWidget.dart';
 
 
-class ChatPageView extends StatefulWidget {
+class CustomerChatPageView extends StatefulWidget {
   final String username;
 
-  const ChatPageView({
+  const CustomerChatPageView({
     Key key,
     this.username,
   }) : super(key: key);
 
   @override
-  _ChatPageViewState createState() => _ChatPageViewState();
+  _CustomerChatPageViewState createState() => _CustomerChatPageViewState();
 }
 
-class _ChatPageViewState extends State<ChatPageView> {
+class _CustomerChatPageViewState extends State<CustomerChatPageView> {
   TextEditingController _text = new TextEditingController();
   ScrollController _scrollController = ScrollController();
   var childList = <Widget>[];
@@ -42,7 +42,7 @@ class _ChatPageViewState extends State<ChatPageView> {
         )));
     childList.add(Align(
       alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
+      child: CustomerSendedMessageWidget(
         content: 'Hello',
         time: '21:36 PM',
         isImage: false,
@@ -50,7 +50,7 @@ class _ChatPageViewState extends State<ChatPageView> {
     ));
     childList.add(Align(
       alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
+      child: CustomerSendedMessageWidget(
         content: 'How are you? What are you doing?',
         time: '21:36 PM',
         isImage: false,
@@ -58,7 +58,7 @@ class _ChatPageViewState extends State<ChatPageView> {
     ));
     childList.add(Align(
       alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
+      child: CustomerReceivedMessageWidget(
         content: 'Hello, Naza.I am fine. How are you?',
         time: '22:40 PM',
         isImage: false,
@@ -66,7 +66,7 @@ class _ChatPageViewState extends State<ChatPageView> {
     ));
     childList.add(Align(
       alignment: Alignment(1, 0),
-      child: SendedMessageWidget(
+      child: CustomerSendedMessageWidget(
         content:
             'I am good. Can you do something for me? I need your help my bro.',
         time: '22:40 PM',
@@ -75,7 +75,7 @@ class _ChatPageViewState extends State<ChatPageView> {
     ));
     childList.add(Align(
       alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
+      child: CustomerReceivedMessageWidget(
         content: 'this is fun 😂',
         time: '22:57 PM',
         isImage: true,
