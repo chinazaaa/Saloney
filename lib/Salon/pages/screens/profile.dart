@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/config/constants.dart';
 import 'package:starter_project/Salon/pages/widgets/profile_list.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
+
+import '../../../home_screen.dart';
 
 
 class ProfileScreen extends StatelessWidget {
@@ -134,6 +138,13 @@ return (
                       ProfileListItem(
                         icon: LineAwesomeIcons.alternate_sign_out,
                         text: 'Logout',
+                        onPressed: () async{
+                          bool success = await Provider.of<AuthRepository>(context).logout();
+
+                          if(success){
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
+                          }
+                        },
                         hasNavigation: false,
                       ),
                     ],
