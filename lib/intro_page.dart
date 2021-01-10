@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/home_screen.dart';
 
 import 'Customer/pages/auth/otp.dart';
+import 'Customer/pages/screens/home.dart';
 import 'Salon/pages/auth/otp.dart';
+import 'Salon/pages/screens/bottom_nav_screen.dart';
 import 'infrastructure/user_info_cache.dart';
 
 class IntroPage extends StatefulWidget {
@@ -41,8 +43,8 @@ class _IntroPageState extends State<IntroPage> {
           //Go to customer OTP page
           Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerOtpScreen()));
         } else {
-          //Got to home screen
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+          //Got to home
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
         }
       } else {
         //perform salon checks
@@ -51,7 +53,7 @@ class _IntroPageState extends State<IntroPage> {
           Navigator.push(context, MaterialPageRoute(builder: (context) =>SalonOtpScreen()));
         } else {
           //Got to home screen
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
         }
       }
     }

@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:starter_project/models/api_response.dart';
+import '../api_response.dart';
+import '../customer_info.dart';
 
-class CustomerLoginResponse extends ApiResponse{
+class CustomerLoginResponse extends ApiResponse {
   final bool success;
   final String message;
-  final Customer data;
+  final Data data;
   final String status;
   CustomerLoginResponse({
     this.success,
@@ -30,7 +31,7 @@ class CustomerLoginResponse extends ApiResponse{
       success: map['success'],
       message: map['message'],
       status: map['status'],
-      data: Customer.fromMap(map['data']),
+      data: Data.fromMap(map['data']),
     );
   }
 
@@ -39,119 +40,60 @@ class CustomerLoginResponse extends ApiResponse{
   factory CustomerLoginResponse.fromJson(String source) => CustomerLoginResponse.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CustomerLoginResponse(success: $success, message: $message, data: $data, status: $status)';
+  String toString() => 'CustomerLoginResponse(success: $success, status: $status, message: $message, data: $data)';
 }
 
-class Customer {
+class Data {
+  final Customer local;
   final Image image;
-  final String firstName;
-  final String lastName;
-  final bool isEmailVerified;
-  final bool isActive;
-  final String userRole;
   final String id;
-  final int phone;
-  final String userName;
-  final String email;
-  final String password;
+  final String identifier;
   final String createdAt;
   final String updatedAt;
   final int v;
-  final String api_token;
-  Customer({
+  Data({
+    this.local,
     this.image,
-    this.firstName,
-    this.lastName,
-    this.isEmailVerified,
-    this.isActive,
-    this.userRole,
     this.id,
-    this.phone,
-    this.userName,
-    this.email,
-    this.password,
+    this.identifier,
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.api_token,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'local': local?.toMap(),
       'image': image?.toMap(),
-      'firstName': firstName,
-      'lastName': lastName,
-      'isEmailVerified': isEmailVerified,
-      'isActive': isActive,
-      'userRole': userRole,
       '_id': id,
-      'phone': phone,
-      'userName': userName,
-      'email': email,
-      'password': password,
+      'identifier': identifier,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__v': v,
-      'api_token': api_token,
     };
   }
 
-  factory Customer.fromMap(Map<String, dynamic> map) {
+  factory Data.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Customer(
+    return Data(
+      local: Customer.fromMap(map['local']),
       image: Image.fromMap(map['image']),
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      isEmailVerified: map['isEmailVerified'],
-      isActive: map['isActive'],
-      userRole: map['userRole'],
       id: map['_id'],
-      phone: map['phone']?.toInt(),
-      userName: map['userName'],
-      email: map['email'],
-      password: map['password'],
+      identifier: map['identifier'],
       createdAt: map['createdAt'],
       updatedAt: map['updatedAt'],
       v: map['__v']?.toInt(),
-      api_token: map['api_token'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
+  factory Data.fromJson(String source) => Data.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Data(image: $image, firstName: $firstName, lastName: $lastName, isEmailVerified: $isEmailVerified, isActive: $isActive, userRole: $userRole, _id: $id, phone: $phone, userName: $userName, email: $email, password: $password, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v, api_token: $api_token)';
+    return 'Data(local: $local, image: $image, _id: $id, identifier: $identifier, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
   }
 }
 
-class Image {
-  final String path;
-  Image({
-    this.path,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'path': path,
-    };
-  }
-
-  factory Image.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Image(
-      path: map['path'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'Image(path: $path)';
-}
