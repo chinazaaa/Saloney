@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class ResetSuccess extends StatelessWidget {
+class CustomerResetSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

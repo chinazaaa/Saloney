@@ -41,7 +41,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context){
-                    return Notifications();
+                    return CustomerNotifications();
                   },
                 ),
               );
