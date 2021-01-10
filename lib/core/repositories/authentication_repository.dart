@@ -218,4 +218,11 @@ class AuthRepository extends BaseNotifier with Validators{
     return false;
   }
 
+  Future<bool> logout() async{
+    String token = locator<UserInfoCache>().token;
+    await locator<UserInfoCache>().clearCache();
+
+    return true;
+  }
+
 }
