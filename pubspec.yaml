@@ -51,6 +51,11 @@ flutter_native_splash:
   image_dark: assets/logo.png
   color_dark: "414141"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
+
 flutter:
   uses-material-design: true
   assets:
