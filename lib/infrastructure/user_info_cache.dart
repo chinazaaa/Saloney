@@ -99,7 +99,7 @@ class UserInfoCache {
   }
 
   getUserDataFromStorage() async {
-    // try {
+    try {
       //Instance of SharedPreferences
       SharedPreferences storage = await SharedPreferences.getInstance();
       String data = await storage.getString('user_data');
@@ -114,11 +114,11 @@ class UserInfoCache {
         print('${res.salon.data.local.email}\'s data fetched from Storage successfully');
       }
 
-    // }
+    }
 
-    // catch (e) {
-    //   print('There is no data in location: \'user_data\'');
-    // }
+    catch (e) {
+      print('There is no data in location: \'user_data\'');
+    }
   }
 
   ///Please use only one response at a time

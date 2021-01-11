@@ -42,6 +42,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^0.2.2
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_native_splash:
+  image: assets/logo.png
+  color: "FFFFFF"
+  image_dark: assets/logo.png
+  color_dark: "414141"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon.png"
 
 flutter:
   uses-material-design: true
