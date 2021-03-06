@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/Customer/pages/screens/checkout.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/home_screen.dart';
 import 'package:starter_project/Salon/pages/screens/bottom_nav_screen.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-//import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
+import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 // ignore: must_be_immutable
 class SalonLoginPage extends StatelessWidget {
@@ -150,7 +149,7 @@ class SalonLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                     Checkout()));
+                                                      BottomNavScreen()));
                                         },
                                         child: Text(
                                           "Forgot Password",

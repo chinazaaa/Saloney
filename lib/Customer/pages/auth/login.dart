@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
-import 'package:starter_project/Customer/pages/password/reset_password.dart';
-import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
-import 'package:starter_project/Customer/pages/screens/profile.dart';
 //import 'package:starter_project/Customer/pages/password/forgot_password.dart';
 //import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/salon.dart';
@@ -121,7 +118,7 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EditCustomerProfile()));
+                                                      SalonsScreen()));
                                         },
                                         child: Text(
                                           "Forgot Password",
