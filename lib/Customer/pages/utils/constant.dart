@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 class Constants{
 
-  static String appName = "Restaurant App UI KIT";
+  static String appName = "Saloney";
 
   //Colors for theme
 //  Color(0xfffcfcff);
-  static Color lightPrimary = Color(0xfffcfcff);
+  static Color lightPrimary = Color(0xff9477cb);
   static Color darkPrimary = Colors.black;
   static Color lightAccent = Colors.red;
   static Color darkAccent = Colors.red[400];
-  static Color lightBG = Color(0xfffcfcff);
+  static Color lightBG = Color(0xff9477cb);
   static Color darkBG = Colors.black;
   static Color ratingBG = Colors.yellow[600];
 
