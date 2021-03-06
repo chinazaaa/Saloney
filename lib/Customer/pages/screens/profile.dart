@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
-import 'package:starter_project/Customer/pages/utils/consts.dart';
-import 'package:starter_project/core/repositories/authentication_repository.dart';
-
-import '../../../home_screen.dart';
+import 'package:starter_project/Customer/pages/password/reset_password.dart';
+import 'package:starter_project/Customer/pages/screens/home.dart';
+import 'package:starter_project/Customer/pages/screens/notifications.dart';
+import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
+import 'package:starter_project/Customer/pages/utils/constant.dart';
 
 class CustomerProfile extends StatefulWidget {
   @override
@@ -12,104 +11,271 @@ class CustomerProfile extends StatefulWidget {
 }
 
 class _CustomerProfileState extends State<CustomerProfile> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kwhite,
-      appBar: AppBar(
-        backgroundColor: kwhite,
-        title: BoldText("Profile", 25, kblack),
+         appBar: AppBar(
+        brightness: Brightness.light,
+        backgroundColor: Colors.red,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_backspace,
+          ),
+          onPressed: ()=>Navigator.pop(context),
+        ),
         centerTitle: true,
+        title: Text(
+          "Profile",
+        ),
         elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: IconBadge(
+              icon: Icons.notifications,
+              size: 22.0,
+            ),
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context){
+                    return CustomerNotifications();
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(10.0,0,10.0,0),
+
+        child: ListView(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: kgreyDark,
-                    radius: 50,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Image.asset(
+                    "assets/1.png",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                ),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      BoldText("Naza Sudu", 20.0, kblack),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          NormalText("Lekki,Nigeria", kgreyDark, 16),
-                          Icon(
-                            Icons.location_on,
-                            color: kgreyDark,
-                            size: 15.0,
+                          Text(
+                            "Naza",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
+
+                      SizedBox(height: 5.0),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "naza@naza.com",
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: (){
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context){
+                                    return Home();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text("Logout",
+                              style: TextStyle(
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).accentColor,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            
+                          ),
+
+                              
+                        ],
+                      ),
+
                     ],
                   ),
-                ],
+                  flex: 3,
+                ),
+              ],
+            ),
+
+            Divider(),
+            Container(height: 15.0),
+
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Text(
+                "Account Information".toUpperCase(),
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Container(
-              height: 2,
-              color: kgreyFill,
-            ),
-            ProfileItem(Icons.person, "My Informations"),
-            ProfileItem(Icons.credit_card, "Payment"),
-            ProfileItem(Icons.settings, "Settings"),
-            ProfileItem(Icons.help, "Help"),
-            ProfileItem(Icons.favorite_border, "Favourite"),
-            ProfileItem(Icons.library_books, "Terms and Conditions"),
-            ProfileItem(Icons.info, "About Us "),
-            ProfileItem(
-              Icons.exit_to_app,
-              "Sign Out",
-              onPressed: () async {
-                bool success =
-                    await Provider.of<AuthRepository>(context).logout();
 
-                if (success) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                      (route) => false);
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+            ListTile(
+              title: Text(
+                "Username",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
 
-  // ignore: non_constant_identifier_names
-  Widget ProfileItem(IconData icon, String text, {Function onPressed}) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 9),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Row(
-          children: <Widget>[
-            Icon(
-              icon,
-              color: kdarkBlue,
-              size: 40,
+              subtitle: Text(
+                "Naza",
+              ),
+
+              trailing: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  size: 20.0,
+                ),
+                onPressed: (){
+                },
+                tooltip: "Edit",
+              ),
             ),
-            SizedBox(
-              width: 8,
+
+            ListTile(
+              title: Text(
+                "Email",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+
+              subtitle: Text(
+                "naza@naza.com",
+              ),
             ),
-            NormalText(text, kblack, 20.0)
+
+            ListTile(
+              title: Text(
+                "Phone Number",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+
+              subtitle: Text(
+                "+234 816-926-6241",
+              ),
+            ),
+
+            ListTile(
+              title: Text(
+                "Address",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+
+              subtitle: Text(
+                "1347 Bog, NGN",
+              ),
+            ),
+ Divider(),
+            Container(height: 15.0),
+             ListTile(
+              title: Text(
+                "Password",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+           
+            trailing: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  size: 20.0,
+                ),
+                onPressed: (){
+                },
+                tooltip: "Edit",
+              ),
+               ),
+
+              // InkWell(
+              //             onTap: () {
+              //               Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                       builder: (context) => CustomerResetPage()));
+              //             },
+              //             child: Text("Click here to Change your Password".toUpperCase(),
+              //                 style: TextStyle(
+              //                     fontWeight: FontWeight.bold, fontSize: 16.0)),
+              //           ),
+            // ListTile(
+            //   title: Text(
+            //     "Gender",
+            //     style: TextStyle(
+            //       fontSize: 17,
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //   ),
+
+            //   subtitle: Text(
+            //     "Female",
+            //   ),
+            // ),
+
+            // ListTile(
+            //   title: Text(
+            //     "Date of Birth",
+            //     style: TextStyle(
+            //       fontSize: 17,
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //   ),
+
+            //   subtitle: Text(
+            //     "April 9, 1995",
+            //   ),
+            // ),
+
+          
+  
           ],
         ),
       ),

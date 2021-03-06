@@ -2,12 +2,12 @@ import 'package:starter_project/Customer/pages/utils/app_properties.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomerChangePasswordPage extends StatefulWidget {
+class EditCustomerProfile extends StatefulWidget {
   @override
-  _CustomerChangePasswordPageState createState() => _CustomerChangePasswordPageState();
+  _EditCustomerProfileState createState() => _EditCustomerProfileState();
 }
 
-class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage> {
+class _EditCustomerProfileState extends State<EditCustomerProfile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -70,7 +70,7 @@ class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage>
                           Padding(
                             padding: const EdgeInsets.only(bottom: 48.0,top:16.0),
                             child: Text(
-                              'Change Password',
+                              'Edit Profile',
                               
                               style: TextStyle(
                                   color: Colors.black,
@@ -81,7 +81,7 @@ class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage>
                           Padding(
                             padding: const EdgeInsets.only(bottom: 12.0),
                             child: Text(
-                              'Enter your current password',
+                              'Enter your new username',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -95,14 +95,34 @@ class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage>
                               child: TextField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Existing Password',
+                                    // hintText: 'Existing Password',
+                                    hintStyle: TextStyle(fontSize: 12.0)),
+                              )),
+                              Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: Text(
+                              'Enter your new email',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    // hintText: 'Existing Password',
                                     hintStyle: TextStyle(fontSize: 12.0)),
                               )),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 24, bottom: 12.0),
                             child: Text(
-                              'Enter new password',
+                              'Enter your new phone number',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -116,14 +136,14 @@ class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage>
                               child: TextField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'New Password',
+                                    // hintText: 'New Password',
                                     hintStyle: TextStyle(fontSize: 12.0)),
                               )),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 24, bottom: 12.0),
                             child: Text(
-                              'Retype new password',
+                              'Enter your new address',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -137,9 +157,11 @@ class _CustomerChangePasswordPageState extends State<CustomerChangePasswordPage>
                               child: TextField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Retype Password',
+                                    // hintText: 'Retype Password',
                                     hintStyle: TextStyle(fontSize: 12.0)),
                               )),
+
+                             
                         ],
                       ),
                       Align(
