@@ -186,8 +186,9 @@ class AddNewService extends StatefulWidget {
                    visible: _track,
                     
                                 child: Row(children: [
+                                  SizedBox(width: 20),
                                   Text('Availability', style: TextStyle(color: Colors.grey)),
-                                  SizedBox(width: 10,),
+                                  SizedBox(width: 50),
                                   DropdownButton<String>(
                                     hint: Text('Select Availability'),
                                     value: dropdownValue2,
