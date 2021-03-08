@@ -14,7 +14,12 @@ class AddNewService extends StatefulWidget {
     'Makeup',
     'Spa'
   ];
+    List<String> _availability =[
+    'Yes',
+    'No',
+  ];
   String dropdownValue;
+  String dropdownValue2;
   File _image;
   bool _track = false;
 
@@ -179,30 +184,31 @@ class AddNewService extends StatefulWidget {
                  ),
                  Visibility(
                    visible: _track,
-                   child: SizedBox(
-                     height: 300,
-                     width: double.infinity,
-                     child: Card(
-                       elevation: 3,
-                       child: Padding(
-                         padding: const EdgeInsets.all(10.0),
-                         child: Column(
-                           children: [
-                             TextField(
-                              decoration: InputDecoration(
-                                    labelText: 'Availability',
-                                    hintText: 'Yes or No',
-                                    labelStyle: TextStyle(color: Colors.grey),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.grey[300],))
-                                   ),
-                             ),
-                                
-                           ],),
-                       ),
-                     )
-                   ),
+                    
+                                child: Row(children: [
+                                  Text('Availability', style: TextStyle(color: Colors.grey)),
+                                  SizedBox(width: 10,),
+                                  DropdownButton<String>(
+                                    hint: Text('Select Availability'),
+                                    value: dropdownValue2,
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    onChanged: (String value) {
+                                    
+                                      setState(() {
+                                      dropdownValue2 = value;
+                                      });
+                                    },
+                                    items: _availability.map<DropdownMenuItem<String>>((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                      child: Text(value),
+                                      );
+                                    }).toList(),
+                                  
+                                  ),
+                                ],
+                            
+                              )
                  )
                ],))
                               ],
