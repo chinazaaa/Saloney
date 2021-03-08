@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/Customer/pages/screens/checkout.dart';
+import 'package:starter_project/Customer/pages/password/change_password.dart';
+import 'package:starter_project/Salon/pages/password/forgot_password.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/home_screen.dart';
@@ -80,7 +81,7 @@ class SalonLoginPage extends StatelessWidget {
                               FadeAnimation(
                                   1.2,
                                   makeInput(
-                                      hint: "Username",
+                                      hint: "Email",
                                       controller: name,
                                       validator: (value) =>
                                           model.validateName(value))),
@@ -150,7 +151,7 @@ class SalonLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                     Checkout()));
+                                                     ForgotPage()));
                                         },
                                         child: Text(
                                           "Forgot Password",

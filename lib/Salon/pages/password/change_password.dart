@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-class ResetPage extends StatelessWidget {
+class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class ResetPage extends StatelessWidget {
                         
                            
                             Text(
-                              "Reset Password",
+                              "Change Password",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
@@ -54,6 +54,7 @@ class ResetPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
+                           makeInput(hint: "Old Password", obscureText: true),
                            makeInput(hint: "New Password", obscureText: true),
                             makeInput(hint: "Confirm Password", obscureText: true),
 
@@ -80,7 +81,7 @@ class ResetPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
-                "Reset Password",
+                "Change Password",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,

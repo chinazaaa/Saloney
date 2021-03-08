@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/password/reset_password.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
-import 'package:starter_project/Customer/pages/utils/constant.dart';
 
 class CustomerProfile extends StatefulWidget {
   @override

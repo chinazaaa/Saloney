@@ -39,6 +39,7 @@ dependencies:
   #animation
   animated_text_kit: ^2.0.0
   bottom_navy_bar: ^5.3.2
+  image_picker: ^0.6.7+22
 
 dev_dependencies:
   flutter_test:

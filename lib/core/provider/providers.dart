@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 
 class SaloneyProviders {
@@ -13,7 +14,7 @@ class SaloneyProviders {
 
     /// Repositories
     ChangeNotifierProvider(create: (_) => AuthRepository()),
-
+     ChangeNotifierProvider(create: (_) => ServiceProvider()),
 
   ];
 }

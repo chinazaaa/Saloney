@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
-import 'package:starter_project/Customer/pages/password/reset_password.dart';
-import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
-import 'package:starter_project/Customer/pages/screens/profile.dart';
-//import 'package:starter_project/Customer/pages/password/forgot_password.dart';
-//import 'package:starter_project/Customer/pages/screens/home.dart';
-import 'package:starter_project/Customer/pages/screens/salon.dart';
+import 'package:starter_project/Salon/pages/screens/service.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
-import 'package:starter_project/home_screen.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 // ignore: must_be_immutable
 class CustomerLoginPage extends StatelessWidget {
@@ -86,7 +79,7 @@ class CustomerLoginPage extends StatelessWidget {
                               FadeAnimation(
                                   1.2,
                                   makeInput(
-                                      hint: "Username",
+                                      hint: "Email",
                                       controller: name,
                                       validator: (value) =>
                                           model.validateName(value))),
@@ -121,7 +114,7 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EditCustomerProfile()));
+                                                      ServiceScreen()));
                                         },
                                         child: Text(
                                           "Forgot Password",

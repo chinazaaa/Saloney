@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
 import 'package:starter_project/Customer/pages/utils/CustomColors.dart';
 
-class EditCustomerProfilePage extends StatefulWidget {
+class EditProfilePage extends StatefulWidget {
   @override
-  _EditCustomerProfilePageState createState() => _EditCustomerProfilePageState();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
+class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,6 +92,30 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12),
                     border: border,
+                    hintText: "Name Of Salon",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
+                    hintText: "Description of Salon",
+                    focusedBorder: border.copyWith(
+                        borderSide: BorderSide(color: Colors.blue))),
+              ),
+              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
+            ),
+            Container(
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: border,
                     hintText: "Email",
                     focusedBorder: border.copyWith(
                         borderSide: BorderSide(color: Colors.blue))),
@@ -122,6 +146,7 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
               ),
               margin: EdgeInsets.only(left: 12, right: 12, top: 12),
             ),
+            
             SizedBox(
               height: 24,
             ),
