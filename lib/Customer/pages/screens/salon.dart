@@ -54,7 +54,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
 
           children: <Widget>[
             Text(
-              "Chinese",
+              "Hair",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
@@ -87,7 +87,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
 
             SizedBox(height: 20.0),
             Text(
-              "Italian",
+              "Beauty",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
@@ -120,7 +120,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
 
             SizedBox(height: 20.0),
             Text(
-              "African",
+              "Spa",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
