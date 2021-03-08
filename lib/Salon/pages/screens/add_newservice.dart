@@ -16,6 +16,7 @@ class AddNewService extends StatefulWidget {
   ];
   String dropdownValue;
   File _image;
+  bool _track = false;
 
   // static const String id = 'addnewservice - screen';
   @override
@@ -66,7 +67,7 @@ class AddNewService extends StatefulWidget {
                         labelColor: Color(0xff9477cb),
                         unselectedLabelColor: Colors.black54,
                       tabs: [
-                        Tab(text: 'General',),
+                        Tab(text: 'GENERAL',),
                         Tab(text: 'INVENTORY'),
                       ],
                       ),
@@ -159,14 +160,58 @@ class AddNewService extends StatefulWidget {
                         )
                       ],
                       ),
-                      
-                                 Text('Coming Soon',textAlign: TextAlign.center),
+                             SingleChildScrollView(
+             child: Column(
+               children: [
+                 SwitchListTile(
+                   title: Text('Track Inventory'),
+                   activeColor: Color(0xff9477cb),
+                   subtitle:Text('Switch ON to track inventory',
+                   style: TextStyle(
+                     color: Colors.grey,fontSize:12),),
+                     value: _track,
+                     onChanged: (selected) {
+                      setState(() {
+                                               _track = !_track;
+                                            });
+                     },
+
+                 ),
+                 Visibility(
+                   visible: _track,
+                   child: SizedBox(
+                     height: 300,
+                     width: double.infinity,
+                     child: Card(
+                       elevation: 3,
+                       child: Padding(
+                         padding: const EdgeInsets.all(10.0),
+                         child: Column(
+                           children: [
+                             TextField(
+                              decoration: InputDecoration(
+                                    labelText: 'Availability',
+                                    hintText: 'Yes or No',
+                                    labelStyle: TextStyle(color: Colors.grey),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey[300],))
+                                   ),
+                             ),
+                                
+                           ],),
+                       ),
+                     )
+                   ),
+                 )
+               ],))
                               ],
                             ),
                           ),
                         ),
-                      )
-            ],
+                      ),
+    
+           ],
           ),
         ),
 
