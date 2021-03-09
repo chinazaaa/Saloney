@@ -146,7 +146,7 @@ class _TimePageState extends State<TimePage> {
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-          color: (isActive) ? Colors.orange : Colors.grey.withOpacity(0.3),
+          color: (isActive) ? Color(0xff9477cb) : Colors.grey.withOpacity(0.3),
           borderRadius: BorderRadius.all(Radius.circular(20))
       ),
       child: Column(
@@ -170,7 +170,7 @@ class _TimePageState extends State<TimePage> {
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-          color: (isActive) ? Colors.orange : Colors.grey.withOpacity(0.3),
+          color: (isActive) ? Color(0xff9477cb): Colors.grey.withOpacity(0.3),
           borderRadius: BorderRadius.all(Radius.circular(20))
       ),
       child: Column(

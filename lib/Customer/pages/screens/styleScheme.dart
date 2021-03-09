@@ -9,7 +9,7 @@ TextStyle contentStyle = TextStyle(
   fontFamily: 'sfpro'
 );
 LinearGradient gradientStyle = LinearGradient(
-    colors: [Color(0xfff3953b), Color(0xffe57509)],
+    colors: [Color(0xff9477cb), Color(0xff9477cb)],
     stops: [0,1],
     begin: Alignment.topCenter
 );
