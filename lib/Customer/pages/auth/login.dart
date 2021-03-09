@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
+import 'package:starter_project/Customer/pages/screens/TimePage.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Salon/pages/screens/service.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
@@ -114,7 +115,7 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ServiceScreen()));
+                                                      TimePage()));
                                         },
                                         child: Text(
                                           "Forgot Password",
