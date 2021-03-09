@@ -23,7 +23,11 @@ class _TimePageState extends State<TimePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+              Navigator.pop(context);
+            },
+          icon: Icon(Icons.arrow_back_ios,size: 20,
+              color: Colors.black,),
         ),
         title: Text("Select Date & Time", style: TextStyle(
             color: Colors.black

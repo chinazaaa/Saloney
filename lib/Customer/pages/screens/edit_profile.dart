@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
-import 'package:starter_project/Customer/pages/utils/CustomColors.dart';
+import 'package:starter_project/Customer/pages/screens/profile.dart';
+
 
 class EditCustomerProfilePage extends StatefulWidget {
   @override
@@ -8,144 +8,178 @@ class EditCustomerProfilePage extends StatefulWidget {
 }
 
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
         leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+              Navigator.pop(context);
+            },
+        ),
+        actions: [
+          IconButton(
             icon: Icon(
-              Icons.arrow_back,
+              Icons.settings,
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pop(context);
-            }),
-        title: Text(
-          "Edit Profile",
-          style: CustomTextStyle.textFormFieldBlack.copyWith(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => CustomerProfile()));
+            },
+          ),
+        ],
       ),
       body: Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 24,
-            ),
-            Stack(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(colors: [
-                          CustomColors.EDIT_PROFILE_PIC_FIRST_GRADIENT,
-                          CustomColors.EDIT_PROFILE_PIC_SECOND_GRADIENT
-                        ])),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                            icon: Icon(
-                              Icons.image,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {}),
-                        Text(
-                          "Choose Image",
-                          style: CustomTextStyle.textFormFieldMedium
-                              .copyWith(color: Colors.white, fontSize: 12),
-                        )
-                      ],
+        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: ListView(
+            children: [
+              Text(
+                "Edit Profile",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 10))
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                              ))),
                     ),
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
+                            color:Color(0xff9477cb),
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              buildTextField("Username",  false),
+              buildTextField("E-mail",false),
+              // buildTextField("Password", "********", true),
+              buildTextField("Phone Number ", false),
+              // buildTextField("Description", false),
+              // buildTextField("Name of Salon ",false),
+              //  buildTextField("Location", false),
+              SizedBox(
+                height: 35,
+              ),
+            
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OutlineButton(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () {},
+                    child: Text("CANCEL",
+                        style: TextStyle(
+                            fontSize: 14,
+                            letterSpacing: 2.2,
+                            color: Colors.black)),
                   ),
-                )
-              ],
-            ),
-            Container(
-              child: TextFormField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(12),
-                  border: border,
-                  hintText: "Username",
-                  focusedBorder: border.copyWith(
-                      borderSide: BorderSide(color: Colors.blue)),
-                ),
-              ),
-              margin: EdgeInsets.only(left: 12, right: 12, top: 24),
-            ),
-            Container(
-              child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(12),
-                    border: border,
-                    hintText: "Email",
-                    focusedBorder: border.copyWith(
-                        borderSide: BorderSide(color: Colors.blue))),
-              ),
-              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            ),
-            Container(
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(12),
-                    border: border,
-                    hintText: "Mobile Number",
-                    focusedBorder: border.copyWith(
-                        borderSide: BorderSide(color: Colors.blue))),
-              ),
-              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            ),
-            Container(
-              child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(12),
-                    border: border,
-                    hintText: "Location",
-                    focusedBorder: border.copyWith(
-                        borderSide: BorderSide(color: Colors.blue))),
-              ),
-              margin: EdgeInsets.only(left: 12, right: 12, top: 12),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 48, right: 48),
-              child: RaisedButton(
-                color: Color(0xff9477cb),
-                textColor: Colors.white,
-                onPressed: () {},
-                child: Text(
-                  "Save",
-                  style: CustomTextStyle.textFormFieldBlack
-                      .copyWith(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            )
-          ],
+                  RaisedButton(
+                    onPressed: () {},
+                    color: Color(0xff9477cb),
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      "SAVE",
+                      style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 2.2,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  var border = OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(4)),
-      borderSide: BorderSide(width: 1, color: Colors.grey));
+  Widget buildTextField(
+      String labelText, bool isPasswordTextField) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35.0),
+      child: TextField(
+        obscureText: isPasswordTextField ? showPassword : false,
+        decoration: InputDecoration(
+            suffixIcon: isPasswordTextField
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                    ),
+                  )
+                : null,
+            contentPadding: EdgeInsets.only(bottom: 3),
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            // hintText: placeholder,
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )),
+      ),
+    );
+  }
 }

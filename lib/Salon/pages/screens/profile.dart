@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Salon/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/screens/about_us.dart';
+import 'package:starter_project/Salon/pages/screens/editProfile.dart';
+import 'package:starter_project/Salon/pages/screens/screens.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
 
@@ -31,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
         "Help and Support",
         "assets/ic_support.png",
         Colors.indigo.shade800,
-        EditCustomerProfilePage()));
+        ProfilePage()));
     listSection.add(createSection(
         "Logout", "assets/ic_logout.png", Colors.red.withOpacity(0.7), null));
   }
@@ -136,7 +138,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                           icon: Icon(Icons.settings),
                                           iconSize: 24,
                                           color: Colors.black,
-                                          onPressed: () {},
+                                         onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => ProfilePage()));
+            },
                                         ),
                                         IconButton(
                                           icon: Icon(Icons.edit),
@@ -147,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 context,
                                                 new MaterialPageRoute(
                                                     builder: (context) =>
-                                                        EditCustomerProfilePage()));
+                                                       EditProfilePage()));
                                           },
                                         )
                                       ],

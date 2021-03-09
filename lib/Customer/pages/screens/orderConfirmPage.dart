@@ -22,9 +22,13 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //   icon: Icon(Icons.arrow_back_ios,size: 20,
+        //       color: Colors.black,),
+        // ),
         title: Text("Booking Confirmed", style: TextStyle(
             color: Colors.black
         ),),
