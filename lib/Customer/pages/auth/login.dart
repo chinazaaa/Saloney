@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
+import 'package:starter_project/Customer/pages/screens/TimePage.dart';
+import 'package:starter_project/Customer/pages/screens/cart.dart';
 
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';

@@ -3,6 +3,8 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - image_picker (0.0.1):
+    - Flutter
   - libphonenumber (0.0.1):
     - Flutter
     - libPhoneNumber-iOS
@@ -14,6 +16,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
@@ -27,6 +30,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
   libphonenumber:
     :path: ".symlinks/plugins/libphonenumber/ios"
   shared_preferences:
@@ -35,6 +40,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d

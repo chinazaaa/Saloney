@@ -26,6 +26,7 @@ dependencies:
   shimmer: ^1.1.2
   flutter_slidable: ^0.5.7
   flutter_svg: ^0.18.0 
+  multi_image_picker: ^4.7.10
   #device preview
   device_preview: ^0.4.5
   #dependency injection & state mgmt

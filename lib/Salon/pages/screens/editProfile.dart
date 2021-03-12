@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Salon/pages/screens/profile.dart';
+import 'dart:io';
+import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 
 
 class EditProfilePage extends StatefulWidget {
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+    //  File _image;
    String _selected;
    List<Map> _myJson = [
     {"id": '1', "name": "Hair"},
@@ -18,6 +23,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
  bool checkboxValue = false;
   @override
   Widget build(BuildContext context) {
+      // var _provider = Provider.of<ServiceProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -173,6 +179,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(
                   height: 5,
                 ),
+  
+                    //  Padding(
+                    //             padding: const EdgeInsets.all(8.0),
+                    //             child: InkWell(
+                    //               onTap: (){
+                    //                 _provider.loadAssets().then((image){
+                    //                      setState(() {
+                    //                     _image = images;                                      
+                    //                                                         });
+                    //                 });
+                    //               },
+                    //               child: SizedBox(
+                    //                 width: 150,
+                    //                 height: 150,
+                    //                 child: Card(
+                    //                   child: Center(child: _image==null ? Text('Select Image') : Image.file(_image)),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
                   Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -208,7 +234,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   
                                     Checkbox(value: checkboxValue, onChanged: (val){
                                       setState(() {
-                                                         checkboxValue = !checkboxValue;                     
+                                                         checkboxValue = val;                     
                                                                             });
                                       print(val);
                                     }),
