@@ -6,6 +6,7 @@ import 'package:starter_project/intro_page.dart';
 
 import 'Salon/pages/auth/login.dart';
 import 'Salon/pages/screens/add_newservice.dart';
+import 'Salon/pages/screens/editProfile.dart';
 import 'core/provider/providers.dart';
 import 'core/routes/route_names.dart';
 import 'locator.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         routes: RouteNames.routes,
         // home: SalonLoginPage(),
         // initialRoute: RouteNames.introPage,
-        home: AddNewService(),
+        home: EditProfilePage(),
         navigatorKey: Get.key,
       ),
     );

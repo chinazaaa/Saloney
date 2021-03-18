@@ -4,26 +4,24 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 
-
 class EditProfilePage extends StatefulWidget {
-
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-    //  File _image;
-   String _selected;
-   List<Map> _myJson = [
+  //  File _image;
+  String _selected;
+  List<Map> _myJson = [
     {"id": '1', "name": "Hair"},
     {"id": '2', "name": "Beauty"},
-    {"id": '3',"name": "Spa"},
+    {"id": '3', "name": "Spa"},
   ];
   bool showPassword = false;
- bool checkboxValue = false;
+  bool checkboxValue = false;
   @override
   Widget build(BuildContext context) {
-      // var _provider = Provider.of<ServiceProvider>(context);
+    // var _provider = Provider.of<ServiceProvider>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -36,8 +34,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
               color: Colors.black,
             ),
             onPressed: () {
-                Navigator.pop(context);
-              },
+              Navigator.pop(context);
+            },
           ),
           actions: [
             IconButton(
@@ -76,7 +74,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 4,
-                                color: Theme.of(context).scaffoldBackgroundColor),
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor),
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 2,
@@ -101,9 +100,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               shape: BoxShape.circle,
                               border: Border.all(
                                 width: 4,
-                                color: Theme.of(context).scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                               ),
-                              color:Color(0xff9477cb),
+                              color: Color(0xff9477cb),
                             ),
                             child: Icon(
                               Icons.edit,
@@ -116,182 +116,196 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(
                   height: 35,
                 ),
-  TabBar(
-                        indicatorColor: Color(0xff9477cb),
-                        labelColor: Color(0xff9477cb),
-                        unselectedLabelColor: Colors.black54,
-                      tabs: [
-                        Tab(text: 'GENERAL',),
-                        Tab(text: 'SALON'),
-                      ],
-                      ),
-                        SizedBox(
-                  height: 15,
-                ),
-                      Container(
-                         height: MediaQuery.of(context).size.height * .5,
-                        child: TabBarView(
-                        children: [
-                          Column(children: [
-                            buildTextField("Username",false),
-                            buildTextField("E-mail",false),
-                            buildTextField("Phone Number ",false),
-                                    SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OutlineButton(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {},
-                      child: Text("CANCEL",
-                          style: TextStyle(
-                              fontSize: 14,
-                              letterSpacing: 2.2,
-                              color: Colors.black)),
+                TabBar(
+                  indicatorColor: Color(0xff9477cb),
+                  labelColor: Color(0xff9477cb),
+                  unselectedLabelColor: Colors.black54,
+                  tabs: [
+                    Tab(
+                      text: 'GENERAL',
                     ),
-                    RaisedButton(
-                      onPressed: () {},
-                      color: Color(0xff9477cb),
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        "SAVE GENERAL",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.white),
-                      ),
-                    )
+                    Tab(text: 'SALON'),
                   ],
                 ),
-                          ],),
-                          Column(children: [
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height * .5,
+                    child: TabBarView(
+                      children: [
+                        Column(
+                          children: [
+                            buildTextField("Username", false),
+                            buildTextField("E-mail", false),
+                            buildTextField("Phone Number ", false),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                OutlineButton(
+                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {},
+                                  child: Text("CANCEL",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          letterSpacing: 2.2,
+                                          color: Colors.black)),
+                                ),
+                                RaisedButton(
+                                  onPressed: () {},
+                                  color: Color(0xff9477cb),
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Text(
+                                    "SAVE GENERAL",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        letterSpacing: 2.2,
+                                        color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             buildTextField("Name of Salon ", false),
                             buildTextField("Description", false),
                             buildTextField("Location", false),
-                                    
-                SizedBox(
-                  height: 5,
-                ),
-  
-                    //  Padding(
-                    //             padding: const EdgeInsets.all(8.0),
-                    //             child: InkWell(
-                    //               onTap: (){
-                    //                 _provider.loadAssets().then((image){
-                    //                      setState(() {
-                    //                     _image = images;                                      
-                    //                                                         });
-                    //                 });
-                    //               },
-                    //               child: SizedBox(
-                    //                 width: 150,
-                    //                 height: 150,
-                    //                 child: Card(
-                    //                   child: Center(child: _image==null ? Text('Select Image') : Image.file(_image)),
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                  Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: DropdownButtonHideUnderline(
-                    child: ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton<String>(
-                        isDense: true,                       
-                        hint: new Text("Select Category"),
-                        value: _selected,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _selected = newValue;
-                          });
 
-                          print(_selected);
-                        },
-                        items: _myJson.map((Map map) {
-                          return new DropdownMenuItem<String>(
-                            value: map["id"].toString(),
-                            // value: _mySelection,
-                            child: Row(
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text("Select Images for Products:",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+
+
+                            //  Padding(
+                            //             padding: const EdgeInsets.all(8.0),
+                            //             child: InkWell(
+                            //               onTap: (){
+                            //                 _provider.loadAssets().then((image){
+                            //                      setState(() {
+                            //                     _image = images;
+                            //                                                         });
+                            //                 });
+                            //               },
+                            //               child: SizedBox(
+                            //                 width: 150,
+                            //                 height: 150,
+                            //                 child: Card(
+                            //                   child: Center(child: _image==null ? Text('Select Image') : Image.file(_image)),
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                // Image.asset(
-                                //   map["image"],
-                                //   width: 25,
-                                // ),
-                                Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: Text(map["name"])),
-                                  
-                                    Checkbox(value: checkboxValue, onChanged: (val){
-                                      setState(() {
-                                                         checkboxValue = val;                     
-                                                                            });
-                                      print(val);
-                                    }),
+                                Expanded(
+                                  child: DropdownButtonHideUnderline(
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<String>(
+                                        isDense: true,
+                                        hint: new Text("Select Category"),
+                                        value: _selected,
+                                        onChanged: (String newValue) {
+                                          setState(() {
+                                            _selected = newValue;
+                                          });
+
+                                          print(_selected);
+                                        },
+                                        items: _myJson.map((Map map) {
+                                          return new DropdownMenuItem<String>(
+                                            value: map["id"].toString(),
+                                            // value: _mySelection,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                // Image.asset(
+                                                //   map["image"],
+                                                //   width: 25,
+                                                // ),
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
+                                                    child: Text(map["name"])),
+
+                                                Checkbox(
+                                                    value: checkboxValue,
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        checkboxValue = val;
+                                                      });
+                                                      print(val);
+                                                    }),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-                               SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OutlineButton(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {},
-                      child: Text("CANCEL",
-                          style: TextStyle(
-                              fontSize: 14,
-                              letterSpacing: 2.2,
-                              color: Colors.black)),
-                    ),
-                    RaisedButton(
-                      onPressed: () {},
-                      color: Color(0xff9477cb),
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        "SAVE SALON",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),   ],)
-                        ],
-                      )),
-                      
-                
-                // buildTextField("Password", "****", true),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                OutlineButton(
+                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {},
+                                  child: Text("CANCEL",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          letterSpacing: 2.2,
+                                          color: Colors.black)),
+                                ),
+                                RaisedButton(
+                                  onPressed: () {},
+                                  color: Color(0xff9477cb),
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Text(
+                                    "SAVE SALON",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        letterSpacing: 2.2,
+                                        color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    )),
 
-              
-             
-         
-     
+                // buildTextField("Password", "****", true),
               ],
             ),
           ),
@@ -300,8 +314,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, bool isPasswordTextField) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
