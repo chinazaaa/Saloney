@@ -7,17 +7,18 @@ import 'package:image_picker/image_picker.dart';
 
 class ServiceProvider with ChangeNotifier {
   //List of images
-  List<File> images = <File>[];
+  List<File> productImages = <File>[];
+  List<File> salonProfileImages = <File>[];
   String pickerError = '';
 
-  Future<File> getServiceImage() async {
+  Future<File> addProductImage() async {
     File image;
     final picker = ImagePicker();
     final pickedFile =
         await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
     if (pickedFile != null) {
       image = File(pickedFile.path);
-      images.add(image);
+      productImages.add(image);
 
       notifyListeners();
     } else {
@@ -28,8 +29,33 @@ class ServiceProvider with ChangeNotifier {
     return image;
   }
 
-  bool deleteImage({int index}){
-    images.removeAt(index);
+  bool deleteProductImage({int index}){
+    productImages.removeAt(index);
     notifyListeners();
+    return true;
+  }
+
+  Future<File> addSaloonProfileImage() async {
+    File image;
+    final picker = ImagePicker();
+    final pickedFile =
+    await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      salonProfileImages.add(image);
+
+      notifyListeners();
+    } else {
+      this.pickerError = 'No image selected';
+      print('No image selected.');
+      notifyListeners();
+    }
+    return image;
+  }
+
+  bool deleteSaloonProfileImage({int index}){
+    salonProfileImages.removeAt(index);
+    notifyListeners();
+    return true;
   }
 }

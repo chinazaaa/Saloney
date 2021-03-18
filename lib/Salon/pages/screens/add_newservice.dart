@@ -114,11 +114,11 @@ class _AddNewServiceState extends State<AddNewService> {
                                   Wrap(
                                     children: [
                                       for (int i = 0;
-                                          i <= model.images.length;
-                                          i++)
-                                        i == model.images.length
-                                            ? AddImageButton(onTap: ()=> model.getServiceImage(),)
-                                            : ImageView(image: model.images[i], onTap: ()=>model.deleteImage(index: i),),
+                                      i <= model.productImages.length;
+                                      i++)
+                                        i == model.productImages.length
+                                            ? AddImageButton(onTap: ()=> model.addProductImage(),)
+                                            : ImageView(image: model.productImages[i], onTap: ()=>model.deleteProductImage(index: i),),
                                     ],
                                   ),
                                   TextFormField(
