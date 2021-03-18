@@ -35,6 +35,7 @@ class _TimePageState extends State<TimePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.search),
+            onPressed: (){},
           )
         ],
       ),
