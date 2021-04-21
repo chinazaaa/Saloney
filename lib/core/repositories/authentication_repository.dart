@@ -1,0 +1,228 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
+import 'package:starter_project/core/api/authentication_api/authentication_api.dart';
+import 'package:starter_project/core/mixin/validators.dart';
+import 'package:starter_project/infrastructure/user_info_cache.dart';
+import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
+import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
+import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
+import 'package:starter_project/ui_helpers/responsive_state/base_view_model.dart';
+import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
+
+import '../../locator.dart';
+
+class AuthRepository extends BaseNotifier with Validators{
+
+  //API
+  var authApi = locator<AuthenticationApi>();
+
+  Future<bool> login({String userName, String password, bool isCustomer}) async {
+    setState(ViewState.Busy);
+    CustomerLoginResponse customer;
+    SalonLoginResponse salon;
+    try {
+      if(isCustomer){
+        customer = await authApi.loginCustomer(userName: userName, password: password);
+        setState(ViewState.Idle);
+
+        if(customer.success){
+          // Cache Login information
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.cacheLoginResponse(customer: customer);
+          return true;
+        } else {
+          Get.snackbar(
+            'Error',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }
+      //is salon
+      else {
+        salon = await authApi.loginSaloon(userName: userName, password: password);
+        setState(ViewState.Idle);
+
+        if(salon.success){
+          // Cache Login information
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.cacheLoginResponse(salon: salon);
+          return true;
+        }
+        else {
+          Get.snackbar(
+            'Error',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+
+      }
+      return false;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error Occured!',
+    //     'Please try again',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black45,
+    //   );
+    // }
+
+    setState(ViewState.Idle);
+    return false;
+  }
+
+  Future<bool> register({bool isCustomer = true, String userName, String password, String email, String location, String nameOfSalon, String phone, String typeOfSalon}) async{
+    setState(ViewState.Busy);
+
+    try {
+      if (isCustomer) {
+        CustomerRegistrationResponse res = await authApi.registerCustomer(userName: userName, password: password, email: email, phone: phone,);
+        setState(ViewState.Idle);
+        if(res.success){
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.updateRegistrationInfo(customerReg: res);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${res.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+          return false;
+        }
+      }  else {
+        SalonRegistrationResponse res = await authApi.registerSaloon(userName: userName, password: password, email: email, location: location, nameOfSalon: nameOfSalon, phone: phone, typeOfSalon: typeOfSalon);
+        setState(ViewState.Idle);
+        if(res.success){
+          var userInfoCache = locator<UserInfoCache>();
+          await userInfoCache.updateRegistrationInfo(salonReg: res);
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${res.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+          return false;
+        }
+      }
+
+
+
+      return false;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
+
+    setState(ViewState.Idle);
+    return false;
+  }
+
+  Future<bool> confirmOTP({bool isCustomer = true, String Otp}) async{
+    SalonRegistrationResponse salon;
+    CustomerRegistrationResponse customer;
+
+    try {
+      if (isCustomer) {
+        CustomerRegistrationResponse customer = await authApi.confirmCustomerOTP(Otp: Otp);
+        setState(ViewState.Idle);
+        if(customer.success){
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }  else {
+        SalonRegistrationResponse salon = await authApi.confirmSaloonOTP(Otp: Otp);
+        setState(ViewState.Idle);
+        if(salon.success){
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }
+
+      setState(ViewState.Idle);
+      return false;
+
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
+    setState(ViewState.Idle);
+    return false;
+  }
+
+  Future<bool> logout() async{
+    String token = locator<UserInfoCache>().token;
+    await locator<UserInfoCache>().clearCache();
+
+    return true;
+  }
+
+}
