@@ -10,7 +10,7 @@ import 'package:starter_project/models/api_response_variants/salon_registration_
 import '../api_utils/api_helper.dart';
 import '../api_utils/api_routes.dart';
 import '../api_utils/network_exceptions.dart';
-import '../../utils/ui_exceptions.dart';
+//FIXME unused import '../../utils/ui_exceptions.dart';
 
 import '../../../locator.dart';
 import 'authentication_api.dart';
@@ -84,7 +84,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
       throw NetworkException();
     }
 
-    return null;
+    // return null; FIXME dead code
   }
 
   @override
@@ -111,7 +111,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
       throw NetworkException();
     }
 
-    return null;
+    // return null; FIXME dead code
   }
 
   @override

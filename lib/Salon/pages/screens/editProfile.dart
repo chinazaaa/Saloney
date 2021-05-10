@@ -20,6 +20,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
   ];
   bool showPassword = false;
   bool checkboxValue = false;
+
+  // FIXME New Code
+  TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController salonName = TextEditingController();
+  TextEditingController salonDescription = TextEditingController();
+  TextEditingController salonLocation = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<ServiceProvider>(context);
@@ -138,33 +147,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         SingleChildScrollView(
                           child: Column(
                             children: [
-                              buildTextField("Username", false),
-                              buildTextField("E-mail", false),
-                              buildTextField("Phone Number ", false),
+                              buildTextField("Username", false, username),
+                              buildTextField("E-mail", false, email),
+                              buildTextField(
+                                  "Phone Number ", false, phoneNumber),
                               SizedBox(
                                 height: 15,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  //FIXME
                                   OutlineButton(
-                                    padding: EdgeInsets.symmetric(horizontal: 30),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 30),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
-                                    onPressed: () {},
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    onPressed:
+                                        () {}, // FIXME Return to profile page
                                     child: Text("CANCEL",
                                         style: TextStyle(
                                             fontSize: 14,
                                             letterSpacing: 2.2,
                                             color: Colors.black)),
                                   ),
+                                  //FIXME
                                   RaisedButton(
                                     onPressed: () {},
                                     color: Color(0xff9477cb),
-                                    padding: EdgeInsets.symmetric(horizontal: 50),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 50),
                                     elevation: 2,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     child: Text(
                                       "SAVE GENERAL",
                                       style: TextStyle(
@@ -183,14 +201,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildTextField("Name of Salon ", false),
-                              buildTextField("Description", false),
-                              buildTextField("Location", false),
-
+                              buildTextField(
+                                  "Name of Salon ", false, salonName),
+                              buildTextField(
+                                  "Description", false, salonDescription),
+                              buildTextField("Location", false, salonLocation),
                               SizedBox(
                                 height: 5,
                               ),
-                              Text("Select Images for Products:",
+                              Text(
+                                "Select Images for Products:",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey,
@@ -202,32 +222,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   child: Wrap(
                                     children: [
                                       for (int i = 0;
-                                      i <= model.salonProfileImages.length;
-                                      i++)
+                                          i <= model.salonProfileImages.length;
+                                          i++)
                                         i == model.salonProfileImages.length
-                                            ? AddImageButton(onTap: ()=> model.addSaloonProfileImage(),)
-                                            : ImageView(image: model.salonProfileImages[i], onTap: ()=>model.deleteSaloonProfileImage(index: i),),
+                                            ? AddImageButton(
+                                                onTap: () => model
+                                                    .addSaloonProfileImage(),
+                                              )
+                                            : ImageView(
+                                                image:
+                                                    model.salonProfileImages[i],
+                                                onTap: () => model
+                                                    .deleteSaloonProfileImage(
+                                                        index: i),
+                                              ),
                                     ],
                                   ),
                                 ),
                               ),
-                              Text("Select Category(ies)",
+                              Text(
+                                "Select Category(ies)",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey,
                                 ),
                               ),
-                              SizedBox(height: 5,),
+                              SizedBox(
+                                height: 5,
+                              ),
                               ListView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: _myJson.length,
                                 itemBuilder: (context, i) => Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Container(
-                                        margin: EdgeInsets.only(
-                                            left: 10),
+                                        margin: EdgeInsets.only(left: 10),
                                         child: Text(_myJson[i]["name"])),
                                     Checkbox(
                                         value: _myJson[i]["value"],
@@ -239,18 +271,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   ],
                                 ),
                               ),
-
                               SizedBox(
                                 height: 15,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   OutlineButton(
-                                    padding: EdgeInsets.symmetric(horizontal: 30),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 30),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
-                                    onPressed: () {},
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    onPressed:
+                                        () {}, // FIXME Return to profile page
                                     child: Text("CANCEL",
                                         style: TextStyle(
                                             fontSize: 14,
@@ -260,10 +295,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   RaisedButton(
                                     onPressed: () {},
                                     color: Color(0xff9477cb),
-                                    padding: EdgeInsets.symmetric(horizontal: 50),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 50),
                                     elevation: 2,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     child: Text(
                                       "SAVE SALON",
                                       style: TextStyle(
@@ -289,11 +326,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, bool isPasswordTextField,
+      TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
         obscureText: isPasswordTextField ? showPassword : false,
+        controller: controller,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(

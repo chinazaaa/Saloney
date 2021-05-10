@@ -13,21 +13,22 @@ import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
 
 import '../../locator.dart';
 
-class AuthRepository extends BaseNotifier with Validators{
-
+class AuthRepository extends BaseNotifier with Validators {
   //API
   var authApi = locator<AuthenticationApi>();
 
-  Future<bool> login({String userName, String password, bool isCustomer}) async {
+  Future<bool> login(
+      {String userName, String password, bool isCustomer}) async {
     setState(ViewState.Busy);
     CustomerLoginResponse customer;
     SalonLoginResponse salon;
     try {
-      if(isCustomer){
-        customer = await authApi.loginCustomer(userName: userName, password: password);
+      if (isCustomer) {
+        customer =
+            await authApi.loginCustomer(userName: userName, password: password);
         setState(ViewState.Idle);
 
-        if(customer.success){
+        if (customer.success) {
           // Cache Login information
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(customer: customer);
@@ -45,16 +46,16 @@ class AuthRepository extends BaseNotifier with Validators{
       }
       //is salon
       else {
-        salon = await authApi.loginSaloon(userName: userName, password: password);
+        salon =
+            await authApi.loginSaloon(userName: userName, password: password);
         setState(ViewState.Idle);
 
-        if(salon.success){
+        if (salon.success) {
           // Cache Login information
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(salon: salon);
           return true;
-        }
-        else {
+        } else {
           Get.snackbar(
             'Error',
             '${salon.message}',
@@ -64,7 +65,6 @@ class AuthRepository extends BaseNotifier with Validators{
             backgroundColor: Colors.black26,
           );
         }
-
       }
       return false;
     } on NetworkException {
@@ -90,14 +90,27 @@ class AuthRepository extends BaseNotifier with Validators{
     return false;
   }
 
-  Future<bool> register({bool isCustomer = true, String userName, String password, String email, String location, String nameOfSalon, String phone, String typeOfSalon}) async{
+  Future<bool> register(
+      {bool isCustomer = true,
+      String userName,
+      String password,
+      String email,
+      String location,
+      String nameOfSalon,
+      String phone,
+      String typeOfSalon}) async {
     setState(ViewState.Busy);
 
     try {
       if (isCustomer) {
-        CustomerRegistrationResponse res = await authApi.registerCustomer(userName: userName, password: password, email: email, phone: phone,);
+        CustomerRegistrationResponse res = await authApi.registerCustomer(
+          userName: userName,
+          password: password,
+          email: email,
+          phone: phone,
+        );
         setState(ViewState.Idle);
-        if(res.success){
+        if (res.success) {
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.updateRegistrationInfo(customerReg: res);
           return true;
@@ -112,10 +125,17 @@ class AuthRepository extends BaseNotifier with Validators{
           );
           return false;
         }
-      }  else {
-        SalonRegistrationResponse res = await authApi.registerSaloon(userName: userName, password: password, email: email, location: location, nameOfSalon: nameOfSalon, phone: phone, typeOfSalon: typeOfSalon);
+      } else {
+        SalonRegistrationResponse res = await authApi.registerSaloon(
+            userName: userName,
+            password: password,
+            email: email,
+            location: location,
+            nameOfSalon: nameOfSalon,
+            phone: phone,
+            typeOfSalon: typeOfSalon);
         setState(ViewState.Idle);
-        if(res.success){
+        if (res.success) {
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.updateRegistrationInfo(salonReg: res);
           return true;
@@ -132,9 +152,7 @@ class AuthRepository extends BaseNotifier with Validators{
         }
       }
 
-
-
-      return false;
+      // return false; FIXME dead code
     } on NetworkException {
       Get.snackbar(
         'No Internet!',
@@ -157,15 +175,16 @@ class AuthRepository extends BaseNotifier with Validators{
     return false;
   }
 
-  Future<bool> confirmOTP({bool isCustomer = true, String Otp}) async{
-    SalonRegistrationResponse salon;
-    CustomerRegistrationResponse customer;
+  Future<bool> confirmOTP({bool isCustomer = true, String Otp}) async {
+    // FIXME Unused  SalonRegistrationResponse salon;
+    // FIXME Unused  CustomerRegistrationResponse customer;
 
     try {
       if (isCustomer) {
-        CustomerRegistrationResponse customer = await authApi.confirmCustomerOTP(Otp: Otp);
+        CustomerRegistrationResponse customer =
+            await authApi.confirmCustomerOTP(Otp: Otp);
         setState(ViewState.Idle);
-        if(customer.success){
+        if (customer.success) {
           return true;
         } else {
           Get.snackbar(
@@ -177,10 +196,11 @@ class AuthRepository extends BaseNotifier with Validators{
             backgroundColor: Colors.black26,
           );
         }
-      }  else {
-        SalonRegistrationResponse salon = await authApi.confirmSaloonOTP(Otp: Otp);
+      } else {
+        SalonRegistrationResponse salon =
+            await authApi.confirmSaloonOTP(Otp: Otp);
         setState(ViewState.Idle);
-        if(salon.success){
+        if (salon.success) {
           return true;
         } else {
           Get.snackbar(
@@ -196,7 +216,6 @@ class AuthRepository extends BaseNotifier with Validators{
 
       setState(ViewState.Idle);
       return false;
-
     } on NetworkException {
       Get.snackbar(
         'No Internet!',
@@ -218,11 +237,10 @@ class AuthRepository extends BaseNotifier with Validators{
     return false;
   }
 
-  Future<bool> logout() async{
-    String token = locator<UserInfoCache>().token;
+  Future<bool> logout() async {
+    // FIXME Unused  String token = locator<UserInfoCache>().token;
     await locator<UserInfoCache>().clearCache();
 
     return true;
   }
-
 }
