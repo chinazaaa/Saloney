@@ -9,7 +9,7 @@ import 'package:starter_project/Salon/pages/auth/login.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/services/http_service_salon.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
+//FIXME unused import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 class SalonSignUp extends StatefulWidget {
   @override

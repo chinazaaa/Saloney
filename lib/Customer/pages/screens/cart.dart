@@ -14,7 +14,8 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      // FIXME replaced by line 19 according to docs
+      // resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
       body: Builder(
@@ -53,22 +54,25 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(right: 30),
                 child: Text(
                   "\$299.00",
-                  style: CustomTextStyle.textFormFieldBlack.copyWith(
-                      color: Color(0xff9477cb), fontSize: 14),
+                  style: CustomTextStyle.textFormFieldBlack
+                      .copyWith(color: Color(0xff9477cb), fontSize: 14),
                 ),
               ),
             ],
           ),
           Utils.getSizedBox(height: 8),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               Navigator.push(context,
                   new MaterialPageRoute(builder: (context) => Orders()));
             },
-            color: Color(0xff9477cb),
-            padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(24))),
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xff9477cb),
+              padding:
+                  EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(24))),
+            ),
             child: Text(
               "Book Now",
               style: CustomTextStyle.textFormFieldSemiBold
@@ -134,8 +138,7 @@ class _CartPageState extends State<CartPage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(14)),
                     color: Colors.blue.shade200,
-                    image: DecorationImage(
-                        image: AssetImage("assets/1.png"))),
+                    image: DecorationImage(image: AssetImage("assets/1.png"))),
               ),
               Expanded(
                 child: Container(

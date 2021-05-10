@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
+//FIXME unused import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Salon/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/screens/about_us.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
-import 'package:starter_project/Salon/pages/screens/screens.dart';
+//FIXME unused import 'package:starter_project/Salon/pages/screens/screens.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
-
-
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -15,7 +13,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<ListProfileSection> listSection = new List();
+  //  List<ListProfileSection> listSection = new List(); //FIXME List() is deprecated
+  List<ListProfileSection> listSection = [];
 
   @override
   void initState() {
@@ -25,15 +24,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void createListItem() {
-    listSection.add(createSection(
-        "Change Password", "assets/ic_settings.png", Colors.teal.shade800, ChangePasswordPage()));
+    listSection.add(createSection("Change Password", "assets/ic_settings.png",
+        Colors.teal.shade800, ChangePasswordPage()));
     listSection.add(createSection("About Us", "assets/ic_about_us.png",
         Colors.black.withOpacity(0.8), AboutPage()));
-         listSection.add(createSection(
-        "Help and Support",
-        "assets/ic_support.png",
-        Colors.indigo.shade800,
-        ProfilePage()));
+    listSection.add(createSection("Help and Support", "assets/ic_support.png",
+        Colors.indigo.shade800, ProfilePage()));
     listSection.add(createSection(
         "Logout", "assets/ic_logout.png", Colors.red.withOpacity(0.7), null));
   }
@@ -46,7 +42,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      resizeToAvoidBottomPadding: true,
+      // FIXME Made to work using ln 51 according to docs
+      // resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       body: Builder(builder: (context) {
         return Container(
           child: Stack(
@@ -138,10 +136,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                           icon: Icon(Icons.settings),
                                           iconSize: 24,
                                           color: Colors.black,
-                                         onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => ProfilePage()));
-            },
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        ProfilePage()));
+                                          },
                                         ),
                                         IconButton(
                                           icon: Icon(Icons.edit),
@@ -152,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 context,
                                                 new MaterialPageRoute(
                                                     builder: (context) =>
-                                                       EditProfilePage()));
+                                                        EditProfilePage()));
                                           },
                                         )
                                       ],

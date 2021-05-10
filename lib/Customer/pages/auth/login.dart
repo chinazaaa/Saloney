@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
-import 'package:starter_project/Customer/pages/screens/TimePage.dart';
-import 'package:starter_project/Customer/pages/screens/cart.dart';
+// FIXME Unused import 'package:starter_project/Customer/pages/screens/TimePage.dart';
+// FIXME Unused import 'package:starter_project/Customer/pages/screens/cart.dart';
 
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
@@ -118,7 +118,7 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                    EditProfilePage()));
+                                                    EditProfilePage())); // FIXME why is this not routing to forgot_password.dart
                                         },
                                         child: Text(
                                           "Forgot Password",

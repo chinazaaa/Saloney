@@ -7,25 +7,30 @@ import 'consts.dart';
 // ignore: must_be_immutable
 class WideButton extends StatelessWidget {
   final String text;
-  bool isBold=false;
+  bool isBold = false;
   final GestureTapCallback onPressed;
   WideButton(this.text, this.onPressed);
-  WideButton.bold(this.text, this.onPressed,this.isBold);
+  WideButton.bold(this.text, this.onPressed, this.isBold);
 
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
-      minWidth: 350.0,
-      height: 50.0,
-      child: RaisedButton(
-          color: korange,
-          shape: new RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25)),
-          child: isBold? BoldText(text,22.5,kwhite):NormalText(text, kwhite, 22.5),
-        onPressed: onPressed,
-    ));
+        minWidth: 350.0,
+        height: 50.0,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: korange,
+            shape: new RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25)),
+          ),
+          child: isBold
+              ? BoldText(text, 22.5, kwhite)
+              : NormalText(text, kwhite, 22.5),
+          onPressed: onPressed,
+        ));
   }
 }
+
 class SquaredIcon extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -34,8 +39,8 @@ class SquaredIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-      onTap: ()=>null,
+    return GestureDetector(
+      onTap: () => null,
       child: Container(
         width: 100,
         height: 80,
@@ -51,27 +56,27 @@ class SquaredIcon extends StatelessWidget {
               ),
             )
           ],
-
         ),
         child: Container(
             width: 90,
             height: 90,
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10.0)
-            ),
+                borderRadius: BorderRadius.circular(10.0)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(icon,size: 50,color: kgreyDark,),
+                Icon(
+                  icon,
+                  size: 50,
+                  color: kgreyDark,
+                ),
                 SizedBox(
                   height: 5,
                 ),
-                NormalText(text,kblack,16.0)
-
+                NormalText(text, kblack, 16.0)
               ],
             )),
-
       ),
     );
   }

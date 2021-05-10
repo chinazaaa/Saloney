@@ -32,7 +32,7 @@ dependencies:
   #dependency injection & state mgmt
   get:
   get_it: ^4.0.4
-  provider: ^3.0.1
+  provider: ^5.0.0
   #internationalization
   intl: ^0.16.1
   #icons
@@ -41,6 +41,11 @@ dependencies:
   animated_text_kit: ^2.0.0
   bottom_navy_bar: ^5.3.2
   image_picker: ^0.6.7+22
+
+  #NEW by Brymes
+  flutter_secure_storage: ^3.3.5
+  dio: ^3.0.10
+  http_parser: ^3.1.4
 
 dev_dependencies:
   flutter_test:

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/profile.dart';
 
-
 class EditCustomerProfilePage extends StatefulWidget {
   @override
-  _EditCustomerProfilePageState createState() => _EditCustomerProfilePageState();
+  _EditCustomerProfilePageState createState() =>
+      _EditCustomerProfilePageState();
 }
 
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
@@ -21,8 +21,8 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
             color: Colors.black,
           ),
           onPressed: () {
-              Navigator.pop(context);
-            },
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
@@ -88,7 +88,7 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color:Color(0xff9477cb),
+                            color: Color(0xff9477cb),
                           ),
                           child: Icon(
                             Icons.edit,
@@ -101,8 +101,8 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Username",  false),
-              buildTextField("E-mail",false),
+              buildTextField("Username", false),
+              // FIXME buildTextField("E-mail", false),
               // buildTextField("Password", "********", true),
               buildTextField("Phone Number ", false),
               // buildTextField("Description", false),
@@ -111,14 +111,16 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
               SizedBox(
                 height: 35,
               ),
-            
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
                     onPressed: () {},
                     child: Text("CANCEL",
                         style: TextStyle(
@@ -126,13 +128,15 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
                             letterSpacing: 2.2,
                             color: Colors.black)),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {},
-                    color: Color(0xff9477cb),
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff9477cb),
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
                     child: Text(
                       "SAVE",
                       style: TextStyle(
@@ -150,8 +154,7 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, bool isPasswordTextField) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(

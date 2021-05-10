@@ -7,7 +7,7 @@ import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
 import 'package:starter_project/services/http_service_customer.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
+// FIXME Unused import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 import 'otp.dart';
 
@@ -202,6 +202,7 @@ class CustomerSignupPage extends StatelessWidget {
   }
 
   Future<HttpResponse> _signUp() async {
+    // FIXME
     _loading = !_loading;
 
     try {
