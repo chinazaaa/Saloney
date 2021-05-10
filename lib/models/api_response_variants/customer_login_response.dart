@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../api_response.dart';
 import '../customer_info.dart';
+import '../image_class.dart';
 
 class CustomerLoginResponse extends ApiResponse {
   final bool success;
@@ -37,10 +38,12 @@ class CustomerLoginResponse extends ApiResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerLoginResponse.fromJson(String source) => CustomerLoginResponse.fromMap(json.decode(source));
+  factory CustomerLoginResponse.fromJson(String source) =>
+      CustomerLoginResponse.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CustomerLoginResponse(success: $success, status: $status, message: $message, data: $data)';
+  String toString() =>
+      'CustomerLoginResponse(success: $success, status: $status, message: $message, data: $data)';
 }
 
 class Data {
@@ -96,4 +99,3 @@ class Data {
     return 'Data(local: $local, image: $image, _id: $id, identifier: $identifier, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
   }
 }
-

@@ -1,8 +1,9 @@
 import 'dart:convert';
+import '../image_class.dart';
 
 import 'package:starter_project/models/api_response.dart';
 
-class SalonLoginResponse extends ApiResponse{
+class SalonLoginResponse extends ApiResponse {
   final bool success;
   final String message;
   final Salon data;
@@ -36,10 +37,12 @@ class SalonLoginResponse extends ApiResponse{
 
   String toJson() => json.encode(toMap());
 
-  factory SalonLoginResponse.fromJson(String source) => SalonLoginResponse.fromMap(json.decode(source));
+  factory SalonLoginResponse.fromJson(String source) =>
+      SalonLoginResponse.fromMap(json.decode(source));
 
   @override
-  String toString() => 'SalonLoginResponse(success: $success, status: $status, message: $message, data: $data)';
+  String toString() =>
+      'SalonLoginResponse(success: $success, status: $status, message: $message, data: $data)';
 }
 
 class Salon {
@@ -174,30 +177,31 @@ class Local {
   }
 }
 
-class Image {
-  final String path;
-  Image({
-    this.path,
-  });
+// FIXME Reused therefore moved to a separte file
+// class Image {
+//   final String path;
+//   Image({
+//     this.path,
+//   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'path': path,
-    };
-  }
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'path': path,
+//     };
+//   }
 
-  factory Image.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+//   factory Image.fromMap(Map<String, dynamic> map) {
+//     if (map == null) return null;
 
-    return Image(
-      path: map['path'],
-    );
-  }
+//     return Image(
+//       path: map['path'],
+//     );
+//   }
 
-  String toJson() => json.encode(toMap());
+//   String toJson() => json.encode(toMap());
 
-  factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
+//   factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
 
-  @override
-  String toString() => 'Image(path: $path)';
-}
+//   @override
+//   String toString() => 'Image(path: $path)';
+// } F

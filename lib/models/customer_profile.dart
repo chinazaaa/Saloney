@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'image_class.dart';
 
 class CustomerProfile {
   final Image image;
@@ -78,7 +79,8 @@ class CustomerProfile {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerProfile.fromJson(String source) => CustomerProfile.fromMap(json.decode(source));
+  factory CustomerProfile.fromJson(String source) =>
+      CustomerProfile.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -86,30 +88,31 @@ class CustomerProfile {
   }
 }
 
-class Image {
-  final String path;
-  Image({
-    this.path,
-  });
+// FIXME Reused therefore moved to a separte file
+// class Image {
+//   final String path;
+//   Image({
+//     this.path,
+//   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'path': path,
-    };
-  }
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'path': path,
+//     };
+//   }
 
-  factory Image.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+//   factory Image.fromMap(Map<String, dynamic> map) {
+//     if (map == null) return null;
 
-    return Image(
-      path: map['path'],
-    );
-  }
+//     return Image(
+//       path: map['path'],
+//     );
+//   }
 
-  String toJson() => json.encode(toMap());
+//   String toJson() => json.encode(toMap());
 
-  factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
+//   factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
 
-  @override
-  String toString() => 'Image(path: $path)';
-}
+//   @override
+//   String toString() => 'Image(path: $path)';
+// }
