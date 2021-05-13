@@ -1,4 +1,5 @@
-import 'dart:convert';
+/*FIXME Unneded code
+ import 'dart:convert';
 
 class Customer {
   final String firstName;
@@ -13,7 +14,6 @@ class Customer {
   final String location;
   final String nameOfSalon;
   final int otp;
-  final String api_token;
   Customer({
     this.firstName,
     this.lastName,
@@ -27,8 +27,8 @@ class Customer {
     this.location,
     this.nameOfSalon,
     this.otp,
-    this.api_token,
   });
+
 
   Map<String, dynamic> toMap() {
     return {
@@ -44,7 +44,6 @@ class Customer {
       'location': location,
       'nameOfSalon': nameOfSalon,
       'otp': otp,
-      'api_token': api_token,
     };
   }
 
@@ -64,20 +63,20 @@ class Customer {
       location: map['location'],
       nameOfSalon: map['nameOfSalon'],
       otp: map['otp']?.toInt(),
-      api_token: map['api_token'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
+  factory Customer.fromJson(String source) =>
+      Customer.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Local(firstName: $firstName, lastName: $lastName, isActive: $isActive, isEmailVerified: $isEmailVerified, userRole: $userRole, email: $email, password: $password, phone: $phone, userName: $userName, location: $location, nameOfSalon: $nameOfSalon, otp: $otp, api_token: $api_token)';
+    return 'Local(firstName: $firstName, lastName: $lastName, isActive: $isActive, isEmailVerified: $isEmailVerified, userRole: $userRole, email: $email, password: $password, phone: $phone, userName: $userName, location: $location, nameOfSalon: $nameOfSalon, otp: $otp)';
   }
 }
-
+ */
 // FIXME Reused therefore moved to a separte file
 // class Image {
 //   final String path;
