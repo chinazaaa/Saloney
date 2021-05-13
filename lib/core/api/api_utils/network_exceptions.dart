@@ -15,7 +15,7 @@ class NetworkException extends AppException {
 
 class FetchDataException extends AppException {
   FetchDataException([String message])
-      : super(message, "Error During Communication: ");
+      : super(message, "Error During Communication: 'Request Timed Out' ");
 }
 
 class BadRequestException extends AppException {
@@ -23,7 +23,8 @@ class BadRequestException extends AppException {
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+  UnauthorisedException([message])
+      : super(message, "Unauthorised: 'Incorrect Username or password' ");
 }
 
 class InvalidInputException extends AppException {
@@ -33,4 +34,10 @@ class InvalidInputException extends AppException {
 class AlreadyRegisteredException extends AppException {
   AlreadyRegisteredException([String message])
       : super(message, "Invalid Input: ");
+}
+
+class InternalServerException extends AppException {
+  InternalServerException([message])
+      : super(message,
+            "An error occurred. But it's on us. Please contact support if error persists");
 }
