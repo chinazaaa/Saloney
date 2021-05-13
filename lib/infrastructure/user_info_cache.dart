@@ -1,11 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:starter_project/core/utils/preference_keys.dart';
+import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
+import 'package:starter_project/models/service/serviceResponses.dart';
 
 //-- How to use --
 /* var userInfoCache = locator<UserInfoCache>();
@@ -13,13 +16,14 @@ import 'package:starter_project/models/api_response_variants/salon_registration_
   print('used data: ${userInfoCache.name}');
 */
 
-class Cache{
+class Cache {
   CustomerLoginResponse customer;
   SalonLoginResponse salon;
+
   bool get isCustomer => customer != null;
 
   ///Please use only one input at a time
-  Cache({CustomerLoginResponse customer, SalonLoginResponse salon}){
+  Cache({CustomerLoginResponse customer, SalonLoginResponse salon}) {
     // //Check if is saloon or customer
     // if (salon != null) {
     //   this.isCustomer = false;
@@ -37,8 +41,12 @@ class Cache{
     // print(map['salon']);
     // print(map['customer']);
     return Cache(
-      customer: map['customer'] != null ? CustomerLoginResponse.fromJson(map['customer']) : null,
-      salon: map['salon'] != null ? SalonLoginResponse.fromJson(map['salon']) : null,
+      customer: map['customer'] != null
+          ? CustomerLoginResponse.fromJson(map['customer'])
+          : null,
+      salon: map['salon'] != null
+          ? SalonLoginResponse.fromJson(map['salon'])
+          : null,
     );
   }
 
@@ -53,7 +61,6 @@ class Cache{
       'isCustomer': isCustomer,
     };
   }
-
 }
 
 ///This class is used to sync User Data
@@ -64,9 +71,12 @@ class UserInfoCache {
   CustomerLoginResponse get customer => cache.customer;
   SalonLoginResponse get salon => cache.salon;
 
+  StorageUtil _storageUtil = Get.find();
 
   //--token
-  String get token => this.cache.isCustomer ? this.cache.customer.data.local.api_token : this.cache.salon.data.local.api_token;
+  String get token => this.cache.isCustomer
+      ? this.cache.customer.data.apiToken
+      : this.cache.salon.data.local.api_token;
   bool get isLoggedIn => this.cache != null;
   // int get id => this._user.id;
 
@@ -86,16 +96,17 @@ class UserInfoCache {
   }
 
   ///Use only one param at a time
-  updateRegistrationInfo({CustomerRegistrationResponse customerReg, SalonRegistrationResponse salonReg}){
+  updateRegistrationInfo(
+      {CustomerRegistrationResponse customerReg,
+      SalonRegistrationResponse salonReg}) {
     this.customerReg = customerReg;
     this.salonReg = salonReg;
     if (salonReg != null) {
       //is salon
       isCustomerReg = false;
-    }  else {
+    } else {
       isCustomerReg = true;
     }
-
   }
 
   getUserDataFromStorage() async {
@@ -109,21 +120,20 @@ class UserInfoCache {
       cache = res;
 
       if (res.isCustomer) {
-        print('${res.customer.data.local.email}\'s data fetched from Storage successfully');
-      }  else {
-        print('${res.salon.data.local.email}\'s data fetched from Storage successfully');
+        print(
+            '${res.customer.data.email}\'s data fetched from Storage successfully');
+      } else {
+        print(
+            '${res.salon.data.local.email}\'s data fetched from Storage successfully');
       }
-
-    }
-
-    catch (e) {
+    } catch (e) {
       print('There is no data in location: \'user_data\'');
     }
   }
 
   ///Please use only one response at a time
-  Future<bool> cacheLoginResponse({CustomerLoginResponse customer, SalonLoginResponse salon}) async {
-
+  Future<bool> cacheLoginResponse(
+      {CustomerLoginResponse customer, SalonLoginResponse salon}) async {
     try {
       //Instance of SharedPreferences
       SharedPreferences storage = await SharedPreferences.getInstance();
@@ -133,20 +143,22 @@ class UserInfoCache {
       if (salon != null) {
         //is salon
         data = Cache(salon: salon);
-      }  else {
+      } else {
         data = Cache(customer: customer);
       }
 
-      // print(data.toMap());
       bool val = await storage.setString('user_data', data.toJson());
 
       //set new values in class field
       this.cache = data;
 
       if (data.isCustomer) {
-        print('${data.customer.data.local.email}\'s data cached successfully');
-      }  else {
+        print('${data.customer.data.email}\'s data cached successfully');
+        await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
+      } else {
         print('${data.salon.data.local.email}\'s data cached successfully');
+        await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
+
       }
 
       return val;
@@ -186,5 +198,4 @@ class UserInfoCache {
 
     this.cache = null;
   }
-
 }
