@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:starter_project/ui_helpers/responsive_state/base_view_model.dart';
 
-class ServiceProvider with ChangeNotifier {
+class ServiceProvider extends BaseNotifier {
   //List of images
   List<File> productImages = <File>[];
   List<File> salonProfileImages = <File>[];
@@ -29,7 +28,7 @@ class ServiceProvider with ChangeNotifier {
     return image;
   }
 
-  bool deleteProductImage({int index}){
+  bool deleteProductImage({int index}) {
     productImages.removeAt(index);
     notifyListeners();
     return true;
@@ -39,7 +38,7 @@ class ServiceProvider with ChangeNotifier {
     File image;
     final picker = ImagePicker();
     final pickedFile =
-    await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
+        await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
     if (pickedFile != null) {
       image = File(pickedFile.path);
       salonProfileImages.add(image);
@@ -53,7 +52,7 @@ class ServiceProvider with ChangeNotifier {
     return image;
   }
 
-  bool deleteSaloonProfileImage({int index}){
+  bool deleteSaloonProfileImage({int index}) {
     salonProfileImages.removeAt(index);
     notifyListeners();
     return true;
