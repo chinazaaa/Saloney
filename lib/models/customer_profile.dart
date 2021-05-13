@@ -3,8 +3,6 @@ import 'image_class.dart';
 
 class CustomerProfile {
   final Image image;
-  final String firstName;
-  final String lastName;
   final bool isEmailVerified;
   final bool isActive;
   final String userRole;
@@ -19,8 +17,6 @@ class CustomerProfile {
   final int v;
   CustomerProfile({
     this.image,
-    this.firstName,
-    this.lastName,
     this.isEmailVerified,
     this.isActive,
     this.userRole,
@@ -38,8 +34,6 @@ class CustomerProfile {
   Map<String, dynamic> toMap() {
     return {
       'image': image?.toMap(),
-      'firstName': firstName,
-      'lastName': lastName,
       'isEmailVerified': isEmailVerified,
       'isActive': isActive,
       'userRole': userRole,
@@ -60,8 +54,6 @@ class CustomerProfile {
 
     return CustomerProfile(
       image: Image.fromMap(map['image']),
-      firstName: map['firstName'],
-      lastName: map['lastName'],
       isEmailVerified: map['isEmailVerified'],
       isActive: map['isActive'],
       userRole: map['userRole'],
@@ -84,7 +76,7 @@ class CustomerProfile {
 
   @override
   String toString() {
-    return 'Data(image: $image, firstName: $firstName, lastName: $lastName, isEmailVerified: $isEmailVerified, isActive: $isActive, userRole: $userRole, _id: $id, email: $email, password: $password, phone: $phone, userName: $userName, otp: $otp, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
+    return 'Data(image: $image, isEmailVerified: $isEmailVerified, isActive: $isActive, userRole: $userRole, _id: $id, email: $email, password: $password, phone: $phone, userName: $userName, otp: $otp, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
   }
 }
 
