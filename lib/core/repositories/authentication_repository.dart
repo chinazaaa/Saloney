@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/authentication_api/authentication_api.dart';
 import 'package:starter_project/core/mixin/validators.dart';
+import 'package:starter_project/index.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
@@ -20,8 +21,10 @@ class AuthRepository extends BaseNotifier with Validators {
   Future<bool> login(
       {String userName, String password, bool isCustomer}) async {
     setState(ViewState.Busy);
+
     CustomerLoginResponse customer;
     SalonLoginResponse salon;
+
     try {
       if (isCustomer) {
         customer =
@@ -32,6 +35,7 @@ class AuthRepository extends BaseNotifier with Validators {
           // Cache Login information
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(customer: customer);
+
           return true;
         } else {
           Get.snackbar(
