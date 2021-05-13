@@ -1,3 +1,4 @@
+// FIXME String is not a type
 class ApiRoutes {
   //base routes
   static const String base = 'https://saloney.herokuapp.com';
