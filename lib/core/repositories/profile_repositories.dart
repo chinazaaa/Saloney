@@ -5,7 +5,7 @@ class ProfileRepo extends BaseNotifier {
   Api _api = Get.find();
 
   // FIXME add support for image
-  Future<bool> update_S_Profile({
+  Future<ApiResponse> update_S_Profile({
     int salonId,
     String nameOfSalon,
     description,
