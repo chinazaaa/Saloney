@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
-import 'package:starter_project/models/http_response.dart';
+// import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
-import 'package:starter_project/services/http_service_customer.dart';
+// import 'package:starter_project/services/http_service_customer.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
 // FIXME Unused import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
@@ -201,8 +201,8 @@ class CustomerSignupPage extends StatelessWidget {
     }
   }
 
-  Future<HttpResponse> _signUp() async {
-    // FIXME
+/*   Future<HttpResponse> _signUp() async {
+    // FIXME Unused code
     _loading = !_loading;
 
     try {
@@ -222,7 +222,7 @@ class CustomerSignupPage extends StatelessWidget {
     } catch (e) {
       _loading = !_loading;
     }
-  }
+  } */
 
   Widget makeInput(
       {obscureText = false,
