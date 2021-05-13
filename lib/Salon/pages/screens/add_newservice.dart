@@ -2,7 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
+import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
+
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/animation/FadeAnimation.dart';
+
+import '../../../index.dart';
 
 class AddNewService extends StatefulWidget {
   @override
@@ -10,8 +16,13 @@ class AddNewService extends StatefulWidget {
 }
 
 class _AddNewServiceState extends State<AddNewService> {
+  // Controllers
+  TextEditingController description = TextEditingController();
+  TextEditingController nameOfService = TextEditingController();
+  TextEditingController price = TextEditingController();
+
   List<String> _category = ['Hair', 'Makeup', 'Spa'];
-  List<String> _availability = [
+  List<String> _isPublished = [
     'Yes',
     'No',
   ];
@@ -52,15 +63,27 @@ class _AddNewServiceState extends State<AddNewService> {
                           ),
                         ),
                       ),
-                      FlatButton.icon(
-                        color: Color(0xff9477cb),
-                        icon: Icon(Icons.save, color: Colors.white),
-                        label: Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white),
+                      ResponsiveState(
+                        state: model.state,
+                        busyWidget: CircularProgressIndicator(),
+                        idleWidget: InkWell(
+                          onTap: () => addService(context),
+                          child: FadeAnimation(
+                            1.5,
+                            TextButton.icon(
+                              style: TextButton.styleFrom(
+                                  primary: Color(0xff9477cb)),
+                              icon: Icon(Icons.save, color: Colors.white),
+                              label: Text(
+                                'Save',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              // FIXME why define addservice twice? Should still work though
+                              onPressed: () => addService(context),
+                            ),
+                          ),
                         ),
-                        onPressed: () {},
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -89,6 +112,7 @@ class _AddNewServiceState extends State<AddNewService> {
                               child: Column(
                                 children: [
                                   TextFormField(
+                                    controller: nameOfService,
                                     decoration: InputDecoration(
                                         labelText: 'Name of Service',
                                         labelStyle:
@@ -99,6 +123,7 @@ class _AddNewServiceState extends State<AddNewService> {
                                         ))),
                                   ),
                                   TextFormField(
+                                    controller: description,
                                     decoration: InputDecoration(
                                         labelText: 'Description',
                                         labelStyle:
@@ -114,14 +139,23 @@ class _AddNewServiceState extends State<AddNewService> {
                                   Wrap(
                                     children: [
                                       for (int i = 0;
-                                      i <= model.productImages.length;
-                                      i++)
+                                          i <= model.productImages.length;
+                                          i++)
                                         i == model.productImages.length
-                                            ? AddImageButton(onTap: ()=> model.addProductImage(),)
-                                            : ImageView(image: model.productImages[i], onTap: ()=>model.deleteProductImage(index: i),),
+                                            ? AddImageButton(
+                                                onTap: () =>
+                                                    model.addProductImage(),
+                                              )
+                                            : ImageView(
+                                                image: model.productImages[i],
+                                                onTap: () =>
+                                                    model.deleteProductImage(
+                                                        index: i),
+                                              ),
                                     ],
                                   ),
                                   TextFormField(
+                                    controller: price,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                         labelText: 'Price ',
@@ -203,7 +237,7 @@ class _AddNewServiceState extends State<AddNewService> {
                                           dropdownValue2 = value;
                                         });
                                       },
-                                      items: _availability
+                                      items: _isPublished
                                           .map<DropdownMenuItem<String>>(
                                               (String value) {
                                         return DropdownMenuItem<String>(
@@ -228,10 +262,39 @@ class _AddNewServiceState extends State<AddNewService> {
     );
   }
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
+  addService(context) async {
+    final model = Provider.of<ServiceRepo>(context);
+
+    // FIXME do we need this
+    // if (!mykey.currentState.validate()) return;
+
+    bool success = await model.addService(
+      service: nameOfService.text, description: description, price: price,
+      category: dropdownValue,
+      // FIXME isPublished:dropdownValue2
+    );
+    if (success) {
+      Get.snackbar(
+        'Success',
+        'Service Successfully Created. Please return to the Previous Page',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+      // FIXME Go where now??
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
+    } else {
+      //Do nothing
+      Get.snackbar(
+        'Error',
+        'Something terrible has gone wrong. Please contact support',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
   }
 }
-
