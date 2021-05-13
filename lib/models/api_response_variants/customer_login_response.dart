@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../api_response.dart';
-import '../customer_info.dart';
+// import '../customer_info.dart';
 import '../image_class.dart';
 
 class CustomerLoginResponse extends ApiResponse {
@@ -47,18 +47,32 @@ class CustomerLoginResponse extends ApiResponse {
 }
 
 class Data {
-  final Customer local;
+  final bool isActive;
+  final bool isEmailVerified;
+  final String userRole;
+  final String email;
+  final String password;
+  final int phone;
+  final String userName;
+  final int otp;
+  final String apiToken;
   final Image image;
   final String id;
-  final String identifier;
   final String createdAt;
   final String updatedAt;
   final int v;
   Data({
-    this.local,
+    this.isActive,
+    this.isEmailVerified,
+    this.userRole,
+    this.email,
+    this.password,
+    this.phone,
+    this.userName,
+    this.otp,
+    this.apiToken,
     this.image,
     this.id,
-    this.identifier,
     this.createdAt,
     this.updatedAt,
     this.v,
@@ -66,13 +80,20 @@ class Data {
 
   Map<String, dynamic> toMap() {
     return {
-      'local': local?.toMap(),
       'image': image?.toMap(),
       '_id': id,
-      'identifier': identifier,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__v': v,
+      'isActive': isActive,
+      'isEmailVerified': isEmailVerified,
+      'userRole': userRole,
+      'email': email,
+      'password': password,
+      'phone': phone,
+      'userName': userName,
+      'otp': otp,
+      'api_token': apiToken,
     };
   }
 
@@ -80,13 +101,20 @@ class Data {
     if (map == null) return null;
 
     return Data(
-      local: Customer.fromMap(map['local']),
       image: Image.fromMap(map['image']),
       id: map['_id'],
-      identifier: map['identifier'],
       createdAt: map['createdAt'],
       updatedAt: map['updatedAt'],
       v: map['__v']?.toInt(),
+      isActive: map['isActive'],
+      isEmailVerified: map['isEmailVerified'],
+      userRole: map['userRole'],
+      email: map['email'],
+      password: map['password'],
+      phone: map['phone']?.toInt(),
+      userName: map['userName'],
+      otp: map['otp']?.toInt(),
+      apiToken: map['api_token'],
     );
   }
 
@@ -96,6 +124,6 @@ class Data {
 
   @override
   String toString() {
-    return 'Data(local: $local, image: $image, _id: $id, identifier: $identifier, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
+    return 'Data( isActive: $isActive, isEmailVerified: $isEmailVerified, userRole: $userRole, email: $email, password: $password, phone: $phone, userName: $userName, otp: $otp, api_token: $apiToken, image: $image, _id: $id,  createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
   }
 }
