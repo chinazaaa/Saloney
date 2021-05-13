@@ -46,3 +46,4 @@ app.*.map.json
 Saloney API.postman_collection.json
 errors.txt
 del.txt
+api_routes.dart
