@@ -47,3 +47,5 @@ Saloney API.postman_collection.json
 errors.txt
 del.txt
 api_routes.dart
+
+lib/infrastructure/sum.txt
