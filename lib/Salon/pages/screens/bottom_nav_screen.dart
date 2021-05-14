@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Salon/pages/screens/screens.dart';
+import 'package:starter_project/Salon/pages/screens/service.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     
     StatsScreen(),
    ChatListPageView(),
-    Scaffold(),
+    ServiceScreen(),
     NotificationsPage(),
     ProfilePage(),
   ];

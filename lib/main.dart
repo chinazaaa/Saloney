@@ -16,6 +16,7 @@ import 'ui_helpers/themes/app_theme_light.dart';
 
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   //Register services
   setupLocator();
 

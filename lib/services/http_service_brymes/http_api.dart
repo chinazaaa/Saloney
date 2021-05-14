@@ -5,10 +5,13 @@ import 'package:starter_project/index.dart';
 import 'package:starter_project/core/api/api_utils/apiUtils.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
 
+import '../../locator.dart';
+
 class HttpApi extends Api {
   static HttpApi api;
   static const baseUrl = "https://saloney.herokuapp.com";
-  StorageUtil _storageUtil = Get.find(); //FIXME what do i do this
+  //StorageUtil _storageUtil = Get.find(); //FIXME what do i do this
+  String token = locator<UserInfoCache>().token;
   Dio dio = Dio();
 
   static HttpApi getInstance() {
@@ -44,7 +47,7 @@ class HttpApi extends Api {
         "description": description,
         "category": category,
         "price": price,
-        "api_token": await jwt
+        "api_token": token
       };
 
       print("Here is a request...");
@@ -86,13 +89,13 @@ class HttpApi extends Api {
   }
 
   //getters
-  Future<String> get jwt async => await _storageUtil.readToken(ACCESS_TOKEN);
+  //Future<String> get jwt async => await _storageUtil.readToken(ACCESS_TOKEN);
 
   // FIXME Saloney_API has issue interpreting headers.. put token in req body instead
-  Future<Map<String, String>> get headers async => {
-        "Content-Type": "application/json",
-        'Authorization': 'Bearer ${(await jwt)}',
-      };
+  // FIXME Future<Map<String, String>> get headers async => {
+  //       "Content-Type": "application/json",
+  //       'Authorization': 'Bearer ${(await jwt)}',
+  //     };
 
   //FIXME write interceptor to auto refresh tokens
   /* InterceptorsWrapper get interceptor => InterceptorsWrapper(

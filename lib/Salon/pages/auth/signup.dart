@@ -92,7 +92,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   signUpSalon() async{
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
 
     if (!mykey.currentState.validate()){
       setState(() {
@@ -185,7 +185,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   _login({BuildContext context}) {
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
     return SingleChildScrollView(
       child: Container(
         // color: Colors.blue,
@@ -313,7 +313,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   _yourDetails({BuildContext context}) {
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,

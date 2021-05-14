@@ -13,7 +13,7 @@ class CustomerOtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final user = locator<UserInfoCache>();
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,

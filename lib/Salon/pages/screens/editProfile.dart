@@ -31,7 +31,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<ServiceProvider>(context);
+    final model = Provider.of<ServiceProvider>(context, listen: false);
     return DefaultTabController(
       length: 2,
       child: Scaffold(

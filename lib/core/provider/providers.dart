@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
+import 'package:starter_project/core/repositories/service_repository.dart';
 
 class SaloneyProviders {
   //The providers for dependency injection and state management are to added here
@@ -22,6 +23,7 @@ class SaloneyProviders {
     /// Repositories
     ChangeNotifierProvider(create: (_) => AuthRepository()),
      ChangeNotifierProvider(create: (_) => ServiceProvider()),
+     ChangeNotifierProvider(create: (_) => ServiceRepo()),
 
   ];
 }

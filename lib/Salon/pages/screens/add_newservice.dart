@@ -35,7 +35,7 @@ class _AddNewServiceState extends State<AddNewService> {
   // static const String id = 'addnewservice - screen';
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<ServiceProvider>(context);
+    final model = Provider.of<ServiceProvider>(context, listen: false);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -263,7 +263,7 @@ class _AddNewServiceState extends State<AddNewService> {
   }
 
   addService(context) async {
-    final model = Provider.of<ServiceRepo>(context);
+    final model = Provider.of<ServiceRepo>(context, listen: false);
 
     // FIXME do we need this
     // if (!mykey.currentState.validate()) return;

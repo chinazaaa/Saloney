@@ -20,7 +20,7 @@ class CustomerLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -194,7 +194,7 @@ class CustomerLoginPage extends StatelessWidget {
   }
 
   loginCustomer(context) async{
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen:false);
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.login(

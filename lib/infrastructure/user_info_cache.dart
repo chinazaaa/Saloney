@@ -1,4 +1,5 @@
 import 'dart:convert';
+//import 'dart:html';
 
 // import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +9,7 @@ import 'package:starter_project/models/api_response_variants/customer_login_resp
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
-import 'package:starter_project/models/service/serviceResponses.dart';
+//import 'package:starter_project/models/service/serviceResponses.dart';
 
 //-- How to use --
 /* var userInfoCache = locator<UserInfoCache>();
@@ -71,7 +72,7 @@ class UserInfoCache {
   CustomerLoginResponse get customer => cache.customer;
   SalonLoginResponse get salon => cache.salon;
 
-  StorageUtil _storageUtil = Get.find();
+  //StorageUtil _storageUtil = Get.find();
 
   //--token
   String get token => this.cache.isCustomer
@@ -154,10 +155,10 @@ class UserInfoCache {
 
       if (data.isCustomer) {
         print('${data.customer.data.email}\'s data cached successfully');
-        await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
+       // await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
       } else {
         print('${data.salon.data.local.email}\'s data cached successfully');
-        await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
+       // await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
 
       }
 
