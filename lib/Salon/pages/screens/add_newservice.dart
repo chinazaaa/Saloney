@@ -72,13 +72,12 @@ class _AddNewServiceState extends State<AddNewService> {
                             1.5,
                             TextButton.icon(
                               style: TextButton.styleFrom(
-                                  primary: Color(0xff9477cb)),
+                                  backgroundColor: Colors.purple),
                               icon: Icon(Icons.save, color: Colors.white),
                               label: Text(
                                 'Save',
                                 style: TextStyle(color: Colors.white),
                               ),
-                              // FIXME why define addservice twice? Should still work though
                               onPressed: () => addService(context),
                             ),
                           ),
@@ -269,7 +268,7 @@ class _AddNewServiceState extends State<AddNewService> {
     // if (!mykey.currentState.validate()) return;
 
     bool success = await model.addService(
-      service: nameOfService.text, description: description, price: price,
+      service: nameOfService.text, description: description.text, price: price.text,
       category: dropdownValue,
       // FIXME isPublished:dropdownValue2
     );
@@ -285,16 +284,17 @@ class _AddNewServiceState extends State<AddNewService> {
       // FIXME Go where now??
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
-    } else {
-      //Do nothing
-      Get.snackbar(
-        'Error',
-        'Something terrible has gone wrong. Please contact support',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
     }
+    // else {
+    //   //Do nothing
+    //   Get.snackbar(
+    //     'Error',
+    //     'Something terrible has gone wrong. Please contact support',
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
+    // }
   }
 }

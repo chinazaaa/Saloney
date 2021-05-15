@@ -4,7 +4,7 @@ import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 
 class ServiceRepo extends BaseNotifier {
   // API
-  Api _api = Get.find();
+  HttpApi _api = HttpApi();
 
   Future<bool> addService({
     String service,

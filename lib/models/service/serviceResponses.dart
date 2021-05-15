@@ -1,69 +1,95 @@
+// To parse this JSON data, do
+//
+//     final createServiceResponse = createServiceResponseFromMap(jsonString);
+
 import 'dart:convert';
 
-import '../api_response.dart';
+import 'package:starter_project/index.dart';
 
-import 'service_info.dart';
+class CreateServiceResponse extends ApiResponse{
+  CreateServiceResponse({
+    this.message,
+    this.data,
+    this.success,
+  }) : super(message: message, data: data, success: success);
 
-//FIXME This endpoint returns slightly different data
-class CreateServiceResponse extends ApiResponse {
-  final bool success;
-  final String message;
-  final Data data;
-  final String status;
+  String message;
+  Data data;
+  bool success;
 
-  CreateServiceResponse({this.success, this.message, this.data, this.status})
-      : super(status: status, success: success, message: message, data: data);
-
-  Map<String, dynamic> toMap() {
-    return {
-      'success': success,
-      'message': message,
-      'status': status,
-      'data': data?.toMap(),
-    };
-  }
-
-  factory CreateServiceResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return CreateServiceResponse(
-      success: map['success'],
-      message: map['message'],
-      status: map['status'],
-      data: Data.fromMap(map['data']),
-    );
-  }
+  factory CreateServiceResponse.fromJson(String str) => CreateServiceResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CreateServiceResponse.fromJson(String source) =>
-      CreateServiceResponse.fromMap(json.decode(source));
+  factory CreateServiceResponse.fromMap(Map<String, dynamic> json) => CreateServiceResponse(
+    message: json["message"],
+    data: Data.fromMap(json["data"]),
+    success: json["success"],
+  );
 
-  @override
-  String toString() =>
-      'Service(success: $success, status: $status, message: $message, data: $data)';
+  Map<String, dynamic> toMap() => {
+    "message": message,
+    "data": data.toMap(),
+    "success": success,
+  };
 }
 
 class Data {
-  final Service service;
-  Data({this.service});
+  Data({
+    this.isPublished,
+    this.imageUrl,
+    this.id,
+    this.service,
+    this.description,
+    this.category,
+    this.price,
+    this.salon,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
-  Map<String, dynamic> toMap() {
-    return {'service': service?.toMap()};
-  }
+  bool isPublished;
+  String imageUrl;
+  String id;
+  String service;
+  String description;
+  String category;
+  String price;
+  String salon;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-  factory Data.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Data(service: Service.fromMap(map['service']));
-  }
+  factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromJson(String source) => Data.fromMap(json.decode(source));
+  factory Data.fromMap(Map<String, dynamic> json) => Data(
+    isPublished: json["isPublished"],
+    imageUrl: json["imageURL"],
+    id: json["_id"],
+    service: json["service"],
+    description: json["description"],
+    category: json["category"],
+    price: json["price"],
+    salon: json["salon"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
 
-  @override
-  String toString() {
-    return "Data(service : $service)";
-  }
+  Map<String, dynamic> toMap() => {
+    "isPublished": isPublished,
+    "imageURL": imageUrl,
+    "_id": id,
+    "service": service,
+    "description": description,
+    "category": category,
+    "price": price,
+    "salon": salon,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+  };
 }
