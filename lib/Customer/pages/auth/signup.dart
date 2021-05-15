@@ -183,7 +183,7 @@ class CustomerSignupPage extends StatelessWidget {
   }
 
   signUpCustomer(BuildContext context) async {
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen: false);
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.register(

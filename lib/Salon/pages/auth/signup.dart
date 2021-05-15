@@ -92,7 +92,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
   }
 
   signUpSalon() async{
-    final model = Provider.of<AuthRepository>(context);
+    final model = Provider.of<AuthRepository>(context, listen: false);
 
     if (!mykey.currentState.validate()){
       setState(() {
@@ -120,38 +120,6 @@ class _SalonSignUpState extends State<SalonSignUp> {
       //Do nothing
     }
 
-  }
-
-  // ignore: missing_return
-  Future<HttpResponse> _signUp() async {
-    setState(() {
-      _loading = !_loading;
-    });
-    try {
-      HttpResponse httpresponse = await HttpService.salonSignup();
-      setState(() {
-        _loading = !_loading;
-      });
-      Fluttertoast.showToast(
-          msg: httpresponse.message,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      // _scaffoldKey.currentState.showSnackBar(SnackBar(
-
-      //   content: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child:  Text(httpresponse.message)),
-      //   behavior:  SnackBarBehavior.floating
-      //   ) );
-    } catch (e) {
-      setState(() {
-        _loading = !_loading;
-      });
-    }
   }
 
   Widget makeInput(
