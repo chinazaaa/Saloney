@@ -2,9 +2,11 @@ import 'package:starter_project/index.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 
+import '../../locator.dart';
+
 class ServiceRepo extends BaseNotifier {
   // API
-  HttpApi _api = HttpApi();
+  final _api = locator<ServicesApi>();
 
   Future<bool> addService({
     String service,

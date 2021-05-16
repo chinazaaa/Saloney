@@ -6,8 +6,8 @@ export 'package:flutter/material.dart';
 
 //Services
 export 'services/storage_util_service.dart';
-export 'services/http_service_brymes/api.dart';
-export 'services/http_service_brymes/http_api.dart';
+export 'core/api/services_api/services_api.dart';
+export 'core/api/services_api/services_api_impl.dart';
 
 // Get
 export 'package:get/get_state_manager/get_state_manager.dart';

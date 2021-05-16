@@ -10,9 +10,8 @@ import 'infrastructure/user_info_cache.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
-  //await _setupStorage();
-  //Example
-  // locator.registerLazySingleton<OverlayManager>(() => OverlayManager());
+  //Api
+  locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
 
   //UI
 
@@ -22,10 +21,5 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
   locator
       .registerLazySingleton<AuthenticationApi>(() => AuthenticationApiImpl());
-  //locator.registerLazySingleton<StorageUtil>(() => StorageUtil());
-}
- 
-Future<void> _setupStorage () async {
-  StorageUtil _storage = await StorageUtil.getInstance();
-  Get.lazyPut<StorageUtil>(() => _storage, fenix:true);
+
 }

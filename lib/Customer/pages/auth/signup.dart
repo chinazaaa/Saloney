@@ -201,28 +201,6 @@ class CustomerSignupPage extends StatelessWidget {
     }
   }
 
-  Future<HttpResponse> _signUp() async {
-    _loading = !_loading;
-
-    try {
-      HttpResponse httpresponse = await HttpService.customerSignup();
-      _loading = !_loading;
-
-      Fluttertoast.showToast(
-          msg: httpresponse.message,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-
-      _loading = !_loading;
-    } catch (e) {
-      _loading = !_loading;
-    }
-  }
-
   Widget makeInput(
       {obscureText = false,
       String hint,
