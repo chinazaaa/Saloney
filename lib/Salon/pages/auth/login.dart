@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/password/forgot_password.dart';
-import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/home_screen.dart';
 import 'package:starter_project/Salon/pages/screens/bottom_nav_screen.dart';

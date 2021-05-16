@@ -11,7 +11,7 @@ GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   //Api
-  locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
+  locator.registerLazySingleton<ServicesApi>(() => ServicesApiImpl());
 
   //UI
 

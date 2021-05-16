@@ -7,7 +7,7 @@ import 'package:starter_project/Customer/pages/screens/cart.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
 
-import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
 

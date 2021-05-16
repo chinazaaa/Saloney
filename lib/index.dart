@@ -5,7 +5,6 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter/material.dart';
 
 //Services
-export 'services/storage_util_service.dart';
 export 'core/api/services_api/services_api.dart';
 export 'core/api/services_api/services_api_impl.dart';
 
