@@ -3,7 +3,7 @@ import 'package:starter_project/index.dart';
 
 import '../../locator.dart';
 
-class ProfileRepo extends BaseNotifier {
+class ProfileRepo extends BaseNotifier with Validators{
 
   //Api
   final profileApi = locator<ProfileApi>();
