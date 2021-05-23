@@ -154,11 +154,13 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, bool isPasswordTextField, TextEditingController controller, Function validator) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
+      child: TextFormField(
         obscureText: isPasswordTextField ? showPassword : false,
+        controller: controller,
+        validator: validator,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(

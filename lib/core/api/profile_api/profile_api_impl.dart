@@ -24,158 +24,25 @@ class ProfileApiImpl implements ProfileApi {
       String currentPassword,
       String password,
       String passwordConfirmation}) async {
-    String token = locator<UserInfoCache>().token;
-
-    //header
-    var header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
     Map val = {
       'current_password': currentPassword,
       'password': password,
       'password_confirmation': password,
     };
 
-    try {
       var responsebody =
           await server.post(ApiRoutes.changePassword, header, jsonEncode(val));
 
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
-    } on SocketException {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<ApiResponse> getUserProfile({String token}) async {
-    String token = locator<UserInfoCache>().token;
-
-    //header
-    var header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
-    try {
-      var responsebody = await server.get(ApiRoutes.profile, header);
-
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-
-      return response;
-    } on SocketException {
-      throw NetworkException();
-    }
-  }
-
-  @override
-  Future<ApiResponse> updateProfile(
-      {String token,
-      @required String firstname,
-      @required String lastname,
-      @required String email,
-      @required String phone,
-      String photo}) async {
-    String token = locator<UserInfoCache>().token;
-
-    //header
-    var header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
-    //header for Dio request
-    var profileHeader = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
-    //If there is a profile photo, perform Dio Request
-    if (photo != null) {
-      String imgname = DateTime.now()
-          .millisecondsSinceEpoch
-          .toString(); //Used to get unique name for image
-      Dio dio = Dio();
-      FormData formdata = FormData.fromMap({
-        "firstname": firstname,
-        "lastname": lastname,
-        "email": email,
-        'phone': phone,
-        "photo": await MultipartFile.fromFile(
-          photo,
-          filename: '$imgname/$photo',
-          contentType: MediaType('image', 'jpg'),
-        ),
-      });
-
-      try {
-        Response res = await dio.post(
-          ApiRoutes.updateProfile,
-          data: formdata,
-          options: Options(
-            method: 'POST',
-            contentType: "application/json",
-            headers: profileHeader,
-            responseType: ResponseType.plain,
-          ),
-          // onSendProgress: (int sent, int total) {
-          //   print("Sent - $sent , Total : $total");
-          // },
-        );
-
-        ApiResponse response = ApiResponse.fromJson(res.data);
-        return response;
-      } on SocketException {
-        throw NetworkException();
-      }
-    }
-
-    //If no profile image was added, perform normal HTTP request
-    else {
-      //data
-      Map val = {
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': email,
-        'phone': phone,
-      };
-
-      //http Request
-      try {
-        var responsebody =
-            await server.post(ApiRoutes.updateProfile, header, jsonEncode(val));
-
-        ApiResponse response = ApiResponse.fromJson(responsebody);
-        return response;
-      } on SocketException {
-        throw NetworkException();
-      }
-    }
   }
 
   @override
   Future<ApiResponse> getProfile({String token}) async {
-    //header
-    var header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${locator<UserInfoCache>().token}'
-    };
-
-    try {
       var responsebody =
       await server.get(ApiRoutes.profile, header);
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
-    } on SocketException {
-      throw NetworkException();
-    }
-    return null;
   }
 
   @override
@@ -185,21 +52,39 @@ class ProfileApiImpl implements ProfileApi {
       'push_notification': value.toString(),
     };
 
-    var header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${locator<UserInfoCache>().token}'
-    };
-
-    //http Request
-    try {
       var responsebody =
           await server.post(ApiRoutes.togglePushNotification, header, jsonEncode(val));
 
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
-    } on SocketException {
-      throw NetworkException();
-    }
   }
+
+  @override
+  Future<ApiResponse> getUserProfile({String token}) {
+    // TODO: implement getUserProfile
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ApiResponse> updateSalonProfile({String nameOfSalon, String description, File image, String category, String location}) async{
+    Map val = {
+      'nameOfSalon' : nameOfSalon,
+      'description' : description,
+      'image' : image,
+      'category' : category,
+      'location' : location,
+    };
+
+    var responsebody =
+        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.id}', header, jsonEncode(val), includesFiles: true);
+
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
+  }
+
+  Map get header => {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${locator<UserInfoCache>().token}'
+  };
 }

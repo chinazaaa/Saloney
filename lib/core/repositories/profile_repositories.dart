@@ -1,16 +1,22 @@
-// import 'package:starter_project/index.dart';
-//
-// class ProfileRepo extends BaseNotifier {
-//   // API
-//   Api _api = Get.find();
-//
-//   // FIXME add support for image
-//   Future<ApiResponse> update_S_Profile({
-//     int salonId,
-//     String nameOfSalon,
-//     description,
-//     location,
-//   }) {
-//     setState(ViewState.Busy);
-//   }
-// }
+import 'package:starter_project/core/api/profile_api/profile_api.dart';
+import 'package:starter_project/index.dart';
+
+import '../../locator.dart';
+
+class ProfileRepo extends BaseNotifier {
+
+  //Api
+  final profileApi = locator<ProfileApi>();
+
+  Future<bool> updateCustomerProfile() {}
+
+  Future<bool> updateSaloonProfile(
+    String salonName,
+    String description,
+    File image,
+    String category,
+    String location,
+  ) {
+
+  }
+}

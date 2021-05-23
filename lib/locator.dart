@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:starter_project/core/api/profile_api/profile_api.dart';
+import 'package:starter_project/core/api/profile_api/profile_api_impl.dart';
 import 'package:starter_project/index.dart';
 
 import 'core/api/api_utils/api_helper.dart';
@@ -18,6 +20,7 @@ Future<void> setupLocator() async {
 
   //Core
   locator.registerLazySingleton<API>(() => API());
+  locator.registerLazySingleton<ProfileApi>(() => ProfileApiImpl());
   locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
   locator
       .registerLazySingleton<AuthenticationApi>(() => AuthenticationApiImpl());

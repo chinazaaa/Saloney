@@ -9,6 +9,10 @@ class AppException implements Exception {
   }
 }
 
+class FileNotFoundException extends AppException {
+  FileNotFoundException([String message]) : super(message, "File not found ");
+}
+
 class NetworkException extends AppException {
   NetworkException([String message]) : super(message, "No Internet ");
 }
