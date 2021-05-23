@@ -7,7 +7,7 @@ import '../image_class.dart';
 class CustomerLoginResponse extends ApiResponse {
   final bool success;
   final String message;
-  final Data data;
+  final Customer data;
   final String status;
   CustomerLoginResponse({
     this.success,
@@ -32,7 +32,7 @@ class CustomerLoginResponse extends ApiResponse {
       success: map['success'],
       message: map['message'],
       status: map['status'],
-      data: Data.fromMap(map['data']),
+      data: Customer.fromMap(map['data']),
     );
   }
 
@@ -46,7 +46,7 @@ class CustomerLoginResponse extends ApiResponse {
       'CustomerLoginResponse(success: $success, status: $status, message: $message, data: $data)';
 }
 
-class Data {
+class Customer {
   final bool isActive;
   final bool isEmailVerified;
   final String userRole;
@@ -61,7 +61,7 @@ class Data {
   final String createdAt;
   final String updatedAt;
   final int v;
-  Data({
+  Customer({
     this.isActive,
     this.isEmailVerified,
     this.userRole,
@@ -97,10 +97,10 @@ class Data {
     };
   }
 
-  factory Data.fromMap(Map<String, dynamic> map) {
+  factory Customer.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Data(
+    return Customer(
       image: Image.fromMap(map['image']),
       id: map['_id'],
       createdAt: map['createdAt'],
@@ -120,7 +120,7 @@ class Data {
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromJson(String source) => Data.fromMap(json.decode(source));
+  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
 
   @override
   String toString() {
