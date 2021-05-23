@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-//FIXME unused import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Salon/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/screens/about_us.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
-//FIXME unused import 'package:starter_project/Salon/pages/screens/screens.dart';
+import 'package:starter_project/index.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
+
+import '../../../locator.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -40,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = locator<UserInfoCache>().salon.data;
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       // FIXME Made to work using ln 51 according to docs
@@ -163,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: 8,
                                   ),
                                   Text(
-                                    "Naza",
+                                    user.local.userName,
                                     style: CustomTextStyle.textFormFieldBlack
                                         .copyWith(
                                             color: Colors.black,
@@ -171,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontWeight: FontWeight.w900),
                                   ),
                                   Text(
-                                    "naza@gmail.com",
+                                    user.local.email,
                                     style: CustomTextStyle.textFormFieldMedium
                                         .copyWith(
                                             color: Colors.grey.shade700,
