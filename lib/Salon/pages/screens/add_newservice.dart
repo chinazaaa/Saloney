@@ -6,7 +6,7 @@ import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
 
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/animation/FadeAnimation.dart';
+import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 
 import '../../../index.dart';
 

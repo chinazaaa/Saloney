@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/profile.dart';
+import 'package:starter_project/core/repositories/profile_repositories.dart';
 
 class EditCustomerProfilePage extends StatefulWidget {
   @override
@@ -9,8 +11,11 @@ class EditCustomerProfilePage extends StatefulWidget {
 
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
   bool showPassword = false;
+  TextEditingController _usernameC = TextEditingController();
+  TextEditingController _passwordC = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<ProfileRepo>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -101,10 +106,10 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Username", false),
+              buildTextField("Username", false, _usernameC, (val) => model.validateName(val)),
               // FIXME buildTextField("E-mail", false),
               // buildTextField("Password", "********", true),
-              buildTextField("Phone Number ", false),
+              buildTextField("Phone Number ", false, _passwordC, (val) => model.validatePassword(val)),
               // buildTextField("Description", false),
               // buildTextField("Name of Salon ",false),
               //  buildTextField("Location", false),
@@ -154,11 +159,13 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, bool isPasswordTextField, TextEditingController controller, Function validator) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
+      child: TextFormField(
         obscureText: isPasswordTextField ? showPassword : false,
+        controller: controller,
+        validator: validator,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(

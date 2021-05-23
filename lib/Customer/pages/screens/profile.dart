@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
+import 'package:starter_project/index.dart';
+import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
+
+import '../../../locator.dart';
 
 class CustomerProfile extends StatefulWidget {
   @override
@@ -9,7 +13,7 @@ class CustomerProfile extends StatefulWidget {
 }
 
 class _CustomerProfileState extends State<CustomerProfile> {
-
+  final Customer user = locator<UserInfoCache>().customer.data;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +60,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Image.asset(
+                  child: user.image == null ? Image.asset(
                     "assets/1.png",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ) : Image.network(
+                    user.image.path,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
@@ -72,7 +81,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "Naza",
+                            user.userName,
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -87,7 +96,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "naza@naza.com",
+                            user.email,
                             style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
@@ -156,7 +165,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ),
 
               subtitle: Text(
-                "Naza",
+                user.userName,
               ),
 
               trailing: IconButton(
@@ -180,7 +189,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ),
 
               subtitle: Text(
-                "naza@naza.com",
+                user.email,
               ),
             ),
 
@@ -194,7 +203,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ),
 
               subtitle: Text(
-                "+234 816-926-6241",
+                user.phone.toString(),
               ),
             ),
 

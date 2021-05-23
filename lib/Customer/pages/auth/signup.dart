@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/animation/FadeAnimation.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
-import 'package:starter_project/models/http_response.dart';
 import 'package:starter_project/Customer/pages/auth/login.dart';
-import 'package:starter_project/services/http_service_customer.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/widgets/loading_button.dart';
 
 import 'otp.dart';
 
@@ -198,28 +194,6 @@ class CustomerSignupPage extends StatelessWidget {
       Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomerOtpScreen()));
     } else {
       //Do nothing
-    }
-  }
-
-  Future<HttpResponse> _signUp() async {
-    _loading = !_loading;
-
-    try {
-      HttpResponse httpresponse = await HttpService.customerSignup();
-      _loading = !_loading;
-
-      Fluttertoast.showToast(
-          msg: httpresponse.message,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-
-      _loading = !_loading;
-    } catch (e) {
-      _loading = !_loading;
     }
   }
 
