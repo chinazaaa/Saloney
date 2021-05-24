@@ -207,19 +207,19 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ),
             ),
 
-            ListTile(
-              title: Text(
-                "Address",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+            // ListTile(
+            //   title: Text(
+            //     "Address",
+            //     style: TextStyle(
+            //       fontSize: 17,
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //   ),
 
-              subtitle: Text(
-                "1347 Bog, NGN",
-              ),
-            ),
+            //   subtitle: Text(
+            //     "1347 Bog, NGN",
+            //   ),
+            // ),
  Divider(),
             Container(height: 15.0),
              ListTile(

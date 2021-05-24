@@ -12,7 +12,8 @@ class EditCustomerProfilePage extends StatefulWidget {
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
   bool showPassword = false;
   TextEditingController _usernameC = TextEditingController();
-  TextEditingController _passwordC = TextEditingController();
+  // TextEditingController _passwordC = TextEditingController();
+  TextEditingController _phoneC = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<ProfileRepo>(context);
@@ -107,9 +108,10 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
                 height: 35,
               ),
               buildTextField("Username", false, _usernameC, (val) => model.validateName(val)),
+              buildTextField("Phone Number", false, _phoneC, (val) => model.validateName(val)),
               // FIXME buildTextField("E-mail", false),
               // buildTextField("Password", "********", true),
-              buildTextField("Phone Number ", false, _passwordC, (val) => model.validatePassword(val)),
+              // buildTextField("Password ", false, _passwordC, (val) => model.validatePassword(val)),
               // buildTextField("Description", false),
               // buildTextField("Name of Salon ",false),
               //  buildTextField("Location", false),
