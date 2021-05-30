@@ -88,8 +88,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           decoration: BoxDecoration(
                               border: Border.all(
                                   width: 4,
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor),
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor),
                               boxShadow: [
                                 BoxShadow(
                                     spreadRadius: 2,
@@ -152,7 +152,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: Column(
                               children: [
                                 buildTextField("Username", false, username),
-                                buildTextField("E-mail", false, email),
+                                // buildTextField("E-mail", false, email),
                                 buildTextField(
                                     "Phone Number ", false, phoneNumber),
                                 SizedBox(
@@ -179,10 +179,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                     //FIXME
                                     RaisedButton(
-                                      onPressed: () async{
+                                      onPressed: () async {
                                         //Update profile
-                                        if(!formKey.currentState.validate()) return;
-                                        bool success = await profileM.updateSaloonProfile(username.text, salonDescription.text, null, _selected, salonLocation.text);
+                                        if (!formKey.currentState.validate())
+                                          return;
+                                        bool success =
+                                            await profileM.updateSaloonProfile(
+                                                username.text,
+                                                salonDescription.text,
+                                                null,
+                                                _selected,
+                                                salonLocation.text);
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
@@ -213,7 +220,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     "Name of Salon ", false, salonName),
                                 buildTextField(
                                     "Description", false, salonDescription),
-                                buildTextField("Location", false, salonLocation),
+                                buildTextField(
+                                    "Location", false, salonLocation),
                                 SizedBox(
                                   height: 5,
                                 ),
@@ -230,7 +238,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: Wrap(
                                       children: [
                                         for (int i = 0;
-                                            i <= model.salonProfileImages.length;
+                                            i <=
+                                                model.salonProfileImages.length;
                                             i++)
                                           i == model.salonProfileImages.length
                                               ? AddImageButton(
@@ -238,8 +247,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                       .addSaloonProfileImage(),
                                                 )
                                               : ImageView(
-                                                  image:
-                                                      model.salonProfileImages[i],
+                                                  image: model
+                                                      .salonProfileImages[i],
                                                   onTap: () => model
                                                       .deleteSaloonProfileImage(
                                                           index: i),
