@@ -15,6 +15,12 @@ import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
 import '../../locator.dart';
 
 class AuthRepository extends BaseNotifier with Validators {
+  bool checkboxValue = false;
+  toggleCheckbox() {
+    checkboxValue = !checkboxValue;
+    notifyListeners();
+  }
+
   //API
   var authApi = locator<AuthenticationApi>();
 

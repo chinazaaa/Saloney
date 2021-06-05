@@ -97,16 +97,18 @@ class CustomerLoginPage extends StatelessWidget {
                                           model.validatePassword(value))),
                               Container(
                                   child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   FadeAnimation(
                                     1.4,
                                     Container(
                                         height: 7,
                                         child: Checkbox(
-                                          value: false,
-                                          onChanged: (value) {},
-                                        )),
+                                            value: model.checkboxValue,
+                                            onChanged: (value) {
+                                              model.toggleCheckbox();
+                                            })),
                                   ),
                                   FadeAnimation(1.5, Text("Remember me")),
                                   Spacer(),
@@ -118,12 +120,12 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                    EditProfilePage()));
+                                                      EditProfilePage()));
                                         },
                                         child: Text(
                                           "Forgot Password",
-                                          style:
-                                              TextStyle(color: Color(0xff9477cb)),
+                                          style: TextStyle(
+                                              color: Color(0xff9477cb)),
                                         )),
                                   )
                                 ],
@@ -193,14 +195,12 @@ class CustomerLoginPage extends StatelessWidget {
         ));
   }
 
-  loginCustomer(context) async{
+  loginCustomer(context) async {
     final model = Provider.of<AuthRepository>(context, listen: false);
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.login(
-        isCustomer: true,
-        userName: name.text,
-        password: password.text);
+        isCustomer: true, userName: name.text, password: password.text);
 
     if (success) {
       //go to otp page
@@ -208,7 +208,6 @@ class CustomerLoginPage extends StatelessWidget {
     } else {
       //Do nothing
     }
-
   }
 
   Widget makeInput(

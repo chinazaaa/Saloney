@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/Customer/pages/password/change_password.dart';
+//import 'package:starter_project/Customer/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/password/forgot_password.dart';
 import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
@@ -15,6 +15,7 @@ class SalonLoginPage extends StatelessWidget {
   TextEditingController name = TextEditingController();
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> mykey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,8 +138,10 @@ class SalonLoginPage extends StatelessWidget {
                                     Container(
                                         height: 7,
                                         child: Checkbox(
-                                          value: false,
-                                          onChanged: (value) {},
+                                          value: model.checkboxValue,
+                                          onChanged: (value) {
+                                            model.toggleCheckbox();
+                                          },
                                         )),
                                   ),
                                   FadeAnimation(1.5, Text("Remember me")),
@@ -151,7 +154,7 @@ class SalonLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                     ForgotPage()));
+                                                      ForgotPage()));
                                         },
                                         child: Text(
                                           "Forgot Password",

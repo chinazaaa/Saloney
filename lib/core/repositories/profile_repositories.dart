@@ -10,6 +10,10 @@ class ProfileRepo extends BaseNotifier with Validators{
 
   Future<bool> updateCustomerProfile() {}
 
+// Future<bool> getSalonProfile() async {
+//   final response = await profileApi.getProfile()
+// }
+
   Future<bool> updateSaloonProfile(
     String salonName,
     String description,
