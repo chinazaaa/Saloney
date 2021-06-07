@@ -25,6 +25,8 @@ class Cache {
 
   ///Please use only one input at a time
   Cache({CustomerLoginResponse customer, SalonLoginResponse salon}) {
+    
+    print(salon);
     // //Check if is saloon or customer
     // if (salon != null) {
     //   this.isCustomer = false;
@@ -155,10 +157,10 @@ class UserInfoCache {
 
       if (data.isCustomer) {
         print('${data.customer.data.email}\'s data cached successfully');
-       // await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
+        // await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
       } else {
         print('${data.salon.data.local.email}\'s data cached successfully');
-       // await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
+        // await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
 
       }
 
