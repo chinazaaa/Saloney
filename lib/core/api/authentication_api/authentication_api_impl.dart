@@ -27,9 +27,9 @@ class AuthenticationApiImpl implements AuthenticationApi {
   var server = locator<API>();
 
   @override
-  Future<ApiResponse> loginCustomer({String userName, String password}) async{
+  Future<ApiResponse> loginCustomer({String email, String password}) async{
     Map val = {
-      'userName': userName,
+      'email': email,
       'password': password,
     };
 
@@ -47,9 +47,9 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<ApiResponse> loginSaloon({String userName, String password}) async{
+  Future<ApiResponse> loginSaloon({String email, String password}) async{
     Map val = {
-      'userName': userName,
+      'email': email,
       'password': password,
     };
 

@@ -36,15 +36,27 @@ class ProfileApiImpl implements ProfileApi {
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
   }
-
   @override
-  Future<ApiResponse> getProfile({String token}) async {
+  Future<ApiResponse> getSalonOwnerProfile({String id}) async {
       var responsebody =
-      await server.get(ApiRoutes.profile, header);
+      await server.get(ApiRoutes.getSalonOwnerProfile+'$id', header);
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
   }
-
+  @override
+  Future<ApiResponse> getSalonProfile({String id}) async {
+      var responsebody =
+      await server.get(ApiRoutes.getSalonProfile+'$id', header);
+      ApiResponse response = ApiResponse.fromJson(responsebody);
+      return response;
+  }
+  @override
+  Future<ApiResponse> getCustomerProfile({String id}) async {
+      var responsebody =
+      await server.get(ApiRoutes.getCustomerProfile, header);
+      ApiResponse response = ApiResponse.fromJson(responsebody);
+      return response;
+  }
   @override
   Future<ApiResponse> togglePushNotification({int value}) async{
     //data
@@ -59,11 +71,11 @@ class ProfileApiImpl implements ProfileApi {
       return response;
   }
 
-  @override
-  Future<ApiResponse> getUserProfile({String token}) {
-    // TODO: implement getUserProfile
-    throw UnimplementedError();
-  }
+ // @override
+  // Future<ApiResponse> getUserProfile({String token}) {
+  //   // TODO: implement getUserProfile
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<ApiResponse> updateSalonProfile({String nameOfSalon, String description, File image, String category, String location}) async{

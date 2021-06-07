@@ -228,7 +228,7 @@ class SalonLoginPage extends StatelessWidget {
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.login(
-        isCustomer: false, userName: name.text, password: password.text);
+        isCustomer: false, email: name.text, password: password.text);
 
     if (success) {
       //go to otp page

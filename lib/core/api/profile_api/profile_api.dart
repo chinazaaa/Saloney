@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:starter_project/index.dart';
 
 abstract class ProfileApi {
-  Future<ApiResponse> getUserProfile({String token});
+  //Future<ApiResponse> getUserProfile({String token});
 
   Future<ApiResponse> updateSalonProfile({
     String nameOfSalon,
@@ -20,9 +20,14 @@ abstract class ProfileApi {
       String password,
       String passwordConfirmation});
 
-  Future<ApiResponse> getProfile({
-    String token,
+  Future<ApiResponse> getSalonOwnerProfile({
+    String id,
   });
-
+    Future<ApiResponse> getSalonProfile({
+    String id,
+  });
+  Future<ApiResponse> getCustomerProfile({
+    String id,
+  });
   Future<ApiResponse> togglePushNotification({int value});
 }

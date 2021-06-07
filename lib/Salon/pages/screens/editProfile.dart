@@ -184,7 +184,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         if (!formKey.currentState.validate())
                                           return;
                                         bool success =
-                                            await profileM.updateSaloonProfile(
+                                            await profileM.updateSalonProfile(
                                                 username.text,
                                                 salonDescription.text,
                                                 null,

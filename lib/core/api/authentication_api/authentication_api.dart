@@ -17,7 +17,7 @@ abstract class AuthenticationApi {
     String location,
   });
   Future<ApiResponse> loginSaloon({
-    String userName,
+    String email,
     String password,
   });
   Future<ApiResponse> confirmSaloonOTP({
@@ -35,7 +35,7 @@ abstract class AuthenticationApi {
   });
 
   Future<ApiResponse> loginCustomer({
-    String userName,
+    String email,
     String password,
   });
 

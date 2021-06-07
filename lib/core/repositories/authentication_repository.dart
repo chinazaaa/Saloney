@@ -24,8 +24,7 @@ class AuthRepository extends BaseNotifier with Validators {
   //API
   var authApi = locator<AuthenticationApi>();
 
-  Future<bool> login(
-      {String userName, String password, bool isCustomer}) async {
+  Future<bool> login({String email, String password, bool isCustomer}) async {
     setState(ViewState.Busy);
 
     CustomerLoginResponse customer;
@@ -34,7 +33,7 @@ class AuthRepository extends BaseNotifier with Validators {
     try {
       if (isCustomer) {
         customer =
-            await authApi.loginCustomer(userName: userName, password: password);
+            await authApi.loginCustomer(email: email, password: password);
         setState(ViewState.Idle);
 
         if (customer.success) {
@@ -56,11 +55,10 @@ class AuthRepository extends BaseNotifier with Validators {
       }
       //is salon
       else {
-        salon =
-            await authApi.loginSaloon(userName: userName, password: password);
+        salon = await authApi.loginSaloon(email: email, password: password);
         setState(ViewState.Idle);
-
-        if (salon.success) {
+        print(salon);
+        if (salon.success==true) {
           // Cache Login information
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(salon: salon);

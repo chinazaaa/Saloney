@@ -200,7 +200,7 @@ class CustomerLoginPage extends StatelessWidget {
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.login(
-        isCustomer: true, userName: name.text, password: password.text);
+        isCustomer: true, email: name.text, password: password.text);
 
     if (success) {
       //go to otp page
