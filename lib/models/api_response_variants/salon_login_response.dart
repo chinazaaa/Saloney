@@ -1,59 +1,160 @@
+// To parse this JSON data, do
+//
+//     final salonLoginResponse = salonLoginResponseFromMap(jsonString);
+
 import 'dart:convert';
-import '../image_class.dart';
 
-import 'package:starter_project/models/api_response.dart';
+import 'package:starter_project/index.dart';
 
-class SalonLoginResponse extends ApiResponse {
-  final bool success;
-  final String message;
-  final Salon data;
-  final String status;
+class SalonLoginResponse extends ApiResponse{
   SalonLoginResponse({
     this.success,
     this.message,
     this.data,
-    this.status,
-  }) : super(status: status, success: success, message: message, data: data);
+  }) : super(message: message, success: success, data: data);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'success': success,
-      'message': message,
-      'data': data?.toMap(),
-      'status': status,
-    };
-  }
+  bool success;
+  String message;
+  SalonData data;
 
-  factory SalonLoginResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  SalonLoginResponse copyWith({
+    bool success,
+    String message,
+    SalonData data,
+  }) =>
+      SalonLoginResponse(
+        success: success ?? this.success,
+        message: message ?? this.message,
+        data: data ?? this.data,
+      );
 
-    return SalonLoginResponse(
-      success: map['success'],
-      message: map['message'],
-      status: map['status'],
-      data: Salon.fromMap(map['data']),
-    );
-  }
+  factory SalonLoginResponse.fromJson(String str) => SalonLoginResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory SalonLoginResponse.fromJson(String source) =>
-      SalonLoginResponse.fromMap(json.decode(source));
+  factory SalonLoginResponse.fromMap(Map<String, dynamic> json) => SalonLoginResponse(
+    success: json["success"],
+    message: json["message"],
+    data: SalonData.fromMap(json["data"]),
+  );
 
-  @override
-  String toString() =>
-      'SalonLoginResponse(success: $success, status: $status, message: $message, data: $data)';
+  Map<String, dynamic> toMap() => {
+    "success": success,
+    "message": message,
+    "data": data.toMap(),
+  };
+}
+
+class SalonData {
+  SalonData({
+    this.user,
+    this.salon,
+  });
+
+  User user;
+  Salon salon;
+
+  SalonData copyWith({
+    User user,
+    Salon salon,
+  }) =>
+      SalonData(
+        user: user ?? this.user,
+        salon: salon ?? this.salon,
+      );
+
+  factory SalonData.fromJson(String str) => SalonData.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory SalonData.fromMap(Map<String, dynamic> json) => SalonData(
+    user: User.fromMap(json["user"]),
+    salon: Salon.fromMap(json["salon"]),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "user": user.toMap(),
+    "salon": salon.toMap(),
+  };
 }
 
 class Salon {
-  final Local local;
-  final Image image;
-  final String id;
-  final String identifier;
-  final String createdAt;
-  final String updatedAt;
-  final int v;
   Salon({
+    this.description,
+    this.image,
+    this.id,
+    this.nameOfSalon,
+    this.location,
+    this.salonOwner,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  String description;
+  String image;
+  String id;
+  String nameOfSalon;
+  String location;
+  String salonOwner;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  Salon copyWith({
+    String description,
+    String image,
+    String id,
+    String nameOfSalon,
+    String location,
+    String salonOwner,
+    DateTime createdAt,
+    DateTime updatedAt,
+    int v,
+  }) =>
+      Salon(
+        description: description ?? this.description,
+        image: image ?? this.image,
+        id: id ?? this.id,
+        nameOfSalon: nameOfSalon ?? this.nameOfSalon,
+        location: location ?? this.location,
+        salonOwner: salonOwner ?? this.salonOwner,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        v: v ?? this.v,
+      );
+
+  factory Salon.fromJson(String str) => Salon.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Salon.fromMap(Map<String, dynamic> json) => Salon(
+    description: json["description"],
+    image: json["image"],
+    id: json["_id"],
+    nameOfSalon: json["nameOfSalon"],
+    location: json["location"],
+    salonOwner: json["salonOwner"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "description": description,
+    "image": image,
+    "_id": id,
+    "nameOfSalon": nameOfSalon,
+    "location": location,
+    "salonOwner": salonOwner,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+  };
+}
+
+class User {
+  User({
     this.local,
     this.image,
     this.id,
@@ -63,59 +164,87 @@ class Salon {
     this.v,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'local': local?.toMap(),
-      'image': image?.toMap(),
-      '_id': id,
-      'identifier': identifier,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      '__v': v,
-    };
-  }
+  Local local;
+  Image image;
+  String id;
+  String identifier;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-  factory Salon.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  User copyWith({
+    Local local,
+    Image image,
+    String id,
+    String identifier,
+    DateTime createdAt,
+    DateTime updatedAt,
+    int v,
+  }) =>
+      User(
+        local: local ?? this.local,
+        image: image ?? this.image,
+        id: id ?? this.id,
+        identifier: identifier ?? this.identifier,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        v: v ?? this.v,
+      );
 
-    return Salon(
-      local: Local.fromMap(map['local']),
-      image: Image.fromMap(map['image']),
-      id: map['_id'],
-      identifier: map['identifier'],
-      createdAt: map['createdAt'],
-      updatedAt: map['updatedAt'],
-      v: map['__v']?.toInt(),
-    );
-  }
+  factory User.fromJson(String str) => User.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Salon.fromJson(String source) => Salon.fromMap(json.decode(source));
+  factory User.fromMap(Map<String, dynamic> json) => User(
+    local: Local.fromMap(json["local"]),
+    image: Image.fromMap(json["image"]),
+    id: json["_id"],
+    identifier: json["identifier"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
 
-  @override
-  String toString() {
-    return 'Data(local: $local, image: $image, _id: $id, identifier: $identifier, createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
-  }
+  Map<String, dynamic> toMap() => {
+    "local": local.toMap(),
+    "image": image.toMap(),
+    "_id": id,
+    "identifier": identifier,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+  };
+}
+
+class Image {
+  Image({
+    this.path,
+  });
+
+  String path;
+
+  Image copyWith({
+    String path,
+  }) =>
+      Image(
+        path: path ?? this.path,
+      );
+
+  factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Image.fromMap(Map<String, dynamic> json) => Image(
+    path: json["path"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "path": path,
+  };
 }
 
 class Local {
-  final String firstName;
-  final String lastName;
-  final bool isActive;
-  final bool isEmailVerified;
-  final String userRole;
-  final String email;
-  final String password;
-  final int phone;
-  final String userName;
-  final String location;
-  final String nameOfSalon;
-  final int otp;
-  final String api_token;
   Local({
-    this.firstName,
-    this.lastName,
     this.isActive,
     this.isEmailVerified,
     this.userRole,
@@ -123,85 +252,68 @@ class Local {
     this.password,
     this.phone,
     this.userName,
-    this.location,
-    this.nameOfSalon,
     this.otp,
-    this.api_token,
+    this.apiToken,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'firstName': firstName,
-      'lastName': lastName,
-      'isActive': isActive,
-      'isEmailVerified': isEmailVerified,
-      'userRole': userRole,
-      'email': email,
-      'password': password,
-      'phone': phone,
-      'userName': userName,
-      'location': location,
-      'nameOfSalon': nameOfSalon,
-      'otp': otp,
-      'api_token': api_token,
-    };
-  }
+  bool isActive;
+  bool isEmailVerified;
+  String userRole;
+  String email;
+  String password;
+  int phone;
+  String userName;
+  int otp;
+  String apiToken;
 
-  factory Local.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  Local copyWith({
+    bool isActive,
+    bool isEmailVerified,
+    String userRole,
+    String email,
+    String password,
+    int phone,
+    String userName,
+    int otp,
+    String apiToken,
+  }) =>
+      Local(
+        isActive: isActive ?? this.isActive,
+        isEmailVerified: isEmailVerified ?? this.isEmailVerified,
+        userRole: userRole ?? this.userRole,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        phone: phone ?? this.phone,
+        userName: userName ?? this.userName,
+        otp: otp ?? this.otp,
+        apiToken: apiToken ?? this.apiToken,
+      );
 
-    return Local(
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      isActive: map['isActive'],
-      isEmailVerified: map['isEmailVerified'],
-      userRole: map['userRole'],
-      email: map['email'],
-      password: map['password'],
-      phone: map['phone']?.toInt(),
-      userName: map['userName'],
-      location: map['location'],
-      nameOfSalon: map['nameOfSalon'],
-      otp: map['otp']?.toInt(),
-      api_token: map['api_token'],
-    );
-  }
+  factory Local.fromJson(String str) => Local.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Local.fromJson(String source) => Local.fromMap(json.decode(source));
+  factory Local.fromMap(Map<String, dynamic> json) => Local(
+    isActive: json["isActive"],
+    isEmailVerified: json["isEmailVerified"],
+    userRole: json["userRole"],
+    email: json["email"],
+    password: json["password"],
+    phone: json["phone"],
+    userName: json["userName"],
+    otp: json["otp"],
+    apiToken: json["api_token"],
+  );
 
-  @override
-  String toString() {
-    return 'Local(firstName: $firstName, lastName: $lastName, isActive: $isActive, isEmailVerified: $isEmailVerified, userRole: $userRole, email: $email, password: $password, phone: $phone, userName: $userName, location: $location, nameOfSalon: $nameOfSalon, otp: $otp, api_token: $api_token)';
-  }
+  Map<String, dynamic> toMap() => {
+    "isActive": isActive,
+    "isEmailVerified": isEmailVerified,
+    "userRole": userRole,
+    "email": email,
+    "password": password,
+    "phone": phone,
+    "userName": userName,
+    "otp": otp,
+    "api_token": apiToken,
+  };
 }
-
-// FIXME Reused therefore moved to a separte file
-// class Image {
-//   final String path;
-//   Image({
-//     this.path,
-//   });
-
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'path': path,
-//     };
-//   }
-
-//   factory Image.fromMap(Map<String, dynamic> map) {
-//     if (map == null) return null;
-
-//     return Image(
-//       path: map['path'],
-//     );
-//   }
-
-//   String toJson() => json.encode(toMap());
-
-//   factory Image.fromJson(String source) => Image.fromMap(json.decode(source));
-
-//   @override
-//   String toString() => 'Image(path: $path)';
-// } F

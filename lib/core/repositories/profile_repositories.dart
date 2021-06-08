@@ -12,7 +12,7 @@ class ProfileRepo extends BaseNotifier with Validators {
 
   Future<ApiResponse> getSalonOwnerProfile() async {
     final salon = userInfoCache.salon;
-    final response = await profileApi.getSalonOwnerProfile(id: salon.data.id);
+    final response = await profileApi.getSalonOwnerProfile(id: salon.data.salon.id);
     print(response);
     return response ;
   }

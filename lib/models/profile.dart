@@ -8,6 +8,7 @@ class ListProfileSection {
   String icon;
   Color color;
   Widget widget;
+  Function onPressed;
 
-  ListProfileSection(this.title, this.icon, this.color, this.widget);
+  ListProfileSection(this.title, this.icon, this.color, this.widget, this.onPressed);
 }

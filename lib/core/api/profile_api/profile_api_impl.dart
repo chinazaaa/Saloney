@@ -88,7 +88,7 @@ class ProfileApiImpl implements ProfileApi {
     };
 
     var responsebody =
-        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.id}', header, jsonEncode(val), includesFiles: true);
+        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.salon.id}', header, jsonEncode(val), includesFiles: true);
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
