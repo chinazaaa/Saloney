@@ -16,7 +16,7 @@ abstract class ProfileApi {
 
   Future<ApiResponse> updateSalonOwner({
     String username,
-    String email,
+    // String email,
     String phone,
   });
 

@@ -70,7 +70,7 @@ class ProfileApiImpl implements ProfileApi {
       ApiResponse response = ApiResponse.fromJson(responsebody);
       return response;
   }
-
+//update salon profile
   @override
   Future<ApiResponse> updateSalonProfile({String nameOfSalon, String description, File image, String category, String location}) async{
     Map val = {
@@ -82,22 +82,22 @@ class ProfileApiImpl implements ProfileApi {
     };
 
     var responsebody =
-        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.salon.id}', header, jsonEncode(val), includesFiles: true);
+        await server.post('${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}', header, jsonEncode(val), includesFiles: true);
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
   }
-
+//update salon owner profile
   @override
-  Future<ApiResponse> updateSalonOwner({String username, String email, String phone}) async{
+  Future<ApiResponse> updateSalonOwner({String username, String phone}) async{
     Map val = {
-      'email' : email,
+      // 'email' : email,
       'phone' : phone,
       'userName' : username,
     };
 
     var responsebody =
-    await server.post('${ApiRoutes.getSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}', header, jsonEncode(val));
+    await server.post('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}', header, jsonEncode(val));
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;

@@ -74,13 +74,13 @@ class ProfileRepo extends BaseNotifier with Validators {
 
     Future<bool> updateSalonOwnerProfile(
         String username,
-        String email,
+        // String email,
         String phone,
         ) async{
       try {
         ApiResponse res = await profileApi.updateSalonOwner(
             username: username,
-            email: email,
+            // email: email,
             phone: phone,
         );
         Get.snackbar(

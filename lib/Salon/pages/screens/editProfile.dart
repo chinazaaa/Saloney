@@ -187,7 +187,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         bool success =
                                             await profileM.updateSalonOwnerProfile(
                                                 username.text,
-                                                email.text,
+                                                // email.text,
                                                 phoneNumber.text);
                                       },
                                       color: Color(0xff9477cb),
