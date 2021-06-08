@@ -23,14 +23,14 @@ class ApiRoutes {
 
 
   ///Get Profile Routes
-  static const String getSalonProfile = '$apiRoute/salonOwner/salon/:id';
+  static const String getSalonProfile = '$apiRoute/salonOwner/salon';
   static const String getSalonOwnerProfile = '$apiRoute/salonOwner';
   //customer
-  static const String getCustomerProfile = '$apiRoute/customer/:id';
+  static const String getCustomerProfile = '$apiRoute/customer';
 
   //update profile routes
-  static const String updateSalonOwnerProfile = '$apiRoute/profile/salonOwner/:id';
-  static const String updateSalonProfile = '$apiRoute/profile/salon/:id';
+  static const String updateSalonOwnerProfile = '$apiRoute/profile/salonOwner';
+  static const String updateSalonProfile = '$apiRoute/profile/salon';
 
   //toggle
   static const String togglePushNotification = '$apiRoute/profile/passenger/update';
