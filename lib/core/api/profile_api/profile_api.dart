@@ -14,6 +14,12 @@ abstract class ProfileApi {
     String location,
   });
 
+  Future<ApiResponse> updateSalonOwner({
+    String username,
+    String email,
+    String phone,
+  });
+
   Future<ApiResponse> changePassword(
       {String token,
       String currentPassword,

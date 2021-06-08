@@ -29,6 +29,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController salonDescription = TextEditingController();
   TextEditingController salonLocation = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final salonFormkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,90 +69,90 @@ class _EditProfilePageState extends State<EditProfilePage> {
             onTap: () {
               FocusScope.of(context).unfocus();
             },
-            child: Form(
-              key: formKey,
-              child: ListView(
-                children: [
-                  Text(
-                    "Edit Salon Profile",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 130,
-                          height: 130,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 4,
-                                  color: Theme.of(context)
-                                      .scaffoldBackgroundColor),
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 2,
-                                    blurRadius: 10,
-                                    color: Colors.black.withOpacity(0.1),
-                                    offset: Offset(0, 10))
-                              ],
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                    "assets/customer.png",
-                                  ))),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  width: 4,
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                ),
-                                color: Color(0xff9477cb),
-                              ),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            )),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  TabBar(
-                    indicatorColor: Color(0xff9477cb),
-                    labelColor: Color(0xff9477cb),
-                    unselectedLabelColor: Colors.black54,
-                    tabs: [
-                      Tab(
-                        text: 'GENERAL',
+            child: ListView(
+              children: [
+                Text(
+                  "Edit Salon Profile",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 130,
+                        height: 130,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 4,
+                                color: Theme.of(context)
+                                    .scaffoldBackgroundColor),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: Colors.black.withOpacity(0.1),
+                                  offset: Offset(0, 10))
+                            ],
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  "assets/customer.png",
+                                ))),
                       ),
-                      Tab(text: 'SALON'),
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 4,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                              ),
+                              color: Color(0xff9477cb),
+                            ),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                          )),
                     ],
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                      height: MediaQuery.of(context).size.height * .5,
-                      child: TabBarView(
-                        children: [
-                          SingleChildScrollView(
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                TabBar(
+                  indicatorColor: Color(0xff9477cb),
+                  labelColor: Color(0xff9477cb),
+                  unselectedLabelColor: Colors.black54,
+                  tabs: [
+                    Tab(
+                      text: 'GENERAL',
+                    ),
+                    Tab(text: 'SALON'),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height * .5,
+                    child: TabBarView(
+                      children: [
+                        Form(
+                          key: formKey,
+                          child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                buildTextField("Username", false, username),
+                                buildTextField("Username", false, username,),
                                 // buildTextField("E-mail", false, email),
                                 buildTextField(
                                     "Phone Number ", false, phoneNumber),
@@ -184,12 +185,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         if (!formKey.currentState.validate())
                                           return;
                                         bool success =
-                                            await profileM.updateSalonProfile(
+                                            await profileM.updateSalonOwnerProfile(
                                                 username.text,
-                                                salonDescription.text,
-                                                null,
-                                                _selected,
-                                                salonLocation.text);
+                                                email.text,
+                                                phoneNumber.text);
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
@@ -211,8 +210,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ],
                             ),
                           ),
-                          SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
+                        ),
+                        SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          child: Form(
+                            key: salonFormkey,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -310,7 +312,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               color: Colors.black)),
                                     ),
                                     RaisedButton(
-                                      onPressed: () {},
+                                      onPressed: () async{
+                                        if (!formKey.currentState.validate())
+                                          return;
+                                        bool success =
+                                            await profileM.updateSalonProfile(
+                                            username.text,
+                                            salonDescription.text,
+                                            null,
+                                            _selected,
+                                            salonLocation.text);
+                                      },
                                       color: Color(0xff9477cb),
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 50),
@@ -330,13 +342,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      )),
+                          ),
+                        )
+                      ],
+                    )),
 
-                  // buildTextField("Password", "****", true),
-                ],
-              ),
+                // buildTextField("Password", "****", true),
+              ],
             ),
           ),
         ),
