@@ -17,7 +17,7 @@ class ServicesApiImpl extends ServicesApi {
       String description,
       String category,
       String price}) async {
-    String userId = locator<UserInfoCache>().salon.data.id.toString();
+    String userId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       Map<String, dynamic> data = {
         "service": service,

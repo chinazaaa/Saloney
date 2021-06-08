@@ -71,12 +71,6 @@ class ProfileApiImpl implements ProfileApi {
       return response;
   }
 
- // @override
-  // Future<ApiResponse> getUserProfile({String token}) {
-  //   // TODO: implement getUserProfile
-  //   throw UnimplementedError();
-  // }
-
   @override
   Future<ApiResponse> updateSalonProfile({String nameOfSalon, String description, File image, String category, String location}) async{
     Map val = {
@@ -88,13 +82,28 @@ class ProfileApiImpl implements ProfileApi {
     };
 
     var responsebody =
-        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.id}', header, jsonEncode(val), includesFiles: true);
+        await server.post('${ApiRoutes.updateProfile}/${locator<UserInfoCache>().salon.data.salon.id}', header, jsonEncode(val), includesFiles: true);
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
   }
 
-  Map get header => {
+  @override
+  Future<ApiResponse> updateSalonOwner({String username, String email, String phone}) async{
+    Map val = {
+      'email' : email,
+      'phone' : phone,
+      'userName' : username,
+    };
+
+    var responsebody =
+    await server.post('${ApiRoutes.getSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}', header, jsonEncode(val));
+
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
+  }
+
+  Map<String, String> get header => {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ${locator<UserInfoCache>().token}'

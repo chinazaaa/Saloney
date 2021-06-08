@@ -246,9 +246,7 @@ class AuthRepository extends BaseNotifier with Validators {
   }
 
   Future<bool> logout() async {
-    // FIXME Unused  String token = locator<UserInfoCache>().token;
     await locator<UserInfoCache>().clearCache();
-
     return true;
   }
 }

@@ -79,7 +79,7 @@ class UserInfoCache {
   //--token
   String get token => this.cache.isCustomer
       ? this.cache.customer.data.apiToken
-      : this.cache.salon.data.local.api_token;
+      : this.cache.salon.data.user.local.apiToken;
   bool get isLoggedIn => this.cache != null;
   // int get id => this._user.id;
 
@@ -127,7 +127,7 @@ class UserInfoCache {
             '${res.customer.data.email}\'s data fetched from Storage successfully');
       } else {
         print(
-            '${res.salon.data.local.email}\'s data fetched from Storage successfully');
+            '${res.salon.data.user.local.email}\'s data fetched from Storage successfully');
       }
     } catch (e) {
       print('There is no data in location: \'user_data\'');
@@ -159,7 +159,7 @@ class UserInfoCache {
         print('${data.customer.data.email}\'s data cached successfully');
         // await _storageUtil.saveToken(ACCESS_TOKEN, data.customer.data.apiToken);
       } else {
-        print('${data.salon.data.local.email}\'s data cached successfully');
+        print('${data.salon.data.user.local.email}\'s data cached successfully');
         // await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
 
       }

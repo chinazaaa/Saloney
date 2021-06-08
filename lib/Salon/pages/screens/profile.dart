@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/screens/about_us.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
+import 'package:starter_project/core/routes/route_names.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
@@ -32,11 +35,14 @@ class _ProfilePageState extends State<ProfilePage> {
     listSection.add(createSection("Help and Support", "assets/ic_support.png",
         Colors.indigo.shade800, ProfilePage()));
     listSection.add(createSection(
-        "Logout", "assets/ic_logout.png", Colors.red.withOpacity(0.7), null));
+        "Logout", "assets/ic_logout.png", Colors.red.withOpacity(0.7), null, onPressed: () async{
+          bool success = await Provider.of<AuthRepository>(context, listen: false).logout();
+          if(success) Navigator.pushNamedAndRemoveUntil(context, RouteNames.introPage, (route) => false);
+    }));
   }
 
-  createSection(String title, String icon, Color color, Widget widget) {
-    return ListProfileSection(title, icon, color, widget);
+  createSection(String title, String icon, Color color, Widget widget, {Function onPressed}) {
+    return ListProfileSection(title, icon, color, widget, onPressed);
   }
 
   @override
@@ -165,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: 8,
                                   ),
                                   Text(
-                                    user.local.userName,
+                                    user.user.local.userName,
                                     style: CustomTextStyle.textFormFieldBlack
                                         .copyWith(
                                             color: Colors.black,
@@ -173,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontWeight: FontWeight.w900),
                                   ),
                                   Text(
-                                    user.local.email,
+                                    user.user.local.email,
                                     style: CustomTextStyle.textFormFieldMedium
                                         .copyWith(
                                             color: Colors.grey.shade700,
@@ -239,7 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Builder(builder: (context) {
       return InkWell(
         splashColor: Colors.teal.shade200,
-        onTap: () {
+        onTap: listSection.onPressed ?? () {
           if (listSection.widget != null) {
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (context) => listSection.widget));
