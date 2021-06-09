@@ -84,10 +84,10 @@ class API {
     }
   }
 
-  Future put(String url, header, {body}) async {
+  Future put(String url, header, {body, bool includesFiles}) async {
     var responseJson;
     try {
-      var res = await client.post(url, headers: header, body: body);
+      var res = await client.put(url, headers: header, body: body);
       responseJson = responseHandler(res);
     } on SocketException {
       //network error

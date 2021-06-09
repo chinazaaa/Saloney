@@ -30,82 +30,100 @@ class ProfileApiImpl implements ProfileApi {
       'password_confirmation': password,
     };
 
-      var responsebody =
-          await server.post(ApiRoutes.changePassword, header, jsonEncode(val));
+    var responsebody =
+        await server.post(ApiRoutes.changePassword, header, jsonEncode(val));
 
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-      return response;
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
   }
+
   @override
   Future<ApiResponse> getSalonOwnerProfile({String id}) async {
-      var responsebody =
-      await server.get(ApiRoutes.getSalonOwnerProfile+'$id', header);
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-      return response;
+    var responsebody =
+        await server.get(ApiRoutes.getSalonOwnerProfile + '$id', header);
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
   }
+
   @override
   Future<ApiResponse> getSalonProfile({String id}) async {
-      var responsebody =
-      await server.get(ApiRoutes.getSalonProfile+'$id', header);
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-      return response;
+    var responsebody =
+        await server.get(ApiRoutes.getSalonProfile + '$id', header);
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
   }
+
   @override
   Future<ApiResponse> getCustomerProfile({String id}) async {
-      var responsebody =
-      await server.get(ApiRoutes.getCustomerProfile, header);
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-      return response;
+    var responsebody = await server.get(ApiRoutes.getCustomerProfile, header);
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
   }
+
   @override
-  Future<ApiResponse> togglePushNotification({int value}) async{
+  Future<ApiResponse> togglePushNotification({int value}) async {
     //data
     Map val = {
       'push_notification': value.toString(),
     };
 
-      var responsebody =
-          await server.post(ApiRoutes.togglePushNotification, header, jsonEncode(val));
-
-      ApiResponse response = ApiResponse.fromJson(responsebody);
-      return response;
-  }
-//update salon profile
-  @override
-  Future<ApiResponse> updateSalonProfile({String nameOfSalon, String description, File image, String category, String location}) async{
-    Map val = {
-      'nameOfSalon' : nameOfSalon,
-      'description' : description,
-      'image' : image,
-      'category' : category,
-      'location' : location,
-    };
-
-    var responsebody =
-        await server.post('${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}', header, jsonEncode(val), includesFiles: true);
+    var responsebody = await server.post(
+        ApiRoutes.togglePushNotification, header, jsonEncode(val));
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
   }
-//update salon owner profile
+
+//update salon profile
   @override
-  Future<ApiResponse> updateSalonOwner({String username, String phone}) async{
+  Future<ApiResponse> updateSalonProfile(
+      {String nameOfSalon,
+      String description,
+      File image,
+      String category,
+      String location}) async {
     Map val = {
-      // 'email' : email,
-      'phone' : phone,
-      'userName' : username,
+      'nameOfSalon': nameOfSalon,
+      'description': description,
+      'image': image,
+      'category': category,
+      'location': location,
     };
 
-    var responsebody =
-    await server.post('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}', header, jsonEncode(val));
+    var responsebody = await server.put(
+        '${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}',
+        header,
+        body: jsonEncode(val),
+        includesFiles: true);
 
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
+  }
+
+//update salon owner profile
+  @override
+  Future<ApiResponse> updateSalonOwner({String username, String phone}) async {
+    Map val = {
+      // 'email' : email,
+      'phone': phone,
+      'userName': username,
+    };
+   String url =
+        ('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}');
+    print(url);
+    var responsebody = await server.put(
+        '${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}',
+        header,
+        body: jsonEncode(val));
+    // await server.put(ApiRoutes.updateSalonOwnerProfile +'/60be7cf955227a3bb482888d', header, body:jsonEncode(val));
+ 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
   }
 
   Map<String, String> get header => {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ${locator<UserInfoCache>().token}'
-  };
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${locator<UserInfoCache>().token}'
+      };
 }
