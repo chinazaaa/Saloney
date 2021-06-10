@@ -61,14 +61,14 @@ class ProfileRepo extends BaseNotifier with Validators {
         backgroundColor: Colors.black26,
       );
     } catch (e) {
-      // Get.snackbar(
-      //   'An Error occured!',
-      //   e.toString(),
-      //   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-      //   snackStyle: SnackStyle.FLOATING,
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black26,
-      // );
+      Get.snackbar(
+        'An Error occured!',
+        e.toString(),
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
     }
   }
 

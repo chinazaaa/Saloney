@@ -108,9 +108,9 @@ class ProfileApiImpl implements ProfileApi {
       'phone': phone,
       'userName': userName,
     };
-   String url =
-        ('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}');
-    print(url);
+  //  String url =
+  //       ('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}');
+  //   print(url);
     var responsebody = await server.put(
         '${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}',
         header,

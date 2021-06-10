@@ -116,7 +116,7 @@ class UserInfoCache {
     try {
       //Instance of SharedPreferences
       SharedPreferences storage = await SharedPreferences.getInstance();
-      String data = await storage.getString('user_data');
+      String data = storage.getString('user_data');
 
       //Set object fields
       Cache res = Cache.fromJson(data);
