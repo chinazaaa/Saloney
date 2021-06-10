@@ -41,23 +41,23 @@ class ServicesApiImpl extends ServicesApi {
         'Authorization': 'Bearer ${locator<UserInfoCache>().token}',
       };
 
-  @override
-  Future<ApiResponse> updateCustomerProfile(
-      String username, phoneNumber, address) {
-    // TODO: implement updateCustomerProfile
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<ApiResponse> updateCustomerProfile(
+  //     String userName, phoneNumber, address) {
+  //   // TODO: implement updateCustomerProfile
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  Future<ApiResponse> updateSalonOwnerProfile() {
-    // TODO: implement updateSalonOwnerProfile
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<ApiResponse> updateSalonOwnerProfile() {
+  //   // TODO: implement updateSalonOwnerProfile
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  Future<ApiResponse> updateSalonProfile(
-      String nameOfSalon, description, location) {
-    // TODO: implement updateSalonProfile
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<ApiResponse> updateSalonProfile(
+  //     String nameOfSalon, description, location) {
+  //   // TODO: implement updateSalonProfile
+  //   throw UnimplementedError();
+  // }
 }

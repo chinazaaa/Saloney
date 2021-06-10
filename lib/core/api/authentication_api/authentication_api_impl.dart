@@ -37,7 +37,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
 
     try {
       var responsebody =
-          await server.post(ApiRoutes.loginSalon, header, jsonEncode(val));
+          await server.post(ApiRoutes.loginCustomer, header, jsonEncode(val));
       CustomerLoginResponse response = CustomerLoginResponse.fromJson(responsebody);
 
       return response;

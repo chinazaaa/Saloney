@@ -102,11 +102,11 @@ class ProfileApiImpl implements ProfileApi {
 
 //update salon owner profile
   @override
-  Future<ApiResponse> updateSalonOwner({String username, String phone}) async {
+  Future<ApiResponse> updateSalonOwnerProfile({String userName, String phone}) async {
     Map val = {
       // 'email' : email,
       'phone': phone,
-      'userName': username,
+      'userName': userName,
     };
    String url =
         ('${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}');
