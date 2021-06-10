@@ -317,7 +317,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           return;
                                         bool success =
                                             await profileM.updateSalonProfile(
-                                            username.text,
+                                            salonName.text,
                                             salonDescription.text,
                                             null,
                                             _selected,
