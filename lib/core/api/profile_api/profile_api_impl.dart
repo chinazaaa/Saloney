@@ -82,6 +82,13 @@ class ProfileApiImpl implements ProfileApi {
       File image,
       String category,
       String location}) async {
+    Map<String, String> header = {
+      'Accept': 'application/json',
+    // 'Content-Type': 'application/json',
+    'x-access-token': locator<UserInfoCache>().token
+    };
+
+    print('${locator<UserInfoCache>().salon.data.salon.id}');
     Map val = {
       'nameOfSalon': nameOfSalon,
       'description': description,
@@ -93,8 +100,7 @@ class ProfileApiImpl implements ProfileApi {
     var responsebody = await server.put(
         '${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}',
         header,
-        body: jsonEncode(val),
-        includesFiles: true);
+        body: jsonEncode(val),);
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;

@@ -283,6 +283,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       Checkbox(
                                           value: _myJson[i]["value"],
                                           onChanged: (val) {
+                                            if(val) _selected = _myJson[i]["name"];
                                             setState(() {
                                               _myJson[i]["value"] = val;
                                             });
@@ -313,8 +314,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                     RaisedButton(
                                       onPressed: () async{
-                                        if (!formKey.currentState.validate())
+                                        if (!salonFormkey.currentState.validate())
                                           return;
+
+                                        // Map data = {
+                                        //   'name' : salonName.text,
+                                        //   'des' : salonDescription.text,
+                                        //   'selected' : _selected,
+                                        //   'location' : salonLocation.text
+                                        // };
+                                        // print(data);
                                         bool success =
                                             await profileM.updateSalonProfile(
                                             salonName.text,
@@ -322,6 +331,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             null,
                                             _selected,
                                             salonLocation.text);
+
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
