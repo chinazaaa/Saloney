@@ -1,8 +1,20 @@
 import 'package:http/http.dart' as http;
+import 'package:starter_project/models/api_response.dart';
 
 import 'network_exceptions.dart';
 
 dynamic responseHandler(http.Response response) async {
+
+  //Attempt to derive error message
+  String exceptionMsg;
+  try{
+    ApiResponse responsebody = ApiResponse.fromJson(response.body);
+    exceptionMsg = responsebody.message;
+  } catch(e){
+    print("Error deriving error message: $e");
+    exceptionMsg = response.body;
+  }
+
   print(response.body);
   print("status code: ${response.statusCode}");
 
@@ -14,24 +26,14 @@ dynamic responseHandler(http.Response response) async {
       return response.body;
       break;
     case 400:
-      return response.body;
-      // break;
-      // throw BadRequestException(response.body);
+      throw BadRequestException(exceptionMsg);
     case 401:
-      return response.body;
-      break;
     case 403:
-      return response.body;
-      // break;
-      // throw UnauthorisedException(response.body.toString());
-    case 409:
-      return response.body;
-      // break;
-      // throw AlreadyRegisteredException(response.body.toString());
+      throw UnauthorisedException(exceptionMsg);
+    case 404:
+      throw FileNotFoundException(exceptionMsg);
     case 422:
-      return response.body;
-      // break;
-      // throw AlreadyRegisteredException(response.body.toString());
+      throw AlreadyRegisteredException(exceptionMsg);
     case 500:
     default:
       throw FetchDataException(

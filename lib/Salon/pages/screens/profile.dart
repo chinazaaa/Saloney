@@ -9,6 +9,7 @@ import 'package:starter_project/index.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
 
+import '../../../intro_page.dart';
 import '../../../locator.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -141,15 +142,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         IconButton(
-                                          icon: Icon(Icons.settings),
+                                          icon: Icon(Icons.logout),
                                           iconSize: 24,
                                           color: Colors.black,
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        ProfilePage()));
+                                          onPressed: () async{
+                                            // Navigator.of(context).push(
+                                            //     MaterialPageRoute(
+                                            //         builder: (BuildContext
+                                            //                 context) =>
+                                            //             ProfilePage()));
+
+                                            bool success = await Provider.of<AuthRepository>(context, listen: false).logout();
+                                            if(success) Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> IntroPage()), (route) => false);
                                           },
                                         ),
                                         IconButton(

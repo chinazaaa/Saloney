@@ -84,15 +84,24 @@ class AuthRepository extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
+    } on UnauthorisedException{
+      Get.snackbar(
+        'Incorrect credentials!',
+        'Please check your username and password',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
     }
-    // catch (e) {
-    //   Get.snackbar(
-    //     'An Error Occured!',
-    //     'Please try again',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black45,
-    //   );
-    // }
+    catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
 
     setState(ViewState.Idle);
     return false;
