@@ -16,9 +16,9 @@ class API {
       var res;
 
       if (header != null) {
-        res = await client.get(url, headers: header);
+        res = await client.get(Uri.parse(url), headers: header);
       } else {
-        res = await client.get(url);
+        res = await client.get(Uri.parse(url));
       }
       responseJson = responseHandler(res);
     } on SocketException {
@@ -35,7 +35,7 @@ class API {
     if (!includesFiles) {
       try {
         ///Log collected Info
-        var res = await client.post(url, headers: header, body: body);
+        var res = await client.post(Uri.parse(url), headers: header, body: body);
         responseJson = await responseHandler(res);
       } on SocketException {
         //network error
@@ -87,7 +87,7 @@ class API {
   Future put(String url, header, {body, bool includesFiles}) async {
     var responseJson;
     try {
-      var res = await client.put(url, headers: header, body: body);
+      var res = await client.put(Uri.parse(url), headers: header, body: body);
       responseJson = responseHandler(res);
     } on SocketException {
       //network error
@@ -99,7 +99,7 @@ class API {
   Future patch(String url, header, {body}) async {
     var responseJson;
     try {
-      var res = await client.patch(url, headers: header, body: body);
+      var res = await client.patch(Uri.parse(url), headers: header, body: body);
       responseJson = responseHandler(res);
     } on SocketException {
       //network error
@@ -111,7 +111,7 @@ class API {
   Future delete(String url, header) async {
     var responseJson;
     try {
-      var res = await client.delete(url, headers: header);
+      var res = await client.delete(Uri.parse(url), headers: header);
       responseJson = responseHandler(res);
     } on SocketException {
       //network error

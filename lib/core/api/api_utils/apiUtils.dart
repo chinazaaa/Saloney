@@ -7,33 +7,33 @@ class ApiUtils {
 
   static String errorString(DioError error) {
     switch (error.type) {
-      case DioErrorType.CONNECT_TIMEOUT:
+      case DioErrorType.connectTimeout:
         {
           return "Connection Error";
         }
         break;
-      case DioErrorType.SEND_TIMEOUT:
+      case DioErrorType.sendTimeout:
         {
           return "Send Timed Out";
         }
         break;
-      case DioErrorType.RECEIVE_TIMEOUT:
+      case DioErrorType.receiveTimeout:
         {
           return "Receive Timed Out";
         }
         break;
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         {
           return error.response.statusMessage;
           // "Response Timed Out";
         }
         break;
-      case DioErrorType.CANCEL:
+      case DioErrorType.cancel:
         {
           return "Request Cancelled. Please Try again";
         }
         break;
-      case DioErrorType.DEFAULT:
+      case DioErrorType.other:
         {
           return "Connection Timed Out";
         }
