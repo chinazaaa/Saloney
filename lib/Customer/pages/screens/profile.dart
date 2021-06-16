@@ -66,7 +66,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
                     width: 100.0,
                     height: 100.0,
                   ) : Image.network(
-                    user.image.path,
+                    user.image,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,

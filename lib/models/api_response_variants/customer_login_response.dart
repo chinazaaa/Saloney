@@ -1,129 +1,151 @@
+// To parse this JSON data, do
+//
+//     final customerLoginResponse = customerLoginResponseFromMap(jsonString);
+
 import 'dart:convert';
 
-import '../api_response.dart';
-// import '../customer_info.dart';
-import '../image_class.dart';
+import 'package:starter_project/index.dart';
 
-class CustomerLoginResponse extends ApiResponse {
-  final bool success;
-  final String message;
-  final Customer data;
-  final String status;
+class CustomerLoginResponse extends ApiResponse{
   CustomerLoginResponse({
     this.success,
     this.message,
     this.data,
-    this.status,
-  }) : super(status: status, success: success, message: message, data: data);
+  }) : super(message: message, data: data, success: success);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'success': success,
-      'message': message,
-      'status': status,
-      'data': data?.toMap(),
-    };
-  }
+  bool success;
+  String message;
+  Customer data;
 
-  factory CustomerLoginResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  CustomerLoginResponse copyWith({
+    bool success,
+    String message,
+    Customer data,
+  }) =>
+      CustomerLoginResponse(
+        success: success ?? this.success,
+        message: message ?? this.message,
+        data: data ?? this.data,
+      );
 
-    return CustomerLoginResponse(
-      success: map['success'],
-      message: map['message'],
-      status: map['status'],
-      data: Customer.fromMap(map['data']),
-    );
-  }
+  factory CustomerLoginResponse.fromJson(String str) => CustomerLoginResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerLoginResponse.fromJson(String source) =>
-      CustomerLoginResponse.fromMap(json.decode(source));
+  factory CustomerLoginResponse.fromMap(Map<String, dynamic> json) => CustomerLoginResponse(
+    success: json["success"],
+    message: json["message"],
+    data: Customer.fromMap(json["data"]),
+  );
 
-  @override
-  String toString() =>
-      'CustomerLoginResponse(success: $success, status: $status, message: $message, data: $data)';
+  Map<String, dynamic> toMap() => {
+    "success": success,
+    "message": message,
+    "data": data.toMap(),
+  };
 }
 
 class Customer {
-  final bool isActive;
-  final bool isEmailVerified;
-  final String userRole;
-  final String email;
-  final String password;
-  final int phone;
-  final String userName;
-  final int otp;
-  final String apiToken;
-  final Image image;
-  final String id;
-  final String createdAt;
-  final String updatedAt;
-  final int v;
   Customer({
-    this.isActive,
+    this.image,
     this.isEmailVerified,
+    this.isActive,
     this.userRole,
+    this.id,
     this.email,
     this.password,
     this.phone,
     this.userName,
     this.otp,
-    this.apiToken,
-    this.image,
-    this.id,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.apiToken,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'image': image?.toMap(),
-      '_id': id,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      '__v': v,
-      'isActive': isActive,
-      'isEmailVerified': isEmailVerified,
-      'userRole': userRole,
-      'email': email,
-      'password': password,
-      'phone': phone,
-      'userName': userName,
-      'otp': otp,
-      'api_token': apiToken,
-    };
-  }
+  String image;
+  bool isEmailVerified;
+  bool isActive;
+  String userRole;
+  String id;
+  String email;
+  String password;
+  int phone;
+  String userName;
+  int otp;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+  String apiToken;
 
-  factory Customer.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  Customer copyWith({
+    String image,
+    bool isEmailVerified,
+    bool isActive,
+    String userRole,
+    String id,
+    String email,
+    String password,
+    int phone,
+    String userName,
+    int otp,
+    DateTime createdAt,
+    DateTime updatedAt,
+    int v,
+    String apiToken,
+  }) =>
+      Customer(
+        image: image ?? this.image,
+        isEmailVerified: isEmailVerified ?? this.isEmailVerified,
+        isActive: isActive ?? this.isActive,
+        userRole: userRole ?? this.userRole,
+        id: id ?? this.id,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        phone: phone ?? this.phone,
+        userName: userName ?? this.userName,
+        otp: otp ?? this.otp,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        v: v ?? this.v,
+        apiToken: apiToken ?? this.apiToken,
+      );
 
-    return Customer(
-      image: Image.fromMap(map['image']),
-      id: map['_id'],
-      createdAt: map['createdAt'],
-      updatedAt: map['updatedAt'],
-      v: map['__v']?.toInt(),
-      isActive: map['isActive'],
-      isEmailVerified: map['isEmailVerified'],
-      userRole: map['userRole'],
-      email: map['email'],
-      password: map['password'],
-      phone: map['phone']?.toInt(),
-      userName: map['userName'],
-      otp: map['otp']?.toInt(),
-      apiToken: map['api_token'],
-    );
-  }
+  factory Customer.fromJson(String str) => Customer.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Customer.fromJson(String source) => Customer.fromMap(json.decode(source));
+  factory Customer.fromMap(Map<String, dynamic> json) => Customer(
+    image: json["image"],
+    isEmailVerified: json["isEmailVerified"],
+    isActive: json["isActive"],
+    userRole: json["userRole"],
+    id: json["_id"],
+    email: json["email"],
+    password: json["password"],
+    phone: json["phone"],
+    userName: json["userName"],
+    otp: json["otp"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+    apiToken: json["api_token"],
+  );
 
-  @override
-  String toString() {
-    return 'Data( isActive: $isActive, isEmailVerified: $isEmailVerified, userRole: $userRole, email: $email, password: $password, phone: $phone, userName: $userName, otp: $otp, api_token: $apiToken, image: $image, _id: $id,  createdAt: $createdAt, updatedAt: $updatedAt, __v: $v)';
-  }
+  Map<String, dynamic> toMap() => {
+    "image": image,
+    "isEmailVerified": isEmailVerified,
+    "isActive": isActive,
+    "userRole": userRole,
+    "_id": id,
+    "email": email,
+    "password": password,
+    "phone": phone,
+    "userName": userName,
+    "otp": otp,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+    "api_token": apiToken,
+  };
 }
