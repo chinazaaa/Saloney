@@ -58,7 +58,7 @@ class AuthRepository extends BaseNotifier with Validators {
         salon = await authApi.loginSaloon(email: email, password: password);
         setState(ViewState.Idle);
         print(salon);
-        if (salon.success==true) {
+        if (salon.success == true) {
           // Cache Login information
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(salon: salon);
@@ -84,7 +84,7 @@ class AuthRepository extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } on UnauthorisedException{
+    } on UnauthorisedException {
       Get.snackbar(
         'Incorrect credentials!',
         'Please check your username and password',
@@ -93,14 +93,14 @@ class AuthRepository extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    }
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error Occured!',
         'Please try again',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black45,
       );
+      print(e);
     }
 
     setState(ViewState.Idle);

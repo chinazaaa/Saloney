@@ -197,7 +197,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> json) => User(
     local: Local.fromMap(json["local"]),
-    image: Image.fromMap(json["image"]),
+    image: json["image"],
     id: json["_id"],
     identifier: json["identifier"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -207,7 +207,7 @@ class User {
 
   Map<String, dynamic> toMap() => {
     "local": local.toMap(),
-    "image": image.toMap(),
+    "image": image,
     "_id": id,
     "identifier": identifier,
     "createdAt": createdAt.toIso8601String(),
@@ -216,32 +216,32 @@ class User {
   };
 }
 
-class Image {
-  Image({
-    this.path,
-  });
+// class Image {
+//   Image({
+//     this.path,
+//   });
 
-  String path;
+//   String path;
 
-  Image copyWith({
-    String path,
-  }) =>
-      Image(
-        path: path ?? this.path,
-      );
+//   Image copyWith({
+//     String path,
+//   }) =>
+//       Image(
+//         path: path ?? this.path,
+//       );
 
-  factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
+//   factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
 
-  String toJson() => json.encode(toMap());
+//   String toJson() => json.encode(toMap());
 
-  factory Image.fromMap(Map<String, dynamic> json) => Image(
-    path: json["path"],
-  );
+//   factory Image.fromMap(Map<String, dynamic> json) => Image(
+//     path: json["path"],
+//   );
 
-  Map<String, dynamic> toMap() => {
-    "path": path,
-  };
-}
+//   Map<String, dynamic> toMap() => {
+//     "path": path,
+//   };
+// }
 
 class Local {
   Local({
