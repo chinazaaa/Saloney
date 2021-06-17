@@ -165,7 +165,7 @@ class User {
   });
 
   Local local;
-  Image image;
+  String image;
   String id;
   String identifier;
   DateTime createdAt;
@@ -174,7 +174,7 @@ class User {
 
   User copyWith({
     Local local,
-    Image image,
+    String image,
     String id,
     String identifier,
     DateTime createdAt,
