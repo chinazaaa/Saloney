@@ -83,8 +83,8 @@ class ProfileApiImpl implements ProfileApi {
       String category,
       String location}) async {
     Map<String, String> header = {
-      'Accept': 'application/json',
-    // 'Content-Type': 'application/json',
+    'Accept': 'application/json',
+   'Content-Type': 'application/json',
     'x-access-token': locator<UserInfoCache>().token
     };
 

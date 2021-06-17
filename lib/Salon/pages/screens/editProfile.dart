@@ -4,7 +4,10 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
+import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
+
+import '../../../locator.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -22,12 +25,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
   bool checkboxValue = false;
 
-  TextEditingController username = TextEditingController();
+  TextEditingController username = TextEditingController(text:locator<UserInfoCache>().salon.data.user.local.userName);
   TextEditingController email = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
-  TextEditingController salonName = TextEditingController();
-  TextEditingController salonDescription = TextEditingController();
-  TextEditingController salonLocation = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController(text:locator<UserInfoCache>().salon.data.user.local.phone.toString());
+  TextEditingController salonName = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.nameOfSalon);
+  TextEditingController salonDescription = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.description);
+  TextEditingController salonLocation = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.location);
   final formKey = GlobalKey<FormState>();
   final salonFormkey = GlobalKey<FormState>();
 
@@ -187,8 +190,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         bool success =
                                             await profileM.updateSalonOwnerProfile(
                                                 username.text,
+                                               
                                                 // email.text,
                                                 phoneNumber.text);
+
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
