@@ -6,6 +6,7 @@ import 'package:starter_project/core/repositories/authentication_repository.dart
 import 'package:starter_project/Salon/pages/auth/login.dart';
 import 'package:flutter/services.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:google_map_location_picker/google_map_location_picker.dart';
 
 class SalonSignUp extends StatefulWidget {
   @override
@@ -13,8 +14,10 @@ class SalonSignUp extends StatefulWidget {
 }
 
 class _SalonSignUpState extends State<SalonSignUp> {
+  static const ApiKey = 'AIzaSyBKddnNMSLhLouaciQnjkOa6WcsmBtlANc';
   int _index = 0;
   bool _loading = false;
+  LocationResult place;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Controllers
@@ -87,10 +90,10 @@ class _SalonSignUpState extends State<SalonSignUp> {
     );
   }
 
-  signUpSalon() async{
+  signUpSalon() async {
     final model = Provider.of<AuthRepository>(context, listen: false);
 
-    if (!mykey.currentState.validate()){
+    if (!mykey.currentState.validate()) {
       setState(() {
         _index = 0;
       });
@@ -98,38 +101,44 @@ class _SalonSignUpState extends State<SalonSignUp> {
     }
 
     if (!mySecondKey.currentState.validate()) return;
+    if (place == null) return;
 
     bool success = await model.register(
-        isCustomer: false,
-        userName: name.text,
-        phone: phone.text,
-        email: email.text,
-        password: password.text,
-        nameOfSalon: nameOfSalon.text,
-        location: location.text,
+      isCustomer: false,
+      userName: name.text,
+      phone: phone.text,
+      email: email.text,
+      password: password.text,
+      nameOfSalon: nameOfSalon.text,
+      location: '${place.latLng.latitude} : ${place.latLng.longitude}',
+      // location.text,
     );
 
     if (success) {
       //go to otp page
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>SalonOtpScreen()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SalonOtpScreen()));
     } else {
       //Do nothing
     }
-
   }
 
   Widget makeInput(
       {obscureText = false,
       String hint,
       TextEditingController controller,
-        Function validator,
-      TextInputType inputType}) {
+      Function validator,
+      TextInputType inputType,
+      Function onTap,
+      bool readOnly = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
           obscureText: obscureText,
+          onTap: onTap,
           controller: controller,
+          readOnly: readOnly,
           decoration: InputDecoration(
             hintText: hint,
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -140,6 +149,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
           ),
           validator: validator,
           keyboardType: inputType,
+          onEditingComplete: ()=>FocusScope.of(context).nextFocus(),
         ),
         SizedBox(
           height: 30,
@@ -188,22 +198,21 @@ class _SalonSignUpState extends State<SalonSignUp> {
                         makeInput(
                             hint: "Username",
                             controller: name,
-                            validator: (value) =>
-                                model.validateName(value))),
+                            validator: (value) => model.validateName(value))),
                     FadeAnimation(
-                        1.3,
-                        makeInput(
-                            hint: "Phone Number",
-                            controller: phone,
-                            validator: (value) =>
-                                model.validatePhoneNumber(value))),
+                      1.3,
+                      makeInput(
+                        hint: "Phone Number",
+                        controller: phone,
+                        validator: (value) => model.validatePhoneNumber(value),
+                      ),
+                    ),
                     FadeAnimation(
                         1.4,
                         makeInput(
                             hint: "Email",
                             controller: email,
-                            validator: (value) =>
-                                model.validateEmail(value))),
+                            validator: (value) => model.validateEmail(value))),
                     FadeAnimation(
                         1.5,
                         makeInput(
@@ -221,7 +230,6 @@ class _SalonSignUpState extends State<SalonSignUp> {
                             validator: (value) => value == password.text
                                 ? null
                                 : "Passwords do not match")),
-
                   ],
                 ),
               ),
@@ -260,8 +268,10 @@ class _SalonSignUpState extends State<SalonSignUp> {
                 Text("Already have an account?"),
                 InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SalonLoginPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SalonLoginPage()));
                     },
                     child: Text(
                       " Login",
@@ -316,16 +326,19 @@ class _SalonSignUpState extends State<SalonSignUp> {
                         makeInput(
                             hint: "Name of Salon",
                             controller: nameOfSalon,
-                            validator: (value) =>
-                                model.validateName(value))),
+                            validator: (value) => model.validateName(value))),
                     FadeAnimation(
-                        1.5,
-                        makeInput(
-                            hint: "Location",
-                            obscureText: false,
-                            controller: location,
-                            validator: (value) =>
-                                model.validateName(value))),
+                      1.5,
+                      makeInput(
+                        hint: "Location",
+                        obscureText: false,
+                        controller: location,
+                        validator: (value) => model.validateName(value),
+                        readOnly: true,
+                        onTap: () => onLocationTap(),
+
+                      ),
+                    ),
                     // makeInput(hint: "Name of Salon"),
                     // makeInput(hint: "Location"),
                   ],
@@ -367,10 +380,30 @@ class _SalonSignUpState extends State<SalonSignUp> {
       ),
     );
   }
+
+  void onLocationTap() async {
+    await Geolocator.requestPermission();
+    LocationPermission status = await Geolocator.checkPermission();
+    print('STATUS IS $status');
+    if (status == LocationPermission.deniedForever) {
+      Geolocator.openAppSettings();
+      return;
+    } else if (status == LocationPermission.denied) {
+      return;
+    }
+    place = await showLocationPicker(
+      context,
+      '$ApiKey',
+      myLocationButtonEnabled: true,
+      requiredGPS: true,
+      automaticallyAnimateToCurrentLocation: true,
+
+    );
+    location.text = place?.address;
+    print('ADDRESS IS ${place?.address}');
+    setState(() {});
+  }
 }
-
-
-
 
 _backButton({BuildContext context}) {
   return Container(

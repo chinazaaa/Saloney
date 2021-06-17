@@ -11,47 +11,51 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  simple_animations: ^1.3.3
-  pin_entry_text_field: ^0.1.4
-  bubble_tab_indicator: ^0.1.4
-  fl_chart: ^0.11.1
-  flutter_screenutil: ^2.3.1
-  font_awesome_flutter: ^8.5.0
-  line_awesome_flutter: ^1.0.1
-  flutter_markdown: ^0.5.0
-  flutter_cmoon_icons: ^0.1.0
-  international_phone_field: ^0.1.1
-  http: ^0.12.2
-  fluttertoast: ^7.1.5
-  shimmer: ^1.1.2
-  flutter_slidable: ^0.5.7
-  flutter_svg: ^0.18.0 
-  multi_image_picker: ^4.7.10
+  simple_animations: #^1.3.3
+  pin_entry_text_field: #^0.1.4
+  bubble_tab_indicator: #^0.1.4
+  fl_chart: #^0.36.1
+  flutter_screenutil: #^2.3.1
+  font_awesome_flutter: #^9.0.0
+  line_awesome_flutter: #^1.0.1
+  flutter_markdown: any #^0.5.0
+  flutter_cmoon_icons: #^0.1.0
+  international_phone_field: #^0.1.1
+  http: #^0.13.0
+  fluttertoast: #^7.1.5
+  shimmer: #^1.1.2
+  flutter_slidable: #^0.5.7
+  flutter_svg: any #^0.22.0 
+  multi_image_picker: #^4.7.10
   #device preview
-  device_preview: ^0.4.5
+  device_preview: #^0.7.3
   #dependency injection & state mgmt
   get:
-  get_it: ^4.0.4
-  provider: ^5.0.0
+  get_it: #^4.0.4
+  provider: #^5.0.0
   #internationalization
-  intl: ^0.16.1
+  intl: #^0.17.0
   #icons
-  cupertino_icons: ^0.1.3
+  cupertino_icons: #^0.1.3
   #animation
-  animated_text_kit: ^2.0.0
-  bottom_navy_bar: ^5.3.2
-  image_picker: ^0.6.7+22
+  animated_text_kit: #^2.0.0
+  bottom_navy_bar: #^5.3.2
+  image_picker: any #^0.6.7+22
 
   #NEW by Brymes
-  flutter_secure_storage: ^3.3.5
-  dio: ^3.0.10
-  http_parser: ^3.1.4
+  flutter_secure_storage: #^3.3.5
+  dio: any
+  http_parser: #^4.0.0
+
+  # map
+  google_map_location_picker: #^4.1.7
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^0.2.2
-  flutter_launcher_icons: "^0.8.0"
+  flutter_native_splash: any #^0.2.2
+  flutter_launcher_icons: any #"^0.8.0"
 
 flutter_native_splash:
   image: assets/logo.png
