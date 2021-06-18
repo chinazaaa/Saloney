@@ -23,7 +23,7 @@ class ServiceScreen extends StatelessWidget {
                       child: Container(
                   child: Row(
                       children: [
-                       Text('Products'),
+                       Text('Services'),
                        SizedBox(width: 10,),
                        CircleAvatar(
                          backgroundColor: Colors.black54,
