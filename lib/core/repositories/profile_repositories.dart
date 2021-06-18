@@ -1,6 +1,8 @@
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/profile_api/profile_api.dart';
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
+import 'package:starter_project/models/api_response_variants/update_salon_response.dart';
 
 import '../../locator.dart';
 
@@ -36,12 +38,14 @@ class ProfileRepo extends BaseNotifier with Validators {
     String location,
   ) async {
     try {
-      ApiResponse res = await profileApi.updateSalonProfile(
+      UpdateSalonResponse res = await profileApi.updateSalonProfile(
           description: description,
           image: image,
           category: category,
           location: location,
           nameOfSalon: nameOfSalon);
+      //cache updated data
+      await userInfoCache.updateSalonInfo(res.data);
       Get.snackbar(
         'Success!',
         'Salon Profile Updated',
@@ -78,11 +82,13 @@ class ProfileRepo extends BaseNotifier with Validators {
     String phone,
   ) async {
     try {
-      ApiResponse res = await profileApi.updateSalonUserProfile(
+      UpdateSalonOwnerResponse res = await profileApi.updateSalonUserProfile(
         userName: userName,
         // email: email,
         phone: phone,
       );
+      //cache updated data
+      await userInfoCache.updateSalonOwnerProfile(res.data);
       Get.snackbar(
         'Success!',
         'User Profile Updated',
