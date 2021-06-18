@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Salon/pages/screens/add_newservice.dart';
+import 'package:starter_project/Salon/pages/screens/published_service.dart';
+import 'package:starter_project/Salon/pages/screens/unpublished_service.dart';
 
 class ServiceScreen extends StatelessWidget {
   @override
@@ -65,8 +67,8 @@ class ServiceScreen extends StatelessWidget {
             child: Container(
               child: TabBarView(
                 children: [
-                  Center(child: Text('Published Products'),),
-                   Center(child: Text('Unpublished Products'),),
+                  PublishedService(),
+          UnPublishedService()
                 ],
                 ),
             ),
