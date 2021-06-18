@@ -20,4 +20,9 @@ abstract class ServicesApi {
     String category,
     String price,
   });
+
+
+   Future<ApiResponse> getUnPublishedService({
+    String salonId
+  });
 }

@@ -13,9 +13,10 @@ class ProfileRepo extends BaseNotifier with Validators {
 
   Future<ApiResponse> getSalonOwnerProfile() async {
     final salon = userInfoCache.salon;
-    final response = await profileApi.getSalonOwnerProfile(id: salon.data.salon.id);
+    final response =
+        await profileApi.getSalonOwnerProfile(id: salon.data.salon.id);
     print(response);
-    return response ;
+    return response;
   }
 
   Future<bool> getSalonProfile() async {
@@ -40,8 +41,7 @@ class ProfileRepo extends BaseNotifier with Validators {
           image: image,
           category: category,
           location: location,
-          nameOfSalon: nameOfSalon
-      );
+          nameOfSalon: nameOfSalon);
       Get.snackbar(
         'Success!',
         'Salon Profile Updated',
@@ -72,47 +72,45 @@ class ProfileRepo extends BaseNotifier with Validators {
     }
   }
 
-    Future<bool> updateSalonOwnerProfile(
-        String userName,
-        // String email,
-        String phone,
-        ) async{
-      try {
-        ApiResponse res = await profileApi.updateSalonUserProfile(
-            userName: userName,
-            // email: email,
-            phone: phone,
-        );
-        Get.snackbar(
-          'Success!',
-          'User Profile Updated',
-          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-          snackStyle: SnackStyle.FLOATING,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.black26,
-        );
-        return true;
-      } on NetworkException{
-        Get.snackbar(
-          'No Internet!',
-          'Please check your internet Connection',
-          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-          snackStyle: SnackStyle.FLOATING,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.black26,
-        );
-      }
-      catch (e) {
-        Get.snackbar(
-          'An Error occured!',
-          e.toString(),
-          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-          snackStyle: SnackStyle.FLOATING,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.black26,
-        );
-      }
+  Future<bool> updateSalonOwnerProfile(
+    String userName,
+    // String email,
+    String phone,
+  ) async {
+    try {
+      ApiResponse res = await profileApi.updateSalonUserProfile(
+        userName: userName,
+        // email: email,
+        phone: phone,
+      );
+      Get.snackbar(
+        'Success!',
+        'User Profile Updated',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        e.toString(),
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
     return false;
   }
-
 }

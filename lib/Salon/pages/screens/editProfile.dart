@@ -25,12 +25,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
   bool checkboxValue = false;
 
-  TextEditingController username = TextEditingController(text:locator<UserInfoCache>().salon.data.user.local.userName);
+  TextEditingController username = TextEditingController(
+      text: locator<UserInfoCache>().salon.data.user.local.userName);
   TextEditingController email = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController(text:locator<UserInfoCache>().salon.data.user.local.phone.toString());
-  TextEditingController salonName = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.nameOfSalon);
-  TextEditingController salonDescription = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.description);
-  TextEditingController salonLocation = TextEditingController(text:locator<UserInfoCache>().salon.data.salon.location);
+  TextEditingController phoneNumber = TextEditingController(
+      text: locator<UserInfoCache>().salon.data.user.local.phone.toString());
+  TextEditingController salonName = TextEditingController(
+      text: locator<UserInfoCache>().salon.data.salon.nameOfSalon);
+  TextEditingController salonDescription = TextEditingController(
+      text: locator<UserInfoCache>().salon.data.salon.description);
+  TextEditingController salonLocation = TextEditingController(
+      text: locator<UserInfoCache>().salon.data.salon.location);
   final formKey = GlobalKey<FormState>();
   final salonFormkey = GlobalKey<FormState>();
 
@@ -90,8 +95,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 4,
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor),
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor),
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 2,
@@ -155,7 +160,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                buildTextField("Username", false, username,),
+                                buildTextField(
+                                  "Username",
+                                  false,
+                                  username,
+                                ),
                                 // buildTextField("E-mail", false, email),
                                 buildTextField(
                                     "Phone Number ", false, phoneNumber),
@@ -187,13 +196,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         //Update profile
                                         if (!formKey.currentState.validate())
                                           return;
-                                        bool success =
-                                            await profileM.updateSalonOwnerProfile(
+                                        bool success = await profileM
+                                            .updateSalonOwnerProfile(
                                                 username.text,
-                                               
+
                                                 // email.text,
                                                 phoneNumber.text);
-
+                                        // if (success == true) {
+                                        //   Navigator.pop(context);
+                                        // }
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
@@ -288,7 +299,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       Checkbox(
                                           value: _myJson[i]["value"],
                                           onChanged: (val) {
-                                            if(val) _selected = _myJson[i]["name"];
+                                            if (val)
+                                              _selected = _myJson[i]["name"];
                                             setState(() {
                                               _myJson[i]["value"] = val;
                                             });
@@ -318,9 +330,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               color: Colors.black)),
                                     ),
                                     RaisedButton(
-                                      onPressed: () async{
-                                        if (!salonFormkey.currentState.validate())
-                                          return;
+                                      onPressed: () async {
+                                        if (!salonFormkey.currentState
+                                            .validate()) return;
 
                                         // Map data = {
                                         //   'name' : salonName.text,
@@ -331,12 +343,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         // print(data);
                                         bool success =
                                             await profileM.updateSalonProfile(
-                                            salonName.text,
-                                            salonDescription.text,
-                                            null,
-                                            _selected,
-                                            salonLocation.text);
-
+                                                salonName.text,
+                                                salonDescription.text,
+                                                null,
+                                                _selected,
+                                                salonLocation.text);
                                       },
                                       color: Color(0xff9477cb),
                                       padding:

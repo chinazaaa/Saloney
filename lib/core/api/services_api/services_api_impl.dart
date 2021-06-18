@@ -1,7 +1,9 @@
 import 'package:starter_project/core/api/api_utils/api_helper.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
+
 
 import '../../../locator.dart';
 
@@ -41,23 +43,22 @@ class ServicesApiImpl extends ServicesApi {
         'Authorization': 'Bearer ${locator<UserInfoCache>().token}',
       };
 
-  // @override
-  // Future<ApiResponse> updateCustomerProfile(
-  //     String userName, phoneNumber, address) {
-  //   // TODO: implement updateCustomerProfile
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<ApiResponse> getUnPublishedService({String salonId})async {
+    String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      // Map<String, dynamic> data = {
+      //   "api_token": locator<UserInfoCache>().token
+      // };
+      var responsebody = await server.get(
+          '$baseUrl/unpublishedServices/$salonId', header);
+      GetunPublishedServiceResponse res = GetunPublishedServiceResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+  
 
-  // @override
-  // Future<ApiResponse> updateSalonOwnerProfile() {
-  //   // TODO: implement updateSalonOwnerProfile
-  //   throw UnimplementedError();
-  // }
 
-  // @override
-  // Future<ApiResponse> updateSalonProfile(
-  //     String nameOfSalon, description, location) {
-  //   // TODO: implement updateSalonProfile
-  //   throw UnimplementedError();
-  // }
 }

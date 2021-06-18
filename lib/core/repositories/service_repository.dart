@@ -1,4 +1,5 @@
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 
@@ -59,6 +60,49 @@ class ServiceRepo extends BaseNotifier {
     }
 
     setState(ViewState.Idle);
-    return false;
+    return 
+    false;
+  }
+  Future<GetunPublishedServiceResponse> getUnpublishedServices() async {
+    setState(ViewState.Busy);
+
+    // List serviceList = [];
+
+    GetunPublishedServiceResponse resp;
+    try {
+      resp = await _api.getUnPublishedService(
+          );
+
+      setState(ViewState.Idle);
+
+      if (resp.success) {
+        //Cache login info
+        print(resp.data);
+
+        return resp;
+      } else {
+        Get.snackbar(
+          'Error',
+          '${resp.message}',
+          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+          snackStyle: SnackStyle.FLOATING,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.black26,
+        );
+        return resp;
+      }
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+
+    setState(ViewState.Idle);
+    return resp;
   }
 }
