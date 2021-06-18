@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
+import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
+import 'package:starter_project/models/api_response_variants/update_salon_response.dart';
 
 import '../../../index.dart';
 import '../api_utils/api_helper.dart';
@@ -76,7 +79,7 @@ class ProfileApiImpl implements ProfileApi {
 
 //update salon profile
   @override
-  Future<ApiResponse> updateSalonProfile(
+  Future<UpdateSalonResponse> updateSalonProfile(
       {String nameOfSalon,
       String description,
       File image,
@@ -102,13 +105,13 @@ class ProfileApiImpl implements ProfileApi {
         header,
         body: jsonEncode(val),);
 
-    ApiResponse response = ApiResponse.fromJson(responsebody);
+    UpdateSalonResponse response = UpdateSalonResponse.fromJson(responsebody);
     return response;
   }
 
 //update salon owner profile
   @override
-  Future<ApiResponse> updateSalonUserProfile({String userName, String phone}) async {
+  Future<UpdateSalonOwnerResponse> updateSalonUserProfile({String userName, String phone}) async {
     Map<String, String> val = {
       // 'email' : email,
       'phone': phone,
@@ -119,9 +122,7 @@ class ProfileApiImpl implements ProfileApi {
         '${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}',
         header,
         body: jsonEncode(val));
-    // await server.put(ApiRoutes.updateSalonOwnerProfile +'/60be7cf955227a3bb482888d', header, body:jsonEncode(val));
- 
-    ApiResponse response = ApiResponse.fromJson(responsebody);
+    UpdateSalonOwnerResponse response = UpdateSalonOwnerResponse.fromJson(responsebody);
     return response;
   }
 
