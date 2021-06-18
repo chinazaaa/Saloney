@@ -43,7 +43,7 @@ class SalonBarChart extends StatelessWidget {
                   bottomTitles: SideTitles(
                     margin: 10.0,
                     showTitles: true,
-                    textStyle: Styles.chartLabelsTextStyle,
+                    // textStyle: Styles.chartLabelsTextStyle,
                     rotateAngle: 35.0,
                     getTitles: (double value) {
                       switch (value.toInt()) {
@@ -69,7 +69,7 @@ class SalonBarChart extends StatelessWidget {
                   leftTitles: SideTitles(
                       margin: 10.0,
                       showTitles: true,
-                      textStyle: Styles.chartLabelsTextStyle,
+                      // textStyle: Styles.chartLabelsTextStyle,
                       getTitles: (value) {
                         if (value == 0) {
                           return '0';
@@ -98,7 +98,7 @@ class SalonBarChart extends StatelessWidget {
                           barRods: [
                             BarChartRodData(
                               y: value,
-                              color: Colors.red,
+                              // color: Colors.red,
                             ),
                           ],
                         )))
