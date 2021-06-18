@@ -10,7 +10,7 @@ class UnPublishedService extends StatelessWidget {
           headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
           columns: <DataColumn>[
             DataColumn(
-              label: Text('Service Name'),
+              label: Text('Service'),
             ),
             DataColumn(
               label: Text('Image'),
