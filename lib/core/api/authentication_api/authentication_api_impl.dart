@@ -33,13 +33,10 @@ class AuthenticationApiImpl implements AuthenticationApi {
       'password': password,
     };
 
-    print(val);
-
     try {
       var responsebody =
           await server.post(ApiRoutes.loginCustomer, header, jsonEncode(val));
       CustomerLoginResponse response = CustomerLoginResponse.fromJson(responsebody);
-
       return response;
     } on SocketException {
       throw NetworkException();

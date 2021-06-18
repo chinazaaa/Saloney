@@ -1,72 +1,13 @@
-import 'dart:convert';
-//import 'dart:html';
-
-// import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter_project/core/utils/preference_keys.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
+import 'package:starter_project/models/cache.dart';
+import 'package:starter_project/models/customer.dart';
 import 'package:starter_project/models/salon.dart';
 import 'package:starter_project/models/user.dart';
-//import 'package:starter_project/models/service/serviceResponses.dart';
-
-//-- How to use --
-/* var userInfoCache = locator<UserInfoCache>();
-  await userInfoCache.getUserDataFromStorage();
-  print('used data: ${userInfoCache.name}');
-*/
-
-class Cache {
-  CustomerLoginResponse customer;
-  SalonLoginResponse salon;
-
-  bool get isCustomer => customer != null;
-
-  ///Please use only one input at a time
-  Cache({CustomerLoginResponse customer, SalonLoginResponse salon}) {
-    
-    print(salon);
-    // //Check if is saloon or customer
-    // if (salon != null) {
-    //   this.isCustomer = false;
-    // }  else {
-    //   isCustomer = true;
-    // }
-
-    this.customer = customer;
-    this.salon = salon;
-  }
-
-  factory Cache.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    // print(map['salon']);
-    // print(map['customer']);
-    return Cache(
-      customer: map['customer'] != null
-          ? CustomerLoginResponse.fromJson(map['customer'])
-          : null,
-      salon: map['salon'] != null
-          ? SalonLoginResponse.fromJson(map['salon'])
-          : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Cache.fromJson(String source) => Cache.fromMap(json.decode(source));
-
-  Map<String, dynamic> toMap() {
-    return {
-      'customer': customer,
-      'salon': salon,
-      'isCustomer': isCustomer,
-    };
-  }
-}
 
 ///This class is used to sync User Data
 class UserInfoCache {
@@ -163,9 +104,7 @@ class UserInfoCache {
       } else {
         print('${data.salon.data.user.local.email}\'s data cached successfully');
         // await _storageUtil.saveToken(ACCESS_TOKEN, data.salon.data.local.api_token);
-
       }
-
       return val;
     } catch (e) {
       print(
@@ -207,6 +146,23 @@ class UserInfoCache {
       //Sets new data in storage labelled ['user_data']
       cacheLoginResponse(salon: newCache);
       print('data in storage & app updated with ${salon.nameOfSalon}\'s details');
+      return true;
+    } catch (e) {
+      print('UserInfoCache: Failed to update User Data');
+      return false;
+    }
+  }
+
+  Future<bool> updateCustomer(Customer customer) async {
+    try {
+      //create new salon login response from new salon data for caching
+      CustomerLoginResponse newCache = CustomerLoginResponse(
+          message: 'updated',
+          success: true,
+          data: customer);
+      //Sets new data in storage labelled ['user_data']
+      cacheLoginResponse(customer: newCache);
+      print('data in storage & app updated with ${customer.userName}\'s details');
       return true;
     } catch (e) {
       print('UserInfoCache: Failed to update User Data');
