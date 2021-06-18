@@ -9,6 +9,8 @@ import 'package:starter_project/models/api_response_variants/customer_login_resp
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
+import 'package:starter_project/models/salon.dart';
+import 'package:starter_project/models/user.dart';
 //import 'package:starter_project/models/service/serviceResponses.dart';
 
 //-- How to use --
@@ -172,28 +174,45 @@ class UserInfoCache {
     }
   }
 
-  // Future<bool> updateUserData(User userdata) async {
-  //   try {
-  //     //Instance of SharedPreferences
-  //     SharedPreferences storage = await SharedPreferences.getInstance();
-  //     LoginResponse newUserData =
-  //         LoginResponse(token: this.token, user: userdata);
-  //
-  //     //Update field in UserInfoCache
-  //     this._loginResponse = newUserData;
-  //     this._user = newUserData.user;
-  //     this._profile = userdata.profile;
-  //
-  //     //Sets new data in storage labelled ['user_data']
-  //     bool val = await storage.setString('user_data', jsonEncode(newUserData));
-  //
-  //     print('data in storage & app updated with ${this.user.name}\'s details');
-  //     return val;
-  //   } catch (e) {
-  //     print('UserInfoCache: Failed to update User Data');
-  //     return false;
-  //   }
-  // }
+  Future<bool> updateSalonOwnerProfile(User userdata) async {
+    try {
+      //create new salon login response from new user data for caching
+      SalonLoginResponse newCache = SalonLoginResponse(
+          message: 'updated',
+          success: true,
+          data: SalonData(
+            user: userdata,
+            salon: this.salon.data.salon
+          ));
+      //Sets new data in storage labelled ['user_data']
+      cacheLoginResponse(salon: newCache);
+      print('data in storage & app updated with ${userdata.local.userName}\'s details');
+      return true;
+    } catch (e) {
+      print('UserInfoCache: Failed to update User Data');
+      return false;
+    }
+  }
+
+  Future<bool> updateSalonInfo(Salon salon) async {
+    try {
+      //create new salon login response from new salon data for caching
+      SalonLoginResponse newCache = SalonLoginResponse(
+          message: 'updated',
+          success: true,
+          data: SalonData(
+              user: this.salon.data.user,
+              salon: salon
+          ));
+      //Sets new data in storage labelled ['user_data']
+      cacheLoginResponse(salon: newCache);
+      print('data in storage & app updated with ${salon.nameOfSalon}\'s details');
+      return true;
+    } catch (e) {
+      print('UserInfoCache: Failed to update User Data');
+      return false;
+    }
+  }
 
   clearCache() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
