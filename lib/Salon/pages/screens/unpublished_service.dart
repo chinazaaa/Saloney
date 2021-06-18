@@ -52,18 +52,18 @@ class PopupOptionMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return <PopupMenuEntry<MenuOption>>[
           PopupMenuItem(
-            child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            //child: Text("Edit"),
+            //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
+            child: Text("Edit"),
           value: MenuOption.Edit,
           ),
             PopupMenuItem(
-                child: Icon(Icons.publish, color: Colors.black, size: 28.0),
-              //child: Text("Publish"),
+                //child: Icon(Icons.publish, color: Colors.black, size: 28.0),
+              child: Text("Publish"),
           value: MenuOption.Publish,
           ),
             PopupMenuItem(
-                child: Icon(Icons.delete,color: Colors.black, size: 28.0),
-              //child: Text("Delete"),
+                //child: Icon(Icons.delete,color: Colors.black, size: 28.0),
+              child: Text("Delete"),
           value: MenuOption.Delete,
           )
         ];
