@@ -58,7 +58,7 @@ class _AddNewServiceState extends State<AddNewService> {
                         child: Container(
                           child: Row(
                             children: [
-                              Text('Products / Add'),
+                              Text('Services / Add'),
                             ],
                           ),
                         ),

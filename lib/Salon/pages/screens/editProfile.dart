@@ -244,7 +244,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  "Select Images for Products:",
+                                  "Select Images for Services:",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.grey,
