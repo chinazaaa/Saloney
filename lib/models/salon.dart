@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class Salon {
   Salon({
+    
     this.description,
     this.image,
     this.id,
@@ -74,3 +75,7 @@ class Salon {
     "__v": v,
   };
 }
+
+
+
+

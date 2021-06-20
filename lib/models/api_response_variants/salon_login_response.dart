@@ -79,4 +79,26 @@ class SalonData {
     "user": user.toMap(),
     "salon": salon.toMap(),
   };
+  
+}
+class Location {
+  List<double> coordinates;
+  String type;
+  String formattedAddress;
+
+  Location({this.coordinates, this.type, this.formattedAddress});
+
+  Location.fromJson(Map<String, dynamic> json) {
+    coordinates = json['coordinates'].cast<double>();
+    type = json['type'];
+    formattedAddress = json['formattedAddress'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['coordinates'] = this.coordinates;
+    data['type'] = this.type;
+    data['formattedAddress'] = this.formattedAddress;
+    return data;
+  }
 }
