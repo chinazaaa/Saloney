@@ -110,7 +110,8 @@ class _SalonSignUpState extends State<SalonSignUp> {
       email: email.text,
       password: password.text,
       nameOfSalon: nameOfSalon.text,
-      location: '${place.latLng.latitude} : ${place.latLng.longitude}',
+      // address:'${place.latLng.latitude} : ${place.latLng.longitude}',
+      address: location.text
       // location.text,
     );
 
