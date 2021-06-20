@@ -14,7 +14,7 @@ abstract class AuthenticationApi {
     String password,
     String nameOfSalon,
     String typeOfSalon,
-    String location,
+    String address,
   });
   Future<ApiResponse> loginSaloon({
     String email,

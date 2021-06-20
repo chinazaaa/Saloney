@@ -85,7 +85,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<SalonRegistrationResponse> registerSaloon({String userName, String email, String phone, String password, String nameOfSalon, String typeOfSalon, String location}) async{
+  Future<SalonRegistrationResponse> registerSaloon({String userName, String email, String phone, String password, String nameOfSalon, String typeOfSalon, String address}) async{
     Map val =   {
       'userName': userName,
       'email': email,
@@ -93,7 +93,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
       'password': password,
       'nameOfSalon': nameOfSalon,
       'typeOfSalon': typeOfSalon,
-      'location': location,
+      'address': address,
     };
 
     print(val);
