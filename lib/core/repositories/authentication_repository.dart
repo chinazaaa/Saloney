@@ -112,7 +112,7 @@ class AuthRepository extends BaseNotifier with Validators {
       String userName,
       String password,
       String email,
-      String location,
+      String address,
       String nameOfSalon,
       String phone,
       String typeOfSalon}) async {
@@ -147,7 +147,7 @@ class AuthRepository extends BaseNotifier with Validators {
             userName: userName,
             password: password,
             email: email,
-            location: location,
+            address: address,
             nameOfSalon: nameOfSalon,
             phone: phone,
             typeOfSalon: typeOfSalon);
