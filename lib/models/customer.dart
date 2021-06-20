@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class Customer {
   Customer({
-    this.image,
+    this.avatar,
     this.isEmailVerified,
     this.isActive,
     this.userRole,
@@ -18,7 +18,7 @@ class Customer {
     this.apiToken,
   });
 
-  String image;
+  String avatar;
   bool isEmailVerified;
   bool isActive;
   String userRole;
@@ -34,7 +34,7 @@ class Customer {
   String apiToken;
 
   Customer copyWith({
-    String image,
+    String avatar,
     bool isEmailVerified,
     bool isActive,
     String userRole,
@@ -50,7 +50,7 @@ class Customer {
     String apiToken,
   }) =>
       Customer(
-        image: image ?? this.image,
+        avatar: avatar ?? this.avatar,
         isEmailVerified: isEmailVerified ?? this.isEmailVerified,
         isActive: isActive ?? this.isActive,
         userRole: userRole ?? this.userRole,
@@ -71,7 +71,7 @@ class Customer {
   String toJson() => json.encode(toMap());
 
   factory Customer.fromMap(Map<String, dynamic> json) => Customer(
-    image: json["image"],
+    avatar: json["avatar"],
     isEmailVerified: json["isEmailVerified"],
     isActive: json["isActive"],
     userRole: json["userRole"],
@@ -88,7 +88,7 @@ class Customer {
   );
 
   Map<String, dynamic> toMap() => {
-    "image": image,
+    "avatar": avatar,
     "isEmailVerified": isEmailVerified,
     "isActive": isActive,
     "userRole": userRole,

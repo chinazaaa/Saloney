@@ -3,7 +3,8 @@ import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/index.dart';
-import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
+//import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
+import 'package:starter_project/models/customer.dart';
 
 import '../../../locator.dart';
 
@@ -60,13 +61,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: user.image == null ? Image.asset(
+                  child: user.avatar == null ? Image.asset(
                     "assets/1.png",
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
                   ) : Image.network(
-                    user.image,
+                    user.avatar,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
