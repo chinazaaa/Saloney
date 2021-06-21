@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/password/change_password.dart';
+import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
@@ -174,8 +176,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   Icons.edit,
                   size: 20.0,
                 ),
-                onPressed: (){
-                },
+               onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                new MaterialPageRoute(
+                                                    builder: (context) =>
+                                                      EditCustomerProfilePage()));
+                                          },
                 tooltip: "Edit",
               ),
             ),
@@ -237,8 +244,13 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   Icons.edit,
                   size: 20.0,
                 ),
-                onPressed: (){
-                },
+               onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                new MaterialPageRoute(
+                                                    builder: (context) =>
+                                                      CustomerChangePasswordPage()));
+                                          },
                 tooltip: "Edit",
               ),
                ),
