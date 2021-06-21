@@ -16,7 +16,6 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   //  File _image;
-  String _selected;
   List<Map> _myJson = [
     {'value': false, "name": "Hair"},
     {'value': false, "name": "Beauty"},
@@ -96,7 +95,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             border: Border.all(
                                 width: 4,
                                 color:
-                                    Theme.of(context).scaffoldBackgroundColor),
+                                Theme.of(context).scaffoldBackgroundColor),
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 2,
@@ -122,7 +121,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               border: Border.all(
                                 width: 4,
                                 color:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).scaffoldBackgroundColor,
                               ),
                               color: Color(0xff9477cb),
                             ),
@@ -173,15 +172,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     //FIXME
                                     OutlineButton(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 30),
+                                      EdgeInsets.symmetric(horizontal: 30),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                          BorderRadius.circular(20)),
                                       onPressed:
                                           () {}, // FIXME Return to profile page
                                       child: Text("CANCEL",
@@ -198,21 +197,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           return;
                                         bool success = await profileM
                                             .updateSalonOwnerProfile(
-                                                username.text,
+                                            username.text,
 
-                                                // email.text,
-                                                phoneNumber.text);
+                                            // email.text,
+                                            phoneNumber.text);
                                         // if (success == true) {
                                         //   Navigator.pop(context);
                                         // }
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 50),
+                                      EdgeInsets.symmetric(horizontal: 50),
                                       elevation: 2,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                          BorderRadius.circular(20)),
                                       child: Text(
                                         "SAVE GENERAL",
                                         style: TextStyle(
@@ -256,21 +255,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: Wrap(
                                       children: [
                                         for (int i = 0;
-                                            i <=
-                                                model.salonProfileImages.length;
-                                            i++)
+                                        i <=
+                                            model.salonProfileImages.length;
+                                        i++)
                                           i == model.salonProfileImages.length
                                               ? AddImageButton(
-                                                  onTap: () => model
-                                                      .addSaloonProfileImage(),
-                                                )
+                                            onTap: () => model
+                                                .addSaloonProfileImage(),
+                                          )
                                               : ImageView(
-                                                  image: model
-                                                      .salonProfileImages[i],
-                                                  onTap: () => model
-                                                      .deleteSaloonProfileImage(
-                                                          index: i),
-                                                ),
+                                            image: model
+                                                .salonProfileImages[i],
+                                            onTap: () => model
+                                                .deleteSaloonProfileImage(
+                                                index: i),
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -291,7 +290,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   itemCount: _myJson.length,
                                   itemBuilder: (context, i) => Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Container(
                                           margin: EdgeInsets.only(left: 10),
@@ -300,7 +299,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           value: _myJson[i]["value"],
                                           onChanged: (val) {
                                             if (val)
-                                              _selected = _myJson[i]["name"];
                                             setState(() {
                                               _myJson[i]["value"] = val;
                                             });
@@ -313,14 +311,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     OutlineButton(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 30),
+                                      EdgeInsets.symmetric(horizontal: 30),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                          BorderRadius.circular(20)),
                                       onPressed:
                                           () {}, // FIXME Return to profile page
                                       child: Text("CANCEL",
@@ -334,28 +332,35 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         if (!salonFormkey.currentState
                                             .validate()) return;
 
-                                        // Map data = {
-                                        //   'name' : salonName.text,
-                                        //   'des' : salonDescription.text,
-                                        //   'selected' : _selected,
-                                        //   'location' : salonLocation.text
-                                        // };
-                                        // print(data);
+                                        String selectedCategories = '';
+                                        //get selected categories
+                                        for(int i=0; i< _myJson.length; i++){
+                                          if(_myJson[i]['value']){
+                                            if(i == 0){
+                                              selectedCategories = selectedCategories + _myJson[i]['name']; 
+                                            } else{
+                                              selectedCategories = selectedCategories + ', ' + _myJson[i]['name'];
+                                            }
+                                          }
+                                        }
+                                        
+                                        print(selectedCategories);
+                                        
                                         bool success =
-                                            await profileM.updateSalonProfile(
-                                                salonName.text,
-                                                salonDescription.text,
-                                                null,
-                                                _selected,
-                                                salonLocation.text);
+                                        await profileM.updateSalonProfile(
+                                            salonName.text,
+                                            salonDescription.text,
+                                            null,
+                                            selectedCategories,
+                                            salonLocation.text);
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 50),
+                                      EdgeInsets.symmetric(horizontal: 50),
                                       elevation: 2,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                          BorderRadius.circular(20)),
                                       child: Text(
                                         "SAVE SALON",
                                         style: TextStyle(
@@ -373,7 +378,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ],
                     )),
 
-                // buildTextField("Password", "****", true),
+                // buildTextField("Password", "**", true),
               ],
             ),
           ),
@@ -392,16 +397,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  )
+              onPressed: () {
+                setState(() {
+                  showPassword = !showPassword;
+                });
+              },
+              icon: Icon(
+                Icons.remove_red_eye,
+                color: Colors.grey,
+              ),
+            )
                 : null,
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
