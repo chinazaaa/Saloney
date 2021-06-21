@@ -298,7 +298,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       Checkbox(
                                           value: _myJson[i]["value"],
                                           onChanged: (val) {
-                                            if (val)
                                             setState(() {
                                               _myJson[i]["value"] = val;
                                             });
@@ -336,16 +335,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         //get selected categories
                                         for(int i=0; i< _myJson.length; i++){
                                           if(_myJson[i]['value']){
-                                            if(i == 0){
-                                              selectedCategories = selectedCategories + _myJson[i]['name']; 
+                                            if(selectedCategories == ''){
+                                              selectedCategories = selectedCategories + _myJson[i]['name'];
                                             } else{
                                               selectedCategories = selectedCategories + ', ' + _myJson[i]['name'];
                                             }
                                           }
                                         }
-                                        
+
                                         print(selectedCategories);
-                                        
+
                                         bool success =
                                         await profileM.updateSalonProfile(
                                             salonName.text,
