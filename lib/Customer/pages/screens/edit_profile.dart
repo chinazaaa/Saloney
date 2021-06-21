@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/profile.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
-import 'package:provider/provider.dart';
-import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 
 import '../../../locator.dart';
@@ -21,9 +20,13 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
   // TextEditingController _passwordC = TextEditingController();
   TextEditingController _phoneC = TextEditingController(
     text: locator<UserInfoCache>().customer.data.phone.toString());
+    final formKey = GlobalKey<FormState>();
+  //final customerFormkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<ProfileRepo>(context);
+   // final model = Provider.of<ProfileRepo>(context, listen: false);
+        final profileC = Provider.of<ProfileRepo>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -114,53 +117,81 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Username", false, _usernameC, (val) => model.validateName(val)),
-              buildTextField("Phone Number", false, _phoneC, (val) => model.validateName(val)),
-              // FIXME buildTextField("E-mail", false),
-              // buildTextField("Password", "********", true),
-              // buildTextField("Password ", false, _passwordC, (val) => model.validatePassword(val)),
-              // buildTextField("Description", false),
-              // buildTextField("Name of Salon ",false),
-              //  buildTextField("Location", false),
-              SizedBox(
-                height: 35,
-              ),
+              SingleChildScrollView(
+              child: Form (
+                key: formKey,
+                child: Column(
+                    children: [
+                buildTextField("Username", false, _usernameC,),
+                buildTextField("Phone Number", false, _phoneC,),
+                
+                SizedBox(
+                  height: 35,
+                ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      onPressed: () {Navigator.pop(context);},
+                      child: Text("CANCEL",
+                          style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                              color: Colors.black)),
                     ),
-                    onPressed: () {},
-                    child: Text("CANCEL",
+                    ElevatedButton(
+                      onPressed: () async{
+                      //update profile
+                                            if (!formKey.currentState.validate())
+                                            return;
+                                          bool success = await profileC
+                                              .updateCustomerProfile(
+                                                  _usernameC.text,
+
+                                                  // email.text,
+                                                  _phoneC.text);
+                                          if (success) {
+                                            Navigator.pop(context);
+                                            Get.snackbar(
+                                              'Success!',
+                                              'Customer Profile Updated',
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 30, horizontal: 30),
+                                              snackStyle: SnackStyle.FLOATING,
+                                              snackPosition: SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.black26,
+                                            );
+                                          }  
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff9477cb),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      child: Text(
+                        "SAVE",
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
-                            color: Colors.black)),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff9477cb),
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                            color: Colors.white),
+                      ),
                     ),
-                    child: Text(
-                      "SAVE",
-                      style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: Colors.white),
-                    ),
-                  )
-                ],
-              )
+                     ],
+                ),
+                  ],
+                  
+                ),
+               
+              ),
+              ),
             ],
           ),
         ),
@@ -168,13 +199,13 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, bool isPasswordTextField, TextEditingController controller, Function validator) {
+  Widget buildTextField(String labelText, bool isPasswordTextField, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextFormField(
         obscureText: isPasswordTextField ? showPassword : false,
         controller: controller,
-        validator: validator,
+        // validator: validator,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(

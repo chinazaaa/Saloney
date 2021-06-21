@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
+import 'package:starter_project/models/api_response_variants/update_customer_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_response.dart';
 
@@ -125,6 +126,24 @@ class ProfileApiImpl implements ProfileApi {
     UpdateSalonOwnerResponse response = UpdateSalonOwnerResponse.fromJson(responsebody);
     return response;
   }
+
+  //update customer
+    @override
+  Future<UpdateCustomerResponse> updateCustomerProfile({String userName, String phone}) async {
+    Map<String, String> val = {
+      // 'email' : email,
+      'phone': phone,
+      'userName': userName,
+    };
+
+    var responsebody = await server.put(
+        '${ApiRoutes.updateCustomerProfile}/${locator<UserInfoCache>().customer.data.id}',
+        header,
+        body: jsonEncode(val));
+    UpdateCustomerResponse response = UpdateCustomerResponse.fromJson(responsebody);
+    return response;
+  }
+
 
   Map<String, String> get header => {
         'Accept': 'application/json',

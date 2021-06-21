@@ -35,5 +35,10 @@ abstract class ProfileApi {
   Future<ApiResponse> getCustomerProfile({
     String id,
   });
+  Future<ApiResponse> updateCustomerProfile({
+    String userName,
+    // String email,
+    String phone,
+  });
   Future<ApiResponse> togglePushNotification({int value});
 }

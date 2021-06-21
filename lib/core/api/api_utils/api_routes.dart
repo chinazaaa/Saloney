@@ -32,6 +32,11 @@ class ApiRoutes {
   static const String updateSalonOwnerProfile = '$apiRoute/profile/salonOwner';
   static const String updateSalonProfile = '$apiRoute/profile/salon';
 
+
+  //update customer
+    static const String updateCustomerProfile = '$apiRoute/profile/customer';
+
+
   //toggle
   static const String togglePushNotification = '$apiRoute/profile/passenger/update';
 
