@@ -41,7 +41,8 @@ class ApiRoutes {
   static const String togglePushNotification = '$apiRoute/profile/passenger/update';
 
   //password
-  static const String changePassword = '$apiRoute/profile/password/update';
+  static const String changeSalonOwnerPassword = '$apiRoute/salonOwner/changePassword';
+    static const String changeCustomerPassword = '$apiRoute/customer/changePassword';
 
 
 }

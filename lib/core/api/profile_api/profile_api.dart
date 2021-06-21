@@ -20,7 +20,12 @@ abstract class ProfileApi {
     String phone,
   });
 
-  Future<ApiResponse> changePassword(
+  Future<ApiResponse> changeSalonOwnerPassword(
+      {String token,
+      String currentPassword,
+      String password,
+      String passwordConfirmation});
+  Future<ApiResponse> changeCustomerPassword(
       {String token,
       String currentPassword,
       String password,

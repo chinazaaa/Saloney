@@ -23,7 +23,7 @@ class ProfileApiImpl implements ProfileApi {
   var server = locator<API>();
 
   @override
-  Future<ApiResponse> changePassword(
+  Future<ApiResponse> changeSalonOwnerPassword(
       {String token,
       String currentPassword,
       String password,
@@ -34,8 +34,32 @@ class ProfileApiImpl implements ProfileApi {
       'password_confirmation': password,
     };
 
-    var responsebody =
-        await server.post(ApiRoutes.changePassword, header, jsonEncode(val));
+      var responsebody = await server.put(
+        '${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}',
+        header,
+        body: jsonEncode(val),);
+
+    ApiResponse response = ApiResponse.fromJson(responsebody);
+    return response;
+  }
+
+
+  @override
+  Future<ApiResponse> changeCustomerPassword(
+      {String token,
+      String currentPassword,
+      String password,
+      String passwordConfirmation}) async {
+    Map val = {
+      'current_password': currentPassword,
+      'password': password,
+      'password_confirmation': password,
+    };
+
+   var responsebody = await server.put(
+        '${ApiRoutes.changeCustomerPassword}/${locator<UserInfoCache>().customer.data.id}',
+        header,
+        body: jsonEncode(val));
 
     ApiResponse response = ApiResponse.fromJson(responsebody);
     return response;
