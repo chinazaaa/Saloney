@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:starter_project/Salon/pages/screens/profile.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
@@ -201,9 +202,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                                             // email.text,
                                             phoneNumber.text);
-                                        // if (success == true) {
-                                        //   Navigator.pop(context);
-                                        // }
+                                        if(success){
+                                          Navigator.pop(context);
+                                           Get.snackbar(
+        'Success!',
+        'Salon Profile Updated',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+}
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
@@ -352,6 +361,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             null,
                                             selectedCategories,
                                             salonLocation.text);
+                                                if(success){
+                                          Navigator.pop(context);
+                                           Get.snackbar(
+        'Success!',
+        'Salon Profile Updated',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+}
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
