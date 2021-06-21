@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/profile.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
+import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/screens/service_provider.dart';
+import 'package:starter_project/infrastructure/user_info_cache.dart';
+
+import '../../../locator.dart';
 
 class EditCustomerProfilePage extends StatefulWidget {
   @override
@@ -11,9 +16,11 @@ class EditCustomerProfilePage extends StatefulWidget {
 
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
   bool showPassword = false;
-  TextEditingController _usernameC = TextEditingController();
+  TextEditingController _usernameC = TextEditingController(
+    text: locator<UserInfoCache>().customer.data.userName);
   // TextEditingController _passwordC = TextEditingController();
-  TextEditingController _phoneC = TextEditingController();
+  TextEditingController _phoneC = TextEditingController(
+    text: locator<UserInfoCache>().customer.data.phone.toString());
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<ProfileRepo>(context);
