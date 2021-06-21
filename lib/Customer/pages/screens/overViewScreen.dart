@@ -52,7 +52,7 @@ class _OverViewPageState extends State<OverViewPage>
                     tabs: <Widget>[
                       Tab(text: "OverView"),
                       Tab(text: "Location"),
-                      Tab(text: "Review"),
+                      Tab(text: "Gallery"),
                     ],
                   ),
                   backgroundColor: kwhite,
@@ -68,7 +68,7 @@ class _OverViewPageState extends State<OverViewPage>
                                 BoldText("Plaza", 20.0, kblack),
                                 Row(
                                   children: <Widget>[
-                                    BoldText("4.5 Stars", 12.0, korange),
+                                    //BoldText("4.5 Stars", 12.0, korange),
                                     SizedBox(
                                       width: 16.0,
                                     ),
@@ -83,7 +83,7 @@ class _OverViewPageState extends State<OverViewPage>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                NormalText(
+                                NormalText( //description of salon goes here
                                     "Cheap and affordable", kgreyDark, 16.0),
                                 SizedBox(
                                   height: 10.0,
@@ -124,7 +124,7 @@ class _OverViewPageState extends State<OverViewPage>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    BoldText("equipments", 20.0, kblack),
+                                    BoldText("categories", 20.0, kblack),
                                     BoldText("More", 16, kdarkBlue),
                                   ],
                                 ),
@@ -135,12 +135,13 @@ class _OverViewPageState extends State<OverViewPage>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    equipmentsItem(Icons.wifi, "Wi-Fi"),
+                                    //categories go here
+                                    equipmentsItem(Icons.wifi, "Beauty"),
                                     equipmentsItem(
-                                        Icons.local_parking, "Parking"),
+                                        Icons.local_parking, "Hair"),
                                     equipmentsItem(Icons.face, "Spa"),
-                                    equipmentsItem(
-                                        Icons.restaurant, "Restaurant"),
+                                    // equipmentsItem(
+                                    //     Icons.restaurant, "Restaurant"),
                                   ],
                                 )
                               ],
@@ -171,63 +172,28 @@ class _OverViewPageState extends State<OverViewPage>
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        BoldText("Reviews", 20.0, kblack),
-                                        BoldText("See all", 16, kdarkBlue),
-                                      ],
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  BoldText("Gallery", 20.0, kblack),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.asset(
+                                      "assets/1.png",
+                                      fit: BoxFit.fill,
+                                      height:
+                                          MediaQuery.of(context).size.width -
+                                              90,
+                                      width: MediaQuery.of(context).size.width,
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Container(
-                                          width: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: korange,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star,
-                                                color: kwhite,
-                                                size: 15.0,
-                                              ),
-                                              BoldText("4.5", 15.0, kwhite),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        NormalText(
-                                            "(420 reviews)", kgreyDark, 14),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    reviewProfile("Hichem","5.0","05,Mar,2020"),
-                                    reviewProfile("Walid","3.5","17,feb,2020"),
-                                    reviewProfile("kratos","4.0","10,jan,2020"),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                            ),
+                     
                         ],
                         controller: tabController,
                       ),

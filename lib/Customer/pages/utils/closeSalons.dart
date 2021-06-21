@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'TextStyles.dart';
 import 'consts.dart';
 
-class BestRatedImage extends StatelessWidget {
+class CloseSalons extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String location;
-  final double rate;
+  // final double rate;
 
-  BestRatedImage(this.imageUrl, this.name, this.location,this.rate);
+  CloseSalons(this.imageUrl, this.name, this.location);
 
   @override
   Widget build(BuildContext context) {
@@ -52,25 +52,25 @@ class BestRatedImage extends StatelessWidget {
                   SizedBox(
                     width: 60.0,
                   ),
-                  Container(
-                    width: 50.0,
-                    decoration: BoxDecoration(
-                      color: korange,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.star,
-                          color: kwhite,
-                          size: 15.0,
-                        ),
-                        BoldText(rate.toString(), 15.0, kwhite)
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   width: 50.0,
+                  //   decoration: BoxDecoration(
+                  //     color: korange,
+                  //     borderRadius: BorderRadius.circular(10.0),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: <Widget>[
+                  //       Icon(
+                  //         Icons.star,
+                  //         color: kwhite,
+                  //         size: 15.0,
+                  //       ),
+                  //      // BoldText(rate.toString(), 15.0, kwhite)
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             )

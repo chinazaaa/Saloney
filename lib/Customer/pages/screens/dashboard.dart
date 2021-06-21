@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:starter_project/Customer/pages/utils/bestRatedImage.dart';
+import 'package:starter_project/Customer/pages/utils/closeSalons.dart';
 import 'package:starter_project/Customer/pages/utils/buttons.dart';
 //import 'package:starter_project/Customer/pages/utils/salonsImage.dart';
 import 'package:starter_project/Customer/pages/utils/recommendationImage.dart';
@@ -17,25 +17,22 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             ImageContainer(),
-
             Padding(
-              padding: const EdgeInsets.only(left:16.0,right: 16.0,bottom: 16.0),
-
+              padding:
+                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
               child: Column(children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: Align(
                       alignment: Alignment.centerLeft,
-                      child: BoldText("Daily Offers", 20.0, kblack)),
+                      child: BoldText("Salon Closest to You", 20.0, kblack)),
                 ),
                 Container(
                   width: 330,
@@ -55,54 +52,52 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: Row(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: <Widget>[
+                //       BoldText("Recommended for you", 20.0, kblack),
+                //       SizedBox(
+                //         width: 60,
+                //       ),
+                //       BoldText("More", 15.0, korange),
+                //       Icon(
+                //         Icons.navigate_next,
+                //         color: korange,
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // Container(
+                //   width: 400,
+                //   height: 200,
+                //   child: ListView(
+                //     scrollDirection: Axis.horizontal,
+                //     children: <Widget>[
+                //       RecommendationImage("assets/1.png", "Naza", "Lekki"),
+                //       RecommendationImage("assets/2.png", "Sudu", "Lekki"),
+                //       RecommendationImage("assets/3.png", "KC", "Lekki"),
+                //     ],
+                //   ),
+                // ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      BoldText("Recommended for you", 20.0, kblack),
-                      SizedBox(
-                        width: 60,
-                      ),
-                      BoldText("More", 15.0, korange),
-                      Icon(
-                        Icons.navigate_next,
-                        color: korange,
-                      )
-                    ],
-                  ),
+                  padding: const EdgeInsets.only(top: 10, bottom: 16.0),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: BoldText("Salons Near You", 20.0, kblack)),
                 ),
                 Container(
                   width: 400,
-                  height: 200,
+                  height: 250,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      RecommendationImage("assets/1.png", "Naza", "Lekki"),
-                      RecommendationImage("assets/2.png", "Sudu", "Lekki"),
-                      RecommendationImage("assets/3.png", "KC", "Lekki"),
+                      CloseSalons("assets/1.png", "KC", "Lekki"),
+                      CloseSalons("assets/2.png", "Naza", "Lekki"),
+                      CloseSalons("assets/3.png", "Sudu", "Lekki"),
+                      
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only( top: 10,bottom: 16.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: BoldText("Best Rated Salons", 20.0, kblack)),
-                ),
-                 Container(
-                    width: 400,
-                    height: 250,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        BestRatedImage(
-                            "assets/1.png", "KC", "Lekki", 4.5),
-                        BestRatedImage(
-                            "assets/2.png", "Naza", "Lekki", 4.8),
-                        BestRatedImage("assets/3.png", "Sudu", "Lekki", 3.1),
-                      ],
-
                   ),
                 ),
                 // Padding(
@@ -130,7 +125,6 @@ class _DashboardState extends State<Dashboard> {
                 //     ],
 
                 // ),
-
               ]),
             ),
           ],
@@ -139,11 +133,9 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-
-
   Widget buildContainer() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
           return OverViewPage();
         }));
@@ -183,7 +175,7 @@ class _DashboardState extends State<Dashboard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        BoldText("5 Stars", 15.0, korangelite),
+                        //BoldText("5 Stars", 15.0, korangelite),
                         Icon(
                           Icons.location_on,
                           color: kgreyDark,
@@ -206,25 +198,25 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Icon(
-                                Icons.star,
-                                color: kwhite,
-                                size: 15.0,
-                              ),
-                              BoldText("4.5", 15.0, kwhite)
+                              // Icon(
+                              //   Icons.star,
+                              //   color: kwhite,
+                              //   size: 15.0,
+                              // ),
+                              // BoldText("4.5", 15.0, kwhite)
                             ],
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
-                        NormalText("(1024 Reviews)", kgreyDark, 11.0),
+                        // NormalText("(1024 Reviews)", kgreyDark, 11.0),
                       ],
                     ),
                     SizedBox(
                       height: 30,
                     ),
-                    BoldText("Book& Save 30% !", 14.0, Colors.red),
+                    BoldText("Book & Save Stress !", 14.0, Colors.red),
                     SizedBox(height: 14),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
