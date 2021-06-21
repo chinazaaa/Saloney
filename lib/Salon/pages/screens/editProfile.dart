@@ -35,7 +35,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController salonDescription = TextEditingController(
       text: locator<UserInfoCache>().salon.data.salon.description);
   TextEditingController salonLocation = TextEditingController(
-      text: locator<UserInfoCache>().salon.data.salon.location.formattedAddress);
+      text:
+          locator<UserInfoCache>().salon.data.salon.location.formattedAddress);
   final formKey = GlobalKey<FormState>();
   final salonFormkey = GlobalKey<FormState>();
 
@@ -96,7 +97,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             border: Border.all(
                                 width: 4,
                                 color:
-                                Theme.of(context).scaffoldBackgroundColor),
+                                    Theme.of(context).scaffoldBackgroundColor),
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 2,
@@ -122,7 +123,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               border: Border.all(
                                 width: 4,
                                 color:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                    Theme.of(context).scaffoldBackgroundColor,
                               ),
                               color: Color(0xff9477cb),
                             ),
@@ -173,17 +174,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     //FIXME
                                     OutlineButton(
                                       padding:
-                                      EdgeInsets.symmetric(horizontal: 30),
+                                          EdgeInsets.symmetric(horizontal: 30),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(20)),
-                                      onPressed:
-                                          () {}, // FIXME Return to profile page
+                                              BorderRadius.circular(20)),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      }, // FIXME Return to profile page
                                       child: Text("CANCEL",
                                           style: TextStyle(
                                               fontSize: 14,
@@ -198,29 +200,30 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           return;
                                         bool success = await profileM
                                             .updateSalonOwnerProfile(
-                                            username.text,
+                                                username.text,
 
-                                            // email.text,
-                                            phoneNumber.text);
-                                        if(success){
+                                                // email.text,
+                                                phoneNumber.text);
+                                        if (success) {
                                           Navigator.pop(context);
-                                           Get.snackbar(
-        'Success!',
-        'Salon Profile Updated',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
-}
+                                          Get.snackbar(
+                                            'Success!',
+                                            'Salon Profile Updated',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                                        }
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
-                                      EdgeInsets.symmetric(horizontal: 50),
+                                          EdgeInsets.symmetric(horizontal: 50),
                                       elevation: 2,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(20)),
+                                              BorderRadius.circular(20)),
                                       child: Text(
                                         "SAVE GENERAL",
                                         style: TextStyle(
@@ -264,21 +267,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: Wrap(
                                       children: [
                                         for (int i = 0;
-                                        i <=
-                                            model.salonProfileImages.length;
-                                        i++)
+                                            i <=
+                                                model.salonProfileImages.length;
+                                            i++)
                                           i == model.salonProfileImages.length
                                               ? AddImageButton(
-                                            onTap: () => model
-                                                .addSaloonProfileImage(),
-                                          )
+                                                  onTap: () => model
+                                                      .addSaloonProfileImage(),
+                                                )
                                               : ImageView(
-                                            image: model
-                                                .salonProfileImages[i],
-                                            onTap: () => model
-                                                .deleteSaloonProfileImage(
-                                                index: i),
-                                          ),
+                                                  image: model
+                                                      .salonProfileImages[i],
+                                                  onTap: () => model
+                                                      .deleteSaloonProfileImage(
+                                                          index: i),
+                                                ),
                                       ],
                                     ),
                                   ),
@@ -299,7 +302,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   itemCount: _myJson.length,
                                   itemBuilder: (context, i) => Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Container(
                                           margin: EdgeInsets.only(left: 10),
@@ -319,16 +322,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     OutlineButton(
                                       padding:
-                                      EdgeInsets.symmetric(horizontal: 30),
+                                          EdgeInsets.symmetric(horizontal: 30),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(20)),
+                                              BorderRadius.circular(20)),
                                       onPressed:
-                                          () {}, // FIXME Return to profile page
+                                          () {Navigator.pop(context);}, // FIXME Return to profile page
                                       child: Text("CANCEL",
                                           style: TextStyle(
                                               fontSize: 14,
@@ -342,12 +345,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                                         String selectedCategories = '';
                                         //get selected categories
-                                        for(int i=0; i< _myJson.length; i++){
-                                          if(_myJson[i]['value']){
-                                            if(selectedCategories == ''){
-                                              selectedCategories = selectedCategories + _myJson[i]['name'];
-                                            } else{
-                                              selectedCategories = selectedCategories + ', ' + _myJson[i]['name'];
+                                        for (int i = 0;
+                                            i < _myJson.length;
+                                            i++) {
+                                          if (_myJson[i]['value']) {
+                                            if (selectedCategories == '') {
+                                              selectedCategories =
+                                                  selectedCategories +
+                                                      _myJson[i]['name'];
+                                            } else {
+                                              selectedCategories =
+                                                  selectedCategories +
+                                                      ', ' +
+                                                      _myJson[i]['name'];
                                             }
                                           }
                                         }
@@ -355,31 +365,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         print(selectedCategories);
 
                                         bool success =
-                                        await profileM.updateSalonProfile(
-                                            salonName.text,
-                                            salonDescription.text,
-                                            null,
-                                            selectedCategories,
-                                            salonLocation.text);
-                                                if(success){
+                                            await profileM.updateSalonProfile(
+                                                salonName.text,
+                                                salonDescription.text,
+                                                null,
+                                                selectedCategories,
+                                                salonLocation.text);
+                                        if (success) {
                                           Navigator.pop(context);
-                                           Get.snackbar(
-        'Success!',
-        'Salon Profile Updated',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
-}
+                                          Get.snackbar(
+                                            'Success!',
+                                            'Salon Profile Updated',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                                        }
                                       },
                                       color: Color(0xff9477cb),
                                       padding:
-                                      EdgeInsets.symmetric(horizontal: 50),
+                                          EdgeInsets.symmetric(horizontal: 50),
                                       elevation: 2,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(20)),
+                                              BorderRadius.circular(20)),
                                       child: Text(
                                         "SAVE SALON",
                                         style: TextStyle(
@@ -416,16 +427,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(
-              onPressed: () {
-                setState(() {
-                  showPassword = !showPassword;
-                });
-              },
-              icon: Icon(
-                Icons.remove_red_eye,
-                color: Colors.grey,
-              ),
-            )
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                    ),
+                  )
                 : null,
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
