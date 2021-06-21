@@ -35,7 +35,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController salonDescription = TextEditingController(
       text: locator<UserInfoCache>().salon.data.salon.description);
   TextEditingController salonLocation = TextEditingController(
-      text: locator<UserInfoCache>().salon.data.salon.location);
+      text: locator<UserInfoCache>().salon.data.salon.location.formattedAddress);
   final formKey = GlobalKey<FormState>();
   final salonFormkey = GlobalKey<FormState>();
 

@@ -82,23 +82,40 @@ class SalonData {
   
 }
 class Location {
-  List<double> coordinates;
+  Location({
+    this.type,
+    this.coordinates,
+    this.formattedAddress,
+  });
+
   String type;
+  List<double> coordinates;
   String formattedAddress;
 
-  Location({this.coordinates, this.type, this.formattedAddress});
+  Location copyWith({
+    String type,
+    List<double> coordinates,
+    String formattedAddress,
+  }) =>
+      Location(
+        type: type ?? this.type,
+        coordinates: coordinates ?? this.coordinates,
+        formattedAddress: formattedAddress ?? this.formattedAddress,
+      );
 
-  Location.fromJson(Map<String, dynamic> json) {
-    coordinates = json['coordinates'].cast<double>();
-    type = json['type'];
-    formattedAddress = json['formattedAddress'];
-  }
+  factory Location.fromJson(String str) => Location.fromMap(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['coordinates'] = this.coordinates;
-    data['type'] = this.type;
-    data['formattedAddress'] = this.formattedAddress;
-    return data;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory Location.fromMap(Map<String, dynamic> json) => Location(
+    type: json["type"],
+    coordinates: List<double>.from(json["coordinates"].map((x) => x.toDouble())),
+    formattedAddress: json["formattedAddress"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "type": type,
+    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
+    "formattedAddress": formattedAddress,
+  };
 }
