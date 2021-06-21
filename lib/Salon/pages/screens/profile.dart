@@ -8,6 +8,7 @@ import 'package:starter_project/core/routes/route_names.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/profile.dart';
 import 'package:starter_project/Salon/pages/screens/utils/CustomTextStyle.dart';
+import 'package:starter_project/models/user.dart';
 
 import '../../../intro_page.dart';
 import '../../../locator.dart';
@@ -18,6 +19,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final User user = locator<UserInfoCache>().salon.data.user;
   //  List<ListProfileSection> listSection = new List(); //FIXME List() is deprecated
   List<ListProfileSection> listSection = [];
 
@@ -205,16 +207,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           Align(
                             alignment: Alignment.topCenter,
                             child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade400, width: 2),
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/ic_user_profile.png"),
-                                      fit: BoxFit.contain)),
-                              width: 100,
-                              height: 100,
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: user.user.avatar == null ? Image.asset(
+                    "assets/1.png",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ) : Image.network(
+                    user.user.avatar,
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ),
                             ),
                           ),
                         ],

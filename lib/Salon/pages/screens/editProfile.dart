@@ -6,10 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
+import 'package:starter_project/models/user.dart';
 import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
 
 import '../../../locator.dart';
-
+final User user = locator<UserInfoCache>().salon.data.user;
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -93,24 +94,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Container(
                         width: 130,
                         height: 130,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 4,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 10,
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: Offset(0, 10))
-                            ],
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  "assets/customer.png",
-                                ))),
+                       padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: user.avatar == null ? Image.asset(
+                    "assets/1.png",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ) : Image.network(
+                    user.avatar,
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ),
                       ),
                       Positioned(
                           bottom: 0,

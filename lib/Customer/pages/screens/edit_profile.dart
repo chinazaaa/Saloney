@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/profile.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
-
+import 'package:starter_project/models/customer.dart';
 import '../../../locator.dart';
 
 class EditCustomerProfilePage extends StatefulWidget {
@@ -14,6 +14,7 @@ class EditCustomerProfilePage extends StatefulWidget {
 }
 
 class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
+  final Customer user = locator<UserInfoCache>().customer.data;
   bool showPassword = false;
   TextEditingController _usernameC = TextEditingController(
     text: locator<UserInfoCache>().customer.data.userName);
@@ -72,26 +73,21 @@ class _EditCustomerProfilePageState extends State<EditCustomerProfilePage> {
                 child: Stack(
                   children: [
                     Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              ))),
-                    ),
+                        
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: user.avatar == null ? Image.asset(
+                    "assets/1.png",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ) : Image.network(
+                    user.avatar,
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                ),
+                   
                     Positioned(
                         bottom: 0,
                         right: 0,

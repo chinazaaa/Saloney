@@ -3,7 +3,7 @@ import 'dart:convert';
 class User {
   User({
     this.local,
-    this.image,
+    this.avatar,
     this.id,
     this.identifier,
     this.createdAt,
@@ -12,7 +12,7 @@ class User {
   });
 
   Local local;
-  String image;
+  String avatar;
   String id;
   String identifier;
   DateTime createdAt;
@@ -21,7 +21,7 @@ class User {
 
   User copyWith({
     Local local,
-    String image,
+    String avatar,
     String id,
     String identifier,
     DateTime createdAt,
@@ -30,7 +30,7 @@ class User {
   }) =>
       User(
         local: local ?? this.local,
-        image: image ?? this.image,
+        avatar: avatar ?? this.avatar,
         id: id ?? this.id,
         identifier: identifier ?? this.identifier,
         createdAt: createdAt ?? this.createdAt,
@@ -44,7 +44,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> json) => User(
     local: Local.fromMap(json["local"]),
-    image: json["image"],
+    avatar: json["avatar"],
     id: json["_id"],
     identifier: json["identifier"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -54,7 +54,7 @@ class User {
 
   Map<String, dynamic> toMap() => {
     "local": local.toMap(),
-    "image": image,
+    "avatar": avatar,
     "_id": id,
     "identifier": identifier,
     "createdAt": createdAt.toIso8601String(),
