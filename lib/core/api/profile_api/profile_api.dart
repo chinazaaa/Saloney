@@ -11,7 +11,7 @@ abstract class ProfileApi {
     String description,
     File image,
     String category,
-    String location,
+    String address,
   });
 
   Future<ApiResponse> updateSalonUserProfile({

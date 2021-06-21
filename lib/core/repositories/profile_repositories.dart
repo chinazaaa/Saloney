@@ -35,14 +35,14 @@ class ProfileRepo extends BaseNotifier with Validators {
     String description,
     File image,
     String category,
-    String location,
+    String address,
   ) async {
     try {
       UpdateSalonResponse res = await profileApi.updateSalonProfile(
           description: description,
           image: image,
           category: category,
-          location: location,
+          address: address,
           nameOfSalon: nameOfSalon);
       //cache updated data
       await userInfoCache.updateSalonInfo(res.data);

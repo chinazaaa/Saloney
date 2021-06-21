@@ -84,7 +84,7 @@ class ProfileApiImpl implements ProfileApi {
       String description,
       File image,
       String category,
-      String location}) async {
+      String address}) async {
     Map<String, String> header = {
     'Accept': 'application/json',
    'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ class ProfileApiImpl implements ProfileApi {
       'description': description,
       'image': image,
       'category': category,
-      'location': location,
+      'address': address,
     };
 
     var responsebody = await server.put(

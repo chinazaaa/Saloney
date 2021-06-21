@@ -44,4 +44,43 @@ class UpdateSalonResponse extends ApiResponse{
     "message": message,
     "data": data.toMap(),
   };
+  
+}
+class Location {
+  Location({
+    this.type,
+    this.coordinates,
+    this.formattedAddress,
+  });
+
+  String type;
+  List<double> coordinates;
+  String formattedAddress;
+
+  Location copyWith({
+    String type,
+    List<double> coordinates,
+    String formattedAddress,
+  }) =>
+      Location(
+        type: type ?? this.type,
+        coordinates: coordinates ?? this.coordinates,
+        formattedAddress: formattedAddress ?? this.formattedAddress,
+      );
+
+  factory Location.fromJson(String str) => Location.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Location.fromMap(Map<String, dynamic> json) => Location(
+    type: json["type"],
+    coordinates: List<double>.from(json["coordinates"].map((x) => x.toDouble())),
+    formattedAddress: json["formattedAddress"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "type": type,
+    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
+    "formattedAddress": formattedAddress,
+  };
 }
