@@ -58,7 +58,7 @@ class PopupOptionMenu extends StatelessWidget {
           ),
             PopupMenuItem(
                 //child: Icon(Icons.cancel, color: Colors.black, size: 28.0),
-              child: Text("Publish"),
+              child: Text("UnPublish"),
           value: MenuOption.Unpublish,
           ),
             PopupMenuItem(
