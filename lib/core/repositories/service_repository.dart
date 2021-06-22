@@ -14,6 +14,7 @@ class ServiceRepo extends BaseNotifier {
     description,
     price,
     category,
+    image
     // bool isPublished
   }) async {
     setState(ViewState.Busy);
@@ -27,6 +28,7 @@ class ServiceRepo extends BaseNotifier {
         description: description,
         price: price,
         category: category,
+        image: image
         // isPublished: isPublished
       );
 

@@ -1,76 +1,93 @@
 import 'dart:convert';
-import '../image_class.dart';
-
 class Service {
-  final String id;
-  final String salonId;
+  Service({
+    this.isPublished,
+    this.id,
+    this.service,
+    this.description,
+    this.image,
+    this.category,
+    this.price,
+    this.salon,
+    this.cloudinaryId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
-  final String serviceName;
-  final String description;
-  final String category;
-  final String price; // FIXME String or Int??
-  //FIXME
-  final Image serviceImage;
+  bool isPublished;
+  String id;
+  String service;
+  String description;
+  String image;
+  String category;
+  String price;
+  String salon;
+  String cloudinaryId;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-  final String createdAt;
-  final String updatedAt;
+  Service copyWith({
+    bool isPublished,
+    String id,
+    String service,
+    String description,
+    String image,
+    String category,
+    String price,
+    String salon,
+    String cloudinaryId,
+    DateTime createdAt,
+    DateTime updatedAt,
+    int v,
+  }) =>
+      Service(
+        isPublished: isPublished ?? this.isPublished,
+        id: id ?? this.id,
+        service: service ?? this.service,
+        description: description ?? this.description,
+        image: image ?? this.image,
+        category: category ?? this.category,
+        price: price ?? this.price,
+        salon: salon ?? this.salon,
+        cloudinaryId: cloudinaryId ?? this.cloudinaryId,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        v: v ?? this.v,
+      );
 
-  final bool isPublished;
-  final int v;
-
-  Service(
-      {this.id,
-      this.salonId,
-      this.serviceName,
-      this.description,
-      this.category,
-      this.price,
-      this.serviceImage,
-      this.createdAt,
-      this.updatedAt,
-      this.isPublished,
-      this.v});
-
-  Map<String, dynamic> toMap() {
-    return {
-      "_id": id,
-      "salon": salonId,
-      "service": serviceName,
-      "description": description,
-      "category": category,
-      "price": price,
-      "imageURL": serviceImage,
-      "isPublished": isPublished,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      "__v": v
-    };
-  }
-
-  factory Service.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Service(
-        id: map['_id'],
-        salonId: map["salon"],
-        serviceName: map["service"],
-        description: map["description"],
-        category: map["category"],
-        price: map["price"],
-        serviceImage: Image.fromMap(map['imageURL']),
-        isPublished: map["isPublished"],
-        createdAt: map['createdAt'],
-        updatedAt: map['updatedAt'],
-        v: map['__v']?.toInt());
-  }
+  factory Service.fromJson(String str) => Service.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Service.fromJson(String source) =>
-      Service.fromMap(json.decode(source));
+  factory Service.fromMap(Map<String, dynamic> json) => Service(
+    isPublished: json["isPublished"],
+    id: json["_id"],
+    service: json["service"],
+    description: json["description"],
+    image: json["image"],
+    category: json["category"],
+    price: json["price"],
+    salon: json["salon"],
+    cloudinaryId: json["cloudinary_id"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
 
-  @override
-  String toString() {
-    return 'Data( _id: $id,salon: $salonId,service: $serviceName,description: $description,category: $category,price: $price,imageURL: $serviceImage,isPublished: $isPublished,createdAt: $createdAt,updatedAt: $updatedAt,__v: $v)';
-  }
+  Map<String, dynamic> toMap() => {
+    "isPublished": isPublished,
+    "_id": id,
+    "service": service,
+    "description": description,
+    "image": image,
+    "category": category,
+    "price": price,
+    "salon": salon,
+    "cloudinary_id": cloudinaryId,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+  };
 }

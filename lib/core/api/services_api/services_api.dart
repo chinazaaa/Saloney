@@ -19,6 +19,7 @@ abstract class ServicesApi {
     String description,
     String category,
     String price,
+    String image,
   });
 
 

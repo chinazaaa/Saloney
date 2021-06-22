@@ -18,7 +18,8 @@ class ServicesApiImpl extends ServicesApi {
       {String service,
       String description,
       String category,
-      String price}) async {
+      String price,
+      String image}) async {
     String userId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       Map<String, dynamic> data = {
@@ -26,6 +27,7 @@ class ServicesApiImpl extends ServicesApi {
         "description": description,
         "category": category,
         "price": price,
+        "image": image,
         "api_token": locator<UserInfoCache>().token
       };
       var responsebody = await server.post(
