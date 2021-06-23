@@ -38,7 +38,7 @@ class MapService{
       ///return null if device location is null
       if(_deviceLocation == null) return null;
       GeocodingResponse detail = await GEOCODER.searchByLocation(Location(
-          _deviceLocation.latitude, _deviceLocation.longitude));
+          lat: _deviceLocation.latitude, lng: _deviceLocation.longitude));
       _deviceLocationDetails = detail.results[0];
       return detail.results[0];
     } else{

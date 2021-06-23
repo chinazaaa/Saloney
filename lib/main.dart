@@ -21,8 +21,6 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //Initialize % sizing helper
-    SizeConfig().init(context);
     //Set default display Orientation to Potrait
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

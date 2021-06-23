@@ -2,6 +2,7 @@ import 'package:starter_project/locator.dart';
 import 'package:starter_project/models/step_models.dart';
 import 'package:flutter/material.dart';
 import 'package:starter_project/home_screen.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 
 import 'Customer/pages/auth/otp.dart';
 import 'Customer/pages/screens/home.dart';
@@ -29,6 +30,13 @@ class _IntroPageState extends State<IntroPage> {
 
   }
 
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    //Initialize % sizing helper
+    SizeConfig().init(context);
+  }
 
   initialize() async {
     //Initiating the UserInfoCache Data to be used in app

@@ -3,6 +3,7 @@ import 'package:starter_project/core/api/customer_api/customer_api.dart';
 import 'package:starter_project/core/api/customer_api/customer_api_impl.dart';
 import 'package:starter_project/core/api/profile_api/profile_api.dart';
 import 'package:starter_project/core/api/profile_api/profile_api_impl.dart';
+import 'package:starter_project/core/services/map_service.dart';
 import 'package:starter_project/index.dart';
 
 import 'core/api/api_utils/api_helper.dart';
@@ -25,6 +26,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<CustomerApi>(() => CustomerApiImpl());
   locator.registerLazySingleton<ProfileApi>(() => ProfileApiImpl());
   locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
+  locator.registerLazySingleton<MapService>(() => MapService());
   locator
       .registerLazySingleton<AuthenticationApi>(() => AuthenticationApiImpl());
 
