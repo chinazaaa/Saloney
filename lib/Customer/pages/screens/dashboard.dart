@@ -142,7 +142,7 @@ class _DashboardState extends State<Dashboard> {
         margin: EdgeInsets.only(bottom: 20),
         child: Container(
             width: 300,
-            height: 150,
+            // height: 150,
             decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(15.0)),
