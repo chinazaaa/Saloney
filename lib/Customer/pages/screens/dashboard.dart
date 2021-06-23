@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/utils/closeSalons.dart';
 import 'package:starter_project/Customer/pages/utils/buttons.dart';
 //import 'package:starter_project/Customer/pages/utils/salonsImage.dart';
@@ -8,6 +9,10 @@ import 'package:starter_project/Customer/pages/utils/recommendationImage.dart';
 import 'package:starter_project/Customer/pages/utils/textStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 import 'package:starter_project/Customer/pages/utils/imageContainer.dart';
+import 'package:starter_project/core/repositories/customer_repository.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
+import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
 
 import 'OverViewScreen.dart';
 
@@ -17,13 +22,26 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //get salons
+      Provider.of<CustomerToSalonRepository>(context, listen: false).getSalonByLocation();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<CustomerToSalonRepository>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             ImageContainer(),
+
+            //Display all fetched salons
             Padding(
               padding:
                   const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
@@ -32,99 +50,32 @@ class _DashboardState extends State<Dashboard> {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: Align(
                       alignment: Alignment.centerLeft,
-                      child: BoldText("Salon Closest to You", 20.0, kblack)),
-                ),
-                Container(
-                  width: 330,
-                  height: 150,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      buildContainer(),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      buildContainer(),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      buildContainer(),
-                    ],
-                  ),
-                ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 20),
-                //   child: Row(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: <Widget>[
-                //       BoldText("Recommended for you", 20.0, kblack),
-                //       SizedBox(
-                //         width: 60,
-                //       ),
-                //       BoldText("More", 15.0, korange),
-                //       Icon(
-                //         Icons.navigate_next,
-                //         color: korange,
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // Container(
-                //   width: 400,
-                //   height: 200,
-                //   child: ListView(
-                //     scrollDirection: Axis.horizontal,
-                //     children: <Widget>[
-                //       RecommendationImage("assets/1.png", "Naza", "Lekki"),
-                //       RecommendationImage("assets/2.png", "Sudu", "Lekki"),
-                //       RecommendationImage("assets/3.png", "KC", "Lekki"),
-                //     ],
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 16.0),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
                       child: BoldText("Salons Near You", 20.0, kblack)),
                 ),
-                Container(
-                  width: 400,
-                  height: 250,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      CloseSalons("assets/1.png", "KC", "Lekki"),
-                      CloseSalons("assets/2.png", "Naza", "Lekki"),
-                      CloseSalons("assets/3.png", "Sudu", "Lekki"),
-                      
-                    ],
+
+                Expanded(
+                  child: ResponsiveState(
+                    state: model.state,
+                    busyWidget: Center(child: Padding(padding: EdgeInsets.all(SizeConfig.widthOf(10)), child: CircularProgressIndicator(strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),),),),
+                    errorWidget: Center(child: Padding(padding: EdgeInsets.all(SizeConfig.widthOf(10)), child: ErrorRetryWidget(errorMessage: model.error, onTap: ()=> model.getSalonByLocation(),),)),
+                    idleWidget: Center(child: Padding(padding: EdgeInsets.all(SizeConfig.widthOf(10)), child: CircularProgressIndicator(strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),),),),
+                    noDataAvailableWidget: Center(child: Padding(padding: EdgeInsets.all(SizeConfig.widthOf(10)), child: Text('No Salon Nearby', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),),)),
+                    dataFetchedWidget: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
+                        buildContainer(),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        buildContainer(),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        buildContainer(),
+                      ],
+                    ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 10,bottom: 16.0),
-                //   child: Align(
-                //       alignment: Alignment.centerLeft,
-                //       child: BoldText("Awesome Cities", 20.0, kblack)),
-                // ),
-                // Row(
-                //   children: <Widget>[
-                //     SalonsImage("assets/2.png","ALGIERS"),
-                //     SizedBox(width: 28,),
-                //     SalonsImage("assets/3.png","TLEMCEN"),
-
-                //   ],
-                // ),
-                // SizedBox(height: 28,),
-                //   Row(
-                //     children: <Widget>[
-                //       SalonsImage("assets/1.png","ADRAR"),
-                //       SizedBox(width: 28,),
-
-                //       SalonsImage("assets/3.png","BEDJAIA"),
-
-                //     ],
-
-                // ),
               ]),
             ),
           ],
@@ -133,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget buildContainer() {
+  Widget buildContainer({String salonName, String salonAddress, String description, String image, String salonId}) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -141,8 +92,9 @@ class _DashboardState extends State<Dashboard> {
         }));
       },
       child: Container(
-        width: 320,
-        height: 50,
+        width: double.infinity,
+        height: 80,
+        margin: EdgeInsets.only(bottom: 20),
         child: Container(
             width: 300,
             height: 150,
@@ -159,7 +111,7 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(15),
                           bottomLeft: Radius.circular(15)),
-                      child: Image.asset(
+                      child: image != null ? Image.network(image) :  Image.asset(
                         "assets/1.png",
                         fit: BoxFit.fitHeight,
                       )),
@@ -171,7 +123,7 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    BoldText("Plaza", 20.5, kblack),
+                    BoldText(salonName ?? 'Unidentified', 20.5, kblack),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -181,7 +133,7 @@ class _DashboardState extends State<Dashboard> {
                           color: kgreyDark,
                           size: 15.0,
                         ),
-                        NormalText("Lekki", kgreyDark, 15.0)
+                        NormalText(salonAddress ?? "Unknown address", kgreyDark, 15.0)
                       ],
                     ),
                     Row(
@@ -216,7 +168,7 @@ class _DashboardState extends State<Dashboard> {
                     SizedBox(
                       height: 30,
                     ),
-                    BoldText("Book & Save Stress !", 14.0, Colors.red),
+                    BoldText(description ?? "No Description", 14.0, Colors.red),
                     SizedBox(height: 14),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -50,6 +50,7 @@ dependencies:
   # map
   google_map_location_picker: #^4.1.7
   shared_preferences:
+  google_maps_webservice: ^0.0.18
 
 dev_dependencies:
   flutter_test:

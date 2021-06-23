@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'Salon/pages/screens/utils/size_config.dart';
 import 'core/provider/providers.dart';
 import 'core/routes/route_names.dart';
 import 'locator.dart';
@@ -20,6 +21,8 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //Initialize % sizing helper
+    SizeConfig().init(context);
     //Set default display Orientation to Potrait
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
