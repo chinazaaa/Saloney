@@ -17,24 +17,36 @@ class CustomerToSalonRepository extends BaseNotifier{
   //Api
   final customerApi = locator<CustomerApi>();
 
+  String currentAction = 'loading...';
+
+  updateCurrentAction(String s){
+    currentAction = s;
+    notifyListeners();
+  }
+
   Future<Position> fetchUserLocation() async {
     final ms = locator<MapService>();
     if(ms.deviceLocation != null) return ms.deviceLocation;
     var p = await ms.getDeviceLocation();
+    // print(ms.deviceLocationDetails.formattedAddress);
     return p;
   }
 
   List<SalonLocation> salons = [];
   Future getSalonByLocation() async{
+    updateCurrentAction('Fetching your location...');
     //get user location
     Position p = await fetchUserLocation();
     if(p == null){
       setError('Could not get User location');
       return;
     }
+    // print('long: ' + p.longitude.toString());
+    // print('lat: ' + p.latitude.toString());
 
     if(salons.isEmpty) setState(ViewState.Busy);
     try {
+      updateCurrentAction('Fetching salons near you...');
       GetSalonByLocationResponse res = await customerApi.getSalonByLocation(latitude: p.latitude.toString(), longitude: p.longitude.toString());
       if(res.salonLocation.isEmpty){
         setState(ViewState.NoDataAvailable);
@@ -49,6 +61,7 @@ class CustomerToSalonRepository extends BaseNotifier{
     catch (e) {
       setError(e.toString());
     }
+    updateCurrentAction('...');
     return false;
   }
 }

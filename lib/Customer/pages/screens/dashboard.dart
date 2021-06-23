@@ -53,10 +53,23 @@ class _DashboardState extends State<Dashboard> {
               busyWidget: Center(
                 child: Padding(
                   padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(
+                        strokeWidth: 6,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Theme.of(context).primaryColor),
+                      ),
+                      SizedBox(height: 10,),
+                      Text(
+                          model.currentAction,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                          ),
+                      ),
+                    ],
                   ),
                 ),
               ),
