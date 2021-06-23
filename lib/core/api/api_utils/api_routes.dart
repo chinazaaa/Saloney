@@ -19,6 +19,7 @@ class ApiRoutes {
   static const String registerCustomer = '$apiRoute/register/customer';
   static const String loginCustomer = '$apiRoute/login/customer';
   static const String confirmCustomerOTP = '$apiRoute/confirm/customer';
+  static const String salonByLocation = '$apiRoute/salonbylocation';
 
 
 
