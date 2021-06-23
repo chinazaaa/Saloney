@@ -6,6 +6,7 @@ class Salon {
         this.location,
         this.description,
         this.image,
+        this.avatar,
         this.id,
         this.nameOfSalon,
         this.salonOwner,
@@ -18,6 +19,7 @@ class Salon {
     String description;
     List<Image> image;
     String id;
+     String avatar;
     String nameOfSalon;
     String salonOwner;
     DateTime createdAt;
@@ -29,6 +31,7 @@ class Salon {
         String description,
         List<Image> image,
         String id,
+         String avatar,
         String nameOfSalon,
         String salonOwner,
         DateTime createdAt,
@@ -40,6 +43,7 @@ class Salon {
             description: description ?? this.description,
             image: image ?? this.image,
             id: id ?? this.id,
+            avatar: avatar ?? this.avatar,
             nameOfSalon: nameOfSalon ?? this.nameOfSalon,
             salonOwner: salonOwner ?? this.salonOwner,
             createdAt: createdAt ?? this.createdAt,
@@ -56,6 +60,7 @@ class Salon {
         description: json["description"],
         image: List<Image>.from(json["image"].map((x) => Image.fromMap(x))),
         id: json["_id"],
+        avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
         salonOwner: json["salonOwner"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -68,6 +73,7 @@ class Salon {
         "description": description,
         "image": List<dynamic>.from(image.map((x) => x.toMap())),
         "_id": id,
+        "avatar": avatar,
         "nameOfSalon": nameOfSalon,
         "salonOwner": salonOwner,
         "createdAt": createdAt.toIso8601String(),
