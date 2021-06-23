@@ -21,11 +21,4 @@ class CustomerApiImpl implements CustomerApi{
     'Content-Type': 'application/json',
     'x-access-token': locator<UserInfoCache>().token
   };
-
-  // Map<String, String> get header => {
-  //   'Accept': 'application/json',
-  //   'Content-Type': 'application/json',
-  //   'Authorization': 'Bearer ${locator<UserInfoCache>().token}',
-  // };
-
 }

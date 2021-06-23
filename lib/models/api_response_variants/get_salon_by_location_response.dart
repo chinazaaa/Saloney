@@ -41,6 +41,7 @@ class SalonLocation {
     this.salonOwner,
     this.createdAt,
     this.updatedAt,
+    this.avatar,
     this.v,
   });
 
@@ -49,6 +50,7 @@ class SalonLocation {
   List<dynamic> image;
   String id;
   String nameOfSalon;
+  String avatar;
   String salonOwner;
   DateTime createdAt;
   DateTime updatedAt;
@@ -62,6 +64,7 @@ class SalonLocation {
     String nameOfSalon,
     String salonOwner,
     DateTime createdAt,
+    String avatar,
     DateTime updatedAt,
     int v,
   }) =>
@@ -70,6 +73,7 @@ class SalonLocation {
         description: description ?? this.description,
         image: image ?? this.image,
         id: id ?? this.id,
+        avatar: avatar ?? this.avatar,
         nameOfSalon: nameOfSalon ?? this.nameOfSalon,
         salonOwner: salonOwner ?? this.salonOwner,
         createdAt: createdAt ?? this.createdAt,
@@ -88,6 +92,7 @@ class SalonLocation {
     id: json["_id"],
     nameOfSalon: json["nameOfSalon"],
     salonOwner: json["salonOwner"],
+    avatar: json["avatar"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
@@ -102,6 +107,7 @@ class SalonLocation {
     "salonOwner": salonOwner,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
+    "avatar" : avatar,
     "__v": v,
   };
 }

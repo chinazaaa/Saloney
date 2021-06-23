@@ -110,7 +110,7 @@ class _DashboardState extends State<Dashboard> {
                       .map((e) => buildContainer(
                             description: e.description,
                             salonAddress: e.location.formattedAddress,
-                            image: e.image.isNotEmpty ? e.image[0] : null,
+                            image: e.avatar,
                             salonId: e.id,
                             salonName: e.nameOfSalon,
                           ))
@@ -130,6 +130,7 @@ class _DashboardState extends State<Dashboard> {
       String description,
       String image,
       String salonId}) {
+    print(image);
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -149,8 +150,8 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 80,
+                  height: 80,
                   child: ClipRRect(
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(15),
@@ -165,73 +166,78 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(
                   width: 10.0,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BoldText(salonName ?? 'Unidentified', 20.5, kblack),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        //BoldText("5 Stars", 15.0, korangelite),
-                        Icon(
-                          Icons.location_on,
-                          color: kgreyDark,
-                          size: 15.0,
-                        ),
-                        NormalText(
-                            salonAddress ?? "Unknown address", kgreyDark, 15.0)
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          width: 50.0,
-                          decoration: BoxDecoration(
-                            color: korange,
-                            borderRadius: BorderRadius.circular(10.0),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      BoldText(salonName ?? 'Unidentified', 20.5, kblack),
+                      SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          //BoldText("5 Stars", 15.0, korangelite),
+                          Icon(
+                            Icons.location_on,
+                            color: kgreyDark,
+                            size: 15.0,
+                          ), SizedBox(width: 10,),
+                          Expanded(
+                            child: NormalText(
+                                salonAddress ?? "Unknown address", kgreyDark, 15.0),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 50.0,
+                            decoration: BoxDecoration(
+                              color: korange,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                // Icon(
+                                //   Icons.star,
+                                //   color: kwhite,
+                                //   size: 15.0,
+                                // ),
+                                // BoldText("4.5", 15.0, kwhite)
+                              ],
+                            ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              // Icon(
-                              //   Icons.star,
-                              //   color: kwhite,
-                              //   size: 15.0,
-                              // ),
-                              // BoldText("4.5", 15.0, kwhite)
-                            ],
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        // NormalText("(1024 Reviews)", kgreyDark, 11.0),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    BoldText(description ?? "No Description", 14.0, Colors.red),
-                    SizedBox(height: 14),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 90,
-                        ),
-                        BoldText("More", 12.0, kblack),
-                        Icon(
-                          Icons.navigate_next,
-                          size: 15.0,
-                        ),
-                      ],
-                    )
-                  ],
+                          // NormalText("(1024 Reviews)", kgreyDark, 11.0),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      BoldText(description != null ? 'Description: $description' : "No Description", 14.0, Colors.red),
+                      SizedBox(height: 14),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 90,
+                          ),
+                          BoldText("More", 12.0, kblack),
+                          Icon(
+                            Icons.navigate_next,
+                            size: 15.0,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 )
               ],
             )),
