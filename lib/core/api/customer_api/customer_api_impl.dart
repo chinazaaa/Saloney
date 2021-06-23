@@ -11,7 +11,8 @@ class CustomerApiImpl implements CustomerApi{
   @override//API client
   var server = locator<API>();
   Future<GetSalonByLocationResponse> getSalonByLocation({String latitude, String longitude}) async{
-    var responsebody = await server.get('${ApiRoutes.salonByLocation}/$latitude/$longitude', header);
+    print('${ApiRoutes.salonByLocation}/$longitude/$latitude');
+    var responsebody = await server.get('${ApiRoutes.salonByLocation}/$longitude/$latitude', header);
     GetSalonByLocationResponse response = GetSalonByLocationResponse.fromJson(responsebody);
     return response;
   }
