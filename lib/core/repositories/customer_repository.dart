@@ -29,7 +29,8 @@ class CustomerToSalonRepository extends BaseNotifier{
     if(ms.deviceLocation != null) return ms.deviceLocation;
     var p = await ms.getDeviceLocation();
     // print(ms.deviceLocationDetails.formattedAddress);
-    return p;
+    // return p;
+    return Position(longitude: 3.3489671, latitude: 3.3489671);
   }
 
   List<SalonLocation> salons = [];
@@ -41,8 +42,8 @@ class CustomerToSalonRepository extends BaseNotifier{
       setError('Could not get User location');
       return;
     }
-    // print('long: ' + p.longitude.toString());
-    // print('lat: ' + p.latitude.toString());
+    print('long: ' + p.longitude.toString());
+    print('lat: ' + p.latitude.toString());
 
     if(salons.isEmpty) setState(ViewState.Busy);
     try {

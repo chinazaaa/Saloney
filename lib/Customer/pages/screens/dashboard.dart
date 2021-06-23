@@ -138,7 +138,6 @@ class _DashboardState extends State<Dashboard> {
       },
       child: Container(
         width: double.infinity,
-        height: 80,
         margin: EdgeInsets.only(bottom: 20),
         child: Container(
             width: 300,
@@ -150,8 +149,8 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: 150,
-                  height: 150,
+                  width: 100,
+                  height: 100,
                   child: ClipRRect(
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(15),
