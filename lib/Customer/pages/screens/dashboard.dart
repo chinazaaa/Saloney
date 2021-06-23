@@ -63,15 +63,15 @@ class _DashboardState extends State<Dashboard> {
                     dataFetchedWidget: ListView(
                       scrollDirection: Axis.vertical,
                       children: <Widget>[
-                        buildContainer(),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        buildContainer(),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        buildContainer(),
+                        ...model.salons.map((e) =>
+                          buildContainer(description: e.description,
+                            salonAddress: e.location.formattedAddress,
+                            image: e.image.isNotEmpty? e.image[0] : null,
+                            salonId: e.id,
+                            salonName: e.nameOfSalon,
+                          )
+                        ).toList(),
+
                       ],
                     ),
                   ),
