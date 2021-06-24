@@ -144,7 +144,7 @@ class ChangePasswordPage extends StatelessWidget {
     if (success) {
       Get.snackbar(
         'Success!',
-        'User Profile Updated',
+        'User Password Changed',
         margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
         snackStyle: SnackStyle.FLOATING,
         snackPosition: SnackPosition.BOTTOM,
