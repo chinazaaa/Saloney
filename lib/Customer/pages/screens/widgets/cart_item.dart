@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/screens/salon_details.dart';
+import 'package:starter_project/Customer/pages/screens/salonServices_details.dart';
 import 'package:starter_project/Customer/pages/utils/constant.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/smooth_star_rating.dart';
 

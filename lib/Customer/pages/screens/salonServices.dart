@@ -5,18 +5,18 @@ import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/grid_service.dart';
 
 
-class SalonsScreen extends StatefulWidget {
+class SalonServicesScreen extends StatefulWidget {
   @override
-  _SalonsScreenState createState() => _SalonsScreenState();
+  _SalonServicesScreenState createState() => _SalonServicesScreenState();
 }
 
-class _SalonsScreenState extends State<SalonsScreen> {
+class _SalonServicesScreenState extends State<SalonServicesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
-        backgroundColor: Colors.red,
+        backgroundColor: Color(0xff9477cb),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
@@ -33,6 +33,7 @@ class _SalonsScreenState extends State<SalonsScreen> {
           IconButton(
             icon: IconBadge(
               icon: Icons.notifications,
+              //color: Color(0xff9477cb),
               size: 22.0,
             ),
             onPressed: (){
@@ -49,10 +50,12 @@ class _SalonsScreenState extends State<SalonsScreen> {
       ),
 
       body: Padding(
+        
           padding: EdgeInsets.fromLTRB(10.0,0,10.0,0),
         child: ListView(
-
+          
           children: <Widget>[
+                Divider(),
             Text(
               "Hair",
               style: TextStyle(
@@ -77,10 +80,10 @@ class _SalonsScreenState extends State<SalonsScreen> {
                 Map service = services[index];
                 return GridService(
                   img: service['img'],
-                  isFav: false,
+                  // isFav: false,
                   name: service['name'],
-                  rating: 5.0,
-                  raters: 23,
+                  // rating: 5.0,
+                  price:service['price'],
                 );
               },
             ),
@@ -110,10 +113,10 @@ class _SalonsScreenState extends State<SalonsScreen> {
                 Map service = services[index];
                 return GridService(
                   img: service['img'],
-                  isFav: false,
+                  //isFav: false,
                   name: service['name'],
-                  rating: 5.0,
-                  raters: 23,
+                  // rating: 5.0,
+                  price: service['price'],
                 );
               },
             ),
@@ -143,10 +146,10 @@ class _SalonsScreenState extends State<SalonsScreen> {
                 Map food = services[index];
                 return GridService(
                   img: food['img'],
-                  isFav: false,
+                  // isFav: false,
                   name: food['name'],
-                  rating: 5.0,
-                  raters: 23,
+                  // rating: 5.0,
+                    price: food['price'],
                 );
               },
             ),

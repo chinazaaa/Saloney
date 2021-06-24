@@ -1,50 +1,62 @@
 List<Map> services = [
   {
     "img": "assets/1.png",
-    "name": "Braiding"
+    "name": "Braiding",
+    "price" : 50,
   },
   {
     "img": "assets/2.png",
-    "name": "Washing of hair"
+    "name": "Washing of hair",
+    "price" : 50
   },
   {
     "img": "assets/3.png",
-    "name": "Fixing nails"
+    "name": "Fixing nails",
+    "price" : 50
   },
   {
     "img": "assets/1.png",
-    "name": "Makeup"
+    "name": "Makeup",
+    "price" : 50
   },
   {
     "img": "assets/2.png",
-    "name": "Fixing weavon"
+    "name": "Fixing weavon",
+    "price" : "50"
   },
   {
     "img": "assets/3.png",
-    "name": "Spa"
+    "name": "Spa",
+    "price" : 50
   },
   {
     "img": "assets/1.png",
-    "name": "Tanning"
+    "name": "Tanning",
+    "price" : 50
   },
   {
     "img": "assets/2.png",
-    "name": "Skin care"
+    "name": "Skin care",
+    "price" : 50
   },
   {
     "img": "assets/3.png",
-    "name": "Brows"
+    "name": "Brows",
+    "price" : 50
   },
   {
     "img": "assets/1.png",
-    "name": "Bath tub"
+    "name": "Bath tub",
+    "price" : 50
   },
   {
     "img": "assets/2.png",
-    "name": "Makeup"
+    "name": "Makeup",
+    "price" : 50
   },
   {
     "img": "assets/3.png",
-    "name": "Braiding"
+    "name": "Braiding",
+    "price" : 50
   },
 ];

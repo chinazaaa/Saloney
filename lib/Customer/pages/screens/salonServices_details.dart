@@ -18,7 +18,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
-        backgroundColor: Colors.red,
+        backgroundColor: Color(0xff9477cb),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
@@ -67,24 +67,24 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                     ),
                   ),
                 ),
-                Positioned(
-                  right: -10.0,
-                  bottom: 3.0,
-                  child: RawMaterialButton(
-                    onPressed: () {},
-                    fillColor: Colors.white,
-                    shape: CircleBorder(),
-                    elevation: 4.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Icon(
-                        isFav ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.red,
-                        size: 17,
-                      ),
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   right: -10.0,
+                //   bottom: 3.0,
+                //   child: RawMaterialButton(
+                //     onPressed: () {},
+                //     fillColor: Colors.white,
+                //     shape: CircleBorder(),
+                //     elevation: 4.0,
+                //     child: Padding(
+                //       padding: EdgeInsets.all(5),
+                //       // child: Icon(
+                //       //   isFav ? Icons.favorite : Icons.favorite_border,
+                //       //   color: Colors.red,
+                //       //   size: 17,
+                //       // ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             SizedBox(height: 10.0),
@@ -98,39 +98,40 @@ class _ServiceDetailsState extends State<ServiceDetails> {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
-              child: Row(
-                children: <Widget>[
-                  SmoothStarRating(
-                    starCount: 5,
-                    color: Constants.ratingBG,
-                    allowHalfRating: true,
-                    rating: 5.0,
-                    size: 10.0,
-                  ),
-                  SizedBox(width: 10.0),
-                  Text(
-                    "5.0 (23 Reviews)",
-                    style: TextStyle(
-                      fontSize: 11.0,
-                    ),
-                  ),
-                ],
-              ),
+              
+              // child: Row(
+              //   children: <Widget>[
+              //     SmoothStarRating(
+              //       starCount: 5,
+              //       color: Constants.ratingBG,
+              //       allowHalfRating: true,
+              //       rating: 5.0,
+              //       size: 10.0,
+              //     ),
+              //     SizedBox(width: 10.0),
+              //     Text(
+              //       "5.0 (23 Reviews)",
+              //       style: TextStyle(
+              //         fontSize: 11.0,
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
               child: Row(
                 children: <Widget>[
-                  Text(
-                    "Cheap and affordable",
-                    style: TextStyle(
-                      fontSize: 11.0,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
+                  // Text(
+                  //   "Cheap and affordable",
+                  //   style: TextStyle(
+                  //     fontSize: 11.0,
+                  //     fontWeight: FontWeight.w300,
+                  //   ),
+                  // ),
                   SizedBox(width: 10.0),
                   Text(
-                    r"$90",
+                   "${services[1]['price']}",
                     style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w900,
@@ -167,61 +168,61 @@ class _ServiceDetailsState extends State<ServiceDetails> {
               ),
             ),
             SizedBox(height: 20.0),
-            Text(
-              "Reviews",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w800,
-              ),
-              maxLines: 2,
-            ),
-            SizedBox(height: 20.0),
-            ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: comments == null ? 0 : comments.length,
-              itemBuilder: (BuildContext context, int index) {
-                Map comment = comments[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 25.0,
-                    backgroundImage: AssetImage(
-                      "${comment['img']}",
-                    ),
-                  ),
-                  title: Text("${comment['name']}"),
-                  subtitle: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SmoothStarRating(
-                            starCount: 5,
-                            color: Constants.ratingBG,
-                            allowHalfRating: true,
-                            rating: 5.0,
-                            size: 12.0,
-                          ),
-                          SizedBox(width: 6.0),
-                          Text(
-                            "February 14, 2020",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 7.0),
-                      Text(
-                        "${comment["comment"]}",
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 10.0),
+            // Text(
+            //   "Reviews",
+            //   style: TextStyle(
+            //     fontSize: 18,
+            //     fontWeight: FontWeight.w800,
+            //   ),
+            //   maxLines: 2,
+            // ),
+            // SizedBox(height: 20.0),
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   primary: false,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   itemCount: comments == null ? 0 : comments.length,
+            //   itemBuilder: (BuildContext context, int index) {
+            //     Map comment = comments[index];
+            //     return ListTile(
+            //       leading: CircleAvatar(
+            //         radius: 25.0,
+            //         backgroundImage: AssetImage(
+            //           "${comment['img']}",
+            //         ),
+            //       ),
+            //       title: Text("${comment['name']}"),
+            //       subtitle: Column(
+            //         children: <Widget>[
+            //           Row(
+            //             children: <Widget>[
+            //               SmoothStarRating(
+            //                 starCount: 5,
+            //                 color: Constants.ratingBG,
+            //                 allowHalfRating: true,
+            //                 rating: 5.0,
+            //                 size: 12.0,
+            //               ),
+            //               SizedBox(width: 6.0),
+            //               Text(
+            //                 "February 14, 2020",
+            //                 style: TextStyle(
+            //                   fontSize: 12,
+            //                   fontWeight: FontWeight.w300,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           SizedBox(height: 7.0),
+            //           Text(
+            //             "${comment["comment"]}",
+            //           ),
+            //         ],
+            //       ),
+            //     );
+            //   },
+            // ),
+            // SizedBox(height: 10.0),
           ],
         ),
       ),
@@ -235,7 +236,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            primary: Color(0xff9477cb),
           ),
           onPressed: () {},
         ),

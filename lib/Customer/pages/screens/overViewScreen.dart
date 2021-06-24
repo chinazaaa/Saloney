@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/screens/salonServices.dart';
 import 'package:starter_project/Customer/pages/utils/Buttons.dart';
 import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
@@ -83,11 +84,11 @@ class _OverViewPageState extends State<OverViewPage>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                NormalText( //description of salon goes here
-                                    "Cheap and affordable", kgreyDark, 16.0),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
+                                // NormalText( //description of salon goes here
+                                //     "Cheap and affordable", kgreyDark, 16.0),
+                                // SizedBox(
+                                //   height: 10.0,
+                                // ),
                                 Container(
                                   height: 2,
                                   color: kgreyFill,
@@ -100,7 +101,7 @@ class _OverViewPageState extends State<OverViewPage>
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     BoldText("About this salon", 20.0, kblack),
-                                    BoldText("More", 16, kdarkBlue)
+                                    // BoldText("More", 16, kdarkBlue)
                                   ],
                                 ),
                                 SizedBox(
@@ -125,7 +126,7 @@ class _OverViewPageState extends State<OverViewPage>
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     BoldText("categories", 20.0, kblack),
-                                    BoldText("More", 16, kdarkBlue),
+                                    // BoldText("More", 16, kdarkBlue),
                                   ],
                                 ),
                                 SizedBox(
@@ -214,7 +215,13 @@ class _OverViewPageState extends State<OverViewPage>
               left: 5,
               child: WideButton(
                 "BOOK NOW",
-                () {},
+                () {
+                       Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SalonServicesScreen()));
+                },
               )),
         ],
       ),

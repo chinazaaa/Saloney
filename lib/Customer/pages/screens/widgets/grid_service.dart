@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/screens/salon_details.dart';
+import 'package:starter_project/Customer/pages/screens/salonServices_details.dart';
 import 'package:starter_project/Customer/pages/utils/constant.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/smooth_star_rating.dart';
 
@@ -7,18 +7,19 @@ class GridService extends StatelessWidget {
 
   final String name;
   final String img;
-  final bool isFav;
-  final double rating;
-  final int raters;
+  // final bool isFav;
+  // final double rating;
+   final int price;
 
 
   GridService({
     Key key,
     @required this.name,
     @required this.img,
-    @required this.isFav,
-    @required this.rating,
-    @required this.raters})
+    @required this.price,
+    // @required this.rating,
+    // @required this.raters
+    })
       :super(key: key);
 
   @override
@@ -42,26 +43,26 @@ class GridService extends StatelessWidget {
                 ),
               ),
 
-              Positioned(
-                right: -10.0,
-                bottom: 3.0,
-                child: RawMaterialButton(
-                  onPressed: (){},
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  elevation: 4.0,
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Icon(
-                      isFav
-                          ?Icons.favorite
-                          :Icons.favorite_border,
-                      color: Colors.red,
-                      size: 17,
-                    ),
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   right: -10.0,
+              //   bottom: 3.0,
+              //   child: RawMaterialButton(
+              //     onPressed: (){},
+              //     fillColor: Colors.white,
+              //     shape: CircleBorder(),
+              //     elevation: 4.0,
+              //     child: Padding(
+              //       padding: EdgeInsets.all(5),
+              //       child: Icon(
+              //         isFav
+              //             ?Icons.favorite
+              //             :Icons.favorite_border,
+              //         color: Colors.red,
+              //         size: 17,
+              //       ),
+              //     ),
+              //   ),
+              //),
             ],
 
 
@@ -83,16 +84,16 @@ class GridService extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
             child: Row(
               children: <Widget>[
-                SmoothStarRating(
-                  starCount: 5,
-                  color: Constants.ratingBG,
-                  allowHalfRating: true,
-                  rating: rating,
-                  size: 10.0,
-                ),
+                // SmoothStarRating(
+                //   starCount: 5,
+                //   color: Constants.ratingBG,
+                //  // allowHalfRating: true,
+                //   price: price,
+                //   size: 10.0,
+                // ),
 
                 Text(
-                  " $rating ($raters Reviews)",
+                  "$price",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
