@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/update_customer_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
@@ -23,15 +24,21 @@ class ProfileApiImpl implements ProfileApi {
   var server = locator<API>();
 
   @override
-  Future<ApiResponse> changeSalonOwnerPassword(
+  Future<SalonLoginResponse> changeSalonOwnerPassword(
       {String token,
-      String currentPassword,
-      String password,
-      String passwordConfirmation}) async {
+      String oldPassword,
+      String newPassword,
+      String confirmPassword}) async {
+            Map<String, String> header = {
+    'Accept': 'application/json',
+   'Content-Type': 'application/json',
+    'x-access-token': locator<UserInfoCache>().token
+    };
+        
     Map val = {
-      'current_password': currentPassword,
-      'password': password,
-      'password_confirmation': password,
+      'oldPassword': oldPassword,
+      'newPassword': newPassword,
+      'confirmPassword': confirmPassword,
     };
 
       var responsebody = await server.put(
@@ -39,21 +46,21 @@ class ProfileApiImpl implements ProfileApi {
         header,
         body: jsonEncode(val),);
 
-    ApiResponse response = ApiResponse.fromJson(responsebody);
+    SalonLoginResponse response = SalonLoginResponse.fromJson(responsebody);
     return response;
   }
 
 
   @override
-  Future<ApiResponse> changeCustomerPassword(
+  Future<CustomerLoginResponse> changeCustomerPassword(
       {String token,
-      String currentPassword,
-      String password,
-      String passwordConfirmation}) async {
+      String oldPassword,
+      String newPassword,
+      String confirmPassword}) async {
     Map val = {
-      'current_password': currentPassword,
-      'password': password,
-      'password_confirmation': password,
+      'oldPassword': oldPassword,
+      'newPassword': newPassword,
+      'confirmPassword': confirmPassword,
     };
 
    var responsebody = await server.put(
@@ -61,7 +68,7 @@ class ProfileApiImpl implements ProfileApi {
         header,
         body: jsonEncode(val));
 
-    ApiResponse response = ApiResponse.fromJson(responsebody);
+     CustomerLoginResponse response = CustomerLoginResponse.fromJson(responsebody);
     return response;
   }
 

@@ -3,6 +3,8 @@ import 'package:starter_project/Customer/pages/screens/salonServices.dart';
 import 'package:starter_project/Customer/pages/utils/Buttons.dart';
 import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
+import 'package:starter_project/core/repositories/customer_repository.dart';
+import 'package:provider/provider.dart';
 
 class OverViewPage extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class _OverViewPageState extends State<OverViewPage>
 
   @override
   Widget build(BuildContext context) {
+   final models = Provider.of<CustomerToSalonRepository>(context);
     return Scaffold(
       backgroundColor: kwhite,
       appBar: AppBar(
@@ -30,6 +33,16 @@ class _OverViewPageState extends State<OverViewPage>
       ),
       body: Stack(
         children: <Widget>[
+                    // ...models.salons
+                    //   .map((e) => buildContainer(
+                    //         description: e.description,
+                    //         salonAddress: e.location.formattedAddress,
+                    //         image: e.avatar,
+                    //         salonId: e.id,
+                    //         salonName: e.nameOfSalon,
+                    //         gallery: e.image
+                    //       ))
+                    //   .toList(),
           Positioned(
             top: 0,
             child: Container(
@@ -61,12 +74,13 @@ class _OverViewPageState extends State<OverViewPage>
                     children: <Widget>[
                       TabBarView(
                         children: <Widget>[
+                
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                BoldText("Plaza", 20.0, kblack),
+                                BoldText("Plaza", 20.5,kblack),
                                 Row(
                                   children: <Widget>[
                                     //BoldText("4.5 Stars", 12.0, korange),
@@ -227,67 +241,16 @@ class _OverViewPageState extends State<OverViewPage>
       ),
     );
   }
+  // Widget buildContainer(
+  //     {String salonName,
+  //     String salonAddress,
+  //     String description,
+  //     String image,
+  //     String salonId,
+  //     String category,
+  //     String gallery,
+  //     }) 
 
-  Widget reviewProfile(String name,String review,String date) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-
-        Row(
-          children: <Widget>[
-            Container(
-              width: 24,
-              height: 24,
-              child: CircleAvatar(
-                backgroundColor: kgreyDark,
-                child: Icon(
-                  Icons.person,
-                  size: 12,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            BoldText(name, 16, kblack)
-          ],
-        ),
-        SizedBox(height: 10,),
-        Row(
-          children: <Widget>[
-            Container(
-              width: 50.0,
-              decoration: BoxDecoration(
-                color: korange,
-                borderRadius:
-                BorderRadius.circular(10.0),
-              ),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.center,
-                crossAxisAlignment:
-                CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.star,
-                    color: kwhite,
-                    size: 15.0,
-                  ),
-                  BoldText(review, 15.0, kwhite),
-                ],
-              ),
-            ),
-            SizedBox(width: 10,),
-            NormalText(date,kgreyDark,12.0)
-          ],
-
-        ),
-        SizedBox(height: 10,),
-        NormalText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",kblack,12.0),
-        SizedBox(height: 10,),
-      ],
-    );
-  }
 
   Column equipmentsItem(IconData icon, String text) {
     return Column(
@@ -314,3 +277,5 @@ class _OverViewPageState extends State<OverViewPage>
     tabController.dispose();
   }
 }
+
+

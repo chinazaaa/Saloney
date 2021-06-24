@@ -1,6 +1,7 @@
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/profile_api/profile_api.dart';
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/update_customer_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_response.dart';
@@ -146,7 +147,8 @@ class ProfileRepo extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } catch (e) {
+    }
+    catch (e) {
       Get.snackbar(
         'An Error occured!',
         e.toString(),
@@ -157,5 +159,60 @@ class ProfileRepo extends BaseNotifier with Validators {
       );
     }
     return false;
+
+
+    
   }
+
+
+Future<bool> changeSalonPassword(
+    {String oldPassword,
+    String newPassword,
+    String confirmPassword}
+  ) async {
+    try {
+      SalonLoginResponse res = await profileApi.changeSalonOwnerPassword(
+       oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      );
+      //cache updated data
+      //FIXME await userInfoCache.cacheLoginResponse(res.data);
+      // Get.snackbar(
+      //   'Success!',
+      //   'User Profile Updated',
+      //   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+      //   snackStyle: SnackStyle.FLOATING,
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   backgroundColor: Colors.black26,
+      // );
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error occured!',
+    //     e.toString(),
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
+    // }
+    return false;
+
+
+    
+  }
+
+  
 }
+

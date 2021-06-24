@@ -22,14 +22,14 @@ abstract class ProfileApi {
 
   Future<ApiResponse> changeSalonOwnerPassword(
       {String token,
-      String currentPassword,
-      String password,
-      String passwordConfirmation});
+      String oldPassword,
+      String newPassword,
+      String confirmPassword});
   Future<ApiResponse> changeCustomerPassword(
       {String token,
-      String currentPassword,
-      String password,
-      String passwordConfirmation});
+      String oldPassword,
+      String newPassword,
+      String confirmPassword});
 
   Future<ApiResponse> getSalonOwnerProfile({
     String id,
