@@ -10,6 +10,7 @@ import 'package:starter_project/Customer/pages/utils/textStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 import 'package:starter_project/Customer/pages/utils/imageContainer.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
 import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
@@ -61,13 +62,15 @@ class _DashboardState extends State<Dashboard> {
                         valueColor: AlwaysStoppedAnimation<Color>(
                             Theme.of(context).primaryColor),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(
-                          model.currentAction,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                          ),
+                        model.currentAction,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),
@@ -103,17 +106,20 @@ class _DashboardState extends State<Dashboard> {
                 ),
               )),
               dataFetchedWidget: ListView(
-                padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthOf(5)),
+                padding:
+                    EdgeInsets.symmetric(horizontal: SizeConfig.widthOf(5)),
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
                   ...model.salons
                       .map((e) => buildContainer(
-                            description: e.description,
-                            salonAddress: e.location.formattedAddress,
-                            image: e.avatar,
-                            salonId: e.id,
-                            salonName: e.nameOfSalon,
-                          ))
+                          description: e.description,
+                          salonAddress: e.location.formattedAddress,
+                          avatar: e.avatar,
+                          salonId: e.id,
+                          salonName: e.nameOfSalon,
+                          gallery: e.image,
+                          categories: null,
+                          ownerName: e.salonOwner))
                       .toList(),
                 ],
               ),
@@ -128,13 +134,26 @@ class _DashboardState extends State<Dashboard> {
       {String salonName,
       String salonAddress,
       String description,
-      String image,
+      String avatar,
+        String categories,
+      List<GalleryItem> gallery,
+      Location location,
+      String ownerName,
       String salonId}) {
-    print(image);
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return OverViewPage();
+          return OverViewPage(
+               salonName: salonName,
+               salonAddress: salonAddress,
+               description: description,
+               avatar: avatar,
+               categories: categories,
+              gallery: gallery,
+               location: location,
+               ownerName: ownerName,
+               salonId: salonId
+          );
         }));
       },
       child: Container(
@@ -156,8 +175,8 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(15),
                           bottomLeft: Radius.circular(15)),
-                      child: image != null
-                          ? Image.network(image)
+                      child: avatar != null
+                          ? Image.network(avatar)
                           : Image.asset(
                               "assets/1.png",
                               fit: BoxFit.fitHeight,
@@ -172,7 +191,9 @@ class _DashboardState extends State<Dashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       BoldText(salonName ?? 'Unidentified', 20.5, kblack),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -181,10 +202,13 @@ class _DashboardState extends State<Dashboard> {
                             Icons.location_on,
                             color: kgreyDark,
                             size: 15.0,
-                          ), SizedBox(width: 10,),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Expanded(
-                            child: NormalText(
-                                salonAddress ?? "Unknown address", kgreyDark, 15.0),
+                            child: NormalText(salonAddress ?? "Unknown address",
+                                kgreyDark, 15.0),
                           )
                         ],
                       ),
@@ -220,7 +244,15 @@ class _DashboardState extends State<Dashboard> {
                       SizedBox(
                         height: 30,
                       ),
-                      BoldText(description != null ? 'Description: $description' : "No Description", 14.0, Colors.red),
+                      BoldText(
+                          description != null
+                              ? 'Description: $description'
+                              : "No Description",
+                          14.0,
+                          Colors.red,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       SizedBox(height: 14),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

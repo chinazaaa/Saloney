@@ -5,8 +5,30 @@ import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 
 class OverViewPage extends StatefulWidget {
+  final String salonName;
+  final String salonAddress;
+  final String description;
+  final String avatar;
+  final List<GalleryItem> gallery;
+  final Location location;
+  final String ownerName;
+  final String salonId;
+  final String categories;
+
+  const OverViewPage(
+      {Key key,
+      this.salonName,
+      this.salonAddress,
+      this.description,
+      this.avatar,
+      this.gallery,
+      this.location,
+      this.ownerName,
+      this.salonId, this.categories})
+      : super(key: key);
   @override
   _OverViewPageState createState() => _OverViewPageState();
 }
@@ -17,7 +39,7 @@ class _OverViewPageState extends State<OverViewPage>
 
   @override
   Widget build(BuildContext context) {
-   final models = Provider.of<CustomerToSalonRepository>(context);
+    final models = Provider.of<CustomerToSalonRepository>(context);
     return Scaffold(
       backgroundColor: kwhite,
       appBar: AppBar(
@@ -28,21 +50,25 @@ class _OverViewPageState extends State<OverViewPage>
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.black,
+          ),
         ),
       ),
       body: Stack(
         children: <Widget>[
-                    // ...models.salons
-                    //   .map((e) => buildContainer(
-                    //         description: e.description,
-                    //         salonAddress: e.location.formattedAddress,
-                    //         image: e.avatar,
-                    //         salonId: e.id,
-                    //         salonName: e.nameOfSalon,
-                    //         gallery: e.image
-                    //       ))
-                    //   .toList(),
+          // ...models.salons
+          //   .map((e) => buildContainer(
+          //         description: e.description,
+          //         salonAddress: e.location.formattedAddress,
+          //         image: e.avatar,
+          //         salonId: e.id,
+          //         salonName: e.nameOfSalon,
+          //         gallery: e.image
+          //       ))
+          //   .toList(),
           Positioned(
             top: 0,
             child: Container(
@@ -65,7 +91,7 @@ class _OverViewPageState extends State<OverViewPage>
                     indicatorColor: kdarkBlue,
                     tabs: <Widget>[
                       Tab(text: "OverView"),
-                      Tab(text: "Location"),
+                      // Tab(text: "Location"),
                       Tab(text: "Gallery"),
                     ],
                   ),
@@ -74,13 +100,12 @@ class _OverViewPageState extends State<OverViewPage>
                     children: <Widget>[
                       TabBarView(
                         children: <Widget>[
-                
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                BoldText("Plaza", 20.5,kblack),
+                                BoldText("Plaza", 20.5, kblack),
                                 Row(
                                   children: <Widget>[
                                     //BoldText("4.5 Stars", 12.0, korange),
@@ -146,14 +171,14 @@ class _OverViewPageState extends State<OverViewPage>
                                 SizedBox(
                                   height: 10,
                                 ),
+                                equipmentsItem(Icons.wifi, widget.c),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     //categories go here
                                     equipmentsItem(Icons.wifi, "Beauty"),
-                                    equipmentsItem(
-                                        Icons.local_parking, "Hair"),
+                                    equipmentsItem(Icons.local_parking, "Hair"),
                                     equipmentsItem(Icons.face, "Spa"),
                                     // equipmentsItem(
                                     //     Icons.restaurant, "Restaurant"),
@@ -162,53 +187,53 @@ class _OverViewPageState extends State<OverViewPage>
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  BoldText("Location", 20.0, kblack),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.asset(
-                                      "assets/plazamap.png",
-                                      fit: BoxFit.fill,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              90,
-                                      width: MediaQuery.of(context).size.width,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: Container(
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: <Widget>[
+                          //         BoldText("Location", 20.0, kblack),
+                          //         ClipRRect(
+                          //           borderRadius: BorderRadius.circular(20.0),
+                          //           child: Image.asset(
+                          //             "assets/plazamap.png",
+                          //             fit: BoxFit.fill,
+                          //             height:
+                          //                 MediaQuery.of(context).size.width -
+                          //                     90,
+                          //             width: MediaQuery.of(context).size.width,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  BoldText("Gallery", 20.0, kblack),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.asset(
-                                      "assets/1.png",
-                                      fit: BoxFit.fill,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              90,
-                                      width: MediaQuery.of(context).size.width,
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    BoldText("Gallery", 20.0, kblack),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      child: Image.asset(
+                                        "assets/1.png",
+                                        fit: BoxFit.fill,
+                                        height:
+                                            MediaQuery.of(context).size.width -
+                                                90,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                            ),
-                     
                         ],
                         controller: tabController,
                       ),
@@ -230,11 +255,10 @@ class _OverViewPageState extends State<OverViewPage>
               child: WideButton(
                 "BOOK NOW",
                 () {
-                       Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SalonServicesScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SalonServicesScreen()));
                 },
               )),
         ],
@@ -249,8 +273,7 @@ class _OverViewPageState extends State<OverViewPage>
   //     String salonId,
   //     String category,
   //     String gallery,
-  //     }) 
-
+  //     })
 
   Column equipmentsItem(IconData icon, String text) {
     return Column(
@@ -277,5 +300,3 @@ class _OverViewPageState extends State<OverViewPage>
     tabController.dispose();
   }
 }
-
-

@@ -43,8 +43,6 @@ class CustomerToSalonRepository extends BaseNotifier{
       setError('Could not get User location');
       return;
     }
-    // print('long: ' + p.longitude.toString());
-    // print('lat: ' + p.latitude.toString());
 
     if(salons.isEmpty) setState(ViewState.Busy);
     try {

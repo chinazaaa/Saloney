@@ -17,7 +17,7 @@ class Salon {
 
     Location location;
     String description;
-    List<Image> image;
+    List<GalleryItem> image;
     String id;
      String avatar;
     String nameOfSalon;
@@ -29,7 +29,7 @@ class Salon {
     Salon copyWith({
         Location location,
         String description,
-        List<Image> image,
+        List<GalleryItem> image,
         String id,
          String avatar,
         String nameOfSalon,
@@ -58,7 +58,7 @@ class Salon {
     factory Salon.fromMap(Map<String, dynamic> json) => Salon(
         location: Location.fromMap(json["location"]),
         description: json["description"],
-        image: List<Image>.from(json["image"].map((x) => Image.fromMap(x))),
+        image: List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
         id: json["_id"],
         avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
