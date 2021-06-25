@@ -80,25 +80,25 @@ class SalonData {
     "salon": salon.toMap(),
   };
   
-}class Image {
-    Image({
+}class GalleryItem {
+    GalleryItem({
         this.image,
     });
 
     String image;
 
-    Image copyWith({
+    GalleryItem copyWith({
         String image,
     }) => 
-        Image(
+        GalleryItem(
             image: image ?? this.image,
         );
 
-    factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
+    factory GalleryItem.fromJson(String str) => GalleryItem.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory Image.fromMap(Map<String, dynamic> json) => Image(
+    factory GalleryItem.fromMap(Map<String, dynamic> json) => GalleryItem(
         image: json["image"],
     );
 

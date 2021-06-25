@@ -5,8 +5,30 @@ import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 
 class OverViewPage extends StatefulWidget {
+  final String salonName;
+  final String salonAddress;
+  final String description;
+  final String avatar;
+  final List<GalleryItem> gallery;
+  final Location location;
+  final String ownerName;
+  final String salonId;
+  final String categories;
+
+  const OverViewPage(
+      {Key key,
+      this.salonName,
+      this.salonAddress,
+      this.description,
+      this.avatar,
+      this.gallery,
+      this.location,
+      this.ownerName,
+      this.salonId, this.categories})
+      : super(key: key);
   @override
   _OverViewPageState createState() => _OverViewPageState();
 }
@@ -17,7 +39,7 @@ class _OverViewPageState extends State<OverViewPage>
 
   @override
   Widget build(BuildContext context) {
-   final models = Provider.of<CustomerToSalonRepository>(context);
+    final models = Provider.of<CustomerToSalonRepository>(context);
     return Scaffold(
       backgroundColor: kwhite,
       appBar: AppBar(
@@ -28,26 +50,20 @@ class _OverViewPageState extends State<OverViewPage>
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.black,
+          ),
         ),
       ),
       body: Stack(
         children: <Widget>[
-                    // ...models.salons
-                    //   .map((e) => buildContainer(
-                    //         description: e.description,
-                    //         salonAddress: e.location.formattedAddress,
-                    //         image: e.avatar,
-                    //         salonId: e.id,
-                    //         salonName: e.nameOfSalon,
-                    //         gallery: e.image
-                    //       ))
-                    //   .toList(),
           Positioned(
             top: 0,
             child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: Image.asset("assets/1.png")),
+                child: widget.avatar != null ? Image.network(widget.avatar) : Image.asset("assets/1.png")),
           ),
           Positioned(
             top: 200.0,
@@ -65,7 +81,7 @@ class _OverViewPageState extends State<OverViewPage>
                     indicatorColor: kdarkBlue,
                     tabs: <Widget>[
                       Tab(text: "OverView"),
-                      Tab(text: "Location"),
+                      // Tab(text: "Location"),
                       Tab(text: "Gallery"),
                     ],
                   ),
@@ -74,25 +90,24 @@ class _OverViewPageState extends State<OverViewPage>
                     children: <Widget>[
                       TabBarView(
                         children: <Widget>[
-                
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                BoldText("Plaza", 20.5,kblack),
+                                BoldText(widget.salonName ?? 'Unidentified', 20.5, kblack),
                                 Row(
                                   children: <Widget>[
                                     //BoldText("4.5 Stars", 12.0, korange),
-                                    SizedBox(
-                                      width: 16.0,
-                                    ),
+                                    // SizedBox(
+                                    //   width: 16.0,
+                                    // ),
                                     Icon(
                                       Icons.location_on,
                                       color: kgreyDark,
                                       size: 15.0,
-                                    ),
-                                    NormalText("Lekki", kgreyDark, 15.0),
+                                    ), SizedBox(width: 10,),
+                                    Expanded(child: NormalText(widget.salonAddress ?? "Unknown location", kgreyDark, 15.0)),
                                   ],
                                 ),
                                 SizedBox(
@@ -122,7 +137,7 @@ class _OverViewPageState extends State<OverViewPage>
                                   height: 10,
                                 ),
                                 NormalText(
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea. ",
+                                    widget.description ?? 'No description',
                                     kblack,
                                     12.0),
                                 SizedBox(
@@ -146,69 +161,71 @@ class _OverViewPageState extends State<OverViewPage>
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    //categories go here
-                                    equipmentsItem(Icons.wifi, "Beauty"),
-                                    equipmentsItem(
-                                        Icons.local_parking, "Hair"),
-                                    equipmentsItem(Icons.face, "Spa"),
-                                    // equipmentsItem(
-                                    //     Icons.restaurant, "Restaurant"),
-                                  ],
-                                )
+                                equipmentsItem(Icons.category, widget.categories ?? 'No category'),
+
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  BoldText("Location", 20.0, kblack),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.asset(
-                                      "assets/plazamap.png",
-                                      fit: BoxFit.fill,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              90,
-                                      width: MediaQuery.of(context).size.width,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: Container(
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: <Widget>[
+                          //         BoldText("Location", 20.0, kblack),
+                          //         ClipRRect(
+                          //           borderRadius: BorderRadius.circular(20.0),
+                          //           child: Image.asset(
+                          //             "assets/plazamap.png",
+                          //             fit: BoxFit.fill,
+                          //             height:
+                          //                 MediaQuery.of(context).size.width -
+                          //                     90,
+                          //             width: MediaQuery.of(context).size.width,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  BoldText("Gallery", 20.0, kblack),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.asset(
-                                      "assets/1.png",
-                                      fit: BoxFit.fill,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              90,
-                                      width: MediaQuery.of(context).size.width,
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    BoldText("Gallery", 20.0, kblack),
+                                    Wrap(
+                                      crossAxisAlignment: WrapCrossAlignment.start,
+                                      runSpacing: 10,
+                                      spacing: 10,
+                                      children: [
+                                        ...widget.gallery.map((e) =>
+                                            Container(
+                                              height: 150, width: 150,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(20.0),
+                                                child: Image.network(
+                                                  e.image,
+                                                  fit: BoxFit.fill,
+                                                  height:
+                                                  MediaQuery.of(context).size.width -
+                                                      90,
+                                                  width:
+                                                  MediaQuery.of(context).size.width,
+                                                ),
+                                              ),
+                                            ),
+                                        ).toList(),
+                                      ],
                                     ),
-                                  ),
-                                ],
+
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                            ),
-                     
                         ],
                         controller: tabController,
                       ),
@@ -230,11 +247,10 @@ class _OverViewPageState extends State<OverViewPage>
               child: WideButton(
                 "BOOK NOW",
                 () {
-                       Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SalonServicesScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SalonServicesScreen()));
                 },
               )),
         ],
@@ -249,17 +265,17 @@ class _OverViewPageState extends State<OverViewPage>
   //     String salonId,
   //     String category,
   //     String gallery,
-  //     }) 
+  //     })
 
-
-  Column equipmentsItem(IconData icon, String text) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Row equipmentsItem(IconData icon, String text) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Icon(
           icon,
           color: kdarkBlue,
         ),
+        SizedBox(width: 10,),
         NormalText(text, kdarkBlue, 12)
       ],
     );
@@ -268,7 +284,7 @@ class _OverViewPageState extends State<OverViewPage>
   @override
   void initState() {
     super.initState();
-    tabController = new TabController(length: 3, vsync: this);
+    tabController = new TabController(length: 2, vsync: this);
   }
 
   @override
@@ -277,5 +293,3 @@ class _OverViewPageState extends State<OverViewPage>
     tabController.dispose();
   }
 }
-
-

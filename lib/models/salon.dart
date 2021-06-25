@@ -12,14 +12,16 @@ class Salon {
         this.salonOwner,
         this.createdAt,
         this.updatedAt,
+        this.category,
         this.v,
     });
 
     Location location;
     String description;
-    List<Image> image;
+    List<GalleryItem> image;
     String id;
      String avatar;
+    String category;
     String nameOfSalon;
     String salonOwner;
     DateTime createdAt;
@@ -29,11 +31,12 @@ class Salon {
     Salon copyWith({
         Location location,
         String description,
-        List<Image> image,
+        List<GalleryItem> image,
         String id,
          String avatar,
         String nameOfSalon,
         String salonOwner,
+        String category,
         DateTime createdAt,
         DateTime updatedAt,
         int v,
@@ -49,6 +52,7 @@ class Salon {
             createdAt: createdAt ?? this.createdAt,
             updatedAt: updatedAt ?? this.updatedAt,
             v: v ?? this.v,
+            category: category ?? this.category
         );
 
     factory Salon.fromJson(String str) => Salon.fromMap(json.decode(str));
@@ -58,7 +62,7 @@ class Salon {
     factory Salon.fromMap(Map<String, dynamic> json) => Salon(
         location: Location.fromMap(json["location"]),
         description: json["description"],
-        image: List<Image>.from(json["image"].map((x) => Image.fromMap(x))),
+        image: List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
         id: json["_id"],
         avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
@@ -66,6 +70,7 @@ class Salon {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        category: json["category"],
     );
 
     Map<String, dynamic> toMap() => {
@@ -74,6 +79,7 @@ class Salon {
         "image": List<dynamic>.from(image.map((x) => x.toMap())),
         "_id": id,
         "avatar": avatar,
+        "category" : category,
         "nameOfSalon": nameOfSalon,
         "salonOwner": salonOwner,
         "createdAt": createdAt.toIso8601String(),
