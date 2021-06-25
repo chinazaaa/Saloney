@@ -5,6 +5,7 @@ import 'package:starter_project/core/api/customer_api/customer_api.dart';
 import 'package:starter_project/core/services/map_service.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/get_salon_by_location_response.dart';
+import 'package:starter_project/models/salon.dart';
 
 import '../../locator.dart';
 
@@ -33,7 +34,7 @@ class CustomerToSalonRepository extends BaseNotifier{
     // return Position(latitude: 3.766225, longitude: 6.4809017);
   }
 
-  List<SalonLocation> salons = [];
+  List<Salon> salons = [];
   Future getSalonByLocation() async{
     updateCurrentAction('Fetching your location...');
     //get user location
