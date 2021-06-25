@@ -30,8 +30,8 @@ class CustomerToSalonRepository extends BaseNotifier{
     if(ms.deviceLocation != null) return ms.deviceLocation;
     var p = await ms.getDeviceLocation();
     // print(ms.deviceLocationDetails.formattedAddress);
-    return p;
-    // return Position(latitude: 3.766225, longitude: 6.4809017);
+    // return p;
+    return Position(longitude: 3.766225, latitude: 6.4809017);
   }
 
   List<Salon> salons = [];

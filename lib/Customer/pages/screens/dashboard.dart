@@ -118,7 +118,7 @@ class _DashboardState extends State<Dashboard> {
                           salonId: e.id,
                           salonName: e.nameOfSalon,
                           gallery: e.image,
-                          categories: null,
+                          categories: e.category,
                           ownerName: e.salonOwner))
                       .toList(),
                 ],
