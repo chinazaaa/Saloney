@@ -72,13 +72,10 @@ class ServicesApiImpl extends ServicesApi {
   Future<ApiResponse> getUnPublishedService({String salonId}) async {
     String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      // Map<String, dynamic> data = {
-      //   "api_token": locator<UserInfoCache>().token
-      // };
       var responsebody =
-          await server.get('$baseUrl/unpublishedServices/$salonId', header);
-      GetunPublishedServiceResponse res =
-          GetunPublishedServiceResponse.fromJson(responsebody);
+          await server.get('$baseUrl/unpublishedServices/$salonId', xHeader);
+      UnpublishedServiceResponse res =
+          UnpublishedServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();

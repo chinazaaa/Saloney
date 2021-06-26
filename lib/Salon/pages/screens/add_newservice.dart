@@ -276,7 +276,7 @@ class _AddNewServiceState extends State<AddNewService> {
       service: nameOfService.text, description: description.text,
       price: price.text,
       category: dropdownValue,
-      image: _image.path
+      image: _image == null ? null : _image.path
     );
     if (success) {
       Navigator.pop(context);

@@ -15,12 +15,17 @@ class ServiceRepo extends BaseNotifier {
     String category,
     String price,
     String image,
-  }) async{
+  }) async {
     setState(ViewState.Busy);
     try {
-      ApiResponse res = await _api.createService(image: image, description: description, price: price, category: category, service: service);
+      ApiResponse res = await _api.createService(
+          image: image,
+          description: description,
+          price: price,
+          category: category,
+          service: service);
       setState(ViewState.Idle);
-      print(res);
+      getUnpublishedServices(silently: true);
       return true;
     } on NetworkException {
       Get.snackbar(
@@ -45,47 +50,25 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
-
-  Future<GetunPublishedServiceResponse> getUnpublishedServices() async {
-    setState(ViewState.Busy);
-
-    // List serviceList = [];
-
-    GetunPublishedServiceResponse resp;
+  List<UnpublishedService> unpublishedServices = [];
+  Future<bool> getUnpublishedServices({bool silently = false}) async {
+    if(!silently) setState(ViewState.Busy);
+    UnpublishedServiceResponse resp;
     try {
-      resp = await _api.getUnPublishedService(
-          );
-
-      setState(ViewState.Idle);
-
-      if (resp.success) {
-        //Cache login info
-        print(resp.data);
-
-        return resp;
-      } else {
-        Get.snackbar(
-          'Error',
-          '${resp.message}',
-          margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-          snackStyle: SnackStyle.FLOATING,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.black26,
-        );
-        return resp;
+      resp = await _api.getUnPublishedService();
+      if(resp.data.isEmpty){
+        setState(ViewState.NoDataAvailable);
+        unpublishedServices = resp.data;
+        return false;
       }
+      unpublishedServices = resp.data;
+      setState(ViewState.DataFetched);
+      return true;
     } on NetworkException {
-      Get.snackbar(
-        'No Internet!',
-        'Check Internet Connection and try again',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
+      setError('No Internet');
+    } catch (e){
+      setError(e.toString());
     }
-
-    setState(ViewState.Idle);
-    return resp;
+    return false;
   }
 }
