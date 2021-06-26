@@ -73,7 +73,7 @@ class _AddNewServiceState extends State<AddNewService> {
                           1.5,
                           TextButton.icon(
                             style: TextButton.styleFrom(
-                                backgroundColor: Colors.purple),
+                                backgroundColor: Color(0xff9477cb)),
                             icon: Icon(Icons.save, color: Colors.white),
                             label: Text(
                               'Save',

@@ -23,23 +23,25 @@ class ServiceScreen extends StatelessWidget {
                       child: Container(
                         child: Row(
                           children: [
-                            Text('Services'),
+                            Text('Services',
+                            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),),
                             SizedBox(
                               width: 10,
                             ),
-                            CircleAvatar(
-                              backgroundColor: Colors.black54,
-                              maxRadius: 8,
-                              child: FittedBox(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Text('20',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                            )
+                            // CircleAvatar(
+                            //   backgroundColor: Colors.black54,
+                            //   maxRadius: 8,
+                            //   child: FittedBox(
+                            //     child: Padding(
+                            //       padding: const EdgeInsets.all(6.0),
+                            //       child: Text('20',
+                            //           style: TextStyle(
+                            //               color: Colors.white,
+                            //               fontWeight: FontWeight.bold)),
+                            //     ),
+                            //   ),
+                            // )
                           ],
                         ),
                       ),
