@@ -26,4 +26,8 @@ abstract class ServicesApi {
    Future<ApiResponse> getUnPublishedService({
     String salonId
   });
+
+    Future<ApiResponse> getPublishedService({
+    String salonId
+  });
 }

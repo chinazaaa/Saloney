@@ -1,5 +1,8 @@
+//import 'package:starter_project/Salon/pages/screens/published_service.dart';
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/service/get_published_service_reponse.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
+import 'package:starter_project/models/service/get_published_service_reponse.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 
@@ -64,6 +67,29 @@ class ServiceRepo extends BaseNotifier {
         return false;
       }
       unpublishedServices = resp.data;
+      setState(ViewState.DataFetched);
+      return true;
+    } on NetworkException {
+      setError('No Internet');
+    } catch (e){
+      setError(e.toString());
+    }
+    return false;
+  }
+  List<PublishedService> publishedServices = [];
+  Future<bool> getPublishedServices({bool silently = false}) async {
+    if(!silently){
+      if(publishedServices.isEmpty) setState(ViewState.Busy);
+    }
+    PublishedServiceResponse resp;
+    try {
+      resp = await _api.getPublishedService();
+      if(resp.data.isEmpty){
+        setState(ViewState.NoDataAvailable);
+        publishedServices = resp.data;
+        return false;
+      }
+      publishedServices = resp.data;
       setState(ViewState.DataFetched);
       return true;
     } on NetworkException {

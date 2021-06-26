@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/screens/edit_service.dart';
+import 'package:starter_project/Salon/pages/screens/published_service.dart';
 import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
@@ -112,20 +114,46 @@ class PopupOptionMenu extends StatelessWidget {
         return <PopupMenuEntry<MenuOption>>[
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(onTap: () {
-              print(data.service);
-            }, title: Text("Edit")),
+            child: ListTile(
+                onTap: () {
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                   EditService()));
+                 // print(data.service);
+                },
+                title: Text("Edit")),
             value: MenuOption.Edit,
           ),
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(onTap: () {}, title: Text("Publish")),
-            value: MenuOption.Edit,
+            child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                   PublishedService()));
+                },
+                title: Text("Publish")),
+            value: MenuOption.Publish,
           ),
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(onTap: () {}, title: Text("Delete", style: TextStyle(color: Colors.red),)),
-            value: MenuOption.Edit,
+            child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                   UnPublishedService()));
+                },
+                title: Text(
+                  "Delete",
+                  style: TextStyle(color: Colors.red),
+                )),
+            value: MenuOption.Delete,
           ),
         ];
       },
