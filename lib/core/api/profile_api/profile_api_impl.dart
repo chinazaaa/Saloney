@@ -29,27 +29,28 @@ class ProfileApiImpl implements ProfileApi {
       String oldPassword,
       String newPassword,
       String confirmPassword}) async {
-            Map<String, String> header = {
-    'Accept': 'application/json',
-   'Content-Type': 'application/json',
-    'x-access-token': locator<UserInfoCache>().token
+    Map<String, String> header = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'x-access-token': locator<UserInfoCache>().token
     };
-        
+
     Map val = {
       'oldPassword': oldPassword,
       'newPassword': newPassword,
       'confirmPassword': confirmPassword,
     };
 
-      var responsebody = await server.put(
-        '${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}',
-        header,
-        body: jsonEncode(val),);
+    print('${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}');
+    var responsebody = await server.put(
+      '${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}',
+      header,
+      body: jsonEncode(val),
+    );
 
     SalonLoginResponse response = SalonLoginResponse.fromJson(responsebody);
     return response;
   }
-
 
   @override
   Future<CustomerLoginResponse> changeCustomerPassword(
@@ -63,12 +64,13 @@ class ProfileApiImpl implements ProfileApi {
       'confirmPassword': confirmPassword,
     };
 
-   var responsebody = await server.put(
+    var responsebody = await server.put(
         '${ApiRoutes.changeCustomerPassword}/${locator<UserInfoCache>().customer.data.id}',
         header,
         body: jsonEncode(val));
 
-     CustomerLoginResponse response = CustomerLoginResponse.fromJson(responsebody);
+    CustomerLoginResponse response =
+        CustomerLoginResponse.fromJson(responsebody);
     return response;
   }
 
@@ -118,9 +120,9 @@ class ProfileApiImpl implements ProfileApi {
       String category,
       String address}) async {
     Map<String, String> header = {
-    'Accept': 'application/json',
-   'Content-Type': 'application/json',
-    'x-access-token': locator<UserInfoCache>().token
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'x-access-token': locator<UserInfoCache>().token
     };
 
     print('${locator<UserInfoCache>().salon.data.salon.id}');
@@ -133,9 +135,10 @@ class ProfileApiImpl implements ProfileApi {
     };
 
     var responsebody = await server.put(
-        '${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}',
-        header,
-        body: jsonEncode(val),);
+      '${ApiRoutes.updateSalonProfile}/${locator<UserInfoCache>().salon.data.salon.id}',
+      header,
+      body: jsonEncode(val),
+    );
 
     UpdateSalonResponse response = UpdateSalonResponse.fromJson(responsebody);
     return response;
@@ -143,7 +146,8 @@ class ProfileApiImpl implements ProfileApi {
 
 //update salon owner profile
   @override
-  Future<UpdateSalonOwnerResponse> updateSalonUserProfile({String userName, String phone}) async {
+  Future<UpdateSalonOwnerResponse> updateSalonUserProfile(
+      {String userName, String phone}) async {
     Map<String, String> val = {
       // 'email' : email,
       'phone': phone,
@@ -154,13 +158,15 @@ class ProfileApiImpl implements ProfileApi {
         '${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}',
         header,
         body: jsonEncode(val));
-    UpdateSalonOwnerResponse response = UpdateSalonOwnerResponse.fromJson(responsebody);
+    UpdateSalonOwnerResponse response =
+        UpdateSalonOwnerResponse.fromJson(responsebody);
     return response;
   }
 
   //update customer
-    @override
-  Future<UpdateCustomerResponse> updateCustomerProfile({String userName, String phone}) async {
+  @override
+  Future<UpdateCustomerResponse> updateCustomerProfile(
+      {String userName, String phone}) async {
     Map<String, String> val = {
       // 'email' : email,
       'phone': phone,
@@ -171,10 +177,10 @@ class ProfileApiImpl implements ProfileApi {
         '${ApiRoutes.updateCustomerProfile}/${locator<UserInfoCache>().customer.data.id}',
         header,
         body: jsonEncode(val));
-    UpdateCustomerResponse response = UpdateCustomerResponse.fromJson(responsebody);
+    UpdateCustomerResponse response =
+        UpdateCustomerResponse.fromJson(responsebody);
     return response;
   }
-
 
   Map<String, String> get header => {
         'Accept': 'application/json',
