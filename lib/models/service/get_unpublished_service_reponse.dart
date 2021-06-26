@@ -1,89 +1,139 @@
+// To parse this JSON data, do
+//
+//     final unpublishedServiceResponse = unpublishedServiceResponseFromMap(jsonString);
 
 import 'dart:convert';
-import '../../index.dart';
 
-class GetunPublishedServiceResponse extends ApiResponse{
+import 'package:starter_project/index.dart';
+
+class UnpublishedServiceResponse extends ApiResponse{
+  UnpublishedServiceResponse({
+    this.success,
+    this.message,
+    this.data,
+  }) : super(success: success, message: message, data: data);
+
   bool success;
   String message;
-  List<Data> data;
+  List<UnpublishedService> data;
 
-  GetunPublishedServiceResponse({this.success, this.message, this.data});
+  UnpublishedServiceResponse copyWith({
+    bool success,
+    String message,
+    List<UnpublishedService> data,
+  }) =>
+      UnpublishedServiceResponse(
+        success: success ?? this.success,
+        message: message ?? this.message,
+        data: data ?? this.data,
+      );
 
-  GetunPublishedServiceResponse.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = new List<Data>();
-      json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
-      });
-    }
-  }
+  factory UnpublishedServiceResponse.fromJson(String str) => UnpublishedServiceResponse.fromMap(json.decode(str));
 
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory UnpublishedServiceResponse.fromMap(Map<String, dynamic> json) => UnpublishedServiceResponse(
+    success: json["success"],
+    message: json["message"],
+    data: List<UnpublishedService>.from(json["data"].map((x) => UnpublishedService.fromMap(x))),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "success": success,
+    "message": message,
+    "data": List<dynamic>.from(data.map((x) => x.toMap())),
+  };
 }
 
-class Data {
+class UnpublishedService {
+  UnpublishedService({
+    this.isPublished,
+    this.id,
+    this.service,
+    this.description,
+    this.image,
+    this.category,
+    this.price,
+    this.salon,
+    this.cloudinaryId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
   bool isPublished;
-  String imageURL;
-  String sId;
+  String id;
   String service;
   String description;
+  String image;
   String category;
   String price;
   String salon;
-  String createdAt;
-  String updatedAt;
-  int iV;
+  String cloudinaryId;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-  Data(
-      {this.isPublished,
-      this.imageURL,
-      this.sId,
-      this.service,
-      this.description,
-      this.category,
-      this.price,
-      this.salon,
-      this.createdAt,
-      this.updatedAt,
-      this.iV});
+  UnpublishedService copyWith({
+    bool isPublished,
+    String id,
+    String service,
+    String description,
+    String image,
+    String category,
+    String price,
+    String salon,
+    String cloudinaryId,
+    DateTime createdAt,
+    DateTime updatedAt,
+    int v,
+  }) =>
+      UnpublishedService(
+        isPublished: isPublished ?? this.isPublished,
+        id: id ?? this.id,
+        service: service ?? this.service,
+        description: description ?? this.description,
+        image: image ?? this.image,
+        category: category ?? this.category,
+        price: price ?? this.price,
+        salon: salon ?? this.salon,
+        cloudinaryId: cloudinaryId ?? this.cloudinaryId,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        v: v ?? this.v,
+      );
 
-  Data.fromJson(Map<String, dynamic> json) {
-    isPublished = json['isPublished'];
-    imageURL = json['imageURL'];
-    sId = json['_id'];
-    service = json['service'];
-    description = json['description'];
-    category = json['category'];
-    price = json['price'];
-    salon = json['salon'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    iV = json['__v'];
-  }
+  factory UnpublishedService.fromJson(String str) => UnpublishedService.fromMap(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['isPublished'] = this.isPublished;
-    data['imageURL'] = this.imageURL;
-    data['_id'] = this.sId;
-    data['service'] = this.service;
-    data['description'] = this.description;
-    data['category'] = this.category;
-    data['price'] = this.price;
-    data['salon'] = this.salon;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    return data;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory UnpublishedService.fromMap(Map<String, dynamic> json) => UnpublishedService(
+    isPublished: json["isPublished"],
+    id: json["_id"],
+    service: json["service"],
+    description: json["description"],
+    image: json["image"],
+    category: json["category"],
+    price: json["price"],
+    salon: json["salon"],
+    cloudinaryId: json["cloudinary_id"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "isPublished": isPublished,
+    "_id": id,
+    "service": service,
+    "description": description,
+    "image": image,
+    "category": category,
+    "price": price,
+    "salon": salon,
+    "cloudinary_id": cloudinaryId,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+  };
 }

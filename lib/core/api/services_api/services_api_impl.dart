@@ -1,9 +1,10 @@
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:starter_project/core/api/api_utils/api_helper.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
-
 
 import '../../../locator.dart';
 
@@ -27,11 +28,27 @@ class ServicesApiImpl extends ServicesApi {
         "description": description,
         "category": category,
         "price": price,
-        "image": image,
-        "api_token": locator<UserInfoCache>().token
       };
+
+      FormData formData;
+
+      if (image != null) {
+        String imgname = DateTime.now().millisecondsSinceEpoch.toString();
+        formData = FormData.fromMap({
+          "service": service,
+          "description": description,
+          "category": category,
+          "price": price,
+          "image": await MultipartFile.fromFile(
+            image,
+            filename: '$imgname/$image',
+            contentType: MediaType('image', 'jpg'),
+          ),
+        });
+      }
+
       var responsebody = await server.post(
-          '$baseUrl/services/$userId', header, jsonEncode(data));
+          '$baseUrl/services/$userId', xHeader, jsonEncode(data), multimediaRequest: formData);
       CreateServiceResponse res = CreateServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
@@ -45,22 +62,23 @@ class ServicesApiImpl extends ServicesApi {
         'Authorization': 'Bearer ${locator<UserInfoCache>().token}',
       };
 
+  Map<String, String> get xHeader => {
+    'Accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': '${locator<UserInfoCache>().token}',
+  };
+
   @override
-  Future<ApiResponse> getUnPublishedService({String salonId})async {
+  Future<ApiResponse> getUnPublishedService({String salonId}) async {
     String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      // Map<String, dynamic> data = {
-      //   "api_token": locator<UserInfoCache>().token
-      // };
-      var responsebody = await server.get(
-          '$baseUrl/unpublishedServices/$salonId', header);
-      GetunPublishedServiceResponse res = GetunPublishedServiceResponse.fromJson(responsebody);
+      var responsebody =
+          await server.get('$baseUrl/unpublishedServices/$salonId', xHeader);
+      UnpublishedServiceResponse res =
+          UnpublishedServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
-  
-
-
 }

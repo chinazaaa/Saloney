@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/password/change_password.dart';
 import 'package:starter_project/Customer/pages/screens/edit_profile.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
+import 'package:starter_project/core/routes/route_names.dart';
 import 'package:starter_project/index.dart';
 //import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/customer.dart';
@@ -113,14 +116,11 @@ class _CustomerProfileState extends State<CustomerProfile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           InkWell(
-                            onTap: (){
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context){
-                                    return Home();
-                                  },
-                                ),
-                              );
+                            onTap: () async {
+                              bool s =  await Provider.of<AuthRepository>(context, listen: false).logout();
+                              if(s){
+                                Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.introPage, (route) => false);
+                              }
                             },
                             child: Text("Logout",
                               style: TextStyle(

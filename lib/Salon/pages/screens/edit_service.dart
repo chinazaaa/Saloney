@@ -135,24 +135,24 @@ class _EditServiceState extends State<EditService> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Wrap(
-                                    children: [
-                                      for (int i = 0;
-                                          i <= model.productImages.length;
-                                          i++)
-                                        i == model.productImages.length
-                                            ? AddImageButton(
-                                                onTap: () =>
-                                                    model.addProductImage(),
-                                              )
-                                            : ImageView(
-                                                image: model.productImages[i],
-                                                onTap: () =>
-                                                    model.deleteProductImage(
-                                                        index: i),
-                                              ),
-                                    ],
-                                  ),
+                                  // Wrap(
+                                  //   children: [
+                                  //     for (int i = 0;
+                                  //         i <= model.productImages.length;
+                                  //         i++)
+                                  //       i == model.productImages.length
+                                  //           ? AddImageButton(
+                                  //               onTap: () =>
+                                  //                   model.addProductImage(),
+                                  //             )
+                                  //           : ImageView(
+                                  //               image: model.productImages[i],
+                                  //               onTap: () =>
+                                  //                   model.deleteProductImage(
+                                  //                       index: i),
+                                  //             ),
+                                  //   ],
+                                  // ),
                                   TextFormField(
                                     controller: price,
                                     keyboardType: TextInputType.number,
@@ -267,20 +267,20 @@ class _EditServiceState extends State<EditService> {
     // FIXME do we need this
     // if (!mykey.currentState.validate()) return;
 
-    bool success = await model.addService(
-      service: nameOfService.text, description: description.text, price: price.text,
-      category: dropdownValue,
-      // FIXME isPublished:dropdownValue2
-    );
-    if (success) {
-      Get.snackbar(
-        'Success',
-        'Service Successfully Updated. Please return to the Previous Page',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
+    // bool success = await model.addService(
+    //   service: nameOfService.text, description: description.text, price: price.text,
+    //   category: dropdownValue,
+    //   // FIXME isPublished:dropdownValue2
+    // );
+    // if (success) {
+    //   Get.snackbar(
+    //     'Success',
+    //     'Service Successfully Updated. Please return to the Previous Page',
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
       // FIXME Go where now??
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
@@ -296,5 +296,5 @@ class _EditServiceState extends State<EditService> {
     //     backgroundColor: Colors.black26,
     //   );
     // }
-  }
+  // }
 }

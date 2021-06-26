@@ -26,7 +26,7 @@ class ProfileRepo extends BaseNotifier with Validators {
       );
       //cache updated data
       await userInfoCache.updateCustomer(res.data);
-      
+
       return true;
     } on NetworkException {
       Get.snackbar(
@@ -37,8 +37,7 @@ class ProfileRepo extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error occured!',
         e.toString(),
@@ -50,8 +49,6 @@ class ProfileRepo extends BaseNotifier with Validators {
     }
     return false;
   }
-
-
 
   Future<ApiResponse> getSalonOwnerProfile() async {
     final salon = userInfoCache.salon;
@@ -147,6 +144,39 @@ class ProfileRepo extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
+    } catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        e.toString(),
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    return false;
+  }
+
+  Future<bool> changeSalonPassword(
+      {String oldPassword, String newPassword, String confirmPassword}) async {
+    setState(ViewState.Busy);
+    try {
+      SalonLoginResponse res = await profileApi.changeSalonOwnerPassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      );
+      setState(ViewState.Idle);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
     }
     catch (e) {
       Get.snackbar(
@@ -158,61 +188,7 @@ class ProfileRepo extends BaseNotifier with Validators {
         backgroundColor: Colors.black26,
       );
     }
+    setState(ViewState.Idle);
     return false;
-
-
-    
   }
-
-
-Future<bool> changeSalonPassword(
-    {String oldPassword,
-    String newPassword,
-    String confirmPassword}
-  ) async {
-    try {
-      SalonLoginResponse res = await profileApi.changeSalonOwnerPassword(
-       oldPassword: oldPassword,
-        newPassword: newPassword,
-        confirmPassword: confirmPassword,
-      );
-      //cache updated data
-      //FIXME await userInfoCache.cacheLoginResponse(res.data);
-      // Get.snackbar(
-      //   'Success!',
-      //   'User Profile Updated',
-      //   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-      //   snackStyle: SnackStyle.FLOATING,
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   backgroundColor: Colors.black26,
-      // );
-      return true;
-    } on NetworkException {
-      Get.snackbar(
-        'No Internet!',
-        'Please check your internet Connection',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
-    } 
-    // catch (e) {
-    //   Get.snackbar(
-    //     'An Error occured!',
-    //     e.toString(),
-    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-    //     snackStyle: SnackStyle.FLOATING,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black26,
-    //   );
-    // }
-    return false;
-
-
-    
-  }
-
-  
 }
-

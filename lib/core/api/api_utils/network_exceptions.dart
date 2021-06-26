@@ -1,11 +1,20 @@
 class AppException implements Exception {
-  final message;
-  final prefix;
+  final _message;
+  final _prefix;
 
-  AppException([this.message, this.prefix]);
+  AppException([this._message, this._prefix]);
 
   String toString() {
-    return "$message";
+    return "$_prefix$_message";
+  }
+}
+
+class NetworkException extends AppException {
+  String message;
+  NetworkException([this.message]) : super(message, "No Internet ");
+  @override
+  String toString() {
+    return "No Internet Connection";
   }
 }
 
@@ -13,13 +22,9 @@ class FileNotFoundException extends AppException {
   FileNotFoundException([String message]) : super(message, "File not found ");
 }
 
-class NetworkException extends AppException {
-  NetworkException([String message]) : super(message, "No Internet ");
-}
-
 class FetchDataException extends AppException {
   FetchDataException([String message])
-      : super(message, "Error During Communication: 'Request Timed Out' ");
+      : super(message, "Error During Communication: ");
 }
 
 class BadRequestException extends AppException {
@@ -27,8 +32,7 @@ class BadRequestException extends AppException {
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException([message])
-      : super(message, "Unauthorised: 'Incorrect Username or password' ");
+  UnauthorisedException([message]) : super(message, "Unauthorised: ");
 }
 
 class InvalidInputException extends AppException {
@@ -38,10 +42,4 @@ class InvalidInputException extends AppException {
 class AlreadyRegisteredException extends AppException {
   AlreadyRegisteredException([String message])
       : super(message, "Invalid Input: ");
-}
-
-class InternalServerException extends AppException {
-  InternalServerException([message])
-      : super(message,
-            "An error occurred. But it's on us. Please contact support if error persists");
 }

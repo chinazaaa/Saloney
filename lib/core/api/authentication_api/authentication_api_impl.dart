@@ -10,8 +10,6 @@ import 'package:starter_project/models/api_response_variants/salon_registration_
 import '../api_utils/api_helper.dart';
 import '../api_utils/api_routes.dart';
 import '../api_utils/network_exceptions.dart';
-//FIXME unused import '../../utils/ui_exceptions.dart';
-
 import '../../../locator.dart';
 import 'authentication_api.dart';
 

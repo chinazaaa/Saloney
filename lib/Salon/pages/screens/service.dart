@@ -21,36 +21,43 @@ class ServiceScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Container(
-                  child: Row(
-                      children: [
-                       Text('Services'),
-                       SizedBox(width: 10,),
-                       CircleAvatar(
-                         backgroundColor: Colors.black54,
-                         maxRadius: 8,
-                         child: FittedBox(
-                           child: Padding(
-                             padding: const EdgeInsets.all(6.0),
-                             child: Text('20', style: TextStyle(color: Colors.white, fontWeight:FontWeight.bold)),
-                           ),
-                         ),
-                       )
-                      ],
-                      ),
+                        child: Row(
+                          children: [
+                            Text('Services'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.black54,
+                              maxRadius: 8,
+                              child: FittedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Text('20',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  FlatButton.icon(
-                    color: Color(0xff9477cb),
-                    icon: Icon(Icons.add, color:Colors.white),
-                    label: Text('Add New', style: TextStyle(color: Colors.white),),
-                    onPressed: (){
-                     Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AddNewService()));
-                    },
-                  )
+                    FlatButton.icon(
+                      color: Color(0xff9477cb),
+                      icon: Icon(Icons.add, color: Colors.white),
+                      label: Text(
+                        'Add New',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddNewService()));
+                      },
+                    )
                   ],
                 ),
               ),
@@ -60,21 +67,23 @@ class ServiceScreen extends StatelessWidget {
               labelColor: Color(0xff9477cb),
               unselectedLabelColor: Colors.black54,
               tabs: [
-              Tab(text: 'PUBLISHED',),
-              Tab(text: 'UNPUBLISHED',),
-            ],),
-          Expanded(
-            child: Container(
-              child: TabBarView(
-                children: [
-                  PublishedService(),
-          UnPublishedService()
-                ],
+                Tab(
+                  text: 'UNPUBLISHED',
                 ),
+                Tab(
+                  text: 'PUBLISHED',
+                ),
+              ],
             ),
-          )
+            Expanded(
+              child: Container(
+                child: TabBarView(
+                  children: [UnPublishedService(), PublishedService(), ],
+                ),
+              ),
+            )
           ],
-          ),
+        ),
       ),
     );
   }
