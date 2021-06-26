@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:starter_project/models/api_response_variants/changeSalonOwnerPassword_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/update_customer_response.dart';
@@ -24,14 +25,14 @@ class ProfileApiImpl implements ProfileApi {
   var server = locator<API>();
 
   @override
-  Future<SalonLoginResponse> changeSalonOwnerPassword(
-      {String token,
+  Future<ChangeSalonOwnerPasswordResponse> changeSalonOwnerPassword(
+      {
       String oldPassword,
       String newPassword,
       String confirmPassword}) async {
     Map<String, String> header = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'x-access-token': locator<UserInfoCache>().token
     };
 
@@ -48,13 +49,13 @@ class ProfileApiImpl implements ProfileApi {
       body: jsonEncode(val),
     );
 
-    SalonLoginResponse response = SalonLoginResponse.fromJson(responsebody);
+    ChangeSalonOwnerPasswordResponse response = ChangeSalonOwnerPasswordResponse.fromJson(responsebody);
     return response;
   }
 
   @override
   Future<CustomerLoginResponse> changeCustomerPassword(
-      {String token,
+      {
       String oldPassword,
       String newPassword,
       String confirmPassword}) async {

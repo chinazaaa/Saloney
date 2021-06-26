@@ -1,6 +1,7 @@
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/profile_api/profile_api.dart';
 import 'package:starter_project/index.dart';
+import 'package:starter_project/models/api_response_variants/changeSalonOwnerPassword_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/update_customer_response.dart';
 import 'package:starter_project/models/api_response_variants/update_salon_owner_response.dart';
@@ -144,7 +145,8 @@ class ProfileRepo extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } catch (e) {
+    } 
+    catch (e) {
       Get.snackbar(
         'An Error occured!',
         e.toString(),
@@ -161,7 +163,7 @@ class ProfileRepo extends BaseNotifier with Validators {
       {String oldPassword, String newPassword, String confirmPassword}) async {
     setState(ViewState.Busy);
     try {
-      SalonLoginResponse res = await profileApi.changeSalonOwnerPassword(
+      ChangeSalonOwnerPasswordResponse res = await profileApi.changeSalonOwnerPassword(
         oldPassword: oldPassword,
         newPassword: newPassword,
         confirmPassword: confirmPassword,
@@ -178,16 +180,16 @@ class ProfileRepo extends BaseNotifier with Validators {
         backgroundColor: Colors.black26,
       );
     }
-    catch (e) {
-      Get.snackbar(
-        'An Error occured!',
-        e.toString(),
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
-    }
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error occured!',
+    //     e.toString(),
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
+    // }
     setState(ViewState.Idle);
     return false;
   }

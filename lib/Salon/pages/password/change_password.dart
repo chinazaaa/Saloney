@@ -84,8 +84,9 @@ class ChangePasswordPage extends StatelessWidget {
                               makeInput(
                                   hint: "Confirm Password",
                                   controller: confirmPassword,
-                                  validator: (value) =>
-                                      model.validatePassword(value),
+                                  validator: (value) => value == newPassword.text
+                                ? null
+                                : "Passwords do not match",
                                   obscureText: true),
                               Container(
                                   child: Row(
