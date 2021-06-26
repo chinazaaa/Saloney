@@ -29,10 +29,10 @@ class API {
     return responseJson;
   }
 
-  Future post(String url, header, body, {bool includesFiles = false}) async {
+  Future post(String url, header, body, {FormData multimediaRequest}) async {
     var responseJson;
     //If does not include files, use http request.
-    if (!includesFiles) {
+    if (multimediaRequest == null) {
       try {
         ///Log collected Info
         var res = await client.post(Uri.parse(url), headers: header, body: body);
@@ -46,11 +46,10 @@ class API {
     //If includes files, use dio request.
     else {
       Dio dio = Dio();
-      FormData formData = FormData.fromMap(body);
       try {
         Response res = await dio.post(
           url,
-          data: formData,
+          data: multimediaRequest,
           options: Options(
             method: 'POST',
             contentType: "application/json",
@@ -84,10 +83,10 @@ class API {
     }
   }
 
-  Future put(String url, header, {body, bool includesFiles}) async {
+  Future put(String url, header, {body}) async {
     var responseJson;
     try {
-      var res = await client.put(Uri.parse(url), headers: header, body: body);
+      var res = await client.post(Uri.parse(url), headers: header, body: body);
       responseJson = responseHandler(res);
     } on SocketException {
       //network error

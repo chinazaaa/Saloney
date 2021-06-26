@@ -32,10 +32,12 @@ class _AddNewServiceState extends State<AddNewService> {
   File _image;
   bool _track = false;
 
-  // static const String id = 'addnewservice - screen';
+  final serviceKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<ServiceProvider>(context, listen: false);
+    final repo = Provider.of<ServiceRepo>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -44,6 +46,7 @@ class _AddNewServiceState extends State<AddNewService> {
           backgroundColor: Color(0xff9477cb),
         ),
         body: Form(
+          key: serviceKey,
           child: Column(
             children: [
               Material(
@@ -64,7 +67,7 @@ class _AddNewServiceState extends State<AddNewService> {
                         ),
                       ),
                       ResponsiveState(
-                        state: model.state,
+                        state: repo.state,
                         busyWidget: CircularProgressIndicator(),
                         idleWidget: InkWell(
                           onTap: () => addService(context),
@@ -78,7 +81,10 @@ class _AddNewServiceState extends State<AddNewService> {
                                 'Save',
                                 style: TextStyle(color: Colors.white),
                               ),
-                              onPressed: () => addService(context),
+                              onPressed: () {
+                                if (!serviceKey.currentState.validate()) return;
+                                addService(context);
+                              },
                             ),
                           ),
                         ),
@@ -112,6 +118,7 @@ class _AddNewServiceState extends State<AddNewService> {
                                 children: [
                                   TextFormField(
                                     controller: nameOfService,
+                                  validator: (value) => model.validateName(value),
                                     decoration: InputDecoration(
                                         labelText: 'Name of Service',
                                         labelStyle:
@@ -123,6 +130,7 @@ class _AddNewServiceState extends State<AddNewService> {
                                   ),
                                   TextFormField(
                                     controller: description,
+                                    validator: (value) => model.validateName(value),
                                     decoration: InputDecoration(
                                         labelText: 'Description',
                                         labelStyle:
@@ -135,26 +143,26 @@ class _AddNewServiceState extends State<AddNewService> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Wrap(
-                                    children: [
-                                      for (int i = 0;
-                                          i <= model.productImages.length;
-                                          i++)
-                                        i == model.productImages.length
-                                            ? AddImageButton(
-                                                onTap: () =>
-                                                    model.addProductImage(),
-                                              )
-                                            : ImageView(
-                                                image: model.productImages[i],
-                                                onTap: () =>
-                                                    model.deleteProductImage(
-                                                        index: i),
-                                              ),
-                                    ],
-                                  ),
+                                  _image == null
+                                      ? AddImageButton(
+                                          onTap: () async {
+                                            _image = await model.getImage();
+                                            setState(() {
+
+                                            });
+                                          },
+                                        )
+                                      : ImageView(
+                                          image: _image,
+                                          onTap: () {
+                                            setState(() {
+                                              _image = null;
+                                            });
+                                          },
+                                        ),
                                   TextFormField(
                                     controller: price,
+                                    validator: (value) => int.tryParse(value) == null ? 'Enter a valid figure' : null,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                         labelText: 'Price ',
@@ -175,23 +183,26 @@ class _AddNewServiceState extends State<AddNewService> {
                                         SizedBox(
                                           width: 10,
                                         ),
-                                        DropdownButton<String>(
-                                          hint: Text('Select Category'),
-                                          value: dropdownValue,
-                                          icon: Icon(Icons.arrow_drop_down),
-                                          onChanged: (String value) {
-                                            setState(() {
-                                              dropdownValue = value;
-                                            });
-                                          },
-                                          items: _category
-                                              .map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
+                                        Expanded(
+                                          child: DropdownButtonFormField<String>(
+                                            hint: Text('Select Category'),
+                                            validator: (val)=> val == null ? 'Select a category' : null,
+                                            value: dropdownValue,
+                                            icon: Icon(Icons.arrow_drop_down),
+                                            onChanged: (String value) {
+                                              setState(() {
+                                                dropdownValue = value;
+                                              });
+                                            },
+                                            items: _category
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -264,13 +275,11 @@ class _AddNewServiceState extends State<AddNewService> {
   addService(context) async {
     final model = Provider.of<ServiceRepo>(context, listen: false);
 
-    // FIXME do we need this
-    // if (!mykey.currentState.validate()) return;
-
-    bool success = await model.addService(
-      service: nameOfService.text, description: description.text, price: price.text,
+    bool success = await model.createService(
+      service: nameOfService.text, description: description.text,
+      price: price.text,
       category: dropdownValue,
-      // FIXME isPublished:dropdownValue2
+      image: _image.path
     );
     if (success) {
       Get.snackbar(
