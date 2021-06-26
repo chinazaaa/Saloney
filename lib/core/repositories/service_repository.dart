@@ -20,6 +20,7 @@ class ServiceRepo extends BaseNotifier {
     try {
       ApiResponse res = await _api.createService(image: image, description: description, price: price, category: category, service: service);
       setState(ViewState.Idle);
+      print(res);
       return true;
     } on NetworkException {
       Get.snackbar(

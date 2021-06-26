@@ -69,23 +69,20 @@ class _AddNewServiceState extends State<AddNewService> {
                       ResponsiveState(
                         state: repo.state,
                         busyWidget: CircularProgressIndicator(),
-                        idleWidget: InkWell(
-                          onTap: () => addService(context),
-                          child: FadeAnimation(
-                            1.5,
-                            TextButton.icon(
-                              style: TextButton.styleFrom(
-                                  backgroundColor: Colors.purple),
-                              icon: Icon(Icons.save, color: Colors.white),
-                              label: Text(
-                                'Save',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                if (!serviceKey.currentState.validate()) return;
-                                addService(context);
-                              },
+                        idleWidget: FadeAnimation(
+                          1.5,
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.purple),
+                            icon: Icon(Icons.save, color: Colors.white),
+                            label: Text(
+                              'Save',
+                              style: TextStyle(color: Colors.white),
                             ),
+                            onPressed: () {
+                              if (!serviceKey.currentState.validate()) return;
+                              addService(context);
+                            },
                           ),
                         ),
                       )
@@ -282,28 +279,15 @@ class _AddNewServiceState extends State<AddNewService> {
       image: _image.path
     );
     if (success) {
+      Navigator.pop(context);
       Get.snackbar(
         'Success',
-        'Service Successfully Created. Please return to the Previous Page',
+        'Service Successfully Created',
         margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
         snackStyle: SnackStyle.FLOATING,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-      // FIXME Go where now??
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
     }
-    // else {
-    //   //Do nothing
-    //   Get.snackbar(
-    //     'Error',
-    //     'Something terrible has gone wrong. Please contact support',
-    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-    //     snackStyle: SnackStyle.FLOATING,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black26,
-    //   );
-    // }
   }
 }
