@@ -52,7 +52,9 @@ class ServiceRepo extends BaseNotifier {
 
   List<UnpublishedService> unpublishedServices = [];
   Future<bool> getUnpublishedServices({bool silently = false}) async {
-    if(!silently) setState(ViewState.Busy);
+    if(!silently){
+      if(unpublishedServices.isEmpty) setState(ViewState.Busy);
+    }
     UnpublishedServiceResponse resp;
     try {
       resp = await _api.getUnPublishedService();
