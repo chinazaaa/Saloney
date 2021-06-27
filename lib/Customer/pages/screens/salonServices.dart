@@ -99,7 +99,7 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
             child: Padding(
               padding: EdgeInsets.all(SizeConfig.widthOf(10)),
               child: Text(
-                'No Salon Nearby',
+                'Salon has not added any service',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
