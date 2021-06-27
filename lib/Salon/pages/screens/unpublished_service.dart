@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/edit_service.dart';
-import 'package:starter_project/Salon/pages/screens/published_service.dart';
+//import 'package:starter_project/Salon/pages/screens/published_service.dart';
+import 'package:starter_project/Salon/pages/screens/service.dart';
 import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
@@ -109,6 +111,7 @@ class PopupOptionMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final models = Provider.of<ServiceRepo>(context);
     return PopupMenuButton<MenuOption>(
       itemBuilder: (BuildContext context) {
         return <PopupMenuEntry<MenuOption>>[
@@ -116,12 +119,9 @@ class PopupOptionMenu extends StatelessWidget {
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
                 onTap: () {
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   EditService()));
-                 // print(data.service);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditService()));
+                  // print(data.service);
                 },
                 title: Text("Edit")),
             value: MenuOption.Edit,
@@ -129,12 +129,21 @@ class PopupOptionMenu extends StatelessWidget {
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   PublishedService()));
+                onTap: () async{
+                  bool success = await models.publishService(serviceId: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Service Unpublished Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
                 },
                 title: Text("Publish")),
             value: MenuOption.Publish,
@@ -144,10 +153,9 @@ class PopupOptionMenu extends StatelessWidget {
             child: ListTile(
                 onTap: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   UnPublishedService()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UnPublishedService()));
                 },
                 title: Text(
                   "Delete",

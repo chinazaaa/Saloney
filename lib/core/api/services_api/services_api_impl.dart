@@ -96,5 +96,36 @@ class ServicesApiImpl extends ServicesApi {
       throw NetworkException();
     }
   }
+
+
+
+  @override
+  Future<ApiResponse> publishService({String serviceId}) async {
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody =
+          await server.post('$baseUrl/services/publish/$serviceId', xHeader, {});
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+
+  @override
+  Future<ApiResponse> unpublishService({String serviceId}) async {
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody =
+          await server.post('$baseUrl/services/unpublish/$serviceId', xHeader, {});
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
   
 }

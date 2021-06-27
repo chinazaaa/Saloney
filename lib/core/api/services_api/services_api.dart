@@ -30,4 +30,12 @@ abstract class ServicesApi {
     Future<ApiResponse> getPublishedService({
     String salonId
   });
+
+    Future<ApiResponse> publishService({
+    String serviceId
+  });
+
+     Future<ApiResponse> unpublishService({
+    String serviceId
+  });
 }

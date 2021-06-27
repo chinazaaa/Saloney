@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/edit_service.dart';
+import 'package:starter_project/Salon/pages/screens/service.dart';
 import 'package:starter_project/Salon/pages/screens/unpublished_service.dart';
 import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
@@ -8,12 +10,12 @@ import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dar
 import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
 
-class PublishedService extends StatefulWidget {
+class PublishedServiceScreen extends StatefulWidget {
   @override
-  _PublishedServiceState createState() => _PublishedServiceState();
+  _PublishedServiceScreenState createState() => _PublishedServiceScreenState();
 }
 
-class _PublishedServiceState extends State<PublishedService> {
+class _PublishedServiceScreenState extends State<PublishedServiceScreen> {
   @override
   void initState() {
     super.initState();
@@ -90,7 +92,7 @@ class _PublishedServiceState extends State<PublishedService> {
                           ? Text('No Image')
                           : Image.network(e.image)),
                       DataCell(
-                        PopupOptionMenu(PublishedService()),
+                        PopupOptionMenu(e),
                       )
                     ]),
                   )
@@ -109,6 +111,7 @@ class PopupOptionMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final models = Provider.of<ServiceRepo>(context);
     return PopupMenuButton<MenuOption>(
       itemBuilder: (BuildContext context) {
         return <PopupMenuEntry<MenuOption>>[
@@ -116,12 +119,9 @@ class PopupOptionMenu extends StatelessWidget {
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
                 onTap: () {
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   EditService()));
-                 // print(data.service);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EditService()));
+                  // print(data.service);
                 },
                 title: Text("Edit")),
             value: MenuOption.Edit,
@@ -129,12 +129,20 @@ class PopupOptionMenu extends StatelessWidget {
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   UnPublishedService()));
+                onTap: () async {
+                 bool success = await models.unpublishService(serviceId: data.id);
+                 if (success) {
+                   //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Service Published Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                 }     
                 },
                 title: Text("UnPublish")),
             value: MenuOption.UnPublish,
@@ -144,10 +152,9 @@ class PopupOptionMenu extends StatelessWidget {
             child: ListTile(
                 onTap: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                   PublishedService()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PublishedServiceScreen()));
                 },
                 title: Text(
                   "Delete",

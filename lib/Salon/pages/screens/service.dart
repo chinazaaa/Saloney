@@ -80,7 +80,7 @@ class ServiceScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 child: TabBarView(
-                  children: [UnPublishedService(), PublishedService(), ],
+                  children: [UnPublishedService(), PublishedServiceScreen(), ],
                 ),
               ),
             )
