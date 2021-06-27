@@ -29,18 +29,15 @@ class ServiceSalonWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
-              child: Text(
-                serviceName,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w900,
-                ),
-                maxLines: 2,
+            ), SizedBox(height: 5,),
+            Text(
+              serviceName,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w900,
               ),
-            ),
+              maxLines: 2,
+            ), SizedBox(height: 3,),
             Padding(
               padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
               child: Row(
