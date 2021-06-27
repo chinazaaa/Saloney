@@ -11,14 +11,36 @@ import 'package:starter_project/models/service/get_published_service_reponse.dar
 import '../../locator.dart';
 
 class CustomerRepository extends BaseNotifier{
+  //Api
+  final servicesApi = locator<ServicesApi>();
 
+  List<PublishedService> salonServices = [];
+  Future getSalonServices(String salonId) async{
+    setState(ViewState.Busy);
+    try {
+      PublishedServiceResponse res = await servicesApi.customerGetServices(salonId);
+      if(res.data.isEmpty){
+        setState(ViewState.NoDataAvailable);
+        salonServices = [];
+        return;
+      }
+      salonServices = res.data;
+      setState(ViewState.DataFetched);
+      return;
+    } on NetworkException {
+      setError('No Internet Connection');
+    }
+    catch (e) {
+      setError(e.toString());
+    }
+    return false;
+  }
 }
 
 class CustomerToSalonRepository extends BaseNotifier{
 
   //Api
   final customerApi = locator<CustomerApi>();
-  final servicesApi = locator<ServicesApi>();
 
   String currentAction = 'loading...';
 
@@ -29,11 +51,11 @@ class CustomerToSalonRepository extends BaseNotifier{
 
   Future<Position> fetchUserLocation() async {
     final ms = locator<MapService>();
-    if(ms.deviceLocation != null) return ms.deviceLocation;
-    var p = await ms.getDeviceLocation();
+    // if(ms.deviceLocation != null) return ms.deviceLocation;
+    // var p = await ms.getDeviceLocation();
     // print(ms.deviceLocationDetails.formattedAddress);
-    return p;
-    // return Position(longitude: 3.766225, latitude: 6.4809017);
+    // return p;
+    return Position(longitude: 3.3489671, latitude: 6.4926317);
   }
 
   List<Salon> salons = [];
@@ -64,28 +86,6 @@ class CustomerToSalonRepository extends BaseNotifier{
       setError(e.toString());
     }
     updateCurrentAction('...');
-    return false;
-  }
-
-  List<PublishedService> salonServices = [];
-  Future getSalonServices(String salonId) async{
-    setState(ViewState.Busy);
-    try {
-      PublishedServiceResponse res = await servicesApi.customerGetServices(salonId);
-      if(res.data.isEmpty){
-        setState(ViewState.NoDataAvailable);
-        salonServices = [];
-        return;
-      }
-      salonServices = res.data;
-      setState(ViewState.DataFetched);
-      return;
-    } on NetworkException {
-      setError('No Internet Connection');
-    }
-    catch (e) {
-      setError(e.toString());
-    }
     return false;
   }
 }

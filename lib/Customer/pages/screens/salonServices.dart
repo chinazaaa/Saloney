@@ -5,6 +5,9 @@ import 'package:starter_project/Customer/pages/utils/service.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/grid_service.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
+import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
 
 class SalonServicesScreen extends StatefulWidget {
   final String salonId, salonName, description;
@@ -19,14 +22,14 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       //Load services using salon id
-      Provider.of<CustomerToSalonRepository>(context, listen: false)
+      Provider.of<CustomerRepository>(context, listen: false)
           .getSalonServices(widget.salonId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<CustomerToSalonRepository>(context);
+    final model = Provider.of<CustomerRepository>(context);
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -40,7 +43,7 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
         ),
         centerTitle: true,
         title: Text(
-          "Salon Services for ${widget.salonName}",
+          "Salon Services",
         ),
         elevation: 0.0,
         actions: <Widget>[
@@ -62,104 +65,65 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-        child: ListView(
-          children: <Widget>[
-            Divider(),
-            Text(
-              "Hair",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-              ),
-              maxLines: 2,
+      body: ResponsiveState(
+        state: model.state,
+        busyWidget: Center(
+          child: Padding(
+            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+            child: CircularProgressIndicator(
+              strokeWidth: 6,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor),
             ),
-            Divider(),
-            GridView.builder(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height / 1.25),
+          ),
+        ),
+        errorWidget: Center(
+            child: Padding(
+              padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+              child: ErrorRetryWidget(
+                errorMessage: model.error,
+                onTap: () => model.getSalonServices(widget.salonId),
               ),
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) {
-                Map service = services[index];
-                return GridService(
-                  img: service['img'],
-                  // isFav: false,
-                  name: service['name'],
-                  // rating: 5.0,
-                  price: service['price'],
-                );
-              },
+            )),
+        idleWidget: Center(
+          child: Padding(
+            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+            child: CircularProgressIndicator(
+              strokeWidth: 6,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor),
             ),
-            SizedBox(height: 20.0),
-            Text(
-              "Beauty",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
+          ),
+        ),
+        noDataAvailableWidget: Center(
+            child: Padding(
+              padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+              child: Text(
+                'No Salon Nearby',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
-              maxLines: 2,
+            )),
+        dataFetchedWidget: Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+          child: GridView(
+            shrinkWrap: true,
+            primary: false,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: MediaQuery.of(context).size.width /
+                  (MediaQuery.of(context).size.height / 1.25),
             ),
-            Divider(),
-            GridView.builder(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height / 1.25),
-              ),
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) {
-                Map service = services[index];
-                return GridService(
-                  img: service['img'],
-                  //isFav: false,
-                  name: service['name'],
-                  // rating: 5.0,
-                  price: service['price'],
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              "Spa",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-              ),
-              maxLines: 2,
-            ),
-            Divider(),
-            GridView.builder(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height / 1.25),
-              ),
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) {
-                Map food = services[index];
-                return GridService(
-                  img: food['img'],
-                  // isFav: false,
-                  name: food['name'],
-                  // rating: 5.0,
-                  price: food['price'],
-                );
-              },
-            ),
-          ],
+            children: [
+              ...model.salonServices.map((e) => ServiceSalonWidget(
+                imgUri: e.image,
+                serviceName: e.service,
+                servicePrice: e.price,
+              )).toList(),
+            ],
+          ),
         ),
       ),
     );
