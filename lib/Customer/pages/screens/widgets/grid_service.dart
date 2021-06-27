@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/salonServices_details.dart';
 import 'package:starter_project/Customer/pages/utils/constant.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/smooth_star_rating.dart';
+import 'package:starter_project/models/service/get_published_service_reponse.dart';
 
 class ServiceSalonWidget extends StatelessWidget {
   final String serviceName, imgUri;
   final String servicePrice;
+  final PublishedService serviceInfo;
 
-  const ServiceSalonWidget({Key key, this.serviceName, this.imgUri, this.servicePrice}) : super(key: key);
+  const ServiceSalonWidget({Key key, this.serviceName, this.imgUri, this.servicePrice, this.serviceInfo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +58,12 @@ class ServiceSalonWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
+
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return ServiceDetails();
+              //another screen? haaa
+              return ServiceDetails(service: serviceInfo,);
             },
           ),
         );

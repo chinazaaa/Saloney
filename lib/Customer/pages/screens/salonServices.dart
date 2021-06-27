@@ -121,6 +121,7 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
                 imgUri: e.image,
                 serviceName: e.service,
                 servicePrice: e.price,
+                serviceInfo: e,
               )).toList(),
             ],
           ),
