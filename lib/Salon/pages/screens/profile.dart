@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/password/change_password.dart';
 import 'package:starter_project/Salon/pages/screens/about_us.dart';
 import 'package:starter_project/Salon/pages/screens/editProfile.dart';
+import 'package:starter_project/Salon/pages/screens/help_and_support.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/core/routes/route_names.dart';
 import 'package:starter_project/index.dart';
@@ -36,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     listSection.add(createSection("About Us", "assets/ic_about_us.png",
         Colors.black.withOpacity(0.8), AboutPage()));
     listSection.add(createSection("Help and Support", "assets/ic_support.png",
-        Colors.indigo.shade800, ProfilePage()));
+        Colors.indigo.shade800, HelpAndSupportPage()));
     listSection.add(createSection(
         "Logout", "assets/ic_logout.png", Colors.red.withOpacity(0.7), null, onPressed: () async{
           bool success = await Provider.of<AuthRepository>(context, listen: false).logout();
