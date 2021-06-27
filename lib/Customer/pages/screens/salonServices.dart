@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/utils/service.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/grid_service.dart';
-
+import 'package:starter_project/core/repositories/customer_repository.dart';
 
 class SalonServicesScreen extends StatefulWidget {
+  final String salonId, salonName, description;
+  const SalonServicesScreen(this.salonId, this.salonName, this.description);
   @override
   _SalonServicesScreenState createState() => _SalonServicesScreenState();
 }
 
 class _SalonServicesScreenState extends State<SalonServicesScreen> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //Load services using salon id
+      Provider.of<CustomerToSalonRepository>(context, listen: false)
+          .getSalonServices(widget.salonId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final model = Provider.of<CustomerToSalonRepository>(context);
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -22,11 +36,11 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
           icon: Icon(
             Icons.keyboard_backspace,
           ),
-          onPressed: ()=>Navigator.pop(context),
+          onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
         title: Text(
-          "Salon Services",
+          "Salon Services for ${widget.salonName}",
         ),
         elevation: 0.0,
         actions: <Widget>[
@@ -36,10 +50,10 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
               //color: Color(0xff9477cb),
               size: 22.0,
             ),
-            onPressed: (){
+            onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context){
+                  builder: (BuildContext context) {
                     return CustomerNotifications();
                   },
                 ),
@@ -48,14 +62,11 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
           ),
         ],
       ),
-
       body: Padding(
-        
-          padding: EdgeInsets.fromLTRB(10.0,0,10.0,0),
+        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
         child: ListView(
-          
           children: <Widget>[
-                Divider(),
+            Divider(),
             Text(
               "Hair",
               style: TextStyle(
@@ -65,7 +76,6 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
               maxLines: 2,
             ),
             Divider(),
-
             GridView.builder(
               shrinkWrap: true,
               primary: false,
@@ -83,11 +93,10 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
                   // isFav: false,
                   name: service['name'],
                   // rating: 5.0,
-                  price:service['price'],
+                  price: service['price'],
                 );
               },
             ),
-
             SizedBox(height: 20.0),
             Text(
               "Beauty",
@@ -98,7 +107,6 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
               maxLines: 2,
             ),
             Divider(),
-
             GridView.builder(
               shrinkWrap: true,
               primary: false,
@@ -120,7 +128,6 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
                 );
               },
             ),
-
             SizedBox(height: 20.0),
             Text(
               "Spa",
@@ -131,7 +138,6 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
               maxLines: 2,
             ),
             Divider(),
-
             GridView.builder(
               shrinkWrap: true,
               primary: false,
@@ -149,7 +155,7 @@ class _SalonServicesScreenState extends State<SalonServicesScreen> {
                   // isFav: false,
                   name: food['name'],
                   // rating: 5.0,
-                    price: food['price'],
+                  price: food['price'],
                 );
               },
             ),

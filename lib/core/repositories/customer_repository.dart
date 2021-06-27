@@ -6,6 +6,7 @@ import 'package:starter_project/core/services/map_service.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/get_salon_by_location_response.dart';
 import 'package:starter_project/models/salon.dart';
+import 'package:starter_project/models/service/get_published_service_reponse.dart';
 
 import '../../locator.dart';
 
@@ -17,6 +18,7 @@ class CustomerToSalonRepository extends BaseNotifier{
 
   //Api
   final customerApi = locator<CustomerApi>();
+  final servicesApi = locator<ServicesApi>();
 
   String currentAction = 'loading...';
 
@@ -62,6 +64,28 @@ class CustomerToSalonRepository extends BaseNotifier{
       setError(e.toString());
     }
     updateCurrentAction('...');
+    return false;
+  }
+
+  List<PublishedService> salonServices = [];
+  Future getSalonServices(String salonId) async{
+    setState(ViewState.Busy);
+    try {
+      PublishedServiceResponse res = await servicesApi.customerGetServices(salonId);
+      if(res.data.isEmpty){
+        setState(ViewState.NoDataAvailable);
+        salonServices = [];
+        return;
+      }
+      salonServices = res.data;
+      setState(ViewState.DataFetched);
+      return;
+    } on NetworkException {
+      setError('No Internet Connection');
+    }
+    catch (e) {
+      setError(e.toString());
+    }
     return false;
   }
 }
