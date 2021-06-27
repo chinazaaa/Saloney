@@ -51,11 +51,11 @@ class CustomerToSalonRepository extends BaseNotifier{
 
   Future<Position> fetchUserLocation() async {
     final ms = locator<MapService>();
-    // if(ms.deviceLocation != null) return ms.deviceLocation;
-    // var p = await ms.getDeviceLocation();
-    // print(ms.deviceLocationDetails.formattedAddress);
-    // return p;
-    return Position(longitude: 3.3489671, latitude: 6.4926317);
+    if(ms.deviceLocation != null) return ms.deviceLocation;
+    var p = await ms.getDeviceLocation();
+    print(ms.deviceLocationDetails.formattedAddress);
+    return p;
+    // return Position(longitude: 3.3489671, latitude: 6.4926317);
   }
 
   List<Salon> salons = [];
