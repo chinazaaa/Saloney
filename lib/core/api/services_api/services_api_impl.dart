@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:starter_project/core/api/api_utils/api_helper.dart';
+import 'package:starter_project/core/api/api_utils/api_routes.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
@@ -9,7 +10,7 @@ import 'package:starter_project/models/service/serviceResponses.dart';
 
 import '../../../locator.dart';
 
-class ServicesApiImpl extends ServicesApi {
+class ServicesApiImpl implements ServicesApi {
   static const baseUrl = "https://saloney.herokuapp.com";
 
   //API client
@@ -122,6 +123,19 @@ class ServicesApiImpl extends ServicesApi {
           await server.post('$baseUrl/services/unpublish/$serviceId', xHeader, {});
       ApiResponse res =
           ApiResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<ApiResponse> customerGetServices(String salonId) async{
+    try {
+      var responsebody =
+          await server.get('${ApiRoutes.customerGetServices}/$salonId', xHeader);
+      PublishedServiceResponse res =
+      PublishedServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();

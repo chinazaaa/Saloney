@@ -24,6 +24,7 @@ class ApiRoutes {
   static const String getSalonOwnerProfile = '$apiRoute/salonOwner';
   //customer
   static const String getCustomerProfile = '$apiRoute/customer';
+  static const String customerGetServices = '$apiRoute/publishedServices';
 
   //update profile routes
   static const String updateSalonOwnerProfile = '$apiRoute/profile/salonOwner';

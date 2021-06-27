@@ -38,4 +38,6 @@ abstract class ServicesApi {
      Future<ApiResponse> unpublishService({
     String serviceId
   });
+
+     Future<ApiResponse> customerGetServices(String salonId);
 }
