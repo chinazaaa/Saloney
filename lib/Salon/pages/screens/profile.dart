@@ -209,13 +209,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             alignment: Alignment.topCenter,
                             child: Container(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: user.user.avatar == null ? Image.asset(
+                  child: user.salon.avatar == null ? Image.asset(
                     "assets/1.png",
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
                   ) : Image.network(
-                    user.user.avatar,
+                    user.salon.avatar,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,

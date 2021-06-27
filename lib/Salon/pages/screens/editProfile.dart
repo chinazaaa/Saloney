@@ -6,11 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
+import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/user.dart';
+import 'package:starter_project/models/salon.dart';
 import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
 
 import '../../../locator.dart';
 final User user = locator<UserInfoCache>().salon.data.user;
+final Salon salon = locator<UserInfoCache>().salon.data.salon;
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -95,13 +98,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         width: 130,
                         height: 130,
                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: user.avatar == null ? Image.asset(
+                  child: salon.avatar == null ? Image.asset(
                     "assets/1.png",
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
                   ) : Image.network(
-                    user.avatar,
+                    salon.avatar,
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
