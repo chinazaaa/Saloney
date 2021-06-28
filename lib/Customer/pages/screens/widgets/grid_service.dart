@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/salonServices_details.dart';
-import 'package:starter_project/Customer/pages/utils/constant.dart';
-import 'package:starter_project/Customer/pages/screens/widgets/smooth_star_rating.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
 
 class ServiceSalonWidget extends StatelessWidget {
