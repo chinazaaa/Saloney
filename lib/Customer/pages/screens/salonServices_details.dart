@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/screens/cart.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/utils/comments.dart';
 import 'package:starter_project/Customer/pages/utils/constant.dart';
@@ -118,7 +119,15 @@ class _ServiceDetailsState extends State<ServiceDetails> {
           style: ElevatedButton.styleFrom(
             primary: Color(0xff9477cb),
           ),
-          onPressed: () {},
+          onPressed: () {
+                  Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context){
+                    return CartPage();
+                  },
+                ),
+              );
+          },
         ),
       ),
     );
