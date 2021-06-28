@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
-import 'package:starter_project/Customer/pages/utils/service.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/grid_service.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/cart.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
-import 'package:starter_project/Customer/pages/utils/comments.dart';
-import 'package:starter_project/Customer/pages/utils/constant.dart';
-import 'package:starter_project/Customer/pages/utils/service.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
-import 'package:starter_project/Customer/pages/screens/widgets/smooth_star_rating.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
 
 class ServiceDetails extends StatefulWidget {
