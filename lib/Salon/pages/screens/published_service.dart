@@ -156,7 +156,7 @@ class PopupOptionMenu extends StatelessWidget {
                    //show snackbar
                          Get.snackbar(
                                             'Success!',
-                                            'Service Published Successfully',
+                                            'Service Deleted Successfully',
                                             margin: EdgeInsets.symmetric(
                                                 vertical: 30, horizontal: 30),
                                             snackStyle: SnackStyle.FLOATING,
