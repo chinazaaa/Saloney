@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/auth/login.dart';
+import 'package:starter_project/Salon/pages/auth/resend_otp.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 
@@ -135,6 +136,11 @@ class SalonOtpScreen extends StatelessWidget {
                           InkWell(
                               onTap: () {
                                 //resend OTP
+                                Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ResendOtpPage()));
                               },
                               child: Text(
                                 "Resend",
