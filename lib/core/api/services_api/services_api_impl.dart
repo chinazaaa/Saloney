@@ -129,6 +129,36 @@ class ServicesApiImpl implements ServicesApi {
     }
   }
 
+
+    @override
+  Future<ApiResponse> deleteUnpublishedService({String serviceId}) async {
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody =
+          await server.delete('$baseUrl/services/$serviceId', xHeader);
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+
+    @override
+  Future<ApiResponse> deletePublishedService({String serviceId}) async {
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody =
+          await server.delete('$baseUrl/services/$serviceId', xHeader);
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
   @override
   Future<ApiResponse> customerGetServices(String salonId) async{
     try {

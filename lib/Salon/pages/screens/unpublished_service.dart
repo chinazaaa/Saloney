@@ -135,7 +135,7 @@ class PopupOptionMenu extends StatelessWidget {
                     //show snackbar
                          Get.snackbar(
                                             'Success!',
-                                            'Service Unpublished Successfully',
+                                            'Service Published Successfully',
                                             margin: EdgeInsets.symmetric(
                                                 vertical: 30, horizontal: 30),
                                             snackStyle: SnackStyle.FLOATING,
@@ -151,11 +151,21 @@ class PopupOptionMenu extends StatelessWidget {
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UnPublishedService()));
+                 onTap: () async{
+                  bool success = await models.deleteUnpublishedService(serviceId: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Service Deleted Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
                 },
                 title: Text(
                   "Delete",

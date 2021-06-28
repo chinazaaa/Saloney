@@ -167,4 +167,70 @@ class ServiceRepo extends BaseNotifier {
     }
     return false;
   }
+
+
+
+  Future<bool> deleteUnpublishedService({
+    String serviceId,
+  }) async {
+    try {
+      ApiResponse res = await _api.deleteUnpublishedService(
+        serviceId: serviceId);
+      getPublishedServices(silently: true);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    return false;
+  }
+
+
+
+  Future<bool> deletePublishedService({
+    String serviceId,
+  }) async {
+    try {
+      ApiResponse res = await _api.deletePublishedService(
+        serviceId: serviceId);
+      getPublishedServices(silently: true);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    return false;
+  }
 }
