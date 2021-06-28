@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/orders.dart';
+import 'package:starter_project/Customer/pages/screens/widgets/date_time_picker_widget2.dart';
 import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
 import 'package:starter_project/Customer/pages/utils/CustomUtils.dart';
 
@@ -61,6 +62,10 @@ class _CartPageState extends State<CartPage> {
             ],
           ),
           Utils.getSizedBox(height: 8),
+         
+            
+            DateTimePickerWidget2(),
+        
           ElevatedButton(
             onPressed: () {
               Navigator.push(context,
