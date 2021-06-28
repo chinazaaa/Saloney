@@ -7,6 +7,7 @@ import 'package:starter_project/index.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
+import 'package:starter_project/models/api_response_variants/resend_otp_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
 import 'package:starter_project/ui_helpers/responsive_state/base_view_model.dart';
@@ -192,14 +193,14 @@ class AuthRepository extends BaseNotifier with Validators {
     return false;
   }
 
-  Future<bool> confirmOTP({bool isCustomer = true, String Otp}) async {
+  Future<bool> confirmOTP({bool isCustomer = true, String otp}) async {
     // FIXME Unused  SalonRegistrationResponse salon;
     // FIXME Unused  CustomerRegistrationResponse customer;
 
     try {
       if (isCustomer) {
         CustomerRegistrationResponse customer =
-            await authApi.confirmCustomerOTP(Otp: Otp);
+            await authApi.confirmCustomerOTP(otp: otp);
         setState(ViewState.Idle);
         if (customer.success) {
           return true;
@@ -215,7 +216,7 @@ class AuthRepository extends BaseNotifier with Validators {
         }
       } else {
         SalonRegistrationResponse salon =
-            await authApi.confirmSaloonOTP(Otp: Otp);
+            await authApi.confirmSaloonOTP(otp: otp);
         setState(ViewState.Idle);
         if (salon.success) {
           return true;
@@ -253,6 +254,71 @@ class AuthRepository extends BaseNotifier with Validators {
     setState(ViewState.Idle);
     return false;
   }
+
+
+  Future<bool> resendOTP({bool isCustomer = true, String email}) async {
+    // FIXME Unused  SalonRegistrationResponse salon;
+    // FIXME Unused  CustomerRegistrationResponse customer;
+
+    try {
+      if (isCustomer) {
+        ResendOTPResponse customer =
+            await authApi.resendOTP(email: email);
+        setState(ViewState.Idle);
+        if (customer.success) {
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      } else {
+        ResendOTPResponse salon =
+            await authApi.resendOTP(email: email);
+        setState(ViewState.Idle);
+        if (salon.success) {
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }
+
+      setState(ViewState.Idle);
+      return false;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error Occured!',
+    //     'Please try again',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black45,
+    //   );
+    // }
+    setState(ViewState.Idle);
+    return false;
+  }
+
 
   Future<bool> logout() async {
     await locator<UserInfoCache>().clearCache();

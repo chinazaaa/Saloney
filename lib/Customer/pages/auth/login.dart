@@ -14,7 +14,7 @@ import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dar
 // ignore: must_be_immutable
 class CustomerLoginPage extends StatelessWidget {
   //Controllers
-  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> mykey = GlobalKey<FormState>();
 
@@ -84,7 +84,7 @@ class CustomerLoginPage extends StatelessWidget {
                                   1.2,
                                   makeInput(
                                       hint: "Email",
-                                      controller: name,
+                                      controller: email,
                                       validator: (value) =>
                                           model.validateName(value))),
                               FadeAnimation(
@@ -200,7 +200,7 @@ class CustomerLoginPage extends StatelessWidget {
     if (!mykey.currentState.validate()) return;
 
     bool success = await model.login(
-        isCustomer: true, email: name.text, password: password.text);
+        isCustomer: true, email: email.text, password: password.text);
 
     if (success) {
       //go to otp page

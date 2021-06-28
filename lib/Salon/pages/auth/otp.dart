@@ -82,7 +82,7 @@ class SalonOtpScreen extends StatelessWidget {
                             }
 
                             //if pin is correct, verify user
-                            bool success = await model.confirmOTP(isCustomer: false, Otp: pin);
+                            bool success = await model.confirmOTP(isCustomer: false, otp: pin);
 
                             if(success){
                               //go to login screen

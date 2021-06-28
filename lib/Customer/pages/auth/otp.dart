@@ -84,7 +84,7 @@ class CustomerOtpScreen extends StatelessWidget {
                             }
 
                             //if pin is correct, verify user
-                            bool success = await model.confirmOTP(isCustomer: true, Otp: pin);
+                            bool success = await model.confirmOTP(isCustomer: true, otp: pin);
 
                             if(success){
                               //go to login screen

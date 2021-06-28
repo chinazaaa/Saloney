@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:starter_project/models/api_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_login_response.dart';
 import 'package:starter_project/models/api_response_variants/customer_registration_response.dart';
+import 'package:starter_project/models/api_response_variants/resend_otp_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/models/api_response_variants/salon_registration_response.dart';
 
@@ -110,9 +111,9 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<ApiResponse> confirmCustomerOTP({String Otp}) async{
+  Future<ApiResponse> confirmCustomerOTP({String otp}) async{
     Map val =   {
-      'otp' : Otp
+      'otp' : otp
     };
 
     print(val);
@@ -129,9 +130,9 @@ class AuthenticationApiImpl implements AuthenticationApi {
   }
 
   @override
-  Future<SalonRegistrationResponse> confirmSaloonOTP({String Otp}) async {
+  Future<SalonRegistrationResponse> confirmSaloonOTP({String otp}) async {
     Map val =   {
-      'otp' : Otp
+      'otp' : otp
     };
 
     print(val);
@@ -140,6 +141,28 @@ class AuthenticationApiImpl implements AuthenticationApi {
       var responsebody =
           await server.post(ApiRoutes.confirmSalonOTP, header, jsonEncode(val));
       SalonRegistrationResponse response = SalonRegistrationResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+
+
+
+  @override
+  Future<ApiResponse> resendOTP({String email}) async{
+    Map val =   {
+      'email': email
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.resendOTP, header, jsonEncode(val));
+      ResendOTPResponse response = ResendOTPResponse.fromJson(responsebody);
 
       return response;
     } on SocketException {

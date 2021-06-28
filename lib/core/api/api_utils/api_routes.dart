@@ -33,6 +33,9 @@ class ApiRoutes {
   //update customer
   static const String updateCustomerProfile = '$apiRoute/profile/customer';
 
+//resend otp
+static const String resendOTP = '$apiRoute/resend/otp';
+
   //toggle
   static const String togglePushNotification =
       '$apiRoute/profile/passenger/update';
