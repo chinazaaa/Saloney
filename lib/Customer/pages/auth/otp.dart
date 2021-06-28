@@ -130,21 +130,21 @@ class CustomerOtpScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: <Widget>[
-                      //     Text("Didn't receive a code?"),
-                      //     InkWell(
-                      //         onTap: () {
-                      //           //Resend OTP Code
-                      //         },
-                      //         child: Text(
-                      //           "Resend",
-                      //           style: TextStyle(
-                      //               fontWeight: FontWeight.w600, fontSize: 18),
-                      //         )),
-                      //   ],
-                      // )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Didn't receive a code?"),
+                          InkWell(
+                              onTap: () {
+                                //Resend OTP Code
+                              },
+                              child: Text(
+                                "Resend",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 18),
+                              )),
+                        ],
+                      )
                     ],
                   ),
                 ),
