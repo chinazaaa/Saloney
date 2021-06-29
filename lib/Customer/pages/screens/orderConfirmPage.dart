@@ -56,13 +56,13 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
               ),
             ),
             SizedBox(height: 15,),
-            Text("Thank you for choosing us!", style: headingStyle,),
+            Text("Thank you Naza for choosing us!", style: headingStyle,),
             Text("Your appointment has been booked!", style: contentStyle,textAlign: TextAlign.center,),
             SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Order ID", style: headingStyle,),
+                Text("Booking ID", style: headingStyle,),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
