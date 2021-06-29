@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/screens/completed_orders.dart';
+import 'package:starter_project/Customer/pages/screens/uncompleted_orders.dart';
 import 'package:starter_project/Customer/pages/utils/RecommendationImage.dart';
 import 'package:starter_project/Customer/pages/utils/TextStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
@@ -124,8 +126,8 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
-            Icon(Icons.person),
-            Icon(Icons.restaurant),
+            CustomerUncompletedOrders(),
+            CustomerCompletedOrders()
           ],
           controller: tabController,
         ),

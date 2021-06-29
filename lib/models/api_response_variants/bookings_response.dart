@@ -18,14 +18,14 @@ class BookingsResponse extends ApiResponse{
 
     bool success;
     String message;
-    Data data;
+    Bookings data;
   factory BookingsResponse.fromJson(String str) => BookingsResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
     factory BookingsResponse.fromMap(Map<String, dynamic> json) => BookingsResponse(
         success: json["success"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: Bookings.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toMap() => {
@@ -35,8 +35,8 @@ class BookingsResponse extends ApiResponse{
     };
 }
 
-class Data {
-    Data({
+class Bookings {
+    Bookings({
         this.services,
         this.bookingDate,
         this.approved,
@@ -60,7 +60,7 @@ class Data {
     DateTime updatedAt;
     int v;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Bookings.fromJson(Map<String, dynamic> json) => Bookings(
         services: List<String>.from(json["services"].map((x) => x)),
         bookingDate: json["bookingDate"],
         approved: json["approved"],

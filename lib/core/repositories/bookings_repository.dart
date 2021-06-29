@@ -11,7 +11,7 @@
 //   final _api = locator<BookingsApi>();
 
 
-//     List<Data> customerUnCompletedOrders = [];
+//     List<Bookings> customerUnCompletedOrders = [];
 //   Future<bool> getCustomerUnCompletedOrders({bool silently = false}) async {
 //     if(!silently){
 //       if(customerUnCompletedOrders.isEmpty) setState(ViewState.Busy);
