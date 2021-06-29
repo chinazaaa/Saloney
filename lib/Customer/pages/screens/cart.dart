@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/Customer/pages/screens/orders.dart';
+import 'package:starter_project/Customer/pages/screens/orderConfirmPage.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/date_time_picker_widget2.dart';
 import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
 import 'package:starter_project/Customer/pages/utils/CustomUtils.dart';
@@ -69,7 +69,7 @@ class _CartPageState extends State<CartPage> {
           ElevatedButton(
             onPressed: () {
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Orders()));
+                  new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
             },
             style: ElevatedButton.styleFrom(
               primary: Color(0xff9477cb),
