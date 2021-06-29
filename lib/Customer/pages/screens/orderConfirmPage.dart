@@ -129,7 +129,7 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
                     gradient: gradientStyle
                 ),
                 child: Center(
-                  child: Text("VIEW ORDER", style: contentStyle.copyWith(
+                  child: Text("VIEW BOOKING", style: contentStyle.copyWith(
                       color: Colors.white,
                       fontSize: 22
                   ),),
