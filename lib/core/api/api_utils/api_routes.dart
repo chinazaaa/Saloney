@@ -45,4 +45,10 @@ static const String resendOTP = '$apiRoute/resend/otp';
       '$apiRoute/salonOwner/changePassword';
   static const String changeCustomerPassword =
       '$apiRoute/customer/changePassword';
+
+
+// uncompleted orders by customer
+  static const String customerUncompletedOrders =
+      '$apiRoute/uncompleted/customer/booking';
+
 }
