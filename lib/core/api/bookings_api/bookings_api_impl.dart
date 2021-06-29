@@ -33,4 +33,40 @@ class BookingsApiImpl implements BookingsApi {
       throw NetworkException();
     }
   }
+    @override
+  Future<ApiResponse> getCustomerCompletedBookings({String customerId}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.get('${ApiRoutes.customerCompletedOrders}/$customerId', header);
+      BookingsResponse res =
+          BookingsResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+    @override
+  Future<ApiResponse> getSalonUnCompletedBookings({String customerId}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.get('${ApiRoutes.salonUncompletedOrders}/$customerId', header);
+      BookingsResponse res =
+          BookingsResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+    @override
+  Future<ApiResponse> getSalonCompletedBookings({String customerId}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.get('${ApiRoutes.salonCompletedOrders}/$customerId', header);
+      BookingsResponse res =
+          BookingsResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
 }

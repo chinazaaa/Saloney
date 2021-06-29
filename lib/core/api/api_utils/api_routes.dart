@@ -51,4 +51,15 @@ static const String resendOTP = '$apiRoute/resend/otp';
   static const String customerUncompletedOrders =
       '$apiRoute/uncompleted/customer/booking';
 
+// completed orders by customer
+  static const String customerCompletedOrders =
+      '$apiRoute/completed/customer/booking';
+
+      // uncompleted orders by salon
+  static const String salonUncompletedOrders =
+      '$apiRoute/uncompleted/salon/booking';
+
+// completed orders by salon
+  static const String salonCompletedOrders =
+      '$apiRoute/completed/salon/booking';
 }
