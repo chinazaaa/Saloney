@@ -15,6 +15,12 @@ abstract class BookingsApi {
      Future<ApiResponse> getSalonCompletedBookings({
     String customerId
   });
+
+      Future<ApiResponse> createBooking({
+    String customerId,
+    String serviceId,
+    String bookingDate
+  });
 }
 
 

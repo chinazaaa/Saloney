@@ -13,7 +13,34 @@ class BookingsApiImpl implements BookingsApi {
 
   //API client
   var server = locator<API>();
+@override
+  Future<BookingsResponse> createBooking(
+      {
+     String customerId,
+    String serviceId,
+    String bookingDate}) async {
+    Map<String, String> header = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-access-token': locator<UserInfoCache>().token
+    };
 
+    Map val = {
+      'customerId': customerId,
+      'serviceId': serviceId,
+      'bookingDate': bookingDate,
+    };
+
+    print('${ApiRoutes.createBooking}/${locator<UserInfoCache>().customer.data.id}');
+    var responsebody = await server.put(
+      '${ApiRoutes.createBooking}/${locator<UserInfoCache>().customer.data.id}',
+      header,
+      body: jsonEncode(val),
+    );
+
+    BookingsResponse response = BookingsResponse.fromJson(responsebody);
+    return response;
+  }
 
   Map<String, String> get header => {
     'Accept': 'application/json',

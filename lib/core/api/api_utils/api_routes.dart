@@ -46,7 +46,9 @@ static const String resendOTP = '$apiRoute/resend/otp';
   static const String changeCustomerPassword =
       '$apiRoute/customer/changePassword';
 
-
+// creeate booking
+  static const String createBooking =
+      '$apiRoute/booking';
 // uncompleted orders by customer
   static const String customerUncompletedOrders =
       '$apiRoute/uncompleted/customer/booking';
