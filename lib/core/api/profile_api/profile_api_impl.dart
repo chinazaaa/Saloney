@@ -24,56 +24,56 @@ class ProfileApiImpl implements ProfileApi {
   //API client
   var server = locator<API>();
 
-  @override
-  Future<ChangeSalonOwnerPasswordResponse> changeSalonOwnerPassword(
-      {
-      String oldPassword,
-      String newPassword,
-      String confirmPassword}) async {
-    Map<String, String> header = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'x-access-token': locator<UserInfoCache>().token
-    };
+  // @override
+  // Future<ChangeSalonOwnerPasswordResponse> changeSalonOwnerPassword(
+  //     {
+  //     String oldPassword,
+  //     String newPassword,
+  //     String confirmPassword}) async {
+  //   Map<String, String> header = {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //     'x-access-token': locator<UserInfoCache>().token
+  //   };
 
-    Map val = {
-      'oldPassword': oldPassword,
-      'newPassword': newPassword,
-      'confirmPassword': confirmPassword,
-    };
+  //   Map val = {
+  //     'oldPassword': oldPassword,
+  //     'newPassword': newPassword,
+  //     'confirmPassword': confirmPassword,
+  //   };
 
-    print('${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}');
-    var responsebody = await server.put(
-      '${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}',
-      header,
-      body: jsonEncode(val),
-    );
+  //   print('${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}');
+  //   var responsebody = await server.put(
+  //     '${ApiRoutes.changeSalonOwnerPassword}/${locator<UserInfoCache>().salon.data.user.id}',
+  //     header,
+  //     body: jsonEncode(val),
+  //   );
 
-    ChangeSalonOwnerPasswordResponse response = ChangeSalonOwnerPasswordResponse.fromJson(responsebody);
-    return response;
-  }
+  //   ChangeSalonOwnerPasswordResponse response = ChangeSalonOwnerPasswordResponse.fromJson(responsebody);
+  //   return response;
+  // }
 
-  @override
-  Future<CustomerLoginResponse> changeCustomerPassword(
-      {
-      String oldPassword,
-      String newPassword,
-      String confirmPassword}) async {
-    Map val = {
-      'oldPassword': oldPassword,
-      'newPassword': newPassword,
-      'confirmPassword': confirmPassword,
-    };
+  // @override
+  // Future<CustomerLoginResponse> changeCustomerPassword(
+  //     {
+  //     String oldPassword,
+  //     String newPassword,
+  //     String confirmPassword}) async {
+  //   Map val = {
+  //     'oldPassword': oldPassword,
+  //     'newPassword': newPassword,
+  //     'confirmPassword': confirmPassword,
+  //   };
 
-    var responsebody = await server.put(
-        '${ApiRoutes.changeCustomerPassword}/${locator<UserInfoCache>().customer.data.id}',
-        header,
-        body: jsonEncode(val));
+  //   var responsebody = await server.put(
+  //       '${ApiRoutes.changeCustomerPassword}/${locator<UserInfoCache>().customer.data.id}',
+  //       header,
+  //       body: jsonEncode(val));
 
-    CustomerLoginResponse response =
-        CustomerLoginResponse.fromJson(responsebody);
-    return response;
-  }
+  //   CustomerLoginResponse response =
+  //       CustomerLoginResponse.fromJson(responsebody);
+  //   return response;
+  // }
 
   @override
   Future<ApiResponse> getSalonOwnerProfile({String id}) async {

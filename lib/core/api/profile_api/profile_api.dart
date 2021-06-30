@@ -20,16 +20,16 @@ abstract class ProfileApi {
     String phone,
   });
 
-  Future<ApiResponse> changeSalonOwnerPassword(
-      {
-      String oldPassword,
-      String newPassword,
-      String confirmPassword});
-  Future<ApiResponse> changeCustomerPassword(
-      {
-      String oldPassword,
-      String newPassword,
-      String confirmPassword});
+  // Future<ApiResponse> changeSalonOwnerPassword(
+  //     {
+  //     String oldPassword,
+  //     String newPassword,
+  //     String confirmPassword});
+  // Future<ApiResponse> changeCustomerPassword(
+  //     {
+  //     String oldPassword,
+  //     String newPassword,
+  //     String confirmPassword});
 
   Future<ApiResponse> getSalonOwnerProfile({
     String id,
