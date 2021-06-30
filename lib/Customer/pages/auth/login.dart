@@ -86,7 +86,7 @@ class CustomerLoginPage extends StatelessWidget {
                                       hint: "Email",
                                       controller: email,
                                       validator: (value) =>
-                                          model.validateName(value))),
+                                          model.validateEmail(value))),
                               FadeAnimation(
                                   1.5,
                                   makeInput(
