@@ -13,10 +13,11 @@ class _CustomerChatListPageViewState extends State<CustomerChatListPageView> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        isLoading = false;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          isLoading = false;
+        });
       });
     });
   }
