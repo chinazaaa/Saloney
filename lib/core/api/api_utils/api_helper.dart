@@ -83,16 +83,57 @@ class API {
     }
   }
 
-  Future put(String url, header, {body}) async {
+  Future put(String url, header, {body, FormData multimediaRequest}) async {
     var responseJson;
-    try {
-      var res = await client.post(Uri.parse(url), headers: header, body: body);
-      responseJson = responseHandler(res);
-    } on SocketException {
-      //network error
-      throw NetworkException("Network error occurred");
+    if(multimediaRequest == null){
+      try {
+        var res = await client.put(Uri.parse(url), headers: header, body: body);
+        responseJson = responseHandler(res);
+      } on SocketException {
+        //network error
+        throw NetworkException("Network error occurred");
+      }
+      return responseJson;
     }
-    return responseJson;
+    //If includes files, use dio request.
+    else {
+      Dio dio = Dio();
+      try {
+        Response res = await dio.put(
+          url,
+          data: multimediaRequest,
+          options: Options(
+            method: 'POST',
+            contentType: "application/json",
+            headers: header,
+            responseType: ResponseType.plain,
+          ),
+          // onSendProgress: (int sent, int total) {
+          //   print("Sent - $sent , Total : $total");
+          // },
+        );
+        return res.data;
+      } on SocketException {
+        throw NetworkException();
+      } on DioError catch (e) {
+        switch (e.response.statusCode) {
+          case 400:
+            throw BadRequestException(e.response.data);
+          case 401:
+          case 403:
+            throw UnauthorisedException(e.response.data);
+          case 404:
+            throw FileNotFoundException(e.response.data);
+          case 422:
+            throw AlreadyRegisteredException(e.response.data);
+          case 500:
+          default:
+            throw FetchDataException(
+                'Error occured while Communication with Server with StatusCode : ${e.response.statusCode}');
+        }
+      }
+    }
+
   }
 
   Future patch(String url, header, {body}) async {
