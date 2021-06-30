@@ -154,10 +154,9 @@ class ProfileApiImpl implements ProfileApi {
       'phone': phone,
       'userName': userName,
     };
-
     var responsebody = await server.put(
         '${ApiRoutes.updateSalonOwnerProfile}/${locator<UserInfoCache>().salon.data.user.id}',
-        header,
+        xheader,
         body: jsonEncode(val));
     UpdateSalonOwnerResponse response =
         UpdateSalonOwnerResponse.fromJson(responsebody);
@@ -188,4 +187,10 @@ class ProfileApiImpl implements ProfileApi {
         'Content-Type': 'application/json',
         'x-access-token': locator<UserInfoCache>().token
       };
+
+  Map<String, String> get xheader => {
+    'Accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': locator<UserInfoCache>().token
+  };
 }

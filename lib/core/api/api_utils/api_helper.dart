@@ -87,7 +87,7 @@ class API {
     var responseJson;
     if(multimediaRequest == null){
       try {
-        var res = await client.post(Uri.parse(url), headers: header, body: body);
+        var res = await client.put(Uri.parse(url), headers: header, body: body);
         responseJson = responseHandler(res);
       } on SocketException {
         //network error
@@ -99,7 +99,7 @@ class API {
     else {
       Dio dio = Dio();
       try {
-        Response res = await dio.post(
+        Response res = await dio.put(
           url,
           data: multimediaRequest,
           options: Options(

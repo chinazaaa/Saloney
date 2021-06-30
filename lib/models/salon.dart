@@ -62,7 +62,7 @@ class Salon {
     factory Salon.fromMap(Map<String, dynamic> json) => Salon(
         location: Location.fromMap(json["location"]),
         description: json["description"],
-        image: List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
+        image: json["image"] == null ? null : List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
         id: json["_id"],
         avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
