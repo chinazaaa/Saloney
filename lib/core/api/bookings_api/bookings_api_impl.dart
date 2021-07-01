@@ -13,7 +13,7 @@ class BookingsApiImpl implements BookingsApi {
   //API client
   var server = locator<API>();
   @override
-  Future<BookingsResponse> createBooking({
+  Future<BookingResponse> createBooking({
     String serviceId,
     String bookingDate,
   }) async {
@@ -36,7 +36,7 @@ class BookingsApiImpl implements BookingsApi {
       body: jsonEncode(val),
     );
 
-    BookingsResponse response = BookingsResponse.fromJson(responsebody);
+    BookingResponse response = BookingResponse.fromJson(responsebody);
     return response;
   }
 
@@ -54,7 +54,7 @@ class BookingsApiImpl implements BookingsApi {
       var responsebody = await server.get(
           '${ApiRoutes.customerUncompletedOrders}/${locator<UserInfoCache>().customer.data.id}',
           header);
-      BookingsResponse res = BookingsResponse.fromJson(responsebody);
+      BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
@@ -67,7 +67,7 @@ class BookingsApiImpl implements BookingsApi {
     try {
       var responsebody = await server.get(
           '${ApiRoutes.customerCompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
-      BookingsResponse res = BookingsResponse.fromJson(responsebody);
+      BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
@@ -80,7 +80,7 @@ class BookingsApiImpl implements BookingsApi {
     try {
       var responsebody = await server.get(
           '${ApiRoutes.salonUncompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
-      BookingsResponse res = BookingsResponse.fromJson(responsebody);
+      BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
@@ -93,7 +93,7 @@ class BookingsApiImpl implements BookingsApi {
     try {
       var responsebody = await server.get(
           '${ApiRoutes.salonCompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
-      BookingsResponse res = BookingsResponse.fromJson(responsebody);
+      BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();

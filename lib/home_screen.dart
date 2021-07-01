@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
                 child: _customCard(
-                    text: 'A Salon',
+                    text: 'A Salon Owner',
                     borderColor: colorText2,
                     textColor: colorText2,
                     imageLink:
