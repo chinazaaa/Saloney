@@ -19,8 +19,7 @@ Future<bool> createBooking({
     try {
       ApiResponse res = await _api.createBooking(
           serviceId: serviceId,
-          customerId: customerId,
-          bookingDate: bookingDate,
+          bookingDate: bookingDate
           );
       setState(ViewState.Idle);
       //getUncompletedCustomerBookings(silently: true);

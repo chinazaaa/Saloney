@@ -10,15 +10,13 @@ import 'package:starter_project/models/api_response_variants/bookings_response.d
 import '../../../locator.dart';
 
 class BookingsApiImpl implements BookingsApi {
-
   //API client
   var server = locator<API>();
-@override
-  Future<BookingsResponse> createBooking(
-      {
-     String customerId,
+  @override
+  Future<BookingsResponse> createBooking({
     String serviceId,
-    String bookingDate}) async {
+    String bookingDate,
+  }) async {
     Map<String, String> header = {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -26,14 +24,14 @@ class BookingsApiImpl implements BookingsApi {
     };
 
     Map val = {
-      'customerId': customerId,
       'serviceId': serviceId,
       'bookingDate': bookingDate,
     };
 
-    print('${ApiRoutes.createBooking}/${locator<UserInfoCache>().customer.data.id}');
+    print(
+        '${ApiRoutes.createBooking}/${locator<UserInfoCache>().salon.data.salon.id}/${locator<UserInfoCache>().customer.data.id}');
     var responsebody = await server.put(
-      '${ApiRoutes.createBooking}/${locator<UserInfoCache>().customer.data.id}',
+      '${ApiRoutes.createBooking}/${locator<UserInfoCache>().salon.data.salon.id}/${locator<UserInfoCache>().customer.data.id}',
       header,
       body: jsonEncode(val),
     );
@@ -43,54 +41,59 @@ class BookingsApiImpl implements BookingsApi {
   }
 
   Map<String, String> get header => {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'x-access-token': '${locator<UserInfoCache>().token}',
-  };
-  
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': '${locator<UserInfoCache>().token}',
+      };
+
   @override
-  Future<ApiResponse> getCustomerUnCompletedBookings({String customerId}) async {
-    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+  Future<ApiResponse> getCustomerUnCompletedBookings(
+      {String customerId}) async {
+    //String customerId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server.get('${ApiRoutes.customerUncompletedOrders}/$customerId', header);
-      BookingsResponse res =
-          BookingsResponse.fromJson(responsebody);
+      var responsebody = await server.get(
+          '${ApiRoutes.customerUncompletedOrders}/${locator<UserInfoCache>().customer.data.id}',
+          header);
+      BookingsResponse res = BookingsResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
-    @override
+
+  @override
   Future<ApiResponse> getCustomerCompletedBookings({String customerId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server.get('${ApiRoutes.customerCompletedOrders}/$customerId', header);
-      BookingsResponse res =
-          BookingsResponse.fromJson(responsebody);
+      var responsebody = await server.get(
+          '${ApiRoutes.customerCompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
+      BookingsResponse res = BookingsResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
-    @override
+
+  @override
   Future<ApiResponse> getSalonUnCompletedBookings({String customerId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server.get('${ApiRoutes.salonUncompletedOrders}/$customerId', header);
-      BookingsResponse res =
-          BookingsResponse.fromJson(responsebody);
+      var responsebody = await server.get(
+          '${ApiRoutes.salonUncompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
+      BookingsResponse res = BookingsResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
-    @override
+
+  @override
   Future<ApiResponse> getSalonCompletedBookings({String customerId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server.get('${ApiRoutes.salonCompletedOrders}/$customerId', header);
-      BookingsResponse res =
-          BookingsResponse.fromJson(responsebody);
+      var responsebody = await server.get(
+          '${ApiRoutes.salonCompletedOrders}/${locator<UserInfoCache>().customer.data.id}', header);
+      BookingsResponse res = BookingsResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();

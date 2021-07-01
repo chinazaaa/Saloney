@@ -46,6 +46,7 @@ class Bookings {
     this.completedBySalon,
     this.id,
     this.customer,
+    this.salon,
     this.bookingID,
     this.createdAt,
     this.updatedAt,
@@ -59,6 +60,7 @@ class Bookings {
   bool completedBySalon;
   String id;
   String customer;
+  String salon;
   String bookingID;
   DateTime createdAt;
   DateTime updatedAt;
@@ -72,6 +74,7 @@ class Bookings {
         completedBySalon: json["completedBySalon"],
         id: json["_id"],
         customer: json["customer"],
+        salon: json["salon"],
         bookingID: json["bookingID"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -86,6 +89,7 @@ class Bookings {
         "completedBySalon": completedBySalon,
         "_id": id,
         "customer": customer,
+        "salon": salon,
          "bookingID": bookingID,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),

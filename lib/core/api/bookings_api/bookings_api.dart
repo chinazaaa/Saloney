@@ -17,7 +17,7 @@ abstract class BookingsApi {
   });
 
       Future<ApiResponse> createBooking({
-    String customerId,
+
     String serviceId,
     String bookingDate
   });
