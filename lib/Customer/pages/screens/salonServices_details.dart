@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/cart.dart';
 import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
+import 'package:starter_project/core/repositories/cart_repository.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
 
 class ServiceDetails extends StatefulWidget {
@@ -107,7 +109,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
         height: 50.0,
         child: ElevatedButton(
           child: Text(
-            "BOOK NOW",
+            "ADD TO CART",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -116,6 +118,8 @@ class _ServiceDetailsState extends State<ServiceDetails> {
             primary: Color(0xff9477cb),
           ),
           onPressed: () {
+            Provider.of<CartRepository>(context, listen: false).addToCart(widget.service);
+
                   Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context){
