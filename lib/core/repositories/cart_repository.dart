@@ -24,7 +24,7 @@ class CartRepository extends BaseNotifier {
 
   //cart details
   List<CartItem> cart = [];
-  double _actualDeliveryCost = 500;
+  double _actualDeliveryCost = 0;
 
   double currentPrice = 0;
   double get deliveryCost => currentPrice == 0 ? 0 : _actualDeliveryCost;
@@ -60,7 +60,7 @@ class CartRepository extends BaseNotifier {
     if (cart.isNotEmpty) {
       for (int i = 0; i < cart.length; i++) {
         CartItem p = cart[i];
-        int total = int.tryParse(p.product.price) ?? 0 * p.quantity;
+        int total = int.tryParse(p.product.price) * p.quantity;
         a += total;
       }
     }
