@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/screens/orderConfirmPage.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/date_time_picker_widget2.dart';
 import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
 import 'package:starter_project/Customer/pages/utils/CustomUtils.dart';
+import 'package:starter_project/core/repositories/cart_repository.dart';
+import 'package:starter_project/models/cart_item.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 
 // import 'CheckOutPage.dart';
 
@@ -13,10 +17,14 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final model = Provider.of<CartRepository>(context);
     return Scaffold(
-      // FIXME replaced by line 19 according to docs
-      // resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
       body: Builder(
@@ -26,7 +34,7 @@ class _CartPageState extends State<CartPage> {
               createHeader(),
               createSubTitle(),
               createCartList(),
-              footer(context)
+              footer(context, model)
             ],
           );
         },
@@ -34,7 +42,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  footer(BuildContext context) {
+  footer(BuildContext context, var model) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +62,7 @@ class _CartPageState extends State<CartPage> {
               Container(
                 margin: EdgeInsets.only(right: 30),
                 child: Text(
-                  "\$299.00",
+                  model.currentPrice.toString(),
                   style: CustomTextStyle.textFormFieldBlack
                       .copyWith(color: Color(0xff9477cb), fontSize: 14),
                 ),
@@ -104,10 +112,11 @@ class _CartPageState extends State<CartPage> {
   }
 
   createSubTitle() {
+    final model = Provider.of<CartRepository>(context);
     return Container(
       alignment: Alignment.topLeft,
       child: Text(
-        "Total(3) Items",
+        "Total(${model.cart.length}) Items",
         style: CustomTextStyle.textFormFieldBold
             .copyWith(fontSize: 12, color: Colors.grey),
       ),
@@ -116,17 +125,28 @@ class _CartPageState extends State<CartPage> {
   }
 
   createCartList() {
-    return ListView.builder(
+    final model = Provider.of<CartRepository>(context);
+    return model.cart.length == 0 ? Padding(
+      padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+      child: Center(child: Text(
+          'Cart is Empty',
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+          ),
+      ),),
+    ) : ListView.builder(
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, position) {
-        return createCartListItem();
+        return createCartListItem(position, model);
       },
-      itemCount: 5,
+      itemCount: model.cart.length,
     );
   }
 
-  createCartListItem() {
+  createCartListItem(int i, var model) {
     return Stack(
       children: <Widget>[
         Container(
@@ -143,7 +163,7 @@ class _CartPageState extends State<CartPage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(14)),
                     color: Colors.blue.shade200,
-                    image: DecorationImage(image: AssetImage("assets/1.png"))),
+                    image: model.cart[i].product.image == null ? null : DecorationImage(image: NetworkImage(model.cart[i].product.image))),
               ),
               Expanded(
                 child: Container(
@@ -155,7 +175,7 @@ class _CartPageState extends State<CartPage> {
                       Container(
                         padding: EdgeInsets.only(right: 8, top: 4),
                         child: Text(
-                          "Braiding",
+                          model.cart[i].product.service,
                           maxLines: 2,
                           softWrap: true,
                           style: CustomTextStyle.textFormFieldSemiBold
@@ -164,7 +184,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                       Utils.getSizedBox(height: 6),
                       Text(
-                        "Saloney",
+                        model.cart[i].product.description,
                         style: CustomTextStyle.textFormFieldRegular
                             .copyWith(color: Colors.grey, fontSize: 14),
                       ),
@@ -173,7 +193,7 @@ class _CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              "\$299.00",
+                              model.cart[i].product.price,
                               style: CustomTextStyle.textFormFieldBlack
                                   .copyWith(color: Color(0xff9477cb)),
                             ),
@@ -183,25 +203,35 @@ class _CartPageState extends State<CartPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.remove,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
+                                  InkWell(
+                                    onTap: (){
+                                      model.decrementQuantity(index: i);
+                                    },
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 24,
+                                      color: Colors.grey.shade700,
+                                    ),
                                   ),
                                   Container(
                                     color: Colors.grey.shade200,
                                     padding: const EdgeInsets.only(
                                         bottom: 2, right: 12, left: 12),
                                     child: Text(
-                                      "1",
+                                      model.cart[i].quantity.toString(),
                                       style:
                                           CustomTextStyle.textFormFieldSemiBold,
                                     ),
                                   ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
+                                  InkWell(
+                                    onTap: (){
+                                      model.incrementQuantity(index: i);
+                                    },
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 24,
+                                      color: Colors.grey.shade700,
+                                    ),
                                   )
                                 ],
                               ),
@@ -219,19 +249,24 @@ class _CartPageState extends State<CartPage> {
         ),
         Align(
           alignment: Alignment.topRight,
-          child: Container(
-            width: 24,
-            height: 24,
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 10, top: 8),
-            child: Icon(
-              Icons.close,
-              color: Colors.white,
-              size: 20,
+          child: InkWell(
+            onTap: (){
+              model.removeItemFromCart(index: i);
+            },
+            child: Container(
+              width: 24,
+              height: 24,
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(right: 10, top: 8),
+              child: Icon(
+                Icons.close,
+                color: Colors.white,
+                size: 20,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  color: Color(0xff9477cb)),
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: Color(0xff9477cb)),
           ),
         )
       ],
