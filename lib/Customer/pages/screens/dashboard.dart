@@ -9,6 +9,7 @@ import 'package:starter_project/Customer/pages/utils/recommendationImage.dart';
 import 'package:starter_project/Customer/pages/utils/textStyles.dart';
 import 'package:starter_project/Customer/pages/utils/consts.dart';
 import 'package:starter_project/Customer/pages/utils/imageContainer.dart';
+import 'package:starter_project/core/repositories/cart_repository.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
@@ -142,6 +143,7 @@ class _DashboardState extends State<Dashboard> {
       String salonId}) {
     return GestureDetector(
       onTap: () {
+        Provider.of<CartRepository>(context, listen: false).updateVendorDetails(salonId, salonName, salonAddress, null);
         Navigator.push(context, MaterialPageRoute(builder: (_) {
           return OverViewPage(
                salonName: salonName,

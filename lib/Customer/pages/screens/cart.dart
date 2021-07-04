@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/Customer/pages/screens/dashboard.dart';
 import 'package:starter_project/Customer/pages/screens/orderConfirmPage.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/date_time_picker_widget2.dart';
+import 'package:starter_project/Customer/pages/screens/widgets/notifcation_dialog.dart';
 import 'package:starter_project/Customer/pages/utils/CustomTextStyle.dart';
 import 'package:starter_project/Customer/pages/utils/CustomUtils.dart';
 import 'package:starter_project/core/repositories/cart_repository.dart';
@@ -16,6 +19,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  DateTime selectedDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +47,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  footer(BuildContext context, var model) {
+  footer(BuildContext context, CartRepository model) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,12 +77,14 @@ class _CartPageState extends State<CartPage> {
           Utils.getSizedBox(height: 8),
          
             
-            DateTimePickerWidget2(),
+          _datePicker(),
         
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
+            onPressed: () async{
+              bool s = await model.checkoutCart(selectedDate.toString());
+              if(s) Navigator.push(context, MaterialPageRoute(builder: (context)=> Dashboard()));
+              // Navigator.push(context,
+              //     new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
             },
             style: ElevatedButton.styleFrom(
               primary: Color(0xff9477cb),
@@ -269,6 +276,27 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
         )
+      ],
+    );
+  }
+
+  Widget _datePicker() {
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(dateFormat.format(selectedDate)),
+        RaisedButton(
+          child: Text('Choose new date time'),
+          onPressed: () async {
+            showDateTimeDialog(context, initialDate: selectedDate,
+                onSelectedDate: (selectedDate) {
+                  setState(() {
+                    selectedDate = selectedDate;
+                  });
+                });
+          },
+        ),
       ],
     );
   }
