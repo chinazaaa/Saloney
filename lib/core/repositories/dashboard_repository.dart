@@ -9,15 +9,14 @@ class DashboardRepo extends BaseNotifier {
   // API
   final _api = locator<DashboardApi>();
   SalonDashboardResponse dashboardResponse;
-  Future<bool> dashboard({
-    String id,
-    // String customerId,
-    // String bookingDate,
-  }) async {
+  List<Data> salonDashboard = [];
+  Future<bool> dashboard(
+    String salonId
+    ) async {
     setState(ViewState.Busy);
     try {
       ApiResponse res = await _api.salondashboard(
-        id: id,
+        salonId: salonId,
         //  bookingDate: bookingDate
       );
       dashboardResponse = res;

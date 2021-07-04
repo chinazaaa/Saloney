@@ -14,7 +14,7 @@ class SalonDashboardImpl implements DashboardApi {
     var server = locator<API>();
 
   @override
-  Future<ApiResponse> salondashboard({String id}) async {
+  Future<ApiResponse> salondashboard({String salonId}) async {
      Map<String, String> header = {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',

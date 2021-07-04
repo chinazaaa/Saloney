@@ -7,7 +7,7 @@ abstract class DashboardApi {
   //Future<ApiResponse> getUserProfile({String token});
 
   Future<ApiResponse> salondashboard({
-    String id,
+    String salonId,
    
   });
 }
