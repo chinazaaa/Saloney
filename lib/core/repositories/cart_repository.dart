@@ -111,7 +111,7 @@ class CartRepository extends BaseNotifier {
   }
 
   //Api call to checkout cart
-  Future<bool> checkoutCart(String salonId, String bookingDate) async{
+  Future<bool> checkoutCart(String bookingDate) async{
     if(cart.isEmpty || vendorId == null){
       //show snackbar
       return false;
@@ -119,7 +119,7 @@ class CartRepository extends BaseNotifier {
 
     setState(ViewState.Busy);
     try {
-      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), );
+      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId, );
       setState(ViewState.Idle);
       return true;
     } on NetworkException {
