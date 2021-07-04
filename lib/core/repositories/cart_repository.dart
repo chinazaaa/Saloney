@@ -119,8 +119,7 @@ class CartRepository extends BaseNotifier {
 
     //generate list of products
     List<Map> items = cart.map((e) => {
-      "quantity": e.quantity,
-      "product_id": e.product.id
+      "serviceId": e.product.id
     }).toList();
 
     setState(ViewState.Busy);

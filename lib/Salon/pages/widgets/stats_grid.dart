@@ -6,14 +6,6 @@ class StatsGrid extends StatefulWidget {
 }
 
 class _StatsGridState extends State<StatsGrid> {
-  //   @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-  //     Provider.of<DashboardRepo>(context, listen: false).dashboard();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
      //final model = Provider.of<DashboardRepo>(context);

@@ -76,8 +76,9 @@ class _CartPageState extends State<CartPage> {
         
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
+
+              // Navigator.push(context,
+              //     new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
             },
             style: ElevatedButton.styleFrom(
               primary: Color(0xff9477cb),

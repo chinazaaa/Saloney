@@ -7,7 +7,7 @@ import 'package:starter_project/core/api/dashboard_api.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/salondashboard_response.dart';
 
-import '../../../locator.dart';
+import '../../locator.dart';
 
 class SalonDashboardImpl implements DashboardApi {
 

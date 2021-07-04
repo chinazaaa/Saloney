@@ -14,8 +14,9 @@ class BookingsApiImpl implements BookingsApi {
   var server = locator<API>();
   @override
   Future<BookingResponse> createBooking({
-    String serviceId,
+    List<String> serviceIds,
     String bookingDate,
+    String salonId,
   }) async {
     Map<String, String> header = {
       'Accept': 'application/json',
@@ -24,14 +25,12 @@ class BookingsApiImpl implements BookingsApi {
     };
 
     Map val = {
-      'serviceId': serviceId,
+      'serviceId': serviceIds,
       'bookingDate': bookingDate,
     };
 
-    print(
-        '${ApiRoutes.createBooking}/${locator<UserInfoCache>().salon.data.salon.id}/${locator<UserInfoCache>().customer.data.id}');
     var responsebody = await server.put(
-      '${ApiRoutes.createBooking}/${locator<UserInfoCache>().salon.data.salon.id}/${locator<UserInfoCache>().customer.data.id}',
+      '${ApiRoutes.createBooking}/$salonId/${locator<UserInfoCache>().customer.data.id}',
       header,
       body: jsonEncode(val),
     );
