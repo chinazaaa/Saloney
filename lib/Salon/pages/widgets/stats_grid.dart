@@ -1,38 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:starter_project/core/repositories/dashboard_repository.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
+import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
 
 class StatsGrid extends StatefulWidget {
+  final String salonId;
+  final int allCustomers, allOrders;
+
+  const StatsGrid({Key key, this.salonId, this.allCustomers, this.allOrders}) : super(key: key);
   @override
   _StatsGridState createState() => _StatsGridState();
 }
 
 class _StatsGridState extends State<StatsGrid> {
   @override
-  Widget build(BuildContext context) {
-     //final model = Provider.of<DashboardRepo>(context);
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: Column(
-        children: <Widget>[
-          Flexible(
-            child: Row(
-              children: <Widget>[
-              //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
-               _buildStatCard('Total Customers', '89k', Colors.orange),
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<DashboardRepo>(context, listen: false).dashboard(widget.salonId);
+    });
+  }
 
-                _buildStatCard('Total Orders', '105 K', Colors.red),
-              ],
+  @override
+  Widget build(BuildContext context) {
+    final model = Provider.of<DashboardRepo>(context);
+    return ResponsiveState(
+        state: model.state,
+         busyWidget: Center(
+          child: Padding(
+            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+            child: CircularProgressIndicator(
+              strokeWidth: 6,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor),
             ),
           ),
-          Flexible(
-            child: Row(
-              children: <Widget>[
-                _buildStatCard('Published Services', '391 K', Colors.green),
-                _buildStatCard('Unpublished Services', '1.31 M', Colors.lightBlue),
-                //_buildStatCard('Messages', 'N/A', Colors.purple),
-              ],
+        ),
+         errorWidget: Center(
+            child: Padding(
+              padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+              child: ErrorRetryWidget(
+                errorMessage: model.error,
+                onTap: () => model.dashboard(widget.salonId),
+              ),
+            )),
+             idleWidget: Center(
+          child: Padding(
+            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+            child: CircularProgressIndicator(
+              strokeWidth: 6,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor),
             ),
           ),
-        ],
+        ),
+      dataFetchedWidget: Container(
+        height: MediaQuery.of(context).size.height * 0.25,
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: Row(
+                children: <Widget>[
+                  ...model.salonDashboard.map((e) => StatsGrid(
+                  allCustomers: e.allCustomers,
+                  allOrders: e.allOrders,
+                  
+                )).toList(),
+                  //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
+                  _buildStatCard('Total Customers', '${widget.allCustomers}', Colors.orange),
+    
+                  _buildStatCard('Total Orders', '${widget.allOrders}', Colors.red),
+                ],
+              ),
+            ),
+            Flexible(
+              child: Row(
+                children: <Widget>[
+                  _buildStatCard('Published Services', '391 K', Colors.green),
+                  _buildStatCard(
+                      'Unpublished Services', '1.31 M', Colors.lightBlue),
+                  //_buildStatCard('Messages', 'N/A', Colors.purple),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
