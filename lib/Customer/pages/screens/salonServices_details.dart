@@ -119,7 +119,6 @@ class _ServiceDetailsState extends State<ServiceDetails> {
           ),
           onPressed: () {
             Provider.of<CartRepository>(context, listen: false).addToCart(widget.service);
-
                   Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context){
