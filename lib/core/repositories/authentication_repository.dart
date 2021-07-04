@@ -64,7 +64,8 @@ class AuthRepository extends BaseNotifier with Validators {
           var userInfoCache = locator<UserInfoCache>();
           await userInfoCache.cacheLoginResponse(salon: salon);
           return true;
-        } else {
+        } 
+        else {
           Get.snackbar(
             'Error',
             '${salon.message}',
@@ -94,7 +95,8 @@ class AuthRepository extends BaseNotifier with Validators {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } catch (e) {
+    } 
+    catch (e) {
       Get.snackbar(
         'An Error Occured!',
         'Please try again',

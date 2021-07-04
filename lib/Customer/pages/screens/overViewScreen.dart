@@ -12,7 +12,7 @@ class OverViewPage extends StatefulWidget {
   final String salonAddress;
   final String description;
   final String avatar;
-  final List<GalleryItem> gallery;
+  final List<String> gallery;
   final Location location;
   final String ownerName;
   final String salonId;
@@ -224,7 +224,7 @@ class _OverViewPageState extends State<OverViewPage>
                                                       BorderRadius.circular(
                                                           20.0),
                                                   child: Image.network(
-                                                    e.image,
+                                                    e,
                                                     fit: BoxFit.fill,
                                                     height:
                                                         MediaQuery.of(context)
