@@ -53,6 +53,49 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
+  Future<bool> updateService({
+    String service,
+    String description,
+    String category,
+    String price,
+    String image,
+    String serviceId
+  }) async {
+    setState(ViewState.Busy);
+    try {
+      ApiResponse res = await _api.updateService(
+          image: image,
+          description: description,
+          price: price,
+          category: category,
+          service: service,
+          serviceId: serviceId);
+      setState(ViewState.Idle);
+      //getUnpublishedServices(silently: true);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    setState(ViewState.Idle);
+    return false;
+  }
+
   List<UnpublishedService> unpublishedServices = [];
   Future<bool> getUnpublishedServices({bool silently = false}) async {
     if(!silently){

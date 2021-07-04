@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
-class StatsGrid extends StatelessWidget {
+
+class StatsGrid extends StatefulWidget {
+  @override
+  _StatsGridState createState() => _StatsGridState();
+}
+
+class _StatsGridState extends State<StatsGrid> {
+  //   @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     Provider.of<DashboardRepo>(context, listen: false).dashboard();
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+     //final model = Provider.of<DashboardRepo>(context);
     return Container(
       height: MediaQuery.of(context).size.height * 0.25,
       child: Column(
@@ -9,7 +24,9 @@ class StatsGrid extends StatelessWidget {
           Flexible(
             child: Row(
               children: <Widget>[
-                _buildStatCard('Total Customers', '1.81 M', Colors.orange),
+              //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
+               _buildStatCard('Total Customers', '89k', Colors.orange),
+
                 _buildStatCard('Total Orders', '105 K', Colors.red),
               ],
             ),
@@ -17,9 +34,9 @@ class StatsGrid extends StatelessWidget {
           Flexible(
             child: Row(
               children: <Widget>[
-                _buildStatCard('Visitors', '391 K', Colors.green),
-                _buildStatCard('Reviews', '1.31 M', Colors.lightBlue),
-                _buildStatCard('Messages', 'N/A', Colors.purple),
+                _buildStatCard('Published Services', '391 K', Colors.green),
+                _buildStatCard('Unpublished Services', '1.31 M', Colors.lightBlue),
+                //_buildStatCard('Messages', 'N/A', Colors.purple),
               ],
             ),
           ),

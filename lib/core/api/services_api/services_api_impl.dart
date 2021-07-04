@@ -51,7 +51,7 @@ class ServicesApiImpl implements ServicesApi {
 
       var responsebody = await server.post(
           '$baseUrl/services/$userId', xHeader, jsonEncode(data), multimediaRequest: formData);
-      CreateServiceResponse res = CreateServiceResponse.fromJson(responsebody);
+      ServiceResponse res = ServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
@@ -171,5 +171,48 @@ class ServicesApiImpl implements ServicesApi {
       throw NetworkException();
     }
   }
-  
+
+
+  @override
+  Future<ApiResponse> updateService(
+      {String service,
+      String description,
+      String category,
+      String price,
+      String image,
+      String serviceId}) async {
+    //String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      Map<String, dynamic> data = {
+        "service": service,
+        "description": description,
+        "category": category,
+        "price": price,
+      };
+
+      FormData formData;
+
+      if (image != null) {
+        String imgname = DateTime.now().millisecondsSinceEpoch.toString();
+        formData = FormData.fromMap({
+          "service": service,
+          "description": description,
+          "category": category,
+          "price": price,
+          "image": await MultipartFile.fromFile(
+            image,
+            filename: '$imgname/$image',
+            contentType: MediaType('image', 'jpg'),
+          ),
+        });
+      }
+
+      var responsebody = await server.put(
+          '$baseUrl/services/$serviceId', xHeader,  body:jsonEncode(data), multimediaRequest: formData);
+      ServiceResponse res = ServiceResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
 }

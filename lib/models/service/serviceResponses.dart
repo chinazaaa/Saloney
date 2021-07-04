@@ -7,8 +7,8 @@ import 'dart:convert';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/service/service_info.dart';
 
-class CreateServiceResponse extends ApiResponse{
-  CreateServiceResponse({
+class ServiceResponse extends ApiResponse{
+  ServiceResponse({
     this.success,
     this.message,
     this.data,
@@ -18,22 +18,22 @@ class CreateServiceResponse extends ApiResponse{
   String message;
   Service data;
 
-  CreateServiceResponse copyWith({
+  ServiceResponse copyWith({
     bool success,
     String message,
     Service data,
   }) =>
-      CreateServiceResponse(
+      ServiceResponse(
         success: success ?? this.success,
         message: message ?? this.message,
         data: data ?? this.data,
       );
 
-  factory CreateServiceResponse.fromJson(String str) => CreateServiceResponse.fromMap(json.decode(str));
+  factory ServiceResponse.fromJson(String str) => ServiceResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory CreateServiceResponse.fromMap(Map<String, dynamic> json) => CreateServiceResponse(
+  factory ServiceResponse.fromMap(Map<String, dynamic> json) => ServiceResponse(
     success: json["success"],
     message: json["message"],
     data: Service.fromMap(json["data"]),

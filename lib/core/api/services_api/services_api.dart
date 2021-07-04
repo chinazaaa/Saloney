@@ -21,9 +21,14 @@ abstract class ServicesApi {
     String price,
     String image,
   });
-  //  Future<ApiResponse> updateService({
-  //   String serviceId
-  // });
+   Future<ApiResponse> updateService({
+    String service,
+      String description,
+      String category,
+      String price,
+      String image,
+      String serviceId
+  });
 
    Future<ApiResponse> getUnPublishedService({
     String salonId

@@ -1,26 +1,26 @@
-//import 'package:starter_project/Salon/pages/screens/published_service.dart';
-import 'package:starter_project/core/api/bookings_api/bookings_api.dart';
+import 'package:starter_project/core/api/dashboard_api.dart';
 import 'package:starter_project/index.dart';
-import 'package:starter_project/models/api_response_variants/bookings_response.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
+import 'package:starter_project/models/api_response_variants/salondashboard_response.dart';
 
 import '../../locator.dart';
 
-class BookingRepo extends BaseNotifier {
+class DashboardRepo extends BaseNotifier {
   // API
-  final _api = locator<BookingsApi>();
-
-Future<bool> createBooking({
-    String serviceId,
-   // String customerId,
-    String bookingDate,
+  final _api = locator<DashboardApi>();
+  SalonDashboardResponse dashboardResponse;
+  Future<bool> dashboard({
+    String id,
+    // String customerId,
+    // String bookingDate,
   }) async {
     setState(ViewState.Busy);
     try {
-      ApiResponse res = await _api.createBooking(
-          serviceId: serviceId,
-          bookingDate: bookingDate
-          );
+      ApiResponse res = await _api.salondashboard(
+        id: id,
+        //  bookingDate: bookingDate
+      );
+      dashboardResponse = res;
       setState(ViewState.Idle);
       //getUncompletedCustomerBookings(silently: true);
       return true;
@@ -46,5 +46,4 @@ Future<bool> createBooking({
     setState(ViewState.Idle);
     return false;
   }
-
 }

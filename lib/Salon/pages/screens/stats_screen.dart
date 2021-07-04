@@ -93,7 +93,7 @@ class _StatsScreenState extends State<StatsScreen> {
       padding: const EdgeInsets.all(20.0),
       sliver: SliverToBoxAdapter(
         child: DefaultTabController(
-          length: 3,
+          length: 1,
           child: TabBar(
             indicatorColor: Colors.transparent,
             labelStyle: Styles.tabTextStyle,
@@ -101,8 +101,8 @@ class _StatsScreenState extends State<StatsScreen> {
             unselectedLabelColor: Colors.white60,
             tabs: <Widget>[
               Text('Total'),
-              Text('Today'),
-              Text('Yesterday'),
+              // Text('Today'),
+              // Text('Yesterday'),
             ],
             onTap: (index) {},
           ),
