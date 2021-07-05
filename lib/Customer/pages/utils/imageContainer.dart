@@ -27,8 +27,8 @@ class ImageContainer extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  BoldText("What are you", 30.0, kwhite),
-                  BoldText("Looking for?", 30.0, kwhite)
+                  BoldText("What are you", 30.0, kdarkBlue),
+                  BoldText("looking for?", 30.0, kdarkBlue)
                 ],
               ),
             ),

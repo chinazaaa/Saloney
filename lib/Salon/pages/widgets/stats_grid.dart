@@ -38,7 +38,7 @@ class _StatsGridState extends State<StatsGrid> {
                   allOrders: e.allOrders,
                   
                 )).toList(),
-                
+                //print(widget.allCustomers.toString());
                   //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
                   _buildStatCard('Total Customers', widget.allCustomers.toString(), Colors.orange),
                   
