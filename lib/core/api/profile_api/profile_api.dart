@@ -9,7 +9,7 @@ abstract class ProfileApi {
   Future<ApiResponse> updateSalonProfile({
     String nameOfSalon,
     String description,
-    File image,
+   // File image,
     String category,
     String address,
   });

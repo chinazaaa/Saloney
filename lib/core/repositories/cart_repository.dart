@@ -118,9 +118,9 @@ class CartRepository extends BaseNotifier {
     }
 
     setState(ViewState.Busy);
-    print(cart.map((e) => e.product.id));
+    print(cart.map((e) => e.product.id).toList());
     try {
-      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId, bookingDate: bookingDate );
+      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId);
       setState(ViewState.Idle);
       return true;
     } on NetworkException {

@@ -117,7 +117,7 @@ class ProfileApiImpl implements ProfileApi {
   Future<UpdateSalonResponse> updateSalonProfile(
       {String nameOfSalon,
       String description,
-      File image,
+     // File image,
       String category,
       String address}) async {
     Map<String, String> header = {
@@ -130,7 +130,7 @@ class ProfileApiImpl implements ProfileApi {
     Map val = {
       'nameOfSalon': nameOfSalon,
       'description': description,
-      'image': image,
+      //'image': image,
       'category': category,
       'address': address,
     };

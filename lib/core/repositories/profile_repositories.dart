@@ -72,14 +72,14 @@ class ProfileRepo extends BaseNotifier with Validators {
   Future<bool> updateSalonProfile(
     String nameOfSalon,
     String description,
-    File image,
+    //File image,
     String category,
     String address,
   ) async {
     try {
       UpdateSalonResponse res = await profileApi.updateSalonProfile(
           description: description,
-          image: image,
+         // image: image,
           category: category,
           address: address,
           nameOfSalon: nameOfSalon);

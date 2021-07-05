@@ -49,7 +49,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final model = Provider.of<ServiceProvider>(context, listen: false);
     final profileM = Provider.of<ProfileRepo>(context);
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -145,6 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       text: 'GENERAL',
                     ),
                     Tab(text: 'SALON'),
+                     Tab(text: 'GALLERY'),
                   ],
                 ),
                 SizedBox(
@@ -232,6 +233,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     )
                                   ],
                                 ),
+                                
                               ],
                             ),
                           ),
@@ -252,38 +254,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  "Select Images for Services:",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.all(16),
-                                  child: Center(
-                                    child: Wrap(
-                                      children: [
-                                        for (int i = 0;
-                                            i <=
-                                                model.salonProfileImages.length;
-                                            i++)
-                                          i == model.salonProfileImages.length
-                                              ? AddImageButton(
-                                                  onTap: () => model
-                                                      .addSaloonProfileImage(),
-                                                )
-                                              : ImageView(
-                                                  image: model
-                                                      .salonProfileImages[i],
-                                                  onTap: () => model
-                                                      .deleteSaloonProfileImage(
-                                                          index: i),
-                                                ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                               
                                 Text(
                                   "Select Category(ies)",
                                   style: TextStyle(
@@ -366,7 +337,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             await profileM.updateSalonProfile(
                                                 salonName.text,
                                                 salonDescription.text,
-                                                null,
+                                               // null,
                                                 selectedCategories,
                                                 salonLocation.text);
                                         if (success) {
@@ -402,8 +373,86 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ],
                             ),
                           ),
-                        )
+                        ),
+                        SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                   Text(
+                                    "Add Images to Your Gallery:",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                       
+                                Container(
+                                  margin: EdgeInsets.all(16),
+                                  child: Center(
+                                    child: Wrap(
+                                      children: [
+                                        for (int i = 0;
+                                            i <=
+                                                model.salonProfileImages.length;
+                                            i++)
+                                          i == model.salonProfileImages.length
+                                              ? AddImageButton(
+                                                  onTap: () => model
+                                                      .addSaloonProfileImage(),
+                                                )
+                                              : ImageView(
+                                                  image: model
+                                                      .salonProfileImages[i],
+                                                  onTap: () => model
+                                                      .deleteSaloonProfileImage(
+                                                          index: i),
+                                                ),
+                                      ],
+                                    ),
+                                  ),
+                        ),
+                  
+                                  ],
+                                ),
+                                
+                              
+                            ),
+                       
+                        //  Text(
+                        //             "Select Images for Services:",
+                        //             style: TextStyle(
+                        //               fontSize: 16,
+                        //               color: Colors.grey,
+                        //             ),
+                        //           ),
+                       
+                        //         Container(
+                        //           margin: EdgeInsets.all(16),
+                        //           child: Center(
+                        //             child: Wrap(
+                        //               children: [
+                        //                 for (int i = 0;
+                        //                     i <=
+                        //                         model.salonProfileImages.length;
+                        //                     i++)
+                        //                   i == model.salonProfileImages.length
+                        //                       ? AddImageButton(
+                        //                           onTap: () => model
+                        //                               .addSaloonProfileImage(),
+                        //                         )
+                        //                       : ImageView(
+                        //                           image: model
+                        //                               .salonProfileImages[i],
+                        //                           onTap: () => model
+                        //                               .deleteSaloonProfileImage(
+                        //                                   index: i),
+                        //                         ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         ),
                       ],
+                       
+                         
                     )),
 
                 // buildTextField("Password", "**", true),
