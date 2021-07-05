@@ -46,19 +46,19 @@ class _StatsGridState extends State<StatsGrid> {
 
                 //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
                 _buildStatCard('Total Customers',
-                    model.salonDashboard.allCustomers.toString(), Colors.orange),
+                   model.salonDashboard== null ? " " : model.salonDashboard.allCustomers.toString(), Colors.orange),
 
                 _buildStatCard(
-                    'Total Orders', model.salonDashboard.allOrders.toString(), Colors.red),
+                    'Total Orders',  model.salonDashboard== null ? " " : model.salonDashboard.allOrders.toString(), Colors.red),
               ],
             ),
           ),
           Flexible(
             child: Row(
               children: <Widget>[
-                _buildStatCard('Published Services', model.salonDashboard.publishedServices.toString(), Colors.green),
+                _buildStatCard('Published Services',  model.salonDashboard== null ? " " : model.salonDashboard.publishedServices.toString(), Colors.green),
                 _buildStatCard(
-                    'Unpublished Services', model.salonDashboard.unpublishedServices.toString(), Colors.lightBlue),
+                    'Unpublished Services', model.salonDashboard== null ? " " : model.salonDashboard.unpublishedServices.toString(), Colors.lightBlue),
                 //_buildStatCard('Messages', 'N/A', Colors.purple),
               ],
             ),

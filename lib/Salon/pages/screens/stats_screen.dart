@@ -30,12 +30,12 @@ class _StatsScreenState extends State<StatsScreen> {
               child: StatsGrid(),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 20.0),
-            sliver: SliverToBoxAdapter(
-              child: SalonBarChart(orders: newOrders),
-            ),
-          ),
+          // SliverPadding(
+          //   padding: const EdgeInsets.only(top: 20.0),
+          //   sliver: SliverToBoxAdapter(
+          //     child: SalonBarChart(orders: newOrders),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -104,7 +104,7 @@ class _StatsScreenState extends State<StatsScreen> {
               // Text('Today'),
               // Text('Yesterday'),
             ],
-            onTap: (index) {},
+            //onTap: (index) {},
           ),
         ),
       ),
