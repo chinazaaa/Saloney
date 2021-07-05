@@ -9,7 +9,7 @@ class DashboardRepo extends BaseNotifier {
   // API
   final _api = locator<DashboardApi>();
 
-  List<DashboardInfo> salonDashboard = [];
+  DashboardInfo salonDashboard;
   Future<bool> dashboard(String salonId) async {
     SalonDashboardResponse res;
     //setState(ViewState.Busy);
@@ -18,8 +18,8 @@ class DashboardRepo extends BaseNotifier {
         salonId: salonId,
         //  bookingDate: bookingDate
       );
-      DashboardInfo salonDashboard;
-      //salonDashboard = res.data
+      //DashboardInfo salonDashboard;
+      salonDashboard = res.data;
       setState(ViewState.Idle);
       //getUncompletedCustomerBookings(silently: true);
       return true;
