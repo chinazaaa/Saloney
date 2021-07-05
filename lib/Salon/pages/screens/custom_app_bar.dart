@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Salon//pages/config/palette.dart';
+import 'package:starter_project/Salon/pages/screens/notifications.dart';
+import 'package:starter_project/Salon/pages/screens/orders.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -8,15 +10,26 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Palette.primaryColor,
       elevation: 0.0,
       leading: IconButton(
-        icon: const Icon(Icons.menu),
+        icon: const Icon(Icons.dashboard_customize_sharp),
         iconSize: 28.0,
-        onPressed: () {},
+        onPressed: ()  {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SalonOrders()));
+                      },
+                      
       ),
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.notifications_none),
           iconSize: 28.0,
-          onPressed: () {},
+         onPressed: ()  {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationsPage()));
+                      },
         ),
       ],
     );

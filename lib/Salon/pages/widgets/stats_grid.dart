@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:starter_project/Salon/pages/screens/orders.dart';
 import 'package:starter_project/core/repositories/dashboard_repository.dart';
-import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/size_config/size_config.dart';
-import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
+
 
 class StatsGrid extends StatefulWidget {
   final String count;
@@ -37,19 +36,24 @@ class _StatsGridState extends State<StatsGrid> {
           Flexible(
             child: Row(
               children: <Widget>[
-                // ...model.salonDashboard
-                //     .map((e) => StatsGrid(
-                //           count: e.allCustomers,
-                //           count: e.allOrders,
-                //         ))
-                //     .toList(),
+     
+              
+                   
+                    _buildStatCard('Total Customers',
+                       model.salonDashboard== null ? " " : model.salonDashboard.allCustomers.toString(), Colors.orange),
+                      //  onTap: ()  {
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => SalonOrders()));
+                      // },
+                
 
-                //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
-                _buildStatCard('Total Customers',
-                   model.salonDashboard== null ? " " : model.salonDashboard.allCustomers.toString(), Colors.orange),
 
-                _buildStatCard(
-                    'Total Orders',  model.salonDashboard== null ? " " : model.salonDashboard.allOrders.toString(), Colors.red),
+                
+                  _buildStatCard(
+                      'Total Orders',  model.salonDashboard== null ? " " : model.salonDashboard.allOrders.toString(), Colors.red),
+                
               ],
             ),
           ),
@@ -57,8 +61,18 @@ class _StatsGridState extends State<StatsGrid> {
             child: Row(
               children: <Widget>[
                 _buildStatCard('Published Services',  model.salonDashboard== null ? " " : model.salonDashboard.publishedServices.toString(), Colors.green),
-                _buildStatCard(
-                    'Unpublished Services', model.salonDashboard== null ? " " : model.salonDashboard.unpublishedServices.toString(), Colors.lightBlue),
+                // onTap: ()  {
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => PublishedServiceScreen()));
+                //       },
+             
+                
+               
+                 _buildStatCard(
+                      'Unpublished Services', model.salonDashboard== null ? " " : model.salonDashboard.unpublishedServices.toString(), Colors.lightBlue),
+                       
                 //_buildStatCard('Messages', 'N/A', Colors.purple),
               ],
             ),

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Salon/pages/config/styles.dart';
 import 'package:starter_project/Salon/pages/config/palette.dart';
-import 'package:starter_project/Salon/pages/data/data.dart';
 import 'package:starter_project/Salon/pages/screens/custom_app_bar.dart';
 import 'package:starter_project/Salon/pages/widgets/widgets.dart';
 
