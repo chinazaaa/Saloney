@@ -30,6 +30,9 @@ class ApiRoutes {
   static const String updateSalonOwnerProfile = '$apiRoute/profile/salonOwner';
   static const String updateSalonProfile = '$apiRoute/profile/salon';
 
+// salon gallery
+  static const String salonGallery =
+      '$apiRoute/gallery';
   //update customer
   static const String updateCustomerProfile = '$apiRoute/profile/customer';
 
@@ -65,7 +68,12 @@ static const String resendOTP = '$apiRoute/resend/otp';
   static const String salonCompletedOrders =
       '$apiRoute/completed/salon/booking';
 
-
+// approved orders
+  static const String approveOrders =
+      '$apiRoute/approve/booking';
+// reject orders
+static const String rejectOrders =
+      '$apiRoute/reject/booking';
 
 // salon dashboard
   static const String salonDashboard =

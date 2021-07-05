@@ -10,6 +10,12 @@ class CustomerUncompletedOrders extends StatelessWidget {
           headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
           columns: <DataColumn>[
             DataColumn(
+              label: Text('Salon'),
+            ),
+             DataColumn(
+              label: Text('Phone No.'),
+            ),
+             DataColumn(
               label: Text('Services'),
             ),
             DataColumn(
@@ -21,18 +27,24 @@ class CustomerUncompletedOrders extends StatelessWidget {
           ],
           rows: [
             DataRow(cells: [
-              DataCell(Text('Hair')),
+              DataCell(Text('Sudu')),
+               DataCell(Text('08024771835')),
+                  DataCell(Text('Hair')),
                DataCell(Text('Tuesday 20th November, 2021')),
               DataCell(
                 PopupOptionMenu(),
               )
             ]),
             DataRow(cells: [
-              DataCell(Text('Cruise')),
+              DataCell(Text('Sudu')),
+              DataCell(Text('08024771835')),
+              DataCell(Text('Cruise')),   
               DataCell(Text('Cruise')),
               DataCell(Text('Cruise'))
             ]),
             DataRow(cells: [
+               DataCell(Text('Sudu')),
+              DataCell(Text('08024771835')),
               DataCell(Text('Cruise')),
               DataCell(Text('Cruise')),
               DataCell(Text('Cruise'))
