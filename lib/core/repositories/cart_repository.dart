@@ -118,6 +118,7 @@ class CartRepository extends BaseNotifier {
     }
 
     setState(ViewState.Busy);
+    print(cart.map((e) => e.product.id));
     try {
       ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId, bookingDate: bookingDate );
       setState(ViewState.Idle);

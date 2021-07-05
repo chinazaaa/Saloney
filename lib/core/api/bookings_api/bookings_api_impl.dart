@@ -25,7 +25,7 @@ class BookingsApiImpl implements BookingsApi {
     };
 
     Map val = {
-      'serviceId': serviceIds,
+      'serviceIds': serviceIds,
       'bookingDate': bookingDate,
     };
 
