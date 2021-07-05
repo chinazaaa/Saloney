@@ -111,16 +111,20 @@ class CartRepository extends BaseNotifier {
   }
 
   //Api call to checkout cart
-  Future<bool> checkoutCart(String bookingDate) async{
-    if(cart.isEmpty || vendorId == null){
+  Future<bool> checkoutCart(String bookingDate) async {
+    if (cart.isEmpty || vendorId == null) {
       //show snackbar
       return false;
     }
 
     setState(ViewState.Busy);
     print(cart.map((e) => e.product.id).toList());
+    print(bookingDate);
     try {
-      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId);
+      ApiResponse res = await bookingApi.createBooking(
+          serviceIds: cart.map((e) => e.product.id).toList(),
+          salonId: vendorId,
+          bookingDate: bookingDate);
       setState(ViewState.Idle);
       return true;
     } on NetworkException {
@@ -132,7 +136,7 @@ class CartRepository extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
+    }
     // catch (e) {
     //   Get.snackbar(
     //     'An Error occured!',

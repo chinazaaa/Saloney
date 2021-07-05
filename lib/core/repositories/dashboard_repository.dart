@@ -8,18 +8,18 @@ import '../../locator.dart';
 class DashboardRepo extends BaseNotifier {
   // API
   final _api = locator<DashboardApi>();
-  SalonDashboardResponse dashboardResponse;
-  List<Data> salonDashboard = [];
-  Future<bool> dashboard(
-    String salonId
-    ) async {
-    setState(ViewState.Busy);
+
+  List<DashboardInfo> salonDashboard = [];
+  Future<bool> dashboard(String salonId) async {
+    SalonDashboardResponse res;
+    //setState(ViewState.Busy);
     try {
-      ApiResponse res = await _api.salondashboard(
+      res = await _api.salondashboard(
         salonId: salonId,
         //  bookingDate: bookingDate
       );
-      dashboardResponse = res;
+      DashboardInfo salonDashboard;
+      //salonDashboard = res.data
       setState(ViewState.Idle);
       //getUncompletedCustomerBookings(silently: true);
       return true;

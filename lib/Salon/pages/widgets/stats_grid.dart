@@ -26,6 +26,7 @@ class _StatsGridState extends State<StatsGrid> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<DashboardRepo>(context);
+    print(widget.allCustomers);
     return  Container(
         height: MediaQuery.of(context).size.height * 0.25,
         child: Column(
@@ -38,7 +39,7 @@ class _StatsGridState extends State<StatsGrid> {
                   allOrders: e.allOrders,
                   
                 )).toList(),
-                //print(widget.allCustomers.toString());
+                
                   //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
                   _buildStatCard('Total Customers', widget.allCustomers.toString(), Colors.orange),
                   
