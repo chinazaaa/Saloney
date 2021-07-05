@@ -6,10 +6,10 @@ import 'package:starter_project/Salon/pages/screens/uncompleted.dart';
 
 class SalonOrders extends StatefulWidget {
   @override
-  _OrdersState createState() => _OrdersState();
+  _SalonOrdersState createState() => _SalonOrdersState();
 }
 
-class _OrdersState extends State<SalonOrders> with SingleTickerProviderStateMixin {
+class _SalonOrdersState extends State<SalonOrders> with SingleTickerProviderStateMixin {
   TabController tabController;
 
   @override
