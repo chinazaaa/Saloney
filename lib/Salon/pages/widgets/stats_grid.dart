@@ -26,37 +26,7 @@ class _StatsGridState extends State<StatsGrid> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<DashboardRepo>(context);
-    return ResponsiveState(
-        state: model.state,
-         busyWidget: Center(
-          child: Padding(
-            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-            child: CircularProgressIndicator(
-              strokeWidth: 6,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor),
-            ),
-          ),
-        ),
-         errorWidget: Center(
-            child: Padding(
-              padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-              child: ErrorRetryWidget(
-                errorMessage: model.error,
-                onTap: () => model.dashboard(widget.salonId),
-              ),
-            )),
-             idleWidget: Center(
-          child: Padding(
-            padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-            child: CircularProgressIndicator(
-              strokeWidth: 6,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor),
-            ),
-          ),
-        ),
-      dataFetchedWidget: Container(
+    return  Container(
         height: MediaQuery.of(context).size.height * 0.25,
         child: Column(
           children: <Widget>[
@@ -68,11 +38,14 @@ class _StatsGridState extends State<StatsGrid> {
                   allOrders: e.allOrders,
                   
                 )).toList(),
+                
                   //  _buildStatCard('Total Customers', model.dashboardResponse.data.allCustomers.toString(), Colors.orange),
-                  _buildStatCard('Total Customers', '${widget.allCustomers}', Colors.orange),
+                  _buildStatCard('Total Customers', widget.allCustomers.toString(), Colors.orange),
+                  
     
                   _buildStatCard('Total Orders', '${widget.allOrders}', Colors.red),
                 ],
+                
               ),
             ),
             Flexible(
@@ -87,7 +60,7 @@ class _StatsGridState extends State<StatsGrid> {
             ),
           ],
         ),
-      ),
+    
     );
   }
 

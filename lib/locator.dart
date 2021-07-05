@@ -3,6 +3,8 @@ import 'package:starter_project/core/api/bookings_api/bookings_api.dart';
 import 'package:starter_project/core/api/bookings_api/bookings_api_impl.dart';
 import 'package:starter_project/core/api/customer_api/customer_api.dart';
 import 'package:starter_project/core/api/customer_api/customer_api_impl.dart';
+import 'package:starter_project/core/api/dashboard_api.dart';
+import 'package:starter_project/core/api/dashboard_api_impl.dart';
 import 'package:starter_project/core/api/profile_api/profile_api.dart';
 import 'package:starter_project/core/api/profile_api/profile_api_impl.dart';
 import 'package:starter_project/core/services/map_service.dart';
@@ -28,6 +30,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<CustomerApi>(() => CustomerApiImpl());
   locator.registerLazySingleton<BookingsApi>(() => BookingsApiImpl());
   locator.registerLazySingleton<ProfileApi>(() => ProfileApiImpl());
+  locator.registerLazySingleton<DashboardApi>(() => SalonDashboardImpl());
   locator.registerLazySingleton<UserInfoCache>(() => UserInfoCache());
   locator.registerLazySingleton<MapService>(() => MapService());
   locator
