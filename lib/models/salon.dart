@@ -18,7 +18,7 @@ class Salon {
 
     Location location;
     String description;
-    List<String> image;
+    List<GalleryItem> image;
     String id;
      String avatar;
     String category;
@@ -31,7 +31,7 @@ class Salon {
     Salon copyWith({
         Location location,
         String description,
-        List<String> image,
+        List<GalleryItem> image,
         String id,
          String avatar,
         String nameOfSalon,
@@ -62,9 +62,7 @@ class Salon {
     factory Salon.fromMap(Map<String, dynamic> json) => Salon(
         location: Location.fromMap(json["location"]),
         description: json["description"],
-        //image: json["image"] == null ? null : List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
-       // image: json["image"] == null ? null : json["image"],
-        image: List<String>.from(json["image"].map((x) => x)),
+        image: json["image"] == null ? null : List<GalleryItem>.from(json["image"].map((x) => GalleryItem.fromMap(x))),
         id: json["_id"],
         avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
@@ -78,9 +76,7 @@ class Salon {
     Map<String, dynamic> toMap() => {
         "location": location.toMap(),
         "description": description,
-       // "image": List<dynamic>.from(image.map((x) => x.toMap())),
-        "image": List<dynamic>.from(image.map((x) => x)),
-       //"image": image,
+        "image": image == null ? null : List<dynamic>.from(image.map((x) => x.toMap())),
         "_id": id,
         "avatar": avatar,
         "category" : category,
@@ -91,3 +87,4 @@ class Salon {
         "__v": v,
     };
 }
+

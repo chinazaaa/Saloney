@@ -137,7 +137,7 @@ class _DashboardState extends State<Dashboard> {
       String description,
       String avatar,
         String categories,
-      List<String> gallery,
+      List<GalleryItem> gallery,
       Location location,
       String ownerName,
       String salonId}) {

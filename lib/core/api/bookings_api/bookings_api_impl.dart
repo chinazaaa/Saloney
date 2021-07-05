@@ -29,10 +29,10 @@ class BookingsApiImpl implements BookingsApi {
       'bookingDate': bookingDate,
     };
 
-    var responsebody = await server.put(
+    var responsebody = await server.post(
       '${ApiRoutes.createBooking}/$salonId/${locator<UserInfoCache>().customer.data.id}',
       header,
-      body: jsonEncode(val),
+       jsonEncode(val),
     );
 
     BookingResponse response = BookingResponse.fromJson(responsebody);

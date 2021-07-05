@@ -119,7 +119,7 @@ class CartRepository extends BaseNotifier {
 
     setState(ViewState.Busy);
     try {
-      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId, );
+      ApiResponse res = await bookingApi.createBooking(serviceIds: cart.map((e) => e.product.id).toList(), salonId: vendorId, bookingDate: bookingDate );
       setState(ViewState.Idle);
       return true;
     } on NetworkException {
@@ -131,16 +131,17 @@ class CartRepository extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } catch (e) {
-      Get.snackbar(
-        'An Error occured!',
-        'Please try again in a bit. \nDetails: $e',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
-    }
+    } 
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error occured!',
+    //     'Please try again in a bit. \nDetails: $e',
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
+    // }
     setState(ViewState.Idle);
     return false;
   }
