@@ -14,6 +14,7 @@ import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
 import '../../locator.dart';
 
 class CartRepository extends BaseNotifier {
+  BookingResponse bookingResponse;
   //api
   final bookingApi = locator<BookingsApi>();
 
@@ -122,10 +123,11 @@ class CartRepository extends BaseNotifier {
     print(cart.map((e) => e.product.id).toList());
     print(bookingDate);
     try {
-      BookingResponse res = await bookingApi.createBooking(
+       bookingResponse = await bookingApi.createBooking(
           serviceIds: cart.map((e) => e.product.id).toList(),
           salonId: vendorId,
           bookingDate: bookingDate);
+          
       setState(ViewState.Idle);
       return true;
     } on NetworkException {

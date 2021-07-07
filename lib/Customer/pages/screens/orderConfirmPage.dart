@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/StyleScheme.dart';
 import 'package:starter_project/Customer/pages/screens/orders.dart';
-class OrderConfirmPage extends StatelessWidget {
+import 'package:starter_project/infrastructure/user_info_cache.dart';
+import 'package:starter_project/models/api_response_variants/bookings_response.dart';
+
+import '../../../locator.dart';
+
+// class OrderConfirmPage extends StatelessWidget {
+//   final bookingDate, bookingID;
+
+//   const OrderConfirmPage({Key key, this.bookingDate, this.bookingID}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     // return MaterialApp(
+//     //   debugShowCheckedModeBanner: false,
+//     //   home: orderConfirmPage(),
+//     // );
+//   }
+// }
+
+class OrderConfirmPage extends StatefulWidget {
+  final BookingResponse booking;
+  final total, price;
+
+  const OrderConfirmPage({Key key, this.booking, this.total, this.price}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: orderConfirmPage(),
-    );
-  }
-}
-class orderConfirmPage extends StatefulWidget {
-  @override
-  _orderConfirmPageState createState() => _orderConfirmPageState();
+  _OrderConfirmPageState createState() => _OrderConfirmPageState();
 }
 
-class _orderConfirmPageState extends State<orderConfirmPage> {
+class _OrderConfirmPageState extends State<OrderConfirmPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +42,10 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
         //   icon: Icon(Icons.arrow_back_ios,size: 20,
         //       color: Colors.black,),
         // ),
-        title: Text("Booking Confirmed", style: TextStyle(
-            color: Colors.black
-        ),),
+        title: Text(
+          "Booking Confirmed",
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -50,28 +64,39 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
               width: MediaQuery.of(context).size.width,
               height: 200,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/1.png')
-                )
-              ),
+                  image: DecorationImage(image: AssetImage('assets/1.png'))),
             ),
-            SizedBox(height: 15,),
-            Text("Thank you Naza for choosing us!", style: headingStyle,),
-            Text("Your appointment has been booked!", style: contentStyle,textAlign: TextAlign.center,),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              "Thank you ${locator<UserInfoCache>().customer.data.userName} for choosing us!",
+              style: headingStyle,
+            ),
+            Text(
+              "Your appointment has been booked!",
+              style: contentStyle,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Booking ID", style: headingStyle,),
+                Text(
+                  "Booking ID",
+                  style: headingStyle,
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    gradient: gradientStyle,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                      gradient: gradientStyle,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Text(
+                    "${widget.booking.booking.bookingId}",
+                    style: headingStyle.copyWith(color: Colors.white),
                   ),
-                  child: Text("1001", style: headingStyle.copyWith(
-                    color: Colors.white
-                  ),),
                 )
               ],
             ),
@@ -79,32 +104,43 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Services Count", style: headingStyle,),
-                Text("7", style: headingStyle.copyWith(
-                  color: Colors.grey
-                ),),
+                Text(
+                  "Services Count",
+                  style: headingStyle,
+                ),
+                Text(
+                  "${widget.total}",
+                  style: headingStyle.copyWith(color: Colors.grey),
+                ),
               ],
             ),
             divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Total Amount", style: headingStyle,),
-                Text("225", style: headingStyle.copyWith(
-                    color: Colors.grey
-                ),),
+                Text(
+                  "Total Amount",
+                  style: headingStyle,
+                ),
+                Text(
+                  "${widget.price}",
+                  style: headingStyle.copyWith(color: Colors.grey),
+                ),
               ],
             ),
             divider(),
             Column(
-
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Date & Time", style: headingStyle,),
-                Text("Wednesday, 07 Aug, 2021.  1:00PM", style: contentStyle.copyWith(
-                    color: Colors.grey,
-                  fontSize: 16
-                ),),
+                Text(
+                  "Date & Time",
+                  style: headingStyle,
+                ),
+                Text(
+                  "${widget.booking.booking.bookingDate}",
+                  style:
+                      contentStyle.copyWith(color: Colors.grey, fontSize: 16),
+                ),
               ],
             ),
             // divider(),
@@ -121,18 +157,20 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
               child: Container(),
             ),
             InkWell(
-              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Orders()));},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Orders()));
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                    gradient: gradientStyle
-                ),
+                decoration: BoxDecoration(gradient: gradientStyle),
                 child: Center(
-                  child: Text("VIEW BOOKING", style: contentStyle.copyWith(
-                      color: Colors.white,
-                      fontSize: 22
-                  ),),
+                  child: Text(
+                    "VIEW BOOKING",
+                    style: contentStyle.copyWith(
+                        color: Colors.white, fontSize: 22),
+                  ),
                 ),
               ),
             )
@@ -141,8 +179,8 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
       ),
     );
   }
-  Container divider()
-  {
+
+  Container divider() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
       height: 1,
@@ -150,4 +188,3 @@ class _orderConfirmPageState extends State<orderConfirmPage> {
     );
   }
 }
-

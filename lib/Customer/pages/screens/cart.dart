@@ -82,7 +82,7 @@ class _CartPageState extends State<CartPage> {
           ElevatedButton(
             onPressed: () async{
               bool s = await model.checkoutCart(selectedDate.toString());
-              if(s) Navigator.push(context, MaterialPageRoute(builder: (context)=> OrderConfirmPage()));
+              if(s) Navigator.push(context, MaterialPageRoute(builder: (context)=> OrderConfirmPage(booking: model.bookingResponse, total: model.cart.length, price: model.currentPrice.toString() )));
               // Navigator.push(context,
               //     new MaterialPageRoute(builder: (context) => OrderConfirmPage()));
             },
