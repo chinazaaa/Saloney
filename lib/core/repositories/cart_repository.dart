@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/bookings_api/bookings_api.dart';
 import 'package:starter_project/models/api_response.dart';
+import 'package:starter_project/models/api_response_variants/bookings_response.dart';
 import 'package:starter_project/models/cart_item.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
 import 'package:starter_project/ui_helpers/responsive_state/base_view_model.dart';
@@ -121,7 +122,7 @@ class CartRepository extends BaseNotifier {
     print(cart.map((e) => e.product.id).toList());
     print(bookingDate);
     try {
-      ApiResponse res = await bookingApi.createBooking(
+      BookingResponse res = await bookingApi.createBooking(
           serviceIds: cart.map((e) => e.product.id).toList(),
           salonId: vendorId,
           bookingDate: bookingDate);
