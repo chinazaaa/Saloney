@@ -3,11 +3,11 @@ import 'package:http_parser/http_parser.dart';
 import 'package:starter_project/core/api/api_utils/api_helper.dart';
 import 'package:starter_project/core/api/api_utils/api_routes.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
-import 'package:starter_project/core/api/dashboard_api.dart';
+import 'package:starter_project/core/api/dashboard_api/dashboard_api.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/salondashboard_response.dart';
 
-import '../../locator.dart';
+import '../../../locator.dart';
 
 class SalonDashboardImpl implements DashboardApi {
 

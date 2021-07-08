@@ -4,6 +4,7 @@ import 'package:starter_project/Salon/pages/screens/profile.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Salon/pages/screens/service_provider.dart';
+import 'package:starter_project/Salon/pages/screens/utils/gallery.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/models/api_response_variants/salon_login_response.dart';
@@ -384,32 +385,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       color: Colors.grey,
                                     ),
                                   ),
-                       
-                                Container(
-                                  margin: EdgeInsets.all(16),
-                                  child: Center(
-                                    child: Wrap(
-                                      children: [
-                                        for (int i = 0;
-                                            i <=
-                                                model.salonProfileImages.length;
-                                            i++)
-                                          i == model.salonProfileImages.length
-                                              ? AddImageButton(
-                                                  onTap: () => model
-                                                      .addSaloonProfileImage(),
-                                                )
-                                              : ImageView(
-                                                  image: model
-                                                      .salonProfileImages[i],
-                                                  onTap: () => model
-                                                      .deleteSaloonProfileImage(
-                                                          index: i),
-                                                ),
-                                      ],
-                                    ),
-                                  ),
-                        ),
+                       AddGallery()
+                                // Container(
+                                //   margin: EdgeInsets.all(16),
+                                //   child: Center(
+                                //     child: Wrap(
+                                //       children: [
+                                //         for (int i = 0;
+                                //             i <=
+                                //                 model.salonProfileImages.length;
+                                //             i++)
+                                //           i == model.salonProfileImages.length
+                                //               ? AddImageButton(
+                                //                   onTap: () => model
+                                //                       .addSaloonProfileImage(),
+                                //                 )
+                                //               : ImageView(
+                                //                   image: model
+                                //                       .salonProfileImages[i],
+                                //                   onTap: () => model
+                                //                       .deleteSaloonProfileImage(
+                                //                           index: i),
+                                //                 ),
+                                //       ],
+                                //     ),
+                                //   ),
+                        //),
                   
                                   ],
                                 ),
@@ -417,45 +418,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               
                             ),
                        
-                        //  Text(
-                        //             "Select Images for Services:",
-                        //             style: TextStyle(
-                        //               fontSize: 16,
-                        //               color: Colors.grey,
-                        //             ),
-                        //           ),
-                       
-                        //         Container(
-                        //           margin: EdgeInsets.all(16),
-                        //           child: Center(
-                        //             child: Wrap(
-                        //               children: [
-                        //                 for (int i = 0;
-                        //                     i <=
-                        //                         model.salonProfileImages.length;
-                        //                     i++)
-                        //                   i == model.salonProfileImages.length
-                        //                       ? AddImageButton(
-                        //                           onTap: () => model
-                        //                               .addSaloonProfileImage(),
-                        //                         )
-                        //                       : ImageView(
-                        //                           image: model
-                        //                               .salonProfileImages[i],
-                        //                           onTap: () => model
-                        //                               .deleteSaloonProfileImage(
-                        //                                   index: i),
-                        //                         ),
-                        //               ],
-                        //             ),
-                        //           ),
-                        //         ),
+                        
                       ],
                        
                          
                     )),
 
-                // buildTextField("Password", "**", true),
+              
               ],
             ),
           ),

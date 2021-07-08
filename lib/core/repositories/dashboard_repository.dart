@@ -1,4 +1,4 @@
-import 'package:starter_project/core/api/dashboard_api.dart';
+import 'package:starter_project/core/api/dashboard_api/dashboard_api.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/models/api_response_variants/salondashboard_response.dart';

@@ -76,11 +76,11 @@ class BookingsApiImpl implements BookingsApi {
   }
 
   @override
-  Future<ApiResponse> getSalonUnCompletedBookings({String customerId}) async {
+  Future<ApiResponse> getSalonUnCompletedBookings({String salonId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       var responsebody = await server.get(
-          '${ApiRoutes.salonUncompletedOrders}/${locator<UserInfoCache>().customer.data.id}',
+          '${ApiRoutes.salonUncompletedOrders}/${locator<UserInfoCache>().salon.data.salon.id}',
           header);
       BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
@@ -90,11 +90,11 @@ class BookingsApiImpl implements BookingsApi {
   }
 
   @override
-  Future<ApiResponse> getSalonCompletedBookings({String customerId}) async {
+  Future<ApiResponse> getSalonCompletedBookings({String salonId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       var responsebody = await server.get(
-          '${ApiRoutes.salonCompletedOrders}/${locator<UserInfoCache>().customer.data.id}',
+          '${ApiRoutes.salonCompletedOrders}/${locator<UserInfoCache>().salon.data.salon.id}',
           header);
       BookingResponse res = BookingResponse.fromJson(responsebody);
       return res;
