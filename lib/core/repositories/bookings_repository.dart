@@ -228,16 +228,80 @@ Future<bool> completeSalonOrders({
         backgroundColor: Colors.black26,
       );
     } 
-    // catch (e) {
-    //   Get.snackbar(
-    //     'An Error occured!',
-    //     'Please try again in a bit. \nDetails: $e',
-    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-    //     snackStyle: SnackStyle.FLOATING,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black26,
-    //   );
-    // }
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    setState(ViewState.Idle);
+    return false;
+  }
+
+Future<bool> approveOrders({
+    String bookingID,
+  }) async {
+    try {
+      CompleteBookingResponse res = await _api.approveBookings(
+        bookingID: bookingID);
+      getSalonUnCompletedBookings(silently: true);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
+    setState(ViewState.Idle);
+    return false;
+  }
+
+Future<bool> rejectOrders({
+    String bookingID,
+  }) async {
+    try {
+      CompleteBookingResponse res = await _api.rejectBookings(
+        bookingID: bookingID);
+      getSalonUnCompletedBookings(silently: true);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
     setState(ViewState.Idle);
     return false;
   }

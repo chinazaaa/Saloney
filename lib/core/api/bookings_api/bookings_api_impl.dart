@@ -131,5 +131,32 @@ class BookingsApiImpl implements BookingsApi {
       throw NetworkException();
     }
   }
+ @override
+  Future<CompleteBookingResponse> approveBookings({String bookingID}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.put(
+          '${ApiRoutes.approveOrders}/$bookingID',
+          header);
+      CompleteBookingResponse res = CompleteBookingResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+ @override
+  Future<CompleteBookingResponse> rejectBookings({String bookingID}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.put(
+          '${ApiRoutes.rejectOrders}/$bookingID',
+          header);
+      CompleteBookingResponse res = CompleteBookingResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
 
 }

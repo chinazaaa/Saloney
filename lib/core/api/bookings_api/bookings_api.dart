@@ -10,6 +10,10 @@ abstract class BookingsApi {
 
     Future<ApiResponse> completeCustomerBookings({String bookingID});
      Future<ApiResponse> completeSalonBookings({String bookingID});
+
+
+          Future<ApiResponse> approveBookings({String bookingID});
+          Future<ApiResponse> rejectBookings({String bookingID});
   Future<ApiResponse> createBooking({
     List<String> serviceIds,
     String bookingDate,
