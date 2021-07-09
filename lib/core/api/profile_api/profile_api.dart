@@ -45,5 +45,11 @@ abstract class ProfileApi {
     // String email,
     String phone,
   });
+
+   Future<ApiResponse> updateGallery({
+    String salonId,
+    String image
+
+  });
   Future<ApiResponse> togglePushNotification({int value});
 }

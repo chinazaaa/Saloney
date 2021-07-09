@@ -90,6 +90,9 @@ class _CustomerUncompletedOrdersState extends State<CustomerUncompletedOrders> {
                 DataColumn(
                   label: Text('Booking Date'),
                 ),
+                 DataColumn(
+                  label: Text('Approved?'),
+                ),
                 DataColumn(
                   label: Text('Actions'),
                 ),
@@ -108,6 +111,7 @@ class _CustomerUncompletedOrdersState extends State<CustomerUncompletedOrders> {
                         DataCell(Text(e.salonPhone.toString())),
                         DataCell(Text(e.serviceName.join(", "))),
                         DataCell(Text(e.bookingDate)),
+                        DataCell(Text(e.approved.toString())),
                         DataCell(
                           PopupOptionMenu(e),
                         )

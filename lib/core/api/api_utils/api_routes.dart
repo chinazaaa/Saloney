@@ -32,7 +32,7 @@ class ApiRoutes {
 
 // salon gallery
   static const String salonGallery =
-      '$apiRoute/gallery';
+      '$apiRoute/profile/gallery';
   //update customer
   static const String updateCustomerProfile = '$apiRoute/profile/customer';
 
@@ -85,6 +85,7 @@ static const String rejectOrders =
 // salon dashboard
   static const String salonDashboard =
       '$apiRoute/dashboard';
+
 
 }
 

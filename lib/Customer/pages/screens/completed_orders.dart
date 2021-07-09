@@ -89,6 +89,9 @@ class _CustomerCompletedOrdersState extends State<CustomerCompletedOrders> {
                 DataColumn(
                   label: Text('Booking Date'),
                 ),
+                 DataColumn(
+                  label: Text('Approved?'),
+                ),
                
               ],
               rows: [
@@ -105,6 +108,7 @@ class _CustomerCompletedOrdersState extends State<CustomerCompletedOrders> {
                         DataCell(Text(e.salonPhone.toString())),
                         DataCell(Text(e.serviceName.join(", "))),
                         DataCell(Text(e.bookingDate)),
+                        DataCell(Text(e.approved.toString())),
                        
                       ]);
                       },
