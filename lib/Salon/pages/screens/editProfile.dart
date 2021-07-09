@@ -386,7 +386,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                               ),
                        SizedBox(height: 30,),
-                       Expanded(child: AddGallery())
+                       Expanded(child: AddGallery()),
+                        SizedBox(
+                                  height: 15,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    OutlineButton(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 30),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      onPressed:
+                                          () {Navigator.pop(context);}, // FIXME Return to profile page
+                                      child: Text("CANCEL",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              letterSpacing: 2.2,
+                                              color: Colors.black)),
+                                    ),
+                                       RaisedButton(
+                                         color: Color(0xff9477cb),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 50),
+                                      elevation: 2,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Text(
+                                        "SAVE GALLERY",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            letterSpacing: 2.2,
+                                            color: Colors.white),
+                                      )),])
+                       
                             // Container(
                             //   margin: EdgeInsets.all(16),
                             //   child: Center(

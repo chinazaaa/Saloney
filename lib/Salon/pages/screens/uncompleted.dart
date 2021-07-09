@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/core/repositories/bookings_repository.dart';
 import 'package:starter_project/models/api_response_variants/getbookings_response.dart';
@@ -103,7 +104,7 @@ class _SalonUncompletedOrdersState extends State<SalonUncompletedOrders> {
                           totalPrice = totalPrice + (prices[i] ??0);
                         return DataRow(cells: [
                         DataCell(Text(e.customerName ?? 'Unknown')),
-                        DataCell(Text(prices.join("+") + " = " + totalPrice.toString())),
+                        DataCell(Text(totalPrice.toString())),
                         DataCell(Text(e.customerPhone.toString())),
                         DataCell(Text(e.serviceName.join(", "))),
                         DataCell(Text(e.bookingDate)),
@@ -135,7 +136,24 @@ class PopupOptionMenu extends StatelessWidget {
         return <PopupMenuEntry<MenuOption>>[
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(title: Text("Complete")),
+            child: ListTile(
+               onTap: () async{
+                  bool success = await models.completeSalonOrders(bookingID: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Booking Completed Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
+                },
+              title: Text("Complete")),
             value: MenuOption.Complete,
           ),
         ];
