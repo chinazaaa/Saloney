@@ -1,46 +1,51 @@
 // To parse this JSON data, do
 //
-//     final bookingResponse = bookingResponseFromMap(jsonString);
+//     final allBookingResponse = allBookingResponseFromMap(jsonString);
 
 import 'dart:convert';
 
 import 'package:starter_project/models/api_response.dart';
 
-class BookingResponse extends ApiResponse{
-    BookingResponse({
-        this.message,
-        this.booking,
-    }) : super(message: message, data: booking);
+class AllBookingResponse extends ApiResponse {
+  AllBookingResponse({
+    this.success,
+    this.message,
+    this.data,
+  });
 
-    String message;
-    Booking booking;
+  bool success;
+  String message;
+  List<GetBookings> data;
 
-    BookingResponse copyWith({
-        String message,
-        Booking booking,
-    }) => 
-        BookingResponse(
-            message: message ?? this.message,
-            booking: booking ?? this.booking,
-        );
+  AllBookingResponse copyWith({
+    bool success,
+    String message,
+    List<GetBookings> data,
+  }) =>
+      AllBookingResponse(
+        success: success ?? this.success,
+        message: message ?? this.message,
+        data: data ?? this.data,
+      );
 
-    factory BookingResponse.fromJson(String str) => BookingResponse.fromMap(json.decode(str));
+  factory AllBookingResponse.fromJson(String str) => AllBookingResponse.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-    factory BookingResponse.fromMap(Map<String, dynamic> json) => BookingResponse(
-        message: json["message"],
-        booking: Booking.fromMap(json["booking"]),
-    );
+  factory AllBookingResponse.fromMap(Map<String, dynamic> json) => AllBookingResponse(
+    success: json["success"] == null ? null : json["success"],
+    message: json["message"] == null ? null : json["message"],
+    data: json["data"] == null ? null : List<GetBookings>.from(json["data"].map((x) => GetBookings.fromMap(x))),
+  );
 
-    Map<String, dynamic> toMap() => {
-        "message": message,
-        "booking": booking.toMap(),
-    };
+  Map<String, dynamic> toMap() => {
+    "success": success == null ? null : success,
+    "message": message == null ? null : message,
+    "data": data == null ? null : List<dynamic>.from(data.map((x) => x.toMap())),
+  };
 }
-
-class Booking {
-    Booking({
+class GetBookings {
+    GetBookings({
         this.services,
         this.serviceName,
         this.servicePrice,
@@ -80,7 +85,7 @@ class Booking {
     DateTime updatedAt;
     int v;
 
-    Booking copyWith({
+    GetBookings copyWith({
         List<String> services,
         String serviceName,
         String servicePrice,
@@ -100,7 +105,7 @@ class Booking {
         DateTime updatedAt,
         int v,
     }) => 
-        Booking(
+        GetBookings(
             services: services ?? this.services,
             serviceName: serviceName ?? this.serviceName,
             servicePrice: servicePrice ?? this.servicePrice,
@@ -121,11 +126,11 @@ class Booking {
             v: v ?? this.v,
         );
 
-    factory Booking.fromJson(String str) => Booking.fromMap(json.decode(str));
+    factory GetBookings.fromJson(String str) => GetBookings.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory Booking.fromMap(Map<String, dynamic> json) => Booking(
+    factory GetBookings.fromMap(Map<String, dynamic> json) => GetBookings(
         services: List<String>.from(json["services"].map((x) => x)),
          serviceName: json["serviceName"],
           servicePrice: json["servicePrice"],

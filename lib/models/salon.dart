@@ -7,6 +7,7 @@ class Salon {
     this.location,
     this.description,
     this.image,
+    this.phone,
     this.avatar,
     this.id,
     this.nameOfSalon,
@@ -24,6 +25,7 @@ class Salon {
   String avatar;
   String category;
   String nameOfSalon;
+  int phone;
   String salonOwner;
   DateTime createdAt;
   DateTime updatedAt;
@@ -36,6 +38,7 @@ class Salon {
     String id,
     String avatar,
     String nameOfSalon,
+    int phone,
     String salonOwner,
     String category,
     DateTime createdAt,
@@ -49,6 +52,7 @@ class Salon {
           id: id ?? this.id,
           avatar: avatar ?? this.avatar,
           nameOfSalon: nameOfSalon ?? this.nameOfSalon,
+          phone: phone ?? this.phone,
           salonOwner: salonOwner ?? this.salonOwner,
           createdAt: createdAt ?? this.createdAt,
           updatedAt: updatedAt ?? this.updatedAt,
@@ -70,6 +74,7 @@ class Salon {
         id: json["_id"],
         avatar: json["avatar"],
         nameOfSalon: json["nameOfSalon"],
+          phone: json["phone"],
         salonOwner: json["salonOwner"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -95,6 +100,7 @@ class Salon {
         "avatar": avatar,
         "category": category,
         "nameOfSalon": nameOfSalon,
+         "phone": phone,
         "salonOwner": salonOwner,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
