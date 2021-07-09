@@ -375,56 +375,48 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ),
                         ),
-                        SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                   Text(
-                                    "Add Images to Your Gallery:",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                       AddGallery()
-                                // Container(
-                                //   margin: EdgeInsets.all(16),
-                                //   child: Center(
-                                //     child: Wrap(
-                                //       children: [
-                                //         for (int i = 0;
-                                //             i <=
-                                //                 model.salonProfileImages.length;
-                                //             i++)
-                                //           i == model.salonProfileImages.length
-                                //               ? AddImageButton(
-                                //                   onTap: () => model
-                                //                       .addSaloonProfileImage(),
-                                //                 )
-                                //               : ImageView(
-                                //                   image: model
-                                //                       .salonProfileImages[i],
-                                //                   onTap: () => model
-                                //                       .deleteSaloonProfileImage(
-                                //                           index: i),
-                                //                 ),
-                                //       ],
-                                //     ),
-                                //   ),
-                        //),
-                  
-                                  ],
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                               Text(
+                                "Add Images to Your Gallery:",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
                                 ),
-                                
-                              
-                            ),
-                       
-                        
-                      ],
-                       
-                         
-                    )),
+                              ),
+                       SizedBox(height: 30,),
+                       Expanded(child: AddGallery())
+                            // Container(
+                            //   margin: EdgeInsets.all(16),
+                            //   child: Center(
+                            //     child: Wrap(
+                            //       children: [
+                            //         for (int i = 0;
+                            //             i <=
+                            //                 model.salonProfileImages.length;
+                            //             i++)
+                            //           i == model.salonProfileImages.length
+                            //               ? AddImageButton(
+                            //                   onTap: () => model
+                            //                       .addSaloonProfileImage(),
+                            //                 )
+                            //               : ImageView(
+                            //                   image: model
+                            //                       .salonProfileImages[i],
+                            //                   onTap: () => model
+                            //                       .deleteSaloonProfileImage(
+                            //                           index: i),
+                            //                 ),
+                            //       ],
+                            //     ),
+                            //   ),
+                        //),
 
-              
+                              ],
+                            ),
+                      ],
+                    ),),
               ],
             ),
           ),

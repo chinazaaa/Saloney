@@ -26,52 +26,51 @@ class _AddGalleryState extends State<AddGallery> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-            child: Padding(
-                padding: EdgeInsets.all(10),
-                child: StaggeredGridView.countBuilder(
-                  crossAxisCount: 4,
-                  itemCount: _images.length + 1,
-                  itemBuilder: (BuildContext context, index) {
-                    return index == _images.length
-                        ? Container(
-                            child: GestureDetector(
-                              onTap: () {
-                                chooseImage();
-                              },
-                              child: DottedBorder(
-                                color: Colors.grey,
-                                strokeWidth: 2,
-                                radius: Radius.circular(8),
-                                dashPattern: [8, 4],
-                                child: ClipRRect(
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
+    return Container(
+        child: Padding(
+            padding: EdgeInsets.all(10),
+            child: StaggeredGridView.countBuilder(
+              crossAxisCount: 4,
+              itemCount: _images.length + 1,
+              itemBuilder: (BuildContext context, index) {
+                return index == _images.length
+                    ? Container(
+                        child: GestureDetector(
+                          onTap: () {
+                            chooseImage();
+                          },
+                          child: DottedBorder(
+                            color: Colors.grey,
+                            strokeWidth: 2,
+                            radius: Radius.circular(8),
+                            dashPattern: [8, 4],
+                            child: ClipRRect(
+                              child: Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ),
-                          )
-                        : Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.white,
-                                image: DecorationImage(
-                                    image: FileImage(_images[index]),
-                                    fit: BoxFit.cover)),
-                          );
-                  },
-                  staggeredTileBuilder: (int index) => new StaggeredTile.count(
-                      index == 0 ? 2 : 1, index == 0 ? 2 : 1),
-                  mainAxisSpacing: 3,
-                  crossAxisSpacing: 3,
-                ))
-                ));
+                          ),
+                        ),
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: FileImage(_images[index]),
+                                fit: BoxFit.cover)),
+                      );
+              },
+              staggeredTileBuilder: (int index) => new StaggeredTile.count(
+                  index == 0 ? 2 : 1, index == 0 ? 2 : 1),
+              mainAxisSpacing: 3,
+              crossAxisSpacing: 3,
+            ))
+            );
   }
 }
