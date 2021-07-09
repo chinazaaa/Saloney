@@ -47,7 +47,7 @@ abstract class ProfileApi {
   });
 
    Future<ApiResponse> updateGallery({
-    String salonId,
+    //String salonId,
     String image
 
   });

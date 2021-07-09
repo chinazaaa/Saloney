@@ -167,7 +167,8 @@ class ProfileApiImpl implements ProfileApi {
   Future<ApiResponse> updateGallery(
       {
       String image,
-      String salonId}) async {
+   // String salonId
+      }) async {
     //String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
      
