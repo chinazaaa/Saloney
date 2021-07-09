@@ -6,6 +6,7 @@ import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/core/api/bookings_api/bookings_api.dart';
 import 'package:starter_project/index.dart';
 import 'package:starter_project/models/api_response_variants/bookings_response.dart';
+import 'package:starter_project/models/api_response_variants/getbookings_response.dart';
 
 import '../../../locator.dart';
 
@@ -76,13 +77,13 @@ class BookingsApiImpl implements BookingsApi {
   }
 
   @override
-  Future<ApiResponse> getSalonUnCompletedBookings({String salonId}) async {
+  Future<AllBookingResponse> getSalonUnCompletedBookings({String salonId}) async {
     //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       var responsebody = await server.get(
           '${ApiRoutes.salonUncompletedOrders}/${locator<UserInfoCache>().salon.data.salon.id}',
           header);
-      BookingResponse res = BookingResponse.fromJson(responsebody);
+      AllBookingResponse res = AllBookingResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();

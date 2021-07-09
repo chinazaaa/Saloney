@@ -4,6 +4,7 @@ import 'package:starter_project/index.dart';
 //import 'package:starter_project/models/api_response_variants/bookings_response.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 import 'package:starter_project/models/api_response_variants/getbookings_response.dart';
+import 'package:starter_project/models/booking.dart';
 
 import '../../locator.dart';
 
@@ -11,7 +12,7 @@ class BookingRepo extends BaseNotifier {
   // API
   final _api = locator<BookingsApi>();
 
-  List<GetBookings> salonUncompletedOrders = [];
+  List<Booking> salonUncompletedOrders = [];
   Future<bool> getSalonUnCompletedBookings({bool silently = false}) async {
     if (!silently) {
       if (salonUncompletedOrders.isEmpty) setState(ViewState.Busy);
@@ -25,6 +26,8 @@ class BookingRepo extends BaseNotifier {
         return false;
       }
       salonUncompletedOrders = resp.data;
+      print(salonUncompletedOrders.length);
+      print(salonUncompletedOrders[0].toMap());
       setState(ViewState.DataFetched);
       return true;
     } on NetworkException {

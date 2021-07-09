@@ -10,26 +10,21 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Palette.primaryColor,
       elevation: 0.0,
       leading: IconButton(
-        icon: const Icon(Icons.dashboard_customize_sharp),
+        icon: const Icon(Icons.category),
         iconSize: 28.0,
-        onPressed: ()  {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SalonOrders()));
-                      },
-                      
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SalonOrders()));
+        },
       ),
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.notifications_none),
           iconSize: 28.0,
-         onPressed: ()  {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NotificationsPage()));
-                      },
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NotificationsPage()));
+          },
         ),
       ],
     );
