@@ -78,6 +78,10 @@ static const String resendOTP = '$apiRoute/resend/otp';
 // approved orders
   static const String approveOrders =
       '$apiRoute/approve/booking';
+
+      // unapproved orders
+  static const String unApproveOrders =
+      '$apiRoute/unapproved/salon/booking';
 // reject orders
 static const String rejectOrders =
       '$apiRoute/reject/booking';

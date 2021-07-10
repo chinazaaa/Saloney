@@ -195,16 +195,16 @@ Future<bool> completeCustomerOrders({
         backgroundColor: Colors.black26,
       );
     } 
-    // catch (e) {
-    //   Get.snackbar(
-    //     'An Error occured!',
-    //     'Please try again in a bit. \nDetails: $e',
-    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-    //     snackStyle: SnackStyle.FLOATING,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black26,
-    //   );
-    // }
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        'Please try again in a bit. \nDetails: $e',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
     setState(ViewState.Idle);
     return false;
   }
@@ -303,6 +303,47 @@ Future<bool> rejectOrders({
       );
     }
     setState(ViewState.Idle);
+    return false;
+  }
+
+  List<Booking> salonUnApprovedOrders = [];
+  Future<bool> getSalonUnApprovedBookings({bool silently = false}) async {
+    if (!silently) {
+      if (salonUnApprovedOrders.isEmpty) setState(ViewState.Busy);
+    }
+    AllBookingResponse resp;
+    try {
+      resp = await _api.getUnapproveBookings();
+      if (resp.data.isEmpty) {
+        setState(ViewState.NoDataAvailable);
+        salonUnApprovedOrders = resp.data;
+        return false;
+      }
+      salonUnApprovedOrders = resp.data;
+      print(salonUnApprovedOrders.length);
+      print(salonUnApprovedOrders[0].toMap());
+      setState(ViewState.DataFetched);
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error occured!',
+        e.toString(),
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    }
     return false;
   }
 }

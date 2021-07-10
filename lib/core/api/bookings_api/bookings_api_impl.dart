@@ -159,4 +159,18 @@ class BookingsApiImpl implements BookingsApi {
     }
   }
 
+  @override
+  Future<AllBookingResponse> getUnapproveBookings({String salonId}) async {
+    //String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+      var responsebody = await server.get(
+          '${ApiRoutes.unApproveOrders}/${locator<UserInfoCache>().salon.data.salon.id}',
+          header);
+      AllBookingResponse res = AllBookingResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
 }

@@ -14,6 +14,7 @@ abstract class BookingsApi {
 
           Future<ApiResponse> approveBookings({String bookingID});
           Future<ApiResponse> rejectBookings({String bookingID});
+           Future<ApiResponse> getUnapproveBookings({String salonId});
   Future<ApiResponse> createBooking({
     List<String> serviceIds,
     String bookingDate,
