@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/StyleScheme.dart';
-import 'package:starter_project/Customer/pages/screens/orders.dart';
+import 'package:starter_project/Customer/pages/screens/home.dart';
+//import 'package:starter_project/Customer/pages/screens/orders.dart';
 import 'package:starter_project/infrastructure/user_info_cache.dart';
 import 'package:starter_project/models/api_response_variants/bookings_response.dart';
 
 import '../../../locator.dart';
 
-// class OrderConfirmPage extends StatelessWidget {
-//   final bookingDate, bookingID;
 
-//   const OrderConfirmPage({Key key, this.bookingDate, this.bookingID}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     // return MaterialApp(
-//     //   debugShowCheckedModeBanner: false,
-//     //   home: orderConfirmPage(),
-//     // );
-//   }
-// }
 
 class OrderConfirmPage extends StatefulWidget {
   final BookingResponse booking;
@@ -159,7 +149,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
             InkWell(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Orders()));
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -167,7 +157,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
                 decoration: BoxDecoration(gradient: gradientStyle),
                 child: Center(
                   child: Text(
-                    "VIEW BOOKING",
+                    "BACK TO HOME",
                     style: contentStyle.copyWith(
                         color: Colors.white, fontSize: 22),
                   ),
