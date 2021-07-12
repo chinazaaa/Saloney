@@ -299,7 +299,8 @@ class _EditServiceState extends State<EditService> {
         description: description.text,
         price: price.text,
         category: dropdownValue,
-        image: _image == null ? null : _image.path);
+        image: _image == null ? null : _image.path,
+        serviceId: widget.service.id);
     if (success) {
       Navigator.pop(context);
       Get.snackbar(

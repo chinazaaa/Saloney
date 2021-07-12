@@ -104,7 +104,7 @@ class _PublishedServiceScreenState extends State<PublishedServiceScreen> {
   }
 }
 
-enum MenuOption { Edit, UnPublish, Delete }
+enum MenuOption { UnPublish, Delete }
 
 class PopupOptionMenu extends StatelessWidget {
   final SalonService data;
@@ -116,23 +116,23 @@ class PopupOptionMenu extends StatelessWidget {
     return PopupMenuButton<MenuOption>(
       itemBuilder: (BuildContext context) {
         return <PopupMenuEntry<MenuOption>>[
-          PopupMenuItem(
-            //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditService(
-                        service: data,
-                      ),
-                    ),
-                  );
-                  // print(data.service);
-                },
-                title: Text("Edit")),
-            value: MenuOption.Edit,
-          ),
+          // PopupMenuItem(
+          //   //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
+          //   child: ListTile(
+          //       onTap: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => EditService(
+          //               service: data,
+          //             ),
+          //           ),
+          //         );
+          //         // print(data.service);
+          //       },
+          //       title: Text("Edit")),
+          //   value: MenuOption.Edit,
+          // ),
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
@@ -143,7 +143,7 @@ class PopupOptionMenu extends StatelessWidget {
                     //show snackbar
                     Get.snackbar(
                       'Success!',
-                      'Service Published Successfully',
+                      'Service UnPublished Successfully',
                       margin:
                           EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                       snackStyle: SnackStyle.FLOATING,
