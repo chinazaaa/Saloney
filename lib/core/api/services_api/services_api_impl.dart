@@ -50,8 +50,7 @@ class ServicesApiImpl implements ServicesApi {
       }
 
       var responsebody = await server.post(
-          '$baseUrl/services/$userId', xHeader, jsonEncode(data),
-          multimediaRequest: formData);
+          '$baseUrl/services/$userId', xHeader, jsonEncode(data), multimediaRequest: formData);
       ServiceResponse res = ServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
@@ -66,11 +65,11 @@ class ServicesApiImpl implements ServicesApi {
       };
 
   Map<String, String> get xHeader => {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'x-access-token': '${locator<UserInfoCache>().token}',
-      };
-
+    'Accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': '${locator<UserInfoCache>().token}',
+  };
+  
   @override
   Future<ApiResponse> getUnPublishedService({String salonId}) async {
     String salonId = locator<UserInfoCache>().salon.data.salon.id.toString();
@@ -99,52 +98,61 @@ class ServicesApiImpl implements ServicesApi {
     }
   }
 
+
+
   @override
   Future<ApiResponse> publishService({String serviceId}) async {
-    // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server
-          .post('$baseUrl/services/publish/$serviceId', xHeader, {});
-      ApiResponse res = ApiResponse.fromJson(responsebody);
+      var responsebody =
+          await server.post('$baseUrl/services/publish/$serviceId', xHeader, {});
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
+
 
   @override
   Future<ApiResponse> unpublishService({String serviceId}) async {
-    // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
-      var responsebody = await server
-          .post('$baseUrl/services/unpublish/$serviceId', xHeader, {});
-      ApiResponse res = ApiResponse.fromJson(responsebody);
+      var responsebody =
+          await server.post('$baseUrl/services/unpublish/$serviceId', xHeader, {});
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
 
-  @override
+
+    @override
   Future<ApiResponse> deleteUnpublishedService({String serviceId}) async {
-    // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       var responsebody =
           await server.delete('$baseUrl/services/$serviceId', xHeader);
-      ApiResponse res = ApiResponse.fromJson(responsebody);
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
 
-  @override
+
+    @override
   Future<ApiResponse> deletePublishedService({String serviceId}) async {
-    // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+   // String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
     try {
       var responsebody =
           await server.delete('$baseUrl/services/$serviceId', xHeader);
-      ApiResponse res = ApiResponse.fromJson(responsebody);
+      ApiResponse res =
+          ApiResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
@@ -152,17 +160,18 @@ class ServicesApiImpl implements ServicesApi {
   }
 
   @override
-  Future<ApiResponse> customerGetServices(String salonId) async {
+  Future<ApiResponse> customerGetServices(String salonId) async{
     try {
-      var responsebody = await server.get(
-          '${ApiRoutes.customerGetServices}/$salonId', xHeader);
+      var responsebody =
+          await server.get('${ApiRoutes.customerGetServices}/$salonId', xHeader);
       PublishedServiceResponse res =
-          PublishedServiceResponse.fromJson(responsebody);
+      PublishedServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
       throw NetworkException();
     }
   }
+
 
   @override
   Future<ApiResponse> updateService(
@@ -199,8 +208,7 @@ class ServicesApiImpl implements ServicesApi {
       }
 
       var responsebody = await server.put(
-          '$baseUrl/services/$serviceId', xHeader,
-          body: jsonEncode(data), multimediaRequest: formData);
+          '$baseUrl/services/$serviceId', xHeader,  body:jsonEncode(data), multimediaRequest: formData);
       ServiceResponse res = ServiceResponse.fromJson(responsebody);
       return res;
     } on SocketException {
