@@ -8,6 +8,7 @@ import 'package:starter_project/models/api_response.dart';
 import 'package:starter_project/models/api_response_variants/bookings_response.dart';
 import 'package:starter_project/models/cart_item.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
+import 'package:starter_project/models/service/salon_service.dart';
 import 'package:starter_project/ui_helpers/responsive_state/base_view_model.dart';
 import 'package:starter_project/ui_helpers/responsive_state/view_state.dart';
 
@@ -32,7 +33,7 @@ class CartRepository extends BaseNotifier {
   double get deliveryCost => currentPrice == 0 ? 0 : _actualDeliveryCost;
   double get total => currentPrice + deliveryCost;
 
-  void addToCart(PublishedService p) {
+  void addToCart(SalonService p) {
     cart.add(CartItem(p));
     calculateCost();
     Get.snackbar(
@@ -123,11 +124,11 @@ class CartRepository extends BaseNotifier {
     print(cart.map((e) => e.product.id).toList());
     print(bookingDate);
     try {
-       bookingResponse = await bookingApi.createBooking(
+      bookingResponse = await bookingApi.createBooking(
           serviceIds: cart.map((e) => e.product.id).toList(),
           salonId: vendorId,
           bookingDate: bookingDate);
-          
+
       setState(ViewState.Idle);
       return true;
     } on NetworkException {
