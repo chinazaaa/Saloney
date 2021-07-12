@@ -3,6 +3,7 @@ import 'package:starter_project/index.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
+import 'package:starter_project/models/service/salon_service.dart';
 import 'package:starter_project/models/service/serviceResponses.dart';
 import 'package:starter_project/core/api/api_utils/network_exceptions.dart';
 
@@ -53,14 +54,13 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
-  Future<bool> updateService({
-    String service,
-    String description,
-    String category,
-    String price,
-    String image,
-    String serviceId
-  }) async {
+  Future<bool> updateService(
+      {String service,
+      String description,
+      String category,
+      String price,
+      String image,
+      String serviceId}) async {
     setState(ViewState.Busy);
     try {
       ApiResponse res = await _api.updateService(
@@ -96,15 +96,15 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
-  List<UnpublishedService> unpublishedServices = [];
+  List<SalonService> unpublishedServices = [];
   Future<bool> getUnpublishedServices({bool silently = false}) async {
-    if(!silently){
-      if(unpublishedServices.isEmpty) setState(ViewState.Busy);
+    if (!silently) {
+      if (unpublishedServices.isEmpty) setState(ViewState.Busy);
     }
     UnpublishedServiceResponse resp;
     try {
       resp = await _api.getUnPublishedService();
-      if(resp.data.isEmpty){
+      if (resp.data.isEmpty) {
         setState(ViewState.NoDataAvailable);
         unpublishedServices = resp.data;
         return false;
@@ -114,20 +114,21 @@ class ServiceRepo extends BaseNotifier {
       return true;
     } on NetworkException {
       setError('No Internet');
-    } catch (e){
+    } catch (e) {
       setError(e.toString());
     }
     return false;
   }
-  List<PublishedService> publishedServices = [];
+
+  List<SalonService> publishedServices = [];
   Future<bool> getPublishedServices({bool silently = false}) async {
-    if(!silently){
-      if(publishedServices.isEmpty) setState(ViewState.Busy);
+    if (!silently) {
+      if (publishedServices.isEmpty) setState(ViewState.Busy);
     }
     PublishedServiceResponse resp;
     try {
       resp = await _api.getPublishedService();
-      if(resp.data.isEmpty){
+      if (resp.data.isEmpty) {
         setState(ViewState.NoDataAvailable);
         publishedServices = resp.data;
         return false;
@@ -137,21 +138,17 @@ class ServiceRepo extends BaseNotifier {
       return true;
     } on NetworkException {
       setError('No Internet');
-    } catch (e){
+    } catch (e) {
       setError(e.toString());
     }
     return false;
   }
 
-
-
-
   Future<bool> publishService({
     String serviceId,
   }) async {
     try {
-      ApiResponse res = await _api.publishService(
-        serviceId: serviceId);
+      ApiResponse res = await _api.publishService(serviceId: serviceId);
       getUnpublishedServices(silently: true);
       return true;
     } on NetworkException {
@@ -163,8 +160,7 @@ class ServiceRepo extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error occured!',
         'Please try again in a bit. \nDetails: $e',
@@ -178,14 +174,11 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
-
-
   Future<bool> unpublishService({
     String serviceId,
   }) async {
     try {
-      ApiResponse res = await _api.unpublishService(
-        serviceId: serviceId);
+      ApiResponse res = await _api.unpublishService(serviceId: serviceId);
       getPublishedServices(silently: true);
       return true;
     } on NetworkException {
@@ -197,8 +190,7 @@ class ServiceRepo extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error occured!',
         'Please try again in a bit. \nDetails: $e',
@@ -210,15 +202,13 @@ class ServiceRepo extends BaseNotifier {
     }
     return false;
   }
-
-
 
   Future<bool> deleteUnpublishedService({
     String serviceId,
   }) async {
     try {
-      ApiResponse res = await _api.deleteUnpublishedService(
-        serviceId: serviceId);
+      ApiResponse res =
+          await _api.deleteUnpublishedService(serviceId: serviceId);
       getPublishedServices(silently: true);
       return true;
     } on NetworkException {
@@ -230,8 +220,7 @@ class ServiceRepo extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error occured!',
         'Please try again in a bit. \nDetails: $e',
@@ -244,14 +233,11 @@ class ServiceRepo extends BaseNotifier {
     return false;
   }
 
-
-
   Future<bool> deletePublishedService({
     String serviceId,
   }) async {
     try {
-      ApiResponse res = await _api.deletePublishedService(
-        serviceId: serviceId);
+      ApiResponse res = await _api.deletePublishedService(serviceId: serviceId);
       getPublishedServices(silently: true);
       return true;
     } on NetworkException {
@@ -263,8 +249,7 @@ class ServiceRepo extends BaseNotifier {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black26,
       );
-    } 
-    catch (e) {
+    } catch (e) {
       Get.snackbar(
         'An Error occured!',
         'Please try again in a bit. \nDetails: $e',
