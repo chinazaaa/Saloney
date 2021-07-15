@@ -103,7 +103,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                 Row(
                                   children: <Widget>[
                                     CircleAvatar(
-                                      backgroundImage: NetworkImage(
+                                      backgroundImage: AssetImage(
                                         'assets/1.png',
                                       ),
                                       maxRadius: 24,
@@ -181,88 +181,88 @@ class _NotificationsPageState extends State<NotificationsPage> {
                           ),
                       ).toList(),
 
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(children: [
-                                SizedBox(
-                                  height: 110,
-                                  width: 110,
-                                  child: Stack(children: <Widget>[
-                                    Positioned(
-                                      left: 5.0,
-                                      bottom: -10.0,
-                                      child: SizedBox(
-                                        height: 100,
-                                        width: 100,
-                                        child: Transform.scale(
-                                          scale: 1.2,
-                                          child: Image.asset(
-                                              'assets/3.png'),
-                                        ),
-                                      ),
-                                    ),
-                                    // Positioned(
-                                    //   top: 8.0,
-                                    //   left: 10.0,
-                                    //   child: SizedBox(
-                                    //       height: 80,
-                                    //       width: 80,
-                                    //       child: Image.asset(
-                                    //           'assets/4.png')),
-                                    // )
-                                  ]),
-                                ),
-                                Flexible(
-                                  child: Column(children: [
-                                    Text(
-                                        'Washing of hair',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10)),
-                                    SizedBox(height:4.0),
-                                    Text(
-                                        'You have successfully received this order',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 10))
-                                  ]),
-                                )
-                              ]),
-                            ),
-                            InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (_) => Orders()
-                                      )
-                                      ),
-                              child: Container(
-                                  padding: const EdgeInsets.all(14.0),
-                                  decoration: BoxDecoration(
-                                      color: purple,
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(5.0),
-                                          bottomLeft: Radius.circular(5.0))),
-                                  child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Center(
-                                      child: Text(
-                                        'Congrats on your order!',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ))),
-                            ))
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   margin: const EdgeInsets.symmetric(vertical: 4.0),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.white,
+                      //       borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                      //     children: <Widget>[
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Row(children: [
+                      //           SizedBox(
+                      //             height: 110,
+                      //             width: 110,
+                      //             child: Stack(children: <Widget>[
+                      //               Positioned(
+                      //                 left: 5.0,
+                      //                 bottom: -10.0,
+                      //                 child: SizedBox(
+                      //                   height: 100,
+                      //                   width: 100,
+                      //                   child: Transform.scale(
+                      //                     scale: 1.2,
+                      //                     child: Image.asset(
+                      //                         'assets/3.png'),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               // Positioned(
+                      //               //   top: 8.0,
+                      //               //   left: 10.0,
+                      //               //   child: SizedBox(
+                      //               //       height: 80,
+                      //               //       width: 80,
+                      //               //       child: Image.asset(
+                      //               //           'assets/4.png')),
+                      //               // )
+                      //             ]),
+                      //           ),
+                      //           Flexible(
+                      //             child: Column(children: [
+                      //               Text(
+                      //                   'Washing of hair',
+                      //                   style: TextStyle(
+                      //                       fontWeight: FontWeight.bold,
+                      //                       fontSize: 10)),
+                      //               SizedBox(height:4.0),
+                      //               Text(
+                      //                   'You have successfully received this order',
+                      //                   style: TextStyle(
+                      //                       color: Colors.grey, fontSize: 10))
+                      //             ]),
+                      //           )
+                      //         ]),
+                      //       ),
+                      //       InkWell(
+                      //         onTap: () => Navigator.of(context).push(
+                      //             MaterialPageRoute(
+                      //                 builder: (_) => Orders()
+                      //                 )
+                      //                 ),
+                      //         child: Container(
+                      //             padding: const EdgeInsets.all(14.0),
+                      //             decoration: BoxDecoration(
+                      //                 color: purple,
+                      //                 borderRadius: BorderRadius.only(
+                      //                     bottomRight: Radius.circular(5.0),
+                      //                     bottomLeft: Radius.circular(5.0))),
+                      //             child: Align(
+                      //                 alignment: Alignment.centerRight,
+                      //                 child: Center(
+                      //                 child: Text(
+                      //                   'Congrats on your order!',
+                      //                   style: TextStyle(
+                      //                       color: Colors.white,
+                      //                       fontWeight: FontWeight.bold,
+                      //                       fontSize: 20),
+                      //                 ))),
+                      //       ))
+                      //     ],
+                      //   ),
+                      // ),
 
                     ],
                   ),
