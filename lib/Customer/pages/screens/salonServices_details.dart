@@ -5,9 +5,10 @@ import 'package:starter_project/Customer/pages/screens/notifications.dart';
 import 'package:starter_project/Customer/pages/screens/widgets/badge.dart';
 import 'package:starter_project/core/repositories/cart_repository.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
+import 'package:starter_project/models/service/salon_service.dart';
 
 class ServiceDetails extends StatefulWidget {
-  final PublishedService service;
+  final SalonService service;
 
   const ServiceDetails({Key key, this.service}) : super(key: key);
   @override
@@ -77,9 +78,11 @@ class _ServiceDetailsState extends State<ServiceDetails> {
               ),
               maxLines: 2,
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Text(
-             "NGN ${widget.service.price}",
+              "NGN ${widget.service.price}",
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w900,
@@ -118,14 +121,15 @@ class _ServiceDetailsState extends State<ServiceDetails> {
             primary: Color(0xff9477cb),
           ),
           onPressed: () {
-            Provider.of<CartRepository>(context, listen: false).addToCart(widget.service);
-                  Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context){
-                    return CartPage();
-                  },
-                ),
-              );
+            Provider.of<CartRepository>(context, listen: false)
+                .addToCart(widget.service);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return CartPage();
+                },
+              ),
+            );
           },
         ),
       ),

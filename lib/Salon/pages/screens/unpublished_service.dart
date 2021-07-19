@@ -6,6 +6,7 @@ import 'package:starter_project/Salon/pages/screens/edit_service.dart';
 import 'package:starter_project/Salon/pages/screens/service.dart';
 import 'package:starter_project/core/repositories/service_repository.dart';
 import 'package:starter_project/models/service/get_unpublished_service_reponse.dart';
+import 'package:starter_project/models/service/salon_service.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
 import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 import 'package:starter_project/ui_helpers/widgets/error_retry_widget.dart';
@@ -106,7 +107,7 @@ class _UnPublishedServiceState extends State<UnPublishedService> {
 enum MenuOption { Edit, Publish, Delete }
 
 class PopupOptionMenu extends StatelessWidget {
-  final UnpublishedService data;
+  final SalonService data;
   const PopupOptionMenu(this.data, {Key key}) : super(key: key);
 
   @override
@@ -119,8 +120,14 @@ class PopupOptionMenu extends StatelessWidget {
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EditService()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditService(
+                        service: data,
+                      ),
+                    ),
+                  );
                   // print(data.service);
                 },
                 title: Text("Edit")),
@@ -129,21 +136,21 @@ class PopupOptionMenu extends StatelessWidget {
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
-                onTap: () async{
-                  bool success = await models.publishService(serviceId: data.id);
-                  if(success){
+                onTap: () async {
+                  bool success =
+                      await models.publishService(serviceId: data.id);
+                  if (success) {
                     //show snackbar
-                         Get.snackbar(
-                                            'Success!',
-                                            'Service Published Successfully',
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 30, horizontal: 30),
-                                            snackStyle: SnackStyle.FLOATING,
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.black26,
-                                          );
+                    Get.snackbar(
+                      'Success!',
+                      'Service Published Successfully',
+                      margin:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      snackStyle: SnackStyle.FLOATING,
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.black26,
+                    );
                   }
-                
                 },
                 title: Text("Publish")),
             value: MenuOption.Publish,
@@ -151,21 +158,21 @@ class PopupOptionMenu extends StatelessWidget {
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
             child: ListTile(
-                 onTap: () async{
-                  bool success = await models.deleteUnpublishedService(serviceId: data.id);
-                  if(success){
+                onTap: () async {
+                  bool success =
+                      await models.deleteUnpublishedService(serviceId: data.id);
+                  if (success) {
                     //show snackbar
-                         Get.snackbar(
-                                            'Success!',
-                                            'Service Deleted Successfully',
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 30, horizontal: 30),
-                                            snackStyle: SnackStyle.FLOATING,
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.black26,
-                                          );
+                    Get.snackbar(
+                      'Success!',
+                      'Service Deleted Successfully',
+                      margin:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      snackStyle: SnackStyle.FLOATING,
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.black26,
+                    );
                   }
-                
                 },
                 title: Text(
                   "Delete",

@@ -6,6 +6,7 @@ class Booking {
     this.servicePrice,
     this.bookingDate,
     this.approved,
+    this.rejected,
     this.completedByCustomer,
     this.completedBySalon,
     this.id,
@@ -26,6 +27,7 @@ class Booking {
   List<String> servicePrice;
   String bookingDate;
   bool approved;
+  bool rejected;
   bool completedByCustomer;
   bool completedBySalon;
   String id;
@@ -46,6 +48,7 @@ class Booking {
     List<String> servicePrice,
     String bookingDate,
     bool approved,
+    bool rejected,
     bool completedByCustomer,
     bool completedBySalon,
     String id,
@@ -66,6 +69,7 @@ class Booking {
         servicePrice: servicePrice ?? this.servicePrice,
         bookingDate: bookingDate ?? this.bookingDate,
         approved: approved ?? this.approved,
+        rejected: rejected ?? this.rejected,
         completedByCustomer: completedByCustomer ?? this.completedByCustomer,
         completedBySalon: completedBySalon ?? this.completedBySalon,
         id: id ?? this.id,
@@ -91,6 +95,7 @@ class Booking {
     servicePrice: json["servicePrice"] == null ? null : List<String>.from(json["servicePrice"].map((x) => x)),
     bookingDate: json["bookingDate"] == null ? null : json["bookingDate"],
     approved: json["approved"] == null ? null : json["approved"],
+    rejected: json["rejected"] == null ? null : json["rejected"],
     completedByCustomer: json["completedByCustomer"] == null ? null : json["completedByCustomer"],
     completedBySalon: json["completedBySalon"] == null ? null : json["completedBySalon"],
     id: json["_id"] == null ? null : json["_id"],
@@ -112,6 +117,7 @@ class Booking {
     "servicePrice": servicePrice == null ? null : List<dynamic>.from(servicePrice.map((x) => x)),
     "bookingDate": bookingDate == null ? null : bookingDate,
     "approved": approved == null ? null : approved,
+    "rejected": rejected == null ? null : rejected,
     "completedByCustomer": completedByCustomer == null ? null : completedByCustomer,
     "completedBySalon": completedBySalon == null ? null : completedBySalon,
     "_id": id == null ? null : id,

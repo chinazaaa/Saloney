@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/core/repositories/bookings_repository.dart';
 import 'package:starter_project/models/api_response_variants/getbookings_response.dart';
@@ -89,6 +90,9 @@ class _SalonUncompletedOrdersState extends State<SalonUncompletedOrders> {
                 DataColumn(
                   label: Text('Booking Date'),
                 ),
+                 DataColumn(
+                  label: Text('Approved?'),
+                ),
                 DataColumn(
                   label: Text('Actions'),
                 ),
@@ -103,10 +107,11 @@ class _SalonUncompletedOrdersState extends State<SalonUncompletedOrders> {
                           totalPrice = totalPrice + (prices[i] ??0);
                         return DataRow(cells: [
                         DataCell(Text(e.customerName ?? 'Unknown')),
-                        DataCell(Text(prices.join("+") + " = " + totalPrice.toString())),
+                        DataCell(Text(totalPrice.toString())),
                         DataCell(Text(e.customerPhone.toString())),
                         DataCell(Text(e.serviceName.join(", "))),
                         DataCell(Text(e.bookingDate)),
+                        DataCell(Text(e.approved.toString())),
                         DataCell(
                           PopupOptionMenu(e),
                         )
@@ -121,7 +126,7 @@ class _SalonUncompletedOrdersState extends State<SalonUncompletedOrders> {
   }
 }
 
-enum MenuOption { Complete }
+enum MenuOption { Complete, Approve, Reject }
 
 class PopupOptionMenu extends StatelessWidget {
   final Booking data;
@@ -135,8 +140,69 @@ class PopupOptionMenu extends StatelessWidget {
         return <PopupMenuEntry<MenuOption>>[
           PopupMenuItem(
             //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
-            child: ListTile(title: Text("Complete")),
+            child: ListTile(
+               onTap: () async{
+                  bool success = await models.completeSalonOrders(bookingID: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Booking Completed Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
+                },
+              title: Text("Complete")),
             value: MenuOption.Complete,
+          ),
+           PopupMenuItem(
+            //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
+            child: ListTile(
+               onTap: () async{
+                  bool success = await models.approveOrders(bookingID: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Booking Approved Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
+                },
+              title: Text("Approve")),
+            value: MenuOption.Approve,
+          ),
+          PopupMenuItem(
+            //child: Icon(Icons.edit, color: Colors.black, size: 28.0),
+            child: ListTile(
+               onTap: () async{
+                  bool success = await models.rejectOrders(bookingID: data.id);
+                  if(success){
+                    //show snackbar
+                         Get.snackbar(
+                                            'Success!',
+                                            'Booking Rejected Successfully',
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 30),
+                                            snackStyle: SnackStyle.FLOATING,
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.black26,
+                                          );
+                  }
+                
+                },
+              title: Text("Reject")),
+            value: MenuOption.Reject,
           ),
         ];
       },

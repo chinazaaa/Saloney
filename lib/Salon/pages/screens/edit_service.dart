@@ -1,16 +1,22 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/Salon/pages/screens/service_provider.dart';
-import 'package:starter_project/core/repositories/service_repository.dart';
-import 'package:starter_project/ui_helpers/widgets/image_picker_ui_assets.dart';
+import 'service_provider.dart';
+import '../../../core/repositories/service_repository.dart';
+import '../../../models/service/get_unpublished_service_reponse.dart';
+import '../../../models/service/salon_service.dart';
+import '../../../ui_helpers/widgets/image_picker_ui_assets.dart';
 
-import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
-import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
+import '../../../ui_helpers/responsive_state/responsive_state.dart';
+import '../../../ui_helpers/animation/FadeAnimation.dart';
 
 import '../../../index.dart';
 
 class EditService extends StatefulWidget {
+  final SalonService service;
+
+  EditService({this.service});
+
   @override
   _EditServiceState createState() => _EditServiceState();
 }
@@ -35,7 +41,17 @@ class _EditServiceState extends State<EditService> {
   final serviceKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    description.text = widget.service.description ?? '';
+    nameOfService.text = widget.service.service ?? '';
+    price.text = widget.service.price ?? '';
+    dropdownValue = widget.service.category ?? null;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(widget.service.image);
     final model = Provider.of<ServiceProvider>(context, listen: false);
     final repo = Provider.of<ServiceRepo>(context);
     return DefaultTabController(
@@ -115,7 +131,8 @@ class _EditServiceState extends State<EditService> {
                                 children: [
                                   TextFormField(
                                     controller: nameOfService,
-                                  validator: (value) => model.validateName(value),
+                                    validator: (value) =>
+                                        model.validateName(value),
                                     decoration: InputDecoration(
                                         labelText: 'Name of Service',
                                         labelStyle:
@@ -127,7 +144,8 @@ class _EditServiceState extends State<EditService> {
                                   ),
                                   TextFormField(
                                     controller: description,
-                                    validator: (value) => model.validateName(value),
+                                    validator: (value) =>
+                                        model.validateName(value),
                                     decoration: InputDecoration(
                                         labelText: 'Description',
                                         labelStyle:
@@ -140,17 +158,15 @@ class _EditServiceState extends State<EditService> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  _image == null
+                                  widget.service.image == null
                                       ? AddImageButton(
                                           onTap: () async {
                                             _image = await model.getImage();
-                                            setState(() {
-
-                                            });
+                                            setState(() {});
                                           },
                                         )
-                                      : ImageView(
-                                          image: _image,
+                                      : NetworkImageView(
+                                          imageUrl: widget.service.image,
                                           onTap: () {
                                             setState(() {
                                               _image = null;
@@ -159,7 +175,10 @@ class _EditServiceState extends State<EditService> {
                                         ),
                                   TextFormField(
                                     controller: price,
-                                    validator: (value) => int.tryParse(value) == null ? 'Enter a valid figure' : null,
+                                    validator: (value) =>
+                                        int.tryParse(value) == null
+                                            ? 'Enter a valid figure'
+                                            : null,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                         labelText: 'Price ',
@@ -181,9 +200,12 @@ class _EditServiceState extends State<EditService> {
                                           width: 10,
                                         ),
                                         Expanded(
-                                          child: DropdownButtonFormField<String>(
+                                          child:
+                                              DropdownButtonFormField<String>(
                                             hint: Text('Select Category'),
-                                            validator: (val)=> val == null ? 'Select a category' : null,
+                                            validator: (val) => val == null
+                                                ? 'Select a category'
+                                                : null,
                                             value: dropdownValue,
                                             icon: Icon(Icons.arrow_drop_down),
                                             onChanged: (String value) {
@@ -273,11 +295,12 @@ class _EditServiceState extends State<EditService> {
     final model = Provider.of<ServiceRepo>(context, listen: false);
 
     bool success = await model.updateService(
-      service: nameOfService.text, description: description.text,
-      price: price.text,
-      category: dropdownValue,
-      image: _image == null ? null : _image.path
-    );
+        service: nameOfService.text,
+        description: description.text,
+        price: price.text,
+        category: dropdownValue,
+        image: _image == null ? null : _image.path,
+        serviceId: widget.service.id);
     if (success) {
       Navigator.pop(context);
       Get.snackbar(

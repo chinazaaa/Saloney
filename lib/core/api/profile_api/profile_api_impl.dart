@@ -162,6 +162,39 @@ class ProfileApiImpl implements ProfileApi {
         UpdateSalonOwnerResponse.fromJson(responsebody);
     return response;
   }
+ 
+  @override
+  Future<ApiResponse> updateGallery(
+      {
+      String image,
+   // String salonId
+      }) async {
+    //String serviceId = locator<UserInfoCache>().salon.data.salon.id.toString();
+    try {
+     
+
+      FormData formData;
+
+      if (image != null) {
+        String imgname = DateTime.now().millisecondsSinceEpoch.toString();
+        formData = FormData.fromMap({
+          
+          "image": await MultipartFile.fromFile(
+            image,
+            filename: '$imgname/$image',
+            contentType: MediaType('image', 'jpg'),
+          ),
+        });
+      }
+
+      var responsebody = await server.put(
+          '${ApiRoutes.salonGallery}/${locator<UserInfoCache>().salon.data.user.id}', xheader, multimediaRequest: formData);
+      UpdateSalonResponse res = UpdateSalonResponse.fromJson(responsebody);
+      return res;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
 
   //update customer
   @override
@@ -193,4 +226,6 @@ class ProfileApiImpl implements ProfileApi {
     'Content-Type': 'application/x-www-form-urlencoded',
     'x-access-token': locator<UserInfoCache>().token
   };
+
+  
 }

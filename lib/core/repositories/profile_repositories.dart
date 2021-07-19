@@ -188,5 +188,45 @@ class ProfileRepo extends BaseNotifier with Validators {
     }
     setState(ViewState.Idle);
     return false;
+ 
+ 
+  }
+
+
+  Future<bool> updateGallery({
+    String image,
+    //String salonId
+  }) async {
+    setState(ViewState.Busy);
+    try {
+      ApiResponse res = await profileApi.updateGallery(
+          image: image
+        //  salonId: salonId
+          );
+      setState(ViewState.Idle);
+      
+      return true;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Please check your internet Connection',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    // catch (e) {
+    //   Get.snackbar(
+    //     'An Error occured!',
+    //     'Please try again in a bit. \nDetails: $e',
+    //     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+    //     snackStyle: SnackStyle.FLOATING,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.black26,
+    //   );
+    // }
+    setState(ViewState.Idle);
+    return false;
   }
 }

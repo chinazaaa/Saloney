@@ -21,14 +21,67 @@ class ImageView extends StatelessWidget {
               child: image == null
                   ? Text("No Image")
                   : Image.file(
-                image,
-                fit: BoxFit.cover,
-              ),
+                      image,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
-          SizedBox(width: 93, height: 93, child: Container(
+          SizedBox(
+              width: 93,
+              height: 93,
+              child: Container(
+                  color: Colors.black.withOpacity(.4),
+                  child: Center(
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                  )))
+        ],
+      ),
+    );
+  }
+}
+
+class NetworkImageView extends StatelessWidget {
+  final String imageUrl;
+  final Function onTap;
+
+  NetworkImageView({this.imageUrl, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Card(
+              color: Colors.grey[100],
+              child: imageUrl == null
+                  ? Text("No Image")
+                  : Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+            ),
+          ),
+          SizedBox(
+            width: 93,
+            height: 93,
+            child: Container(
               color: Colors.black.withOpacity(.4),
-              child: Center(child: Icon(Icons.close, color: Colors.white,),)))
+              child: Center(
+                child: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -37,9 +90,7 @@ class ImageView extends StatelessWidget {
 
 class AddImageButton extends StatelessWidget {
   Function onTap;
-  AddImageButton({
-    Key key, this.onTap
-  }) : super(key: key);
+  AddImageButton({Key key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +101,7 @@ class AddImageButton extends StatelessWidget {
         height: 100,
         child: Card(
           color: Colors.grey[100],
-          child: Center(
-              child: Icon(Icons.add)),
+          child: Center(child: Icon(Icons.add)),
         ),
       ),
     );

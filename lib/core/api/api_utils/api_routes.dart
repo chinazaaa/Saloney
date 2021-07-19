@@ -33,7 +33,7 @@ class ApiRoutes {
 
 // salon gallery
   static const String salonGallery =
-      '$apiRoute/gallery';
+      '$apiRoute/profile/gallery';
   //update customer
   static const String updateCustomerProfile = '$apiRoute/profile/customer';
 
@@ -69,9 +69,20 @@ static const String resendOTP = '$apiRoute/resend/otp';
   static const String salonCompletedOrders =
       '$apiRoute/completed/salon/booking';
 
+// complete orders by customer
+  static const String customerCompleteOrders =
+      '$apiRoute/complete/customer/booking';
+
+      // complete orders by salon
+  static const String salonCompleteOrders =
+      '$apiRoute/complete/salon/booking';
 // approved orders
   static const String approveOrders =
       '$apiRoute/approve/booking';
+
+      // unapproved orders
+  static const String unApproveOrders =
+      '$apiRoute/unapproved/salon/booking';
 // reject orders
 static const String rejectOrders =
       '$apiRoute/reject/booking';
@@ -79,6 +90,7 @@ static const String rejectOrders =
 // salon dashboard
   static const String salonDashboard =
       '$apiRoute/dashboard';
+
 
 }
 

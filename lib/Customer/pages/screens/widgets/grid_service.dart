@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/Customer/pages/screens/salonServices_details.dart';
 import 'package:starter_project/models/service/get_published_service_reponse.dart';
+import 'package:starter_project/models/service/salon_service.dart';
 
 class ServiceSalonWidget extends StatelessWidget {
   final String serviceName, imgUri;
   final String servicePrice;
-  final PublishedService serviceInfo;
+  final SalonService serviceInfo;
 
-  const ServiceSalonWidget({Key key, this.serviceName, this.imgUri, this.servicePrice, this.serviceInfo}) : super(key: key);
+  const ServiceSalonWidget(
+      {Key key,
+      this.serviceName,
+      this.imgUri,
+      this.servicePrice,
+      this.serviceInfo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,10 @@ class ServiceSalonWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            ), SizedBox(height: 5,),
+            ),
+            SizedBox(
+              height: 5,
+            ),
             Text(
               serviceName,
               style: TextStyle(
@@ -35,7 +45,10 @@ class ServiceSalonWidget extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
               maxLines: 2,
-            ), SizedBox(height: 3,),
+            ),
+            SizedBox(
+              height: 3,
+            ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
               child: Row(
@@ -53,12 +66,13 @@ class ServiceSalonWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
-
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
               //another screen? haaa
-              return ServiceDetails(service: serviceInfo,);
+              return ServiceDetails(
+                service: serviceInfo,
+              );
             },
           ),
         );
