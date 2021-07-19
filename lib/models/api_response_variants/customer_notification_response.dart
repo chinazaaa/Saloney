@@ -35,13 +35,13 @@ class CustomerNotificationResponse extends ApiResponse{
   factory CustomerNotificationResponse.fromMap(Map<String, dynamic> json) => CustomerNotificationResponse(
     success: json["success"] == null ? null : json["success"],
     message: json["message"] == null ? null : json["message"],
-    data: json["data"] == null ? null : List<CustomerNotification>.from(json["data"].map((x) => CustomerNotification.fromMap(x))),
+    data: json["data"] == null ? [] : List<CustomerNotification>.from(json["data"].map((x) => CustomerNotification.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
     "success": success == null ? null : success,
     "message": message == null ? null : message,
-    "data": data == null ? null : List<dynamic>.from(data.map((x) => x.toMap())),
+    "data": data == null ? [] : List<dynamic>.from(data.map((x) => x.toMap())),
   };
 }
 
@@ -136,9 +136,9 @@ class CustomerNotification {
   String toJson() => json.encode(toMap());
 
   factory CustomerNotification.fromMap(Map<String, dynamic> json) => CustomerNotification(
-    services: json["services"] == null ? null : List<String>.from(json["services"].map((x) => x)),
-    serviceName: json["serviceName"] == null ? null : List<String>.from(json["serviceName"].map((x) => x)),
-    servicePrice: json["servicePrice"] == null ? null : List<String>.from(json["servicePrice"].map((x) => x)),
+    services: json["services"] == null ? [] : List<String>.from(json["services"].map((x) => x)),
+    serviceName: json["serviceName"] == null ? [] : List<String>.from(json["serviceName"].map((x) => x)),
+    servicePrice: json["servicePrice"] == null ? [] : List<String>.from(json["servicePrice"].map((x) => x)),
     bookingDate: json["bookingDate"] == null ? null : json["bookingDate"],
     approved: json["approved"] == null ? null : json["approved"],
     rejected: json["rejected"] == null ? null : json["rejected"],
