@@ -60,7 +60,7 @@ class _CustomerNotificationsState extends State<CustomerNotifications> {
                   Expanded(
                     child: Text(
                       "Notifications",
-                      style: TextStyle(color: Color(0xff9477cb)),
+                      style: TextStyle(color: Color(0xff9477cb), fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                   ),
                   IconButton(
@@ -75,59 +75,61 @@ class _CustomerNotificationsState extends State<CustomerNotifications> {
                 ],
               ),
             ),
-            ResponsiveState(
-              state: model.state,
-              busyWidget: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor),
-                  ),
-                ),
-              ),
-              errorWidget: Center(
+            Expanded(
+              child: ResponsiveState(
+                state: model.state,
+                busyWidget: Center(
                   child: Padding(
-                padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-                child: Text(model.error ?? "An error occurred."),
-              )),
-              idleWidget: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor),
+                    padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 6,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).primaryColor),
+                    ),
                   ),
                 ),
-              ),
-              noDataAvailableWidget: Center(
-                child: Padding(
+                errorWidget: Center(
+                    child: Padding(
                   padding: EdgeInsets.all(SizeConfig.widthOf(10)),
-                  child: Text(
-                    'No new notifications',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                  child: Text(model.error ?? "An error occurred."),
+                )),
+                idleWidget: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 6,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).primaryColor),
+                    ),
                   ),
                 ),
-              ),
-              dataFetchedWidget: ListView(
-                children: [
-                  ...model.notifications
-                      .map(
-                        (e) => NotiCard(
-                          title: e.approved ? "Approved Booking" : e.rejected ? "Rejected Booking" : "Pending booking" ,
-                          description: e.approved ? '${e.salonName} has accepted your booking' : e.rejected ? '${e.salonName} has rejected your booking' : "Your booking is pending",
-                          color: e.approved ? Colors.green[300] : e.rejected ? Colors.red[300] : Colors.amber,
-                          time: DateFormat.yMd().format(e.createdAt),
-                          services: e.services.join(", "),
-                        ),
-                      )
-                      .toList(),
-                ],
+                noDataAvailableWidget: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                    child: Text(
+                      'No new notifications',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ),
+                ),
+                dataFetchedWidget: ListView(
+                  children: [
+                    ...model.notifications
+                        .map(
+                          (e) => NotiCard(
+                            title: e.approved ? "Approved Booking" : e.rejected ? "Rejected Booking" : "Pending booking" ,
+                            description: e.approved ? '${e.salonName} has accepted your booking' : e.rejected ? '${e.salonName} has rejected your booking' : "Your booking is pending",
+                            color: e.approved ? Colors.green[300].withOpacity(.5) : e.rejected ? Colors.red[300].withOpacity(.5) : Colors.amber.withOpacity(.5),
+                            time: DateFormat.yMd().format(e.createdAt),
+                            services: e.serviceName.join(", "),
+                          ),
+                        )
+                        .toList(),
+                  ],
+                ),
               ),
             ),
           ],
@@ -167,32 +169,38 @@ class NotiCard extends StatelessWidget {
             radius: 5,
           ),
           SizedBox(
-            width: 20,
+            width: 15,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: AppColor.primary,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
-              Text(
-                description,
-                style: TextStyle(
-                  color: AppColor.primary,
+                SizedBox(height: 5,),
+                Text(
+                  description,
+                  style: TextStyle(
+                    color: AppColor.primary,
+                  ),
                 ),
-              ),
-              Text(
-                services,
-                style: TextStyle(
-                  color: AppColor.primary,
+                SizedBox(height: 5,),
+                Text(
+                  services,
+                  style: TextStyle(
+                    color: AppColor.primary,
+                  ),
                 ),
-              ),
-              Text(time),
-            ],
+                SizedBox(height: 5,),
+                Text(time),
+              ],
+            ),
           )
         ],
       ),

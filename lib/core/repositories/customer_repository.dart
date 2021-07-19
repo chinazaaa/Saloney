@@ -82,9 +82,9 @@ class CustomerToSalonRepository extends BaseNotifier{
     } on NetworkException {
       setError('No Internet Connection');
     }
-    // catch (e) {
-    //   setError(e.toString());
-    // }
+    catch (e) {
+      setError(e.toString());
+    }
     updateCurrentAction('...');
     return false;
   }
