@@ -65,7 +65,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                       child: Padding(
                         padding: EdgeInsets.all(SizeConfig.widthOf(10)),
                         child: Text(
-                          'An error occured'
+                          model.error ?? "An error occurred."
                         ),
                       )),
                   idleWidget: Center(

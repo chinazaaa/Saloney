@@ -31,23 +31,9 @@ class BookingRepo extends BaseNotifier {
       setState(ViewState.DataFetched);
       return true;
     } on NetworkException {
-      Get.snackbar(
-        'No Internet!',
-        'Please check your internet Connection',
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
+      setError("No Internet!");
     } catch (e) {
-      Get.snackbar(
-        'An Error occured!',
-        e.toString(),
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-        snackStyle: SnackStyle.FLOATING,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black26,
-      );
+      setError("An error occured!\n${e.toString()}");
     }
     return false;
   }

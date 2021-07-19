@@ -1,136 +1,156 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/utils/colors.dart';
+import 'package:starter_project/core/repositories/notification_repository.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+import 'package:starter_project/ui_helpers/size_config/size_config.dart';
 
-class CustomerNotifications  extends StatelessWidget {
+class CustomerNotifications extends StatefulWidget {
+  @override
+  _CustomerNotificationsState createState() => _CustomerNotificationsState();
+}
+
+class _CustomerNotificationsState extends State<CustomerNotifications> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<NotificationRepository>(context, listen: false)
+          .getCustomerNotifications();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<NotificationRepository>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.light,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          brightness: Brightness.light,
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
-              color: Colors.black,
-            ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: Colors.black,
           ),
         ),
-      body: Stack(
-        children: [
-          SafeArea(
-              child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    // IconButton(
-                    //   onPressed: () {
-                    //     Navigator.of(context).pop();
-                    //   },
-                    //   icon: Icon(
-                    //     Icons.arrow_back_ios_rounded,
-                    //   ),
-                    // ),
-                    Expanded(
-                      child: Text(
-                        "Notifications",
-                        style: TextStyle(color: Color(0xff9477cb)),
-                      ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  // IconButton(
+                  //   onPressed: () {
+                  //     Navigator.of(context).pop();
+                  //   },
+                  //   icon: Icon(
+                  //     Icons.arrow_back_ios_rounded,
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: Text(
+                      "Notifications",
+                      style: TextStyle(color: Color(0xff9477cb)),
                     ),
-                      IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: Color(0xff9477cb),
-                      ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Color(0xff9477cb),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+            ResponsiveState(
+              state: model.state,
+              busyWidget: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 6,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).primaryColor),
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 20,
+              errorWidget: Center(
+                  child: Padding(
+                padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                child: Text(model.error ?? "An error occurred."),
+              )),
+              idleWidget: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 6,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).primaryColor),
+                  ),
+                ),
               ),
-              NotiCard(
-                title: "Your booking has been approved",
-                time: "Now",
+              noDataAvailableWidget: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(SizeConfig.widthOf(10)),
+                  child: Text(
+                    'No new notifications',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                ),
               ),
-              NotiCard(
-                title: "Your booking has been declined",
-                time: "1 h ago",
-                color: AppColor.placeholderBg,
+              dataFetchedWidget: ListView(
+                children: [
+                  ...model.notifications
+                      .map(
+                        (e) => NotiCard(
+                          title: e.approved ? "Approved Booking" : e.rejected ? "Rejected Booking" : "Pending booking" ,
+                          description: e.approved ? '${e.salonName} has accepted your booking' : e.rejected ? '${e.salonName} has rejected your booking' : "Your booking is pending",
+                          color: e.approved ? Colors.green[300] : e.rejected ? Colors.red[300] : Colors.amber,
+                          time: DateFormat.yMd().format(e.createdAt),
+                          services: e.services.join(", "),
+                        ),
+                      )
+                      .toList(),
+                ],
               ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "3 h ago",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "5 h ago",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "05 Sep 2021",
-                color: AppColor.placeholderBg,
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "12 Aug 2020",
-                color: AppColor.placeholderBg,
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "20 Jul 2021",
-              ),
-              NotiCard(
-                title: "Lorem ipsum dolor sit amet, consectetur",
-                time: "12 Jul 2021",
-              ),
-            ],
-          )),
-          // Positioned(
-          //     bottom: 0,
-          //     left: 0,
-          //     child: CustomNavBar(
-          //       menu: true,
-          //     ))
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class NotiCard extends StatelessWidget {
-  const NotiCard({
-    Key key,
-    String time,
-    String title,
-    Color color = Colors.white,
-  })  : _time = time,
-        _title = title,
-        _color = color,
-        super(key: key);
+  final String time;
+  final String title, description, services;
+  final Color color;
 
-  final String _time;
-  final String _title;
-  final Color _color;
+  const NotiCard({Key key, this.time, this.title, this.color, this.description, this.services}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-     // height: 60,
+      // height: 60,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: _color,
+        color: color,
         border: Border(
           bottom: BorderSide(
             color: AppColor.placeholder,
@@ -154,12 +174,24 @@ class NotiCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                _title,
+                title,
                 style: TextStyle(
                   color: AppColor.primary,
                 ),
               ),
-              Text(_time),
+              Text(
+                description,
+                style: TextStyle(
+                  color: AppColor.primary,
+                ),
+              ),
+              Text(
+                services,
+                style: TextStyle(
+                  color: AppColor.primary,
+                ),
+              ),
+              Text(time),
             ],
           )
         ],

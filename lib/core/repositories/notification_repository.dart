@@ -11,7 +11,7 @@ class NotificationRepository extends BaseNotifier{
   final customerApi = locator<CustomerApi>();
 
   List<CustomerNotification> notifications = [];
-  Future<bool> getSalonUnCompletedBookings({bool silently = false}) async {
+  Future<bool> getCustomerNotifications({bool silently = false}) async {
     if (!silently) {
       if (notifications.isEmpty) setState(ViewState.Busy);
     }
