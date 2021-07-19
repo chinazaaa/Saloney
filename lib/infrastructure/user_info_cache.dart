@@ -23,6 +23,11 @@ class UserInfoCache {
   String get token => this.cache.isCustomer
       ? this.cache.customer.data.apiToken
       : this.cache.salon.data.user.local.apiToken;
+
+  String get id => this.cache.isCustomer
+      ? this.cache.customer.data.id
+      : this.cache.salon.data.user.id;
+
   bool get isLoggedIn => this.cache != null;
   // int get id => this._user.id;
 
