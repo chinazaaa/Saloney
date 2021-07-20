@@ -265,7 +265,7 @@ class AuthRepository extends BaseNotifier with Validators {
     try {
       if (isCustomer) {
         ResendOTPResponse customer =
-            await authApi.resendOTP(email: email);
+            await authApi.resendOTPCustomer(email: email);
         setState(ViewState.Idle);
         if (customer.success) {
           return true;
@@ -281,7 +281,7 @@ class AuthRepository extends BaseNotifier with Validators {
         }
       } else {
         ResendOTPResponse salon =
-            await authApi.resendOTP(email: email);
+            await authApi.resendOTPSalon(email: email);
         setState(ViewState.Idle);
         if (salon.success) {
           return true;
@@ -309,14 +309,78 @@ class AuthRepository extends BaseNotifier with Validators {
         backgroundColor: Colors.black26,
       );
     } 
-    // catch (e) {
-    //   Get.snackbar(
-    //     'An Error Occured!',
-    //     'Please try again',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.black45,
-    //   );
-    // }
+    catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
+    setState(ViewState.Idle);
+    return false;
+  }
+
+
+  Future<bool> forgotPassword({bool isCustomer = true, String email}) async {
+    // FIXME Unused  SalonRegistrationResponse salon;
+    // FIXME Unused  CustomerRegistrationResponse customer;
+
+    try {
+      if (isCustomer) {
+        ResendOTPResponse customer =
+            await authApi.resendOTPCustomer(email: email);
+        setState(ViewState.Idle);
+        if (customer.success) {
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${customer.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      } else {
+        ResendOTPResponse salon =
+            await authApi.resendOTPSalon(email: email);
+        setState(ViewState.Idle);
+        if (salon.success) {
+          return true;
+        } else {
+          Get.snackbar(
+            'An Error Occured',
+            '${salon.message}',
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+            snackStyle: SnackStyle.FLOATING,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black26,
+          );
+        }
+      }
+
+      setState(ViewState.Idle);
+      return false;
+    } on NetworkException {
+      Get.snackbar(
+        'No Internet!',
+        'Check Internet Connection and try again',
+        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        snackStyle: SnackStyle.FLOATING,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black26,
+      );
+    } 
+    catch (e) {
+      Get.snackbar(
+        'An Error Occured!',
+        'Please try again',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black45,
+      );
+    }
     setState(ViewState.Idle);
     return false;
   }

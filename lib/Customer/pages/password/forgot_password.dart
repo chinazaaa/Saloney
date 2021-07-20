@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/Customer/pages/auth/otp.dart';
+import 'package:provider/provider.dart';
+import 'package:starter_project/core/repositories/authentication_repository.dart';
+import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
+
+
 class CustomerForgotPage extends StatelessWidget {
+    TextEditingController email = TextEditingController();
+    GlobalKey<FormState> mykey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    //final user = locator<UserInfoCache>();
+    final model = Provider.of<AuthRepository>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -35,7 +45,7 @@ class CustomerForgotPage extends StatelessWidget {
                         
                            
                             Text(
-                              "Forgot Password",
+                              "Forgot Password ",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
@@ -50,22 +60,34 @@ class CustomerForgotPage extends StatelessWidget {
                             ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: Column(
-                        children: <Widget>[
-                          makeInput(hint: "Email Address"),
-                          
-                          Container(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              ],
-                          ))
-                        ],
+                    Form(
+                          key: mykey,
+                       child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Column(
+                          children: <Widget>[
+                            makeInput(hint: "Email Address",
+                            controller: email,
+                                        validator: (value) =>
+                                            model.validateName(value)),
+                            
+                            Container(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+           
+                                ],
+                            ))
+                          ],
+                        ),
                       ),
                     ),
-                         Padding(
+                         ResponsiveState(
+                                  state: model.state,
+                        busyWidget: CircularProgressIndicator(),
+                        idleWidget: InkWell(
+                            onTap: () => forgotPassword(context),
+                                                                  child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
                         width: double.infinity,
@@ -76,15 +98,19 @@ class CustomerForgotPage extends StatelessWidget {
                 color: Color(0xff9477cb),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(
-                "Send",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    color: Colors.white),
-              ),
+                  
+                            child: Text(
+                              "Send",
+                              style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                            )
+                    
                       ),
                     ),
+                                  ),
+                         ),
                   
                   ],
                 ),
@@ -105,14 +131,32 @@ class CustomerForgotPage extends StatelessWidget {
     
   }
 
-  Widget makeInput({obscureText = false, String hint}) {
+    forgotPassword(context) async {
+    final model = Provider.of<AuthRepository>(context, listen: false);
+    if (!mykey.currentState.validate()) return;
+
+    bool success = await model.forgotPassword(
+        email:email.text);
+
+    if (success) {
+      //go to otp page
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerOtpScreen()));
+    } else {
+      //Do nothing
+    }
+  }
+
+  Widget makeInput({obscureText = false, String hint,TextEditingController controller,
+      Function validator}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
     
         
-        TextField(
+        TextFormField(
           obscureText: obscureText,
+           controller: controller,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hint, 
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),

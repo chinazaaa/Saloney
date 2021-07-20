@@ -38,7 +38,11 @@ class ApiRoutes {
   static const String updateCustomerProfile = '$apiRoute/profile/customer';
 
 //resend otp
-static const String resendOTP = '$apiRoute/resend/otp';
+static const String resendSalonOTP = '$apiRoute/resend/otp/salon';
+
+//resend otp
+static const String resendCustomerOTP = '$apiRoute/resend/otp/customer';
+
 
   //toggle
   static const String togglePushNotification =
@@ -49,6 +53,13 @@ static const String resendOTP = '$apiRoute/resend/otp';
       '$apiRoute/salonOwner/changePassword';
   static const String changeCustomerPassword =
       '$apiRoute/customer/changePassword';
+
+        static const String forgotCustomerPassword =
+      '$apiRoute//forgot-password/customer';
+
+       static const String forgotSalonPassword =
+      '$apiRoute//forgot-password/salon';
+
 
 // creeate booking
   static const String createBooking =

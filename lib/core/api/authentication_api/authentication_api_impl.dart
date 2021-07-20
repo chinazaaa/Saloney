@@ -152,7 +152,7 @@ class AuthenticationApiImpl implements AuthenticationApi {
 
 
   @override
-  Future<ApiResponse> resendOTP({String email}) async{
+  Future<ApiResponse> resendOTPSalon({String email}) async{
     Map val =   {
       'email': email
     };
@@ -161,7 +161,66 @@ class AuthenticationApiImpl implements AuthenticationApi {
 
     try {
       var responsebody =
-          await server.post(ApiRoutes.resendOTP, header, jsonEncode(val));
+          await server.post(ApiRoutes.resendSalonOTP, header, jsonEncode(val));
+      ResendOTPResponse response = ResendOTPResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<ApiResponse> resendOTPCustomer({String email}) async{
+    Map val =   {
+      'email': email
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.resendCustomerOTP, header, jsonEncode(val));
+      ResendOTPResponse response = ResendOTPResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+
+  @override
+  Future<ApiResponse> forgotPasswordSalon({String email}) async{
+    Map val =   {
+      'email': email
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.forgotSalonPassword, header, jsonEncode(val));
+      ResendOTPResponse response = ResendOTPResponse.fromJson(responsebody);
+
+      return response;
+    } on SocketException {
+      throw NetworkException();
+    }
+  }
+
+
+  @override
+  Future<ApiResponse> forgotPasswordCustomer({String email}) async{
+    Map val =   {
+      'email': email
+    };
+
+    print(val);
+
+    try {
+      var responsebody =
+          await server.post(ApiRoutes.forgotCustomerPassword, header, jsonEncode(val));
       ResendOTPResponse response = ResendOTPResponse.fromJson(responsebody);
 
       return response;

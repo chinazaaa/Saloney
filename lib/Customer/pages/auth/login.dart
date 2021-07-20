@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_project/Customer/pages/auth/signup.dart';
-import 'package:starter_project/Customer/pages/screens/TimePage.dart';
-import 'package:starter_project/Customer/pages/screens/cart.dart';
-
+import 'package:starter_project/Customer/pages/password/forgot_password.dart';
 import 'package:starter_project/Customer/pages/screens/home.dart';
-import 'package:starter_project/Salon/pages/screens/editProfile.dart';
-
 import 'package:starter_project/ui_helpers/animation/FadeAnimation.dart';
 import 'package:starter_project/core/repositories/authentication_repository.dart';
 import 'package:starter_project/ui_helpers/responsive_state/responsive_state.dart';
@@ -120,7 +116,7 @@ class CustomerLoginPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EditProfilePage()));
+                                                    CustomerForgotPage()));
                                         },
                                         child: Text(
                                           "Forgot Password",

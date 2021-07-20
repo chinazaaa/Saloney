@@ -120,7 +120,7 @@ class _CustomerNotificationsState extends State<CustomerNotifications> {
                     ...model.notifications
                         .map(
                           (e) => NotiCard(
-                            title: e.approved ? "Approved Booking" : e.rejected ? "Rejected Booking" : "Pending booking" ,
+                            title: e.approved ? "Approved Booking" : e.rejected ? "Rejected Booking" : "Pending Booking" ,
                             description: e.approved ? '${e.salonName} has accepted your booking' : e.rejected ? '${e.salonName} has rejected your booking' : "Your booking is pending",
                             color: e.approved ? Colors.green[300].withOpacity(.5) : e.rejected ? Colors.red[300].withOpacity(.5) : Colors.amber.withOpacity(.5),
                             time: DateFormat.yMd().format(e.createdAt),

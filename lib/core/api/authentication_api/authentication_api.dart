@@ -43,7 +43,19 @@ abstract class AuthenticationApi {
     String otp,
   });
 
- Future<ApiResponse> resendOTP({
+ Future<ApiResponse> resendOTPSalon({
+    String email
+  });
+
+   Future<ApiResponse> resendOTPCustomer({
+    String email
+  });
+
+   Future<ApiResponse> forgotPasswordSalon({
+    String email
+  });
+
+    Future<ApiResponse> forgotPasswordCustomer({
     String email
   });
 }
