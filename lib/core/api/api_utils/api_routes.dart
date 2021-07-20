@@ -55,10 +55,10 @@ static const String resendCustomerOTP = '$apiRoute/resend/otp/customer';
       '$apiRoute/customer/changePassword';
 
         static const String forgotCustomerPassword =
-      '$apiRoute//forgot-password/customer';
+      '$apiRoute/forgot-password/customer';
 
        static const String forgotSalonPassword =
-      '$apiRoute//forgot-password/salon';
+      '$apiRoute/forgot-password/salon';
 
 
 // creeate booking

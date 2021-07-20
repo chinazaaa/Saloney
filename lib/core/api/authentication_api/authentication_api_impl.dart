@@ -195,8 +195,8 @@ class AuthenticationApiImpl implements AuthenticationApi {
     Map val =   {
       'email': email
     };
-
-    print(val);
+     print(val);
+   
 
     try {
       var responsebody =
