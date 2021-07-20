@@ -7,6 +7,7 @@ import 'package:starter_project/core/repositories/bookings_repository.dart';
 import 'package:starter_project/core/repositories/cart_repository.dart';
 import 'package:starter_project/core/repositories/customer_repository.dart';
 import 'package:starter_project/core/repositories/dashboard_repository.dart';
+import 'package:starter_project/core/repositories/notification_repository.dart';
 import 'package:starter_project/core/repositories/profile_repositories.dart';
 import 'package:starter_project/core/repositories/service_repository.dart';
 
@@ -33,5 +34,6 @@ class SaloneyProviders {
     ChangeNotifierProvider(create: (_) => CustomerToSalonRepository()),
     ChangeNotifierProvider(create: (_) => CustomerRepository()),
     ChangeNotifierProvider(create: (_) => CartRepository()),
+    ChangeNotifierProvider(create: (_) => NotificationRepository()),
   ];
 }

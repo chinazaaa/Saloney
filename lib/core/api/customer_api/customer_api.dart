@@ -6,4 +6,6 @@ abstract class CustomerApi{
     String latitude,
     String longitude,
   });
+
+  Future<ApiResponse> getCustomerNotifications();
 }
