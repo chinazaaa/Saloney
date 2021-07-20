@@ -329,7 +329,7 @@ class AuthRepository extends BaseNotifier with Validators {
     try {
       if (isCustomer) {
         ResendOTPResponse customer =
-            await authApi.resendOTPCustomer(email: email);
+            await authApi.forgotPasswordCustomer(email: email);
         setState(ViewState.Idle);
         if (customer.success) {
           return true;
@@ -345,7 +345,7 @@ class AuthRepository extends BaseNotifier with Validators {
         }
       } else {
         ResendOTPResponse salon =
-            await authApi.resendOTPSalon(email: email);
+            await authApi.forgotPasswordSalon(email: email);
         setState(ViewState.Idle);
         if (salon.success) {
           return true;
